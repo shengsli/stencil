@@ -1,18 +1,17 @@
-#+title: stencil
+#+title: Stencil
 #+author: Sheng Li
 #+date: <2019-02-18 Mon 17:08>
 
 * Description
 - Project title: A Stencil Skeleton for a DICE-Friendly Parallel Skeleton Library
 - Goal: To build and evaluate a stencil skeleton for an existing C++ skeleton-based parallel programming library.
-#+BEGIN_VERSE
+
 Writing parallel programs which are correct and efficient is widely acknowledged to be a challenging task. The use of parallel algorithmic patterns (or “skeletons”) to abstract and simplify this challenge is growing in popularity. Each pattern captures the core structure of a class of parallel algorithms. The programmer specializes the pattern to a particular situation by writing some type definitions and sequential code, while the pre-defined pattern implementation handles the hard work of providing and optimizing the necessary parallel code.
 
 While several skeleton based systems have been constructed, they tend to rely on quite complex software frameworks, and/or more modern versions of tools (eg compilers and libraries) than are provided in the School's standard DICE set-up. This makes them troublesome to use in teaching contexts, both because non-standard versions and packages must be made available and maintained, and because the corresponding complexities are hard for students to understand and investigate.
 
 The goal of this project is to extend an existing "DICE-friendly" parallel skeleton library, implemented in a previous MSc project, with a skeleton capturing the stencil parallel programming pattern [fn:1].
 The library allows students already familiar with C/C++ to investigate the world of skeletons without having to wrestle with the additional complexities of non-DICE friendly implementations.
-#+END_VERSE 
 
 * Resources
 - Valais, A: A Parallel Skeleton Library for DICE, University of Edinburgh MSc Project, 2018, available from Murray Cole, the project proposer.
