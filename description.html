@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-02-20 Wed 01:07 -->
+<!-- 2019-02-20 Wed 01:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>stencil</title>
+<title>project description</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Sheng Li" />
 <style type="text/css">
@@ -243,12 +243,79 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">stencil</h1>
-<ul class="org-ul">
-<li><a href="description.html">Project description</a></li>
-<li><a href="ppp.html">Weekly progress reporting</a></li>
-<li><a href="https://github.com/shengsli/stencil">GitHub repo</a></li>
+<h1 class="title">project description</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgac516a1">1. Description</a></li>
+<li><a href="#org5cfcb7b">2. Resources</a></li>
+<li><a href="#org9e2caa0">3. Completion Criteria</a></li>
+<li><a href="#orgaee4f9e">4. Skills</a></li>
 </ul>
 </div>
+</div>
+
+<div id="outline-container-orgac516a1" class="outline-2">
+<h2 id="orgac516a1"><span class="section-number-2">1</span> Description</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Project title: A Stencil Skeleton for a DICE-Friendly Parallel Skeleton Library</li>
+<li>Goal: To build and evaluate a stencil skeleton for an existing C++ skeleton-based parallel programming library.</li>
+</ul>
+<p class="verse">
+Writing parallel programs which are correct and efficient is widely acknowledged to be a challenging task. The use of parallel algorithmic patterns (or “skeletons”) to abstract and simplify this challenge is growing in popularity. Each pattern captures the core structure of a class of parallel algorithms. The programmer specializes the pattern to a particular situation by writing some type definitions and sequential code, while the pre-defined pattern implementation handles the hard work of providing and optimizing the necessary parallel code.<br />
+<br />
+While several skeleton based systems have been constructed, they tend to rely on quite complex software frameworks, and/or more modern versions of tools (eg compilers and libraries) than are provided in the School's standard DICE set-up. This makes them troublesome to use in teaching contexts, both because non-standard versions and packages must be made available and maintained, and because the corresponding complexities are hard for students to understand and investigate.<br />
+<br />
+The goal of this project is to extend an existing "DICE-friendly" parallel skeleton library, implemented in a previous MSc project, with a skeleton capturing the stencil parallel programming pattern <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.<br />
+The library allows students already familiar with C/C++ to investigate the world of skeletons without having to wrestle with the additional complexities of non-DICE friendly implementations.<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5cfcb7b" class="outline-2">
+<h2 id="org5cfcb7b"><span class="section-number-2">2</span> Resources</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Valais, A: A Parallel Skeleton Library for DICE, University of Edinburgh MSc Project, 2018, available from Murray Cole, the project proposer.</li>
+<li>Kessler, <a href="http://www.ida.liu.se/~chrke55/skepu/">SkePU: Autotunable Multi-Backend Skeleton Programming Framework for Multicore CPU and Multi-GPU Systems</a></li>
+<li>Kuchen, <a href="http://www.wi1.uni-muenster.de/pi/forschung/Skeletons/">The Münster Skeleton Library Muesli</a></li>
+<li><a href="http://homepages.inf.ed.ac.uk/mic/Skeletons/">http://homepages.inf.ed.ac.uk/mic/Skeletons/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9e2caa0" class="outline-2">
+<h2 id="org9e2caa0"><span class="section-number-2">3</span> Completion Criteria</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+A basic completion would involve a simple implementation, some example applications of this in action,
+and a Pthreads parallelized implementation which achieves modest speed-ups on multicore DICE lab hardware.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaee4f9e" class="outline-2">
+<h2 id="orgaee4f9e"><span class="section-number-2">4</span> Skills</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>OOP with threads, C++</li>
+<li>templates</li>
+<li>lambda expressions</li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+McCool, <a href="https://pdfs.semanticscholar.org/6895/2de895930b75041827b3037b575e3c527afa.pdf">Structured Parallel Programming with Deterministic Patterns</a>
+</p></div></div>
+
+
+</div>
+</div></div>
 </body>
 </html>
