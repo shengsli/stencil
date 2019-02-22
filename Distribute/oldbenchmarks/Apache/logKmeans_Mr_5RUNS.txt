@@ -1,0 +1,587 @@
+K-Means problem with MapReduce Skeleton
+Problem K-Means(MapReduce)
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	4
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.134547
+Seq. Non-Parallel Time:	0.00310626
+Skeleton Time:	0.0836311
+skelSeq Time:	0.00284619
+PThread Time:	0.055868
+Seq Gain:	1.60882
+PThread Gain:	0.668029
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	4
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	1.60185
+Seq. Non-Parallel Time:	0.054923
+Skeleton Time:	0.817888
+skelSeq Time:	0.0302301
+PThread Time:	0.573907
+Seq Gain:	1.95852
+PThread Gain:	0.701694
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	4
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	33.596
+Seq. Non-Parallel Time:	1.21696
+Skeleton Time:	19.1404
+skelSeq Time:	0.519546
+PThread Time:	12.7442
+Seq Gain:	1.75524
+PThread Gain:	0.665828
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	5
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.342592
+Seq. Non-Parallel Time:	0.00760183
+Skeleton Time:	0.270223
+skelSeq Time:	0.0077137
+PThread Time:	0.192823
+Seq Gain:	1.26781
+PThread Gain:	0.713572
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	5
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	4.56597
+Seq. Non-Parallel Time:	0.16623
+Skeleton Time:	3.63598
+skelSeq Time:	0.100948
+PThread Time:	2.61031
+Seq Gain:	1.25578
+PThread Gain:	0.717912
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	5
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	65.1823
+Seq. Non-Parallel Time:	2.83312
+Skeleton Time:	34.943
+skelSeq Time:	0.892957
+PThread Time:	22.6487
+Seq Gain:	1.86539
+PThread Gain:	0.648159
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	6
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.288763
+Seq. Non-Parallel Time:	0.00631156
+Skeleton Time:	0.213973
+skelSeq Time:	0.00608869
+PThread Time:	0.144706
+Seq Gain:	1.34953
+PThread Gain:	0.676282
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	6
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	8.02545
+Seq. Non-Parallel Time:	0.312089
+Skeleton Time:	5.80233
+skelSeq Time:	0.16322
+PThread Time:	4.26593
+Seq Gain:	1.38314
+PThread Gain:	0.73521
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	6
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	99.2644
+Seq. Non-Parallel Time:	4.33058
+Skeleton Time:	50.3665
+skelSeq Time:	1.27849
+PThread Time:	32.6789
+Seq Gain:	1.97084
+PThread Gain:	0.648823
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	7
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.251507
+Seq. Non-Parallel Time:	0.00531812
+Skeleton Time:	0.197885
+skelSeq Time:	0.00563326
+PThread Time:	0.125032
+Seq Gain:	1.27098
+PThread Gain:	0.631841
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	7
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	6.04375
+Seq. Non-Parallel Time:	0.236659
+Skeleton Time:	4.31521
+skelSeq Time:	0.123246
+PThread Time:	3.12027
+Seq Gain:	1.40057
+PThread Gain:	0.723087
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	7
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	116.603
+Seq. Non-Parallel Time:	5.17915
+Skeleton Time:	59.6258
+skelSeq Time:	1.47556
+PThread Time:	39.6814
+Seq Gain:	1.95559
+PThread Gain:	0.665507
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	8
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.431383
+Seq. Non-Parallel Time:	0.00912533
+Skeleton Time:	0.316987
+skelSeq Time:	0.00906944
+PThread Time:	0.203512
+Seq Gain:	1.36089
+PThread Gain:	0.642021
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	8
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	9.16069
+Seq. Non-Parallel Time:	0.368767
+Skeleton Time:	6.24544
+skelSeq Time:	0.179172
+PThread Time:	4.3753
+Seq Gain:	1.46678
+PThread Gain:	0.700558
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	8
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	288.818
+Seq. Non-Parallel Time:	14.9259
+Skeleton Time:	125.045
+skelSeq Time:	3.14195
+PThread Time:	81.415
+Seq Gain:	2.30971
+PThread Gain:	0.651084
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	9
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.670445
+Seq. Non-Parallel Time:	0.0141159
+Skeleton Time:	0.471556
+skelSeq Time:	0.0137201
+PThread Time:	0.316169
+Seq Gain:	1.42177
+PThread Gain:	0.670481
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	9
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	10.3009
+Seq. Non-Parallel Time:	0.434664
+Skeleton Time:	6.40094
+skelSeq Time:	0.191933
+PThread Time:	4.67848
+Seq Gain:	1.60928
+PThread Gain:	0.730905
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	9
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	307.826
+Seq. Non-Parallel Time:	14.7925
+Skeleton Time:	137.312
+skelSeq Time:	3.35222
+PThread Time:	91.8983
+Seq Gain:	2.24181
+PThread Gain:	0.669268
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.359122
+Seq. Non-Parallel Time:	0.00732632
+Skeleton Time:	0.237213
+skelSeq Time:	0.00655651
+PThread Time:	0.159371
+Seq Gain:	1.51392
+PThread Gain:	0.671847
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	7.63303
+Seq. Non-Parallel Time:	0.308101
+Skeleton Time:	4.38671
+skelSeq Time:	0.137392
+PThread Time:	3.13306
+Seq Gain:	1.74004
+PThread Gain:	0.714217
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	132.853
+Seq. Non-Parallel Time:	6.2515
+Skeleton Time:	59.5349
+skelSeq Time:	1.47328
+PThread Time:	40.0486
+Seq Gain:	2.23152
+PThread Gain:	0.672692
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	11
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.429706
+Seq. Non-Parallel Time:	0.00862832
+Skeleton Time:	0.264412
+skelSeq Time:	0.0076417
+PThread Time:	0.185153
+Seq Gain:	1.62514
+PThread Gain:	0.700244
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	11
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	14.684
+Seq. Non-Parallel Time:	0.591488
+Skeleton Time:	7.80558
+skelSeq Time:	0.258605
+PThread Time:	5.75066
+Seq Gain:	1.88121
+PThread Gain:	0.736737
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	11
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	184.651
+Seq. Non-Parallel Time:	8.60191
+Skeleton Time:	77.6225
+skelSeq Time:	1.9738
+PThread Time:	53.3323
+Seq Gain:	2.37884
+PThread Gain:	0.687072
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	12
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.407479
+Seq. Non-Parallel Time:	0.00781865
+Skeleton Time:	0.25102
+skelSeq Time:	0.00717468
+PThread Time:	0.183915
+Seq Gain:	1.62329
+PThread Gain:	0.73267
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	12
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	12.0707
+Seq. Non-Parallel Time:	0.473937
+Skeleton Time:	7.36443
+skelSeq Time:	0.215786
+PThread Time:	5.50374
+Seq Gain:	1.63905
+PThread Gain:	0.747341
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	12
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	187.626
+Seq. Non-Parallel Time:	9.35093
+Skeleton Time:	75.4558
+skelSeq Time:	1.87194
+PThread Time:	51.7512
+Seq Gain:	2.48657
+PThread Gain:	0.685847
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	13
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.378595
+Seq. Non-Parallel Time:	0.00732689
+Skeleton Time:	0.221058
+skelSeq Time:	0.00633087
+PThread Time:	0.160766
+Seq Gain:	1.71265
+PThread Gain:	0.727258
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	13
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	20.5366
+Seq. Non-Parallel Time:	0.78741
+Skeleton Time:	11.7587
+skelSeq Time:	0.357222
+PThread Time:	9.01304
+Seq Gain:	1.7465
+PThread Gain:	0.7665
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	13
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	230.525
+Seq. Non-Parallel Time:	11.6657
+Skeleton Time:	92.055
+skelSeq Time:	2.27961
+PThread Time:	65.7804
+Seq Gain:	2.50421
+PThread Gain:	0.714577
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	14
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.894089
+Seq. Non-Parallel Time:	0.0171568
+Skeleton Time:	0.526722
+skelSeq Time:	0.015532
+PThread Time:	0.390154
+Seq Gain:	1.69746
+PThread Gain:	0.74072
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	14
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	12.7031
+Seq. Non-Parallel Time:	0.478295
+Skeleton Time:	8.34409
+skelSeq Time:	0.222949
+PThread Time:	6.29224
+Seq Gain:	1.5224
+PThread Gain:	0.754096
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	14
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	299.171
+Seq. Non-Parallel Time:	15.109
+Skeleton Time:	122.427
+skelSeq Time:	2.92049
+PThread Time:	83.0182
+Seq Gain:	2.44367
+PThread Gain:	0.678103
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	15
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.60551
+Seq. Non-Parallel Time:	0.0115406
+Skeleton Time:	0.356042
+skelSeq Time:	0.0102391
+PThread Time:	0.263401
+Seq Gain:	1.70067
+PThread Gain:	0.739803
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	15
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	11.6475
+Seq. Non-Parallel Time:	0.44215
+Skeleton Time:	7.42358
+skelSeq Time:	0.197204
+PThread Time:	5.59475
+Seq Gain:	1.56899
+PThread Gain:	0.753647
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	15
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	782.969
+Seq. Non-Parallel Time:	42.186
+Skeleton Time:	293.408
+skelSeq Time:	7.0614
+PThread Time:	208.039
+Seq Gain:	2.66853
+PThread Gain:	0.709041
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	10000
+Number of Clusters:	16
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.620243
+Seq. Non-Parallel Time:	0.0113491
+Skeleton Time:	0.348982
+skelSeq Time:	0.00992866
+PThread Time:	0.262857
+Seq Gain:	1.77729
+PThread Gain:	0.75321
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	100000
+Number of Clusters:	16
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	22.4816
+Seq. Non-Parallel Time:	0.84259
+Skeleton Time:	13.9464
+skelSeq Time:	0.371939
+PThread Time:	10.6839
+Seq Gain:	1.612
+PThread Gain:	0.766068
+########################
+K-Means problem with:	MapReduce Skeleton
+Number of 2-D Points:	1000000
+Number of Clusters:	16
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	340.576
+Seq. Non-Parallel Time:	17.9808
+Skeleton Time:	131.512
+skelSeq Time:	3.04558
+PThread Time:	93.5345
+Seq Gain:	2.58969
+PThread Gain:	0.711222

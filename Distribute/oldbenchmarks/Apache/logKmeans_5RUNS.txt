@@ -1,0 +1,664 @@
+Problem K-Means
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	4
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.0560554
+Seq. Non-Parallel Time:	0.0278771
+Skeleton Time:	0.0525026
+skelMap Time:	0.00807157
+skelRed Time:	0.0138114
+skelSeq Time:	0.0302208
+PThread Time:	0.0493776
+Seq Gain:	1.06767
+PThread Gain:	0.94048
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	4
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.654967
+Seq. Non-Parallel Time:	0.32469
+Skeleton Time:	0.497081
+skelMap Time:	0.0845393
+skelRed Time:	0.0786553
+skelSeq Time:	0.330355
+PThread Time:	0.473314
+Seq Gain:	1.31763
+PThread Gain:	0.952187
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	4
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	10.3651
+Seq. Non-Parallel Time:	5.0605
+Skeleton Time:	7.03303
+skelMap Time:	1.23729
+skelRed Time:	0.684324
+skelSeq Time:	5.07428
+PThread Time:	6.66834
+Seq Gain:	1.47378
+PThread Gain:	0.948146
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	5
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.0708978
+Seq. Non-Parallel Time:	0.0336221
+Skeleton Time:	0.0632912
+skelMap Time:	0.010149
+skelRed Time:	0.017118
+skelSeq Time:	0.0356783
+PThread Time:	0.0606581
+Seq Gain:	1.12018
+PThread Gain:	0.958396
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	5
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	1.00561
+Seq. Non-Parallel Time:	0.472649
+Skeleton Time:	0.742687
+skelMap Time:	0.135359
+skelRed Time:	0.115532
+skelSeq Time:	0.488578
+PThread Time:	0.714031
+Seq Gain:	1.35402
+PThread Gain:	0.961416
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	5
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	17.2818
+Seq. Non-Parallel Time:	7.9177
+Skeleton Time:	11.2139
+skelMap Time:	2.12324
+skelRed Time:	1.11689
+skelSeq Time:	7.93586
+PThread Time:	10.6564
+Seq Gain:	1.54111
+PThread Gain:	0.950286
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	6
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.0862006
+Seq. Non-Parallel Time:	0.0398071
+Skeleton Time:	0.0792191
+skelMap Time:	0.0132407
+skelRed Time:	0.0217341
+skelSeq Time:	0.0439036
+PThread Time:	0.0743495
+Seq Gain:	1.08813
+PThread Gain:	0.938531
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	6
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	1.48162
+Seq. Non-Parallel Time:	0.66924
+Skeleton Time:	1.05382
+skelMap Time:	0.199573
+skelRed Time:	0.158567
+skelSeq Time:	0.692537
+PThread Time:	1.03034
+Seq Gain:	1.40595
+PThread Gain:	0.977717
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	6
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	40.6491
+Seq. Non-Parallel Time:	17.9406
+Skeleton Time:	25.5783
+skelMap Time:	5.01089
+skelRed Time:	2.53755
+skelSeq Time:	17.9929
+PThread Time:	24.442
+Seq Gain:	1.5892
+PThread Gain:	0.955576
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	7
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.13132
+Seq. Non-Parallel Time:	0.0575119
+Skeleton Time:	0.118735
+skelMap Time:	0.0206792
+skelRed Time:	0.0331485
+skelSeq Time:	0.0645631
+PThread Time:	0.114155
+Seq Gain:	1.10599
+PThread Gain:	0.961432
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	7
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	2.11674
+Seq. Non-Parallel Time:	0.913294
+Skeleton Time:	1.46894
+skelMap Time:	0.291815
+skelRed Time:	0.221638
+skelSeq Time:	0.952179
+PThread Time:	1.41657
+Seq Gain:	1.441
+PThread Gain:	0.964349
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	7
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	26.1472
+Seq. Non-Parallel Time:	10.903
+Skeleton Time:	15.8203
+skelMap Time:	3.30736
+skelRed Time:	1.5558
+skelSeq Time:	10.9212
+PThread Time:	15.2237
+Seq Gain:	1.65276
+PThread Gain:	0.962287
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	8
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.240619
+Seq. Non-Parallel Time:	0.101531
+Skeleton Time:	0.216119
+skelMap Time:	0.038955
+skelRed Time:	0.0619641
+skelSeq Time:	0.114829
+PThread Time:	0.207747
+Seq Gain:	1.11336
+PThread Gain:	0.961262
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	8
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	7.92277
+Seq. Non-Parallel Time:	3.28123
+Skeleton Time:	5.27281
+skelMap Time:	1.09676
+skelRed Time:	0.77979
+skelSeq Time:	3.39311
+PThread Time:	5.17595
+Seq Gain:	1.50257
+PThread Gain:	0.981632
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	8
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	80.9647
+Seq. Non-Parallel Time:	32.251
+Skeleton Time:	47.5416
+skelMap Time:	10.4967
+skelRed Time:	4.6835
+skelSeq Time:	32.3249
+PThread Time:	45.5847
+Seq Gain:	1.70303
+PThread Gain:	0.95884
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	9
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.258667
+Seq. Non-Parallel Time:	0.105408
+Skeleton Time:	0.223808
+skelMap Time:	0.0409407
+skelRed Time:	0.0656781
+skelSeq Time:	0.116828
+PThread Time:	0.21799
+Seq Gain:	1.15575
+PThread Gain:	0.974006
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	9
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	3.72329
+Seq. Non-Parallel Time:	1.5075
+Skeleton Time:	2.4471
+skelMap Time:	0.526238
+skelRed Time:	0.346021
+skelSeq Time:	1.5717
+PThread Time:	2.42758
+Seq Gain:	1.52151
+PThread Gain:	0.99202
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	9
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	67.6222
+Seq. Non-Parallel Time:	26.0928
+Skeleton Time:	38.9521
+skelMap Time:	8.92387
+skelRed Time:	3.84542
+skelSeq Time:	26.1453
+PThread Time:	37.3734
+Seq Gain:	1.73603
+PThread Gain:	0.959472
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.258772
+Seq. Non-Parallel Time:	0.101908
+Skeleton Time:	0.223905
+skelMap Time:	0.0421564
+skelRed Time:	0.0677768
+skelSeq Time:	0.113613
+PThread Time:	0.217574
+Seq Gain:	1.15572
+PThread Gain:	0.971721
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	3.84929
+Seq. Non-Parallel Time:	1.49751
+Skeleton Time:	2.44183
+skelMap Time:	0.549306
+skelRed Time:	0.344401
+skelSeq Time:	1.54497
+PThread Time:	2.41604
+Seq Gain:	1.5764
+PThread Gain:	0.989437
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	48.5804
+Seq. Non-Parallel Time:	18.2232
+Skeleton Time:	27.4805
+skelMap Time:	6.54393
+skelRed Time:	2.67164
+skelSeq Time:	18.2272
+PThread Time:	26.4344
+Seq Gain:	1.76782
+PThread Gain:	0.961936
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	11
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.705259
+Seq. Non-Parallel Time:	0.27014
+Skeleton Time:	0.620004
+skelMap Time:	0.118604
+skelRed Time:	0.196635
+skelSeq Time:	0.304367
+PThread Time:	0.592561
+Seq Gain:	1.13751
+PThread Gain:	0.955737
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	11
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	4.04157
+Seq. Non-Parallel Time:	1.53134
+Skeleton Time:	2.53768
+skelMap Time:	0.590074
+skelRed Time:	0.362567
+skelSeq Time:	1.58192
+PThread Time:	2.489
+Seq Gain:	1.59263
+PThread Gain:	0.980818
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	11
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	72.0828
+Seq. Non-Parallel Time:	26.3142
+Skeleton Time:	40.1233
+skelMap Time:	9.87431
+skelRed Time:	3.81294
+skelSeq Time:	26.3988
+PThread Time:	38.5485
+Seq Gain:	1.79653
+PThread Gain:	0.96075
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	12
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.344343
+Seq. Non-Parallel Time:	0.127549
+Skeleton Time:	0.304307
+skelMap Time:	0.0588508
+skelRed Time:	0.101651
+skelSeq Time:	0.143433
+PThread Time:	0.290173
+Seq Gain:	1.13157
+PThread Gain:	0.953555
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	12
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	2.35298
+Seq. Non-Parallel Time:	0.859426
+Skeleton Time:	1.44184
+skelMap Time:	0.352649
+skelRed Time:	0.190177
+skelSeq Time:	0.895885
+PThread Time:	1.43722
+Seq Gain:	1.63193
+PThread Gain:	0.996795
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	12
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	52.5049
+Seq. Non-Parallel Time:	18.4612
+Skeleton Time:	28.6261
+skelMap Time:	7.37331
+skelRed Time:	2.68502
+skelSeq Time:	18.5313
+PThread Time:	27.621
+Seq Gain:	1.83416
+PThread Gain:	0.96489
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	13
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.325212
+Seq. Non-Parallel Time:	0.117832
+Skeleton Time:	0.286555
+skelMap Time:	0.0565012
+skelRed Time:	0.0978818
+skelSeq Time:	0.131806
+PThread Time:	0.27297
+Seq Gain:	1.1349
+PThread Gain:	0.952593
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	13
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	8.65216
+Seq. Non-Parallel Time:	3.0728
+Skeleton Time:	5.1305
+skelMap Time:	1.32282
+skelRed Time:	0.629839
+skelSeq Time:	3.17468
+PThread Time:	5.22131
+Seq Gain:	1.68642
+PThread Gain:	1.0177
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	13
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	160.699
+Seq. Non-Parallel Time:	55.1858
+Skeleton Time:	86.5183
+skelMap Time:	22.9075
+skelRed Time:	8.00621
+skelSeq Time:	55.5663
+PThread Time:	83.2725
+Seq Gain:	1.8574
+PThread Gain:	0.962484
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	14
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.264549
+Seq. Non-Parallel Time:	0.0926784
+Skeleton Time:	0.230639
+skelMap Time:	0.0459479
+skelRed Time:	0.0803553
+skelSeq Time:	0.103968
+PThread Time:	0.222114
+Seq Gain:	1.14703
+PThread Gain:	0.963038
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	14
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	4.53328
+Seq. Non-Parallel Time:	1.55765
+Skeleton Time:	2.66691
+skelMap Time:	0.703572
+skelRed Time:	0.347097
+skelSeq Time:	1.613
+PThread Time:	2.68465
+Seq Gain:	1.69982
+PThread Gain:	1.00665
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	14
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	74.3442
+Seq. Non-Parallel Time:	24.7015
+Skeleton Time:	39.0615
+skelMap Time:	10.692
+skelRed Time:	3.54916
+skelSeq Time:	24.7829
+PThread Time:	37.7866
+Seq Gain:	1.90326
+PThread Gain:	0.967363
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	15
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.377871
+Seq. Non-Parallel Time:	0.13064
+Skeleton Time:	0.332064
+skelMap Time:	0.0659992
+skelRed Time:	0.120014
+skelSeq Time:	0.145672
+PThread Time:	0.316953
+Seq Gain:	1.13795
+PThread Gain:	0.954495
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	15
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	8.2936
+Seq. Non-Parallel Time:	2.80633
+Skeleton Time:	4.84592
+skelMap Time:	1.29467
+skelRed Time:	0.656669
+skelSeq Time:	2.89132
+PThread Time:	4.858
+Seq Gain:	1.71146
+PThread Gain:	1.00249
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	15
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	123.862
+Seq. Non-Parallel Time:	40.8205
+Skeleton Time:	65.2877
+skelMap Time:	18.1277
+skelRed Time:	5.85179
+skelSeq Time:	41.2706
+PThread Time:	63.1172
+Seq Gain:	1.89716
+PThread Gain:	0.966755
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	10000
+Number of Clusters:	16
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.366637
+Seq. Non-Parallel Time:	0.122785
+Skeleton Time:	0.321618
+skelMap Time:	0.0646689
+skelRed Time:	0.119384
+skelSeq Time:	0.137194
+PThread Time:	0.309707
+Seq Gain:	1.13998
+PThread Gain:	0.962965
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	100000
+Number of Clusters:	16
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	7.67472
+Seq. Non-Parallel Time:	2.53263
+Skeleton Time:	4.44623
+skelMap Time:	1.21008
+skelRed Time:	0.625885
+skelSeq Time:	2.60702
+PThread Time:	4.40775
+Seq Gain:	1.72612
+PThread Gain:	0.991344
+########################
+K-Means problem with:	Map and Reduce Skeletons
+Number of 2-D Points:	1000000
+Number of Clusters:	16
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	75.4828
+Seq. Non-Parallel Time:	24.0529
+Skeleton Time:	38.8372
+skelMap Time:	11.1581
+skelRed Time:	3.47171
+skelSeq Time:	24.1693
+PThread Time:	37.6491
+Seq Gain:	1.94357
+PThread Gain:	0.969409

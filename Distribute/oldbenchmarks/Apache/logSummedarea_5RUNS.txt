@@ -1,0 +1,257 @@
+Summed-Area problem with Map and Scan Skeletons
+Problem Summed-Area
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	1000
+Number of simpson samples:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.00251942
+Seq. Non-Parallel Time:	1.5831e-05
+Skeleton Time:	0.002702
+skelMap Time:	0.000922155
+skelScan Time:	0.00174818
+skelSeq Time:	2.01702e-05
+PThread Time:	0.00175791
+Seq Gain:	0.932427
+PThread Gain:	0.650596
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	1000
+Number of simpson samples:	100
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.00823236
+Seq. Non-Parallel Time:	6.96182e-06
+Skeleton Time:	0.00302901
+skelMap Time:	0.00223856
+skelScan Time:	0.000777721
+skelSeq Time:	8.39233e-06
+PThread Time:	0.00268335
+Seq Gain:	2.71783
+PThread Gain:	0.885884
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	1000
+Number of simpson samples:	1000
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.05628
+Seq. Non-Parallel Time:	4.62532e-06
+Skeleton Time:	0.01252
+skelMap Time:	0.0114052
+skelScan Time:	0.00110831
+skelSeq Time:	4.00543e-06
+PThread Time:	0.0170267
+Seq Gain:	4.4952
+PThread Gain:	1.35996
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	10000
+Number of simpson samples:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.00696273
+Seq. Non-Parallel Time:	4.45366e-05
+Skeleton Time:	0.00262928
+skelMap Time:	0.00170474
+skelScan Time:	0.000842381
+skelSeq Time:	6.6185e-05
+PThread Time:	0.00260496
+Seq Gain:	2.64815
+PThread Gain:	0.990751
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	10000
+Number of simpson samples:	100
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.0574653
+Seq. Non-Parallel Time:	4.72546e-05
+Skeleton Time:	0.0132897
+skelMap Time:	0.011745
+skelScan Time:	0.00149059
+skelSeq Time:	4.59671e-05
+PThread Time:	0.0175262
+Seq Gain:	4.32405
+PThread Gain:	1.31878
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	10000
+Number of simpson samples:	1000
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.557733
+Seq. Non-Parallel Time:	4.80175e-05
+Skeleton Time:	0.108688
+skelMap Time:	0.107289
+skelScan Time:	0.00133944
+skelSeq Time:	4.78745e-05
+PThread Time:	0.119556
+Seq Gain:	5.1315
+PThread Gain:	1.09999
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	100000
+Number of simpson samples:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.0633922
+Seq. Non-Parallel Time:	0.000406933
+Skeleton Time:	0.0170994
+skelMap Time:	0.0129342
+skelScan Time:	0.00356817
+skelSeq Time:	0.000455809
+PThread Time:	0.01968
+Seq Gain:	3.70728
+PThread Gain:	1.15092
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	100000
+Number of simpson samples:	100
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.567367
+Seq. Non-Parallel Time:	0.000367737
+Skeleton Time:	0.115439
+skelMap Time:	0.111261
+skelScan Time:	0.00369182
+skelSeq Time:	0.000402355
+PThread Time:	0.11734
+Seq Gain:	4.91485
+PThread Gain:	1.01647
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	100000
+Number of simpson samples:	1000
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	5.48903
+Seq. Non-Parallel Time:	0.000392628
+Skeleton Time:	1.0682
+skelMap Time:	1.06417
+skelScan Time:	0.00351605
+skelSeq Time:	0.000416183
+PThread Time:	1.09288
+Seq Gain:	5.13857
+PThread Gain:	1.0231
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	1000000
+Number of simpson samples:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	0.634027
+Seq. Non-Parallel Time:	0.00443006
+Skeleton Time:	0.154974
+skelMap Time:	0.127466
+skelScan Time:	0.021063
+skelSeq Time:	0.00474176
+PThread Time:	0.146246
+Seq Gain:	4.09118
+PThread Gain:	0.943683
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	1000000
+Number of simpson samples:	100
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	5.59469
+Seq. Non-Parallel Time:	0.00408092
+Skeleton Time:	1.10773
+skelMap Time:	1.08045
+skelScan Time:	0.0214576
+skelSeq Time:	0.00468898
+PThread Time:	1.10126
+Seq Gain:	5.0506
+PThread Gain:	0.99416
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	1000000
+Number of simpson samples:	1000
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	55.361
+Seq. Non-Parallel Time:	0.00408359
+Skeleton Time:	10.8308
+skelMap Time:	10.8036
+skelScan Time:	0.0213436
+skelSeq Time:	0.00470123
+PThread Time:	10.7005
+Seq Gain:	5.11146
+PThread Gain:	0.987974
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	10000000
+Number of simpson samples:	10
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	6.2684
+Seq. Non-Parallel Time:	0.0646249
+Skeleton Time:	1.58569
+skelMap Time:	1.27917
+skelScan Time:	0.205316
+skelSeq Time:	0.0644625
+PThread Time:	1.32923
+Seq Gain:	3.95311
+PThread Gain:	0.838266
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	10000000
+Number of simpson samples:	100
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	56.212
+Seq. Non-Parallel Time:	0.065102
+Skeleton Time:	11.4793
+skelMap Time:	11.1715
+skelScan Time:	0.205484
+skelSeq Time:	0.0654088
+PThread Time:	10.9898
+Seq Gain:	4.89682
+PThread Gain:	0.957358
+########################
+Summed-Area problem with:	Map and Scan Skeletons
+Size of summed-area table:	10000000
+Number of simpson samples:	1000
+Number of Threads:	8
+Hardware Concurrency:	8
+Number of Runs (for AVG):	5
+Results validated
+Sequential Time:	539.074
+Seq. Non-Parallel Time:	0.0661784
+Skeleton Time:	113.941
+skelMap Time:	113.624
+skelScan Time:	0.212161
+skelSeq Time:	0.0664302
+PThread Time:	111.002
+Seq Gain:	4.73119
+PThread Gain:	0.974209

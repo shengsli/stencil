@@ -1,0 +1,31 @@
+# Test workload on multiple threads problem sizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./murrayBlackScholesScript threads maxdatablocks runs resultfile noptions nbsrepeats
+#
+# threads:    max threadcount
+# maxdatablocks  max number of sub-blocks (for stealing) created from the initial
+#                work partition allocated to a thread
+# runs:       number of repeat runs of the program
+# resultfile: results are sent here
+# noptions:   number of BlackScholes options to compute
+# nbsrepeats: number of repeats of each BlackScholes computation (artificially boost work)  TO BE DONE*******
+
+threads=$1
+maxdatablocks=$2
+runs=$3
+resultfile=$4
+noptions=$5
+nbsrepeats=$6
+
+ 
+echo "time, nthreads, ndatablocks, noptions" >> $resultfile
+for blockcount in $(seq 1 100000 $maxdatablocks)
+do
+  g++ -o murrayBlackScholes -std=c++11 -O2 -lpthread -DNTHREADS=$threads -DNOPTIONS=$noptions -DNDATABLOCKS=$blockcount -DNBSREPEATS=nbsrepeats murrayBlackScholes.cpp 
+  for run in $(seq 1 $runs)
+  do
+    ./murrayBlackScholes >> $resultfile
+  done
+done
+

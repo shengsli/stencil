@@ -1,0 +1,36 @@
+# Test workload on multiple threads problemsizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./experimentalScript threads mindatablocks datablockstep maxdatablocks runs resultfile xres yres itermax
+#
+# threads:    max threadcount
+# mindatablocks  min number of sub-blocks (for stealing) created from the initial
+#                work partition allocated to a thread
+# datablockstep  experimental increment in number of blocks
+# maxdatablocks  max number of sub-blocks (for stealing) created from the initial
+#                work partition allocated to a thread
+# runs:       number of repeat runs
+# resultfile: results are sent here
+# xres:	      xresolution
+# yres:	      yresolution
+# itermax:    max mandel iterations
+
+threads=$1
+mindatablocks=$2
+datablockstep=$3
+maxdatablocks=$4
+runs=$5
+resultfile=$6
+xres=$7
+yres=$8
+itermax=$9
+
+echo "time, nthreads, ndatablocks, itermax, size" >> $resultfile
+for blockcount in $(seq $mindatablocks $datablockstep $maxdatablocks)
+do
+  g++ -o murrayMandel -std=c++11 -O2 -lpthread -DNTHREADS=$threads -DHXRES=$xres -DHYRES=$yres -DITERMAX=$itermax -DNDATABLOCKS=$blockcount murrayMandel.cpp
+  for run in $(seq 1 $runs)
+  do
+    ./murrayMandel >> $resultfile
+  done
+done

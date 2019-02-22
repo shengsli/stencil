@@ -1,0 +1,939 @@
+Benchmarking MAPREDUCE Skeleton
+########################
+Number of Runs (for AVG):	50
+Hardware Concurrency:		4
+Max Threads (last Run):		32
+Number of Items per Run:	1000
+Collatz seed:			871
+Balanced :			YES
+########################
+Run: 1
+Run: 2
+Run: 3
+Run: 4
+Run: 5
+Run: 6
+Run: 7
+Run: 8
+Run: 9
+Run: 10
+Run: 11
+Run: 12
+Run: 13
+Run: 14
+Run: 15
+Run: 16
+Run: 17
+Run: 18
+Run: 19
+Run: 20
+Run: 21
+Run: 22
+Run: 23
+Run: 24
+Run: 25
+Run: 26
+Run: 27
+Run: 28
+Run: 29
+Run: 30
+Run: 31
+Run: 32
+Run: 33
+Run: 34
+Run: 35
+Run: 36
+Run: 37
+Run: 38
+Run: 39
+Run: 40
+Run: 41
+Run: 42
+Run: 43
+Run: 44
+Run: 45
+Run: 46
+Run: 47
+Run: 48
+Run: 49
+Run: 50
+----------------
+Number of threads:		1
+Sequential Run 1 :	0.408537
+Sequential Run 2 :	0.393367
+Sequential Run 3 :	0.396991
+Sequential Run 4 :	0.385688
+Sequential Run 5 :	0.38738
+Sequential Run 6 :	0.392074
+Sequential Run 7 :	0.396281
+Sequential Run 8 :	0.389487
+Sequential Run 9 :	0.39144
+Sequential Run 10 :	0.392107
+Sequential Run 11 :	0.396199
+Sequential Run 12 :	0.385532
+Sequential Run 13 :	0.38783
+Sequential Run 14 :	0.392359
+Sequential Run 15 :	0.396338
+Sequential Run 16 :	0.385191
+Sequential Run 17 :	0.388289
+Sequential Run 18 :	0.392267
+Sequential Run 19 :	0.395794
+Sequential Run 20 :	0.385556
+Sequential Run 21 :	0.386843
+Sequential Run 22 :	0.391823
+Sequential Run 23 :	0.395924
+Sequential Run 24 :	0.385173
+Sequential Run 25 :	0.387059
+Sequential Run 26 :	0.392255
+Sequential Run 27 :	0.396679
+Sequential Run 28 :	0.385266
+Sequential Run 29 :	0.387167
+Sequential Run 30 :	0.391148
+Sequential Run 31 :	0.395865
+Sequential Run 32 :	0.385684
+Sequential Run 33 :	0.386966
+Sequential Run 34 :	0.391169
+Sequential Run 35 :	0.399031
+Sequential Run 36 :	0.385123
+Sequential Run 37 :	0.387486
+Sequential Run 38 :	0.390938
+Sequential Run 39 :	0.396891
+Sequential Run 40 :	0.385154
+Sequential Run 41 :	0.386736
+Sequential Run 42 :	0.393271
+Sequential Run 43 :	0.396184
+Sequential Run 44 :	0.38528
+Sequential Run 45 :	0.387362
+Sequential Run 46 :	0.391117
+Sequential Run 47 :	0.395801
+Sequential Run 48 :	0.385239
+Sequential Run 49 :	0.390226
+Sequential Run 50 :	0.391061
+Sequential took (avg sec):	0.390893
+Skeleton Run 1 :	0.503399
+Skeleton Run 2 :	0.497311
+Skeleton Run 3 :	0.491469
+Skeleton Run 4 :	0.50442
+Skeleton Run 5 :	0.495042
+Skeleton Run 6 :	0.50248
+Skeleton Run 7 :	0.490815
+Skeleton Run 8 :	0.503343
+Skeleton Run 9 :	0.489791
+Skeleton Run 10 :	0.503288
+Skeleton Run 11 :	0.490727
+Skeleton Run 12 :	0.501756
+Skeleton Run 13 :	0.490602
+Skeleton Run 14 :	0.501921
+Skeleton Run 15 :	0.489966
+Skeleton Run 16 :	0.503244
+Skeleton Run 17 :	0.489736
+Skeleton Run 18 :	0.503313
+Skeleton Run 19 :	0.490398
+Skeleton Run 20 :	0.502401
+Skeleton Run 21 :	0.491319
+Skeleton Run 22 :	0.503825
+Skeleton Run 23 :	0.491586
+Skeleton Run 24 :	0.500305
+Skeleton Run 25 :	0.488617
+Skeleton Run 26 :	0.502144
+Skeleton Run 27 :	0.48924
+Skeleton Run 28 :	0.502794
+Skeleton Run 29 :	0.489008
+Skeleton Run 30 :	0.502496
+Skeleton Run 31 :	0.491099
+Skeleton Run 32 :	0.500954
+Skeleton Run 33 :	0.489956
+Skeleton Run 34 :	0.501422
+Skeleton Run 35 :	0.490598
+Skeleton Run 36 :	0.501087
+Skeleton Run 37 :	0.491776
+Skeleton Run 38 :	0.502046
+Skeleton Run 39 :	0.491141
+Skeleton Run 40 :	0.501235
+Skeleton Run 41 :	0.490808
+Skeleton Run 42 :	0.501353
+Skeleton Run 43 :	0.491329
+Skeleton Run 44 :	0.500417
+Skeleton Run 45 :	0.491021
+Skeleton Run 46 :	0.502076
+Skeleton Run 47 :	0.490413
+Skeleton Run 48 :	0.499099
+Skeleton Run 49 :	0.490227
+Skeleton Run 50 :	0.500941
+Skeleton took (avg sec):	0.496515
+Gain:				0.787272
+Run: 1
+Run: 2
+Run: 3
+Run: 4
+Run: 5
+Run: 6
+Run: 7
+Run: 8
+Run: 9
+Run: 10
+Run: 11
+Run: 12
+Run: 13
+Run: 14
+Run: 15
+Run: 16
+Run: 17
+Run: 18
+Run: 19
+Run: 20
+Run: 21
+Run: 22
+Run: 23
+Run: 24
+Run: 25
+Run: 26
+Run: 27
+Run: 28
+Run: 29
+Run: 30
+Run: 31
+Run: 32
+Run: 33
+Run: 34
+Run: 35
+Run: 36
+Run: 37
+Run: 38
+Run: 39
+Run: 40
+Run: 41
+Run: 42
+Run: 43
+Run: 44
+Run: 45
+Run: 46
+Run: 47
+Run: 48
+Run: 49
+Run: 50
+----------------
+Number of threads:		2
+Sequential Run 1 :	0.408537
+Sequential Run 2 :	0.393367
+Sequential Run 3 :	0.396991
+Sequential Run 4 :	0.385688
+Sequential Run 5 :	0.38738
+Sequential Run 6 :	0.392074
+Sequential Run 7 :	0.396281
+Sequential Run 8 :	0.389487
+Sequential Run 9 :	0.39144
+Sequential Run 10 :	0.392107
+Sequential Run 11 :	0.396199
+Sequential Run 12 :	0.385532
+Sequential Run 13 :	0.38783
+Sequential Run 14 :	0.392359
+Sequential Run 15 :	0.396338
+Sequential Run 16 :	0.385191
+Sequential Run 17 :	0.388289
+Sequential Run 18 :	0.392267
+Sequential Run 19 :	0.395794
+Sequential Run 20 :	0.385556
+Sequential Run 21 :	0.386843
+Sequential Run 22 :	0.391823
+Sequential Run 23 :	0.395924
+Sequential Run 24 :	0.385173
+Sequential Run 25 :	0.387059
+Sequential Run 26 :	0.392255
+Sequential Run 27 :	0.396679
+Sequential Run 28 :	0.385266
+Sequential Run 29 :	0.387167
+Sequential Run 30 :	0.391148
+Sequential Run 31 :	0.395865
+Sequential Run 32 :	0.385684
+Sequential Run 33 :	0.386966
+Sequential Run 34 :	0.391169
+Sequential Run 35 :	0.399031
+Sequential Run 36 :	0.385123
+Sequential Run 37 :	0.387486
+Sequential Run 38 :	0.390938
+Sequential Run 39 :	0.396891
+Sequential Run 40 :	0.385154
+Sequential Run 41 :	0.386736
+Sequential Run 42 :	0.393271
+Sequential Run 43 :	0.396184
+Sequential Run 44 :	0.38528
+Sequential Run 45 :	0.387362
+Sequential Run 46 :	0.391117
+Sequential Run 47 :	0.395801
+Sequential Run 48 :	0.385239
+Sequential Run 49 :	0.390226
+Sequential Run 50 :	0.391061
+Sequential took (avg sec):	0.390893
+Skeleton Run 1 :	0.324969
+Skeleton Run 2 :	0.308662
+Skeleton Run 3 :	0.305168
+Skeleton Run 4 :	0.308228
+Skeleton Run 5 :	0.310471
+Skeleton Run 6 :	0.307904
+Skeleton Run 7 :	0.303344
+Skeleton Run 8 :	0.309056
+Skeleton Run 9 :	0.313062
+Skeleton Run 10 :	0.30377
+Skeleton Run 11 :	0.301952
+Skeleton Run 12 :	0.303901
+Skeleton Run 13 :	0.308138
+Skeleton Run 14 :	0.307394
+Skeleton Run 15 :	0.305684
+Skeleton Run 16 :	0.307106
+Skeleton Run 17 :	0.301746
+Skeleton Run 18 :	0.308151
+Skeleton Run 19 :	0.302847
+Skeleton Run 20 :	0.307098
+Skeleton Run 21 :	0.307063
+Skeleton Run 22 :	0.307481
+Skeleton Run 23 :	0.306609
+Skeleton Run 24 :	0.307074
+Skeleton Run 25 :	0.308917
+Skeleton Run 26 :	0.304021
+Skeleton Run 27 :	0.310338
+Skeleton Run 28 :	0.303182
+Skeleton Run 29 :	0.301938
+Skeleton Run 30 :	0.308685
+Skeleton Run 31 :	0.305048
+Skeleton Run 32 :	0.311689
+Skeleton Run 33 :	0.302821
+Skeleton Run 34 :	0.306753
+Skeleton Run 35 :	0.297735
+Skeleton Run 36 :	0.309613
+Skeleton Run 37 :	0.302155
+Skeleton Run 38 :	0.313768
+Skeleton Run 39 :	0.304803
+Skeleton Run 40 :	0.306941
+Skeleton Run 41 :	0.306859
+Skeleton Run 42 :	0.309777
+Skeleton Run 43 :	0.307741
+Skeleton Run 44 :	0.310814
+Skeleton Run 45 :	0.302486
+Skeleton Run 46 :	0.312745
+Skeleton Run 47 :	0.310398
+Skeleton Run 48 :	0.308375
+Skeleton Run 49 :	0.308175
+Skeleton Run 50 :	0.306467
+Skeleton took (avg sec):	0.307182
+Gain:				1.27251
+Run: 1
+Run: 2
+Run: 3
+Run: 4
+Run: 5
+Run: 6
+Run: 7
+Run: 8
+Run: 9
+Run: 10
+Run: 11
+Run: 12
+Run: 13
+Run: 14
+Run: 15
+Run: 16
+Run: 17
+Run: 18
+Run: 19
+Run: 20
+Run: 21
+Run: 22
+Run: 23
+Run: 24
+Run: 25
+Run: 26
+Run: 27
+Run: 28
+Run: 29
+Run: 30
+Run: 31
+Run: 32
+Run: 33
+Run: 34
+Run: 35
+Run: 36
+Run: 37
+Run: 38
+Run: 39
+Run: 40
+Run: 41
+Run: 42
+Run: 43
+Run: 44
+Run: 45
+Run: 46
+Run: 47
+Run: 48
+Run: 49
+Run: 50
+----------------
+Number of threads:		4
+Sequential Run 1 :	0.408537
+Sequential Run 2 :	0.393367
+Sequential Run 3 :	0.396991
+Sequential Run 4 :	0.385688
+Sequential Run 5 :	0.38738
+Sequential Run 6 :	0.392074
+Sequential Run 7 :	0.396281
+Sequential Run 8 :	0.389487
+Sequential Run 9 :	0.39144
+Sequential Run 10 :	0.392107
+Sequential Run 11 :	0.396199
+Sequential Run 12 :	0.385532
+Sequential Run 13 :	0.38783
+Sequential Run 14 :	0.392359
+Sequential Run 15 :	0.396338
+Sequential Run 16 :	0.385191
+Sequential Run 17 :	0.388289
+Sequential Run 18 :	0.392267
+Sequential Run 19 :	0.395794
+Sequential Run 20 :	0.385556
+Sequential Run 21 :	0.386843
+Sequential Run 22 :	0.391823
+Sequential Run 23 :	0.395924
+Sequential Run 24 :	0.385173
+Sequential Run 25 :	0.387059
+Sequential Run 26 :	0.392255
+Sequential Run 27 :	0.396679
+Sequential Run 28 :	0.385266
+Sequential Run 29 :	0.387167
+Sequential Run 30 :	0.391148
+Sequential Run 31 :	0.395865
+Sequential Run 32 :	0.385684
+Sequential Run 33 :	0.386966
+Sequential Run 34 :	0.391169
+Sequential Run 35 :	0.399031
+Sequential Run 36 :	0.385123
+Sequential Run 37 :	0.387486
+Sequential Run 38 :	0.390938
+Sequential Run 39 :	0.396891
+Sequential Run 40 :	0.385154
+Sequential Run 41 :	0.386736
+Sequential Run 42 :	0.393271
+Sequential Run 43 :	0.396184
+Sequential Run 44 :	0.38528
+Sequential Run 45 :	0.387362
+Sequential Run 46 :	0.391117
+Sequential Run 47 :	0.395801
+Sequential Run 48 :	0.385239
+Sequential Run 49 :	0.390226
+Sequential Run 50 :	0.391061
+Sequential took (avg sec):	0.390893
+Skeleton Run 1 :	0.214144
+Skeleton Run 2 :	0.197369
+Skeleton Run 3 :	0.18715
+Skeleton Run 4 :	0.19003
+Skeleton Run 5 :	0.188498
+Skeleton Run 6 :	0.186791
+Skeleton Run 7 :	0.187172
+Skeleton Run 8 :	0.188404
+Skeleton Run 9 :	0.188019
+Skeleton Run 10 :	0.193789
+Skeleton Run 11 :	0.193061
+Skeleton Run 12 :	0.187597
+Skeleton Run 13 :	0.186807
+Skeleton Run 14 :	0.187039
+Skeleton Run 15 :	0.186253
+Skeleton Run 16 :	0.186296
+Skeleton Run 17 :	0.188448
+Skeleton Run 18 :	0.189808
+Skeleton Run 19 :	0.185912
+Skeleton Run 20 :	0.188014
+Skeleton Run 21 :	0.185228
+Skeleton Run 22 :	0.186468
+Skeleton Run 23 :	0.185633
+Skeleton Run 24 :	0.18759
+Skeleton Run 25 :	0.185963
+Skeleton Run 26 :	0.189918
+Skeleton Run 27 :	0.185143
+Skeleton Run 28 :	0.188945
+Skeleton Run 29 :	0.186297
+Skeleton Run 30 :	0.187178
+Skeleton Run 31 :	0.186094
+Skeleton Run 32 :	0.186099
+Skeleton Run 33 :	0.18466
+Skeleton Run 34 :	0.190479
+Skeleton Run 35 :	0.187158
+Skeleton Run 36 :	0.188062
+Skeleton Run 37 :	0.185895
+Skeleton Run 38 :	0.187745
+Skeleton Run 39 :	0.187874
+Skeleton Run 40 :	0.189139
+Skeleton Run 41 :	0.184532
+Skeleton Run 42 :	0.187963
+Skeleton Run 43 :	0.185134
+Skeleton Run 44 :	0.18814
+Skeleton Run 45 :	0.18506
+Skeleton Run 46 :	0.188063
+Skeleton Run 47 :	0.185179
+Skeleton Run 48 :	0.188192
+Skeleton Run 49 :	0.187151
+Skeleton Run 50 :	0.188189
+Skeleton took (avg sec):	0.188195
+Gain:				2.07706
+Run: 1
+Run: 2
+Run: 3
+Run: 4
+Run: 5
+Run: 6
+Run: 7
+Run: 8
+Run: 9
+Run: 10
+Run: 11
+Run: 12
+Run: 13
+Run: 14
+Run: 15
+Run: 16
+Run: 17
+Run: 18
+Run: 19
+Run: 20
+Run: 21
+Run: 22
+Run: 23
+Run: 24
+Run: 25
+Run: 26
+Run: 27
+Run: 28
+Run: 29
+Run: 30
+Run: 31
+Run: 32
+Run: 33
+Run: 34
+Run: 35
+Run: 36
+Run: 37
+Run: 38
+Run: 39
+Run: 40
+Run: 41
+Run: 42
+Run: 43
+Run: 44
+Run: 45
+Run: 46
+Run: 47
+Run: 48
+Run: 49
+Run: 50
+----------------
+Number of threads:		8
+Sequential Run 1 :	0.408537
+Sequential Run 2 :	0.393367
+Sequential Run 3 :	0.396991
+Sequential Run 4 :	0.385688
+Sequential Run 5 :	0.38738
+Sequential Run 6 :	0.392074
+Sequential Run 7 :	0.396281
+Sequential Run 8 :	0.389487
+Sequential Run 9 :	0.39144
+Sequential Run 10 :	0.392107
+Sequential Run 11 :	0.396199
+Sequential Run 12 :	0.385532
+Sequential Run 13 :	0.38783
+Sequential Run 14 :	0.392359
+Sequential Run 15 :	0.396338
+Sequential Run 16 :	0.385191
+Sequential Run 17 :	0.388289
+Sequential Run 18 :	0.392267
+Sequential Run 19 :	0.395794
+Sequential Run 20 :	0.385556
+Sequential Run 21 :	0.386843
+Sequential Run 22 :	0.391823
+Sequential Run 23 :	0.395924
+Sequential Run 24 :	0.385173
+Sequential Run 25 :	0.387059
+Sequential Run 26 :	0.392255
+Sequential Run 27 :	0.396679
+Sequential Run 28 :	0.385266
+Sequential Run 29 :	0.387167
+Sequential Run 30 :	0.391148
+Sequential Run 31 :	0.395865
+Sequential Run 32 :	0.385684
+Sequential Run 33 :	0.386966
+Sequential Run 34 :	0.391169
+Sequential Run 35 :	0.399031
+Sequential Run 36 :	0.385123
+Sequential Run 37 :	0.387486
+Sequential Run 38 :	0.390938
+Sequential Run 39 :	0.396891
+Sequential Run 40 :	0.385154
+Sequential Run 41 :	0.386736
+Sequential Run 42 :	0.393271
+Sequential Run 43 :	0.396184
+Sequential Run 44 :	0.38528
+Sequential Run 45 :	0.387362
+Sequential Run 46 :	0.391117
+Sequential Run 47 :	0.395801
+Sequential Run 48 :	0.385239
+Sequential Run 49 :	0.390226
+Sequential Run 50 :	0.391061
+Sequential took (avg sec):	0.390893
+Skeleton Run 1 :	0.196064
+Skeleton Run 2 :	0.195887
+Skeleton Run 3 :	0.189825
+Skeleton Run 4 :	0.188317
+Skeleton Run 5 :	0.197908
+Skeleton Run 6 :	0.190834
+Skeleton Run 7 :	0.194649
+Skeleton Run 8 :	0.201966
+Skeleton Run 9 :	0.200025
+Skeleton Run 10 :	0.196376
+Skeleton Run 11 :	0.1926
+Skeleton Run 12 :	0.192506
+Skeleton Run 13 :	0.192721
+Skeleton Run 14 :	0.19683
+Skeleton Run 15 :	0.194602
+Skeleton Run 16 :	0.197538
+Skeleton Run 17 :	0.194418
+Skeleton Run 18 :	0.188454
+Skeleton Run 19 :	0.189178
+Skeleton Run 20 :	0.198173
+Skeleton Run 21 :	0.190201
+Skeleton Run 22 :	0.190505
+Skeleton Run 23 :	0.188255
+Skeleton Run 24 :	0.200023
+Skeleton Run 25 :	0.188107
+Skeleton Run 26 :	0.18775
+Skeleton Run 27 :	0.192421
+Skeleton Run 28 :	0.189316
+Skeleton Run 29 :	0.194168
+Skeleton Run 30 :	0.184904
+Skeleton Run 31 :	0.194089
+Skeleton Run 32 :	0.191054
+Skeleton Run 33 :	0.180187
+Skeleton Run 34 :	0.182084
+Skeleton Run 35 :	0.186857
+Skeleton Run 36 :	0.189063
+Skeleton Run 37 :	0.185912
+Skeleton Run 38 :	0.18737
+Skeleton Run 39 :	0.189101
+Skeleton Run 40 :	0.195699
+Skeleton Run 41 :	0.185244
+Skeleton Run 42 :	0.193476
+Skeleton Run 43 :	0.191972
+Skeleton Run 44 :	0.193979
+Skeleton Run 45 :	0.184811
+Skeleton Run 46 :	0.179633
+Skeleton Run 47 :	0.188498
+Skeleton Run 48 :	0.196359
+Skeleton Run 49 :	0.186805
+Skeleton Run 50 :	0.191077
+Skeleton took (avg sec):	0.191356
+Gain:				2.04275
+Run: 1
+Run: 2
+Run: 3
+Run: 4
+Run: 5
+Run: 6
+Run: 7
+Run: 8
+Run: 9
+Run: 10
+Run: 11
+Run: 12
+Run: 13
+Run: 14
+Run: 15
+Run: 16
+Run: 17
+Run: 18
+Run: 19
+Run: 20
+Run: 21
+Run: 22
+Run: 23
+Run: 24
+Run: 25
+Run: 26
+Run: 27
+Run: 28
+Run: 29
+Run: 30
+Run: 31
+Run: 32
+Run: 33
+Run: 34
+Run: 35
+Run: 36
+Run: 37
+Run: 38
+Run: 39
+Run: 40
+Run: 41
+Run: 42
+Run: 43
+Run: 44
+Run: 45
+Run: 46
+Run: 47
+Run: 48
+Run: 49
+Run: 50
+----------------
+Number of threads:		16
+Sequential Run 1 :	0.408537
+Sequential Run 2 :	0.393367
+Sequential Run 3 :	0.396991
+Sequential Run 4 :	0.385688
+Sequential Run 5 :	0.38738
+Sequential Run 6 :	0.392074
+Sequential Run 7 :	0.396281
+Sequential Run 8 :	0.389487
+Sequential Run 9 :	0.39144
+Sequential Run 10 :	0.392107
+Sequential Run 11 :	0.396199
+Sequential Run 12 :	0.385532
+Sequential Run 13 :	0.38783
+Sequential Run 14 :	0.392359
+Sequential Run 15 :	0.396338
+Sequential Run 16 :	0.385191
+Sequential Run 17 :	0.388289
+Sequential Run 18 :	0.392267
+Sequential Run 19 :	0.395794
+Sequential Run 20 :	0.385556
+Sequential Run 21 :	0.386843
+Sequential Run 22 :	0.391823
+Sequential Run 23 :	0.395924
+Sequential Run 24 :	0.385173
+Sequential Run 25 :	0.387059
+Sequential Run 26 :	0.392255
+Sequential Run 27 :	0.396679
+Sequential Run 28 :	0.385266
+Sequential Run 29 :	0.387167
+Sequential Run 30 :	0.391148
+Sequential Run 31 :	0.395865
+Sequential Run 32 :	0.385684
+Sequential Run 33 :	0.386966
+Sequential Run 34 :	0.391169
+Sequential Run 35 :	0.399031
+Sequential Run 36 :	0.385123
+Sequential Run 37 :	0.387486
+Sequential Run 38 :	0.390938
+Sequential Run 39 :	0.396891
+Sequential Run 40 :	0.385154
+Sequential Run 41 :	0.386736
+Sequential Run 42 :	0.393271
+Sequential Run 43 :	0.396184
+Sequential Run 44 :	0.38528
+Sequential Run 45 :	0.387362
+Sequential Run 46 :	0.391117
+Sequential Run 47 :	0.395801
+Sequential Run 48 :	0.385239
+Sequential Run 49 :	0.390226
+Sequential Run 50 :	0.391061
+Sequential took (avg sec):	0.390893
+Skeleton Run 1 :	0.209561
+Skeleton Run 2 :	0.196324
+Skeleton Run 3 :	0.185064
+Skeleton Run 4 :	0.189552
+Skeleton Run 5 :	0.191803
+Skeleton Run 6 :	0.190774
+Skeleton Run 7 :	0.189786
+Skeleton Run 8 :	0.18954
+Skeleton Run 9 :	0.191167
+Skeleton Run 10 :	0.190747
+Skeleton Run 11 :	0.188995
+Skeleton Run 12 :	0.194408
+Skeleton Run 13 :	0.188006
+Skeleton Run 14 :	0.191026
+Skeleton Run 15 :	0.190102
+Skeleton Run 16 :	0.194243
+Skeleton Run 17 :	0.192354
+Skeleton Run 18 :	0.187329
+Skeleton Run 19 :	0.190197
+Skeleton Run 20 :	0.186412
+Skeleton Run 21 :	0.188542
+Skeleton Run 22 :	0.18967
+Skeleton Run 23 :	0.190029
+Skeleton Run 24 :	0.187674
+Skeleton Run 25 :	0.183915
+Skeleton Run 26 :	0.185901
+Skeleton Run 27 :	0.188335
+Skeleton Run 28 :	0.188707
+Skeleton Run 29 :	0.19157
+Skeleton Run 30 :	0.188626
+Skeleton Run 31 :	0.186273
+Skeleton Run 32 :	0.194352
+Skeleton Run 33 :	0.185033
+Skeleton Run 34 :	0.189452
+Skeleton Run 35 :	0.188877
+Skeleton Run 36 :	0.194954
+Skeleton Run 37 :	0.189242
+Skeleton Run 38 :	0.189852
+Skeleton Run 39 :	0.190863
+Skeleton Run 40 :	0.189448
+Skeleton Run 41 :	0.185839
+Skeleton Run 42 :	0.189049
+Skeleton Run 43 :	0.185664
+Skeleton Run 44 :	0.19296
+Skeleton Run 45 :	0.187896
+Skeleton Run 46 :	0.189993
+Skeleton Run 47 :	0.186942
+Skeleton Run 48 :	0.190247
+Skeleton Run 49 :	0.194584
+Skeleton Run 50 :	0.193808
+Skeleton took (avg sec):	0.190114
+Gain:				2.0561
+Run: 1
+Run: 2
+Run: 3
+Run: 4
+Run: 5
+Run: 6
+Run: 7
+Run: 8
+Run: 9
+Run: 10
+Run: 11
+Run: 12
+Run: 13
+Run: 14
+Run: 15
+Run: 16
+Run: 17
+Run: 18
+Run: 19
+Run: 20
+Run: 21
+Run: 22
+Run: 23
+Run: 24
+Run: 25
+Run: 26
+Run: 27
+Run: 28
+Run: 29
+Run: 30
+Run: 31
+Run: 32
+Run: 33
+Run: 34
+Run: 35
+Run: 36
+Run: 37
+Run: 38
+Run: 39
+Run: 40
+Run: 41
+Run: 42
+Run: 43
+Run: 44
+Run: 45
+Run: 46
+Run: 47
+Run: 48
+Run: 49
+Run: 50
+----------------
+Number of threads:		32
+Sequential Run 1 :	0.408537
+Sequential Run 2 :	0.393367
+Sequential Run 3 :	0.396991
+Sequential Run 4 :	0.385688
+Sequential Run 5 :	0.38738
+Sequential Run 6 :	0.392074
+Sequential Run 7 :	0.396281
+Sequential Run 8 :	0.389487
+Sequential Run 9 :	0.39144
+Sequential Run 10 :	0.392107
+Sequential Run 11 :	0.396199
+Sequential Run 12 :	0.385532
+Sequential Run 13 :	0.38783
+Sequential Run 14 :	0.392359
+Sequential Run 15 :	0.396338
+Sequential Run 16 :	0.385191
+Sequential Run 17 :	0.388289
+Sequential Run 18 :	0.392267
+Sequential Run 19 :	0.395794
+Sequential Run 20 :	0.385556
+Sequential Run 21 :	0.386843
+Sequential Run 22 :	0.391823
+Sequential Run 23 :	0.395924
+Sequential Run 24 :	0.385173
+Sequential Run 25 :	0.387059
+Sequential Run 26 :	0.392255
+Sequential Run 27 :	0.396679
+Sequential Run 28 :	0.385266
+Sequential Run 29 :	0.387167
+Sequential Run 30 :	0.391148
+Sequential Run 31 :	0.395865
+Sequential Run 32 :	0.385684
+Sequential Run 33 :	0.386966
+Sequential Run 34 :	0.391169
+Sequential Run 35 :	0.399031
+Sequential Run 36 :	0.385123
+Sequential Run 37 :	0.387486
+Sequential Run 38 :	0.390938
+Sequential Run 39 :	0.396891
+Sequential Run 40 :	0.385154
+Sequential Run 41 :	0.386736
+Sequential Run 42 :	0.393271
+Sequential Run 43 :	0.396184
+Sequential Run 44 :	0.38528
+Sequential Run 45 :	0.387362
+Sequential Run 46 :	0.391117
+Sequential Run 47 :	0.395801
+Sequential Run 48 :	0.385239
+Sequential Run 49 :	0.390226
+Sequential Run 50 :	0.391061
+Sequential took (avg sec):	0.390893
+Skeleton Run 1 :	0.236725
+Skeleton Run 2 :	0.212228
+Skeleton Run 3 :	0.194634
+Skeleton Run 4 :	0.19724
+Skeleton Run 5 :	0.196187
+Skeleton Run 6 :	0.198175
+Skeleton Run 7 :	0.193995
+Skeleton Run 8 :	0.191865
+Skeleton Run 9 :	0.192003
+Skeleton Run 10 :	0.192529
+Skeleton Run 11 :	0.191262
+Skeleton Run 12 :	0.192727
+Skeleton Run 13 :	0.194811
+Skeleton Run 14 :	0.194632
+Skeleton Run 15 :	0.193004
+Skeleton Run 16 :	0.193571
+Skeleton Run 17 :	0.195393
+Skeleton Run 18 :	0.191498
+Skeleton Run 19 :	0.192343
+Skeleton Run 20 :	0.19363
+Skeleton Run 21 :	0.191514
+Skeleton Run 22 :	0.195196
+Skeleton Run 23 :	0.190126
+Skeleton Run 24 :	0.189984
+Skeleton Run 25 :	0.192422
+Skeleton Run 26 :	0.195546
+Skeleton Run 27 :	0.194511
+Skeleton Run 28 :	0.192544
+Skeleton Run 29 :	0.190388
+Skeleton Run 30 :	0.196968
+Skeleton Run 31 :	0.191268
+Skeleton Run 32 :	0.192243
+Skeleton Run 33 :	0.190997
+Skeleton Run 34 :	0.194387
+Skeleton Run 35 :	0.188828
+Skeleton Run 36 :	0.188838
+Skeleton Run 37 :	0.196742
+Skeleton Run 38 :	0.197763
+Skeleton Run 39 :	0.192611
+Skeleton Run 40 :	0.193836
+Skeleton Run 41 :	0.192303
+Skeleton Run 42 :	0.193853
+Skeleton Run 43 :	0.194808
+Skeleton Run 44 :	0.1934
+Skeleton Run 45 :	0.193361
+Skeleton Run 46 :	0.196488
+Skeleton Run 47 :	0.19395
+Skeleton Run 48 :	0.198801
+Skeleton Run 49 :	0.195808
+Skeleton Run 50 :	0.192904
+Skeleton took (avg sec):	0.194817
+Gain:				2.00646

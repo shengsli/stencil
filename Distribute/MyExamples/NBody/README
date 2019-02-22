@@ -1,0 +1,5 @@
+
+[fantine]mic: ./murrayNBodyScript 4 10 10 myResults.csv 40 200
+[fantine]mic: Rscript Rtest.R myResults.csv myResults.pdf
+Saving 7 x 7 in image
+[fantine]mic: acroread myResults.pdf &

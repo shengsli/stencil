@@ -1,0 +1,28 @@
+# Test workload on multiple threads problem sizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./murrayPPMCCScript threads ndatablocks runs resultfile nitems 
+#
+# threads:    max threadcount
+# ndatablocks number of sub-blocks (for stealing) created from the initial
+#             work partition allocated to a thread
+# runs:       number of repeat runs
+# resultfile: results are sent here
+# nitems:     number of items in each sequence
+
+threads=$1
+ndatablocks=$2
+runs=$3
+resultfile=$4
+nitems=$5
+ 
+echo "time, nthreads, ndatablocks, nitems" >> $resultfile
+for threadcount in $(seq 1 $threads)
+do
+  g++ -o murrayPPMCC -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNITEMS=$nitems -DNDATABLOCKS=$ndatablocks murrayPPMCC.cpp 
+  for run in $(seq 1 $runs)
+  do
+    ./murrayPPMCC >> $resultfile
+  done
+done
+
