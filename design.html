@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>stencil</title>
-<!-- 2019-02-23 Sat 21:28 -->
+<title>interface design</title>
+<!-- 2019-02-24 Sun 07:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Sheng Li" />
+<meta  name="author" content="sheng li" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -138,47 +138,72 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">stencil</h1>
+<h1 class="title">interface design</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. skepu2 intro</a></li>
+<li><a href="#sec-2">2. skepu2 stencil interface design</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> skepu2 intro</h2>
+<div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li><a href="description.html">Project description</a>
+<li>skepu2 is structured around source-to-source translator (precompiler)
 </li>
-<li>Seed resources:
-<ul class="org-ul">
-<li>Kessler, <a href="https://www.ida.liu.se/labs/pelab/skepu/">SkePU</a>
-</li>
-<li>McCool, <a href="https://pdfs.semanticscholar.org/6895/2de895930b75041827b3037b575e3c527afa.pdf">Structured Parallel Programming with Deterministic Patterns</a>
-</li>
-<li>Kuchen, The Münster Skeleton Library Muesli
-<ul class="org-ul">
-<li><a href="https://www.researchgate.net/publication/254459421_The_Munster_Skeleton_Library_Muesli_A_comprehensive_overview">The Münster Skeleton Library Muesli: A comprehensive overview</a>
-</li>
-<li><a href="http://muesli.uni-muenster.de/">The Muenster Skeleton Library</a>
+<li>nested namespaces are not part of the api and should be considered implementation-specific. 
 </li>
 </ul>
-</li>
-<li><a href="valais.html">my reading notes</a> on Valais, A: A Parallel Skeleton Library for DICE, UoE MSc Project, 2018
-</li>
-</ul>
-</li>
-</ul>
-<hr  />
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> skepu2 stencil interface design</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-C++">MapOverlap(int radius, int radius, size_t stride, )
+</pre>
+</div>
 <ul class="org-ul">
-<li><a href="ppp.html">Weekly progress reporting</a>
+<li><code>int x_radius</code>: overlap radius in the x-direction
 </li>
-<li><a href="plan.html">Draft Plan</a> for <a href="https://www.overleaf.com/read/tnrbypvpprym">IPP (read-only overleaf)</a>
+<li><code>int y_radius</code>: overlap radius in the y-direction, used to deduce that an instance is 2d. 
 </li>
-<li><a href="design.html">Sketch Interface Design</a>
+<li><code>size_t stride</code>: stride
 </li>
-<li><a href="https://github.com/shengsli/stencil">GitHub repo</a>
+<li>~~: pointer to the contained type, pointing to the centre of the overlap region. 
 </li>
-<li>Resources: 
-<ul class="org-ul">
-<li><a href="https://www.ida.liu.se/labs/pelab/skepu/docs/userguide-2_0.pdf">skepu2 manual</a> (MapOverlap in section 8.5)
-</li>
-<li></li>
-</ul>
+<li>~~: 
 </li>
 </ul>
+
+<div class="org-src-container">
+<label class="org-src-name">skepu2 MapOverlap examples</label>
+<pre class="src src-C++">float conv(int overlap, size_t stride, const float *v, const Vec&lt;float&gt; stencil, float scale)
+{
+	float res = 0;
+	for (int i = -overlap; i &lt;= overlap; ++i)
+		res += stencil[i + overlap] * v[i*stride];
+	return res / scale;
+}
+
+Vector&lt;float&gt; convolution(Vector&lt;float&gt; &amp;v)
+{
+	auto convol = MapOverlap(conv);
+	Vector&lt;float&gt; stencil {1, 2, 4, 2, 1};
+	Vector&lt;float&gt; result(v.size());
+	convol.setOverlap(2);
+	return convol(result, v, stencil, 10);
+}
+</pre>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
