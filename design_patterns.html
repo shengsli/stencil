@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>draft project plan</title>
-<!-- 2019-02-28 Thu 15:24 -->
+<title>design patterns</title>
+<!-- 2019-02-28 Thu 09:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Sheng Li" />
+<meta  name="author" content="sheng li" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -138,133 +138,95 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">draft project plan</h1>
+<h1 class="title">design patterns</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. motivation</a>
+<li><a href="#sec-1">1. why use design patterns? benefits</a></li>
+<li><a href="#sec-2">2. creational design patterns</a>
 <ul>
-<li><a href="#sec-1-1">1.1. problem statement</a></li>
-<li><a href="#sec-1-2">1.2. research hypothesis and objectives</a></li>
-<li><a href="#sec-1-3">1.3. timeliness and novelty</a></li>
-<li><a href="#sec-1-4">1.4. significance</a></li>
-<li><a href="#sec-1-5">1.5. beneficiaries</a></li>
+<li><a href="#sec-2-1">2.1. abstract factory</a></li>
+<li><a href="#sec-2-2">2.2. builder</a></li>
+<li><a href="#sec-2-3">2.3. factory method</a></li>
+<li><a href="#sec-2-4">2.4. </a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2. background</a></li>
-<li><a href="#sec-3">3. programme and methodology</a></li>
-<li><a href="#sec-4">4. evaluation</a></li>
-<li><a href="#sec-5">5. expected outcomes</a></li>
-<li><a href="#sec-6">6. research plan, milestones and deliverables</a></li>
-<li><a href="#sec-7">7. objectives</a></li>
 </ul>
 </div>
 </div>
-
+<p>
+more on <a href="https://sourcemaking.com/design_patterns">https://sourcemaking.com/design_patterns</a>
+</p>
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> motivation</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> why use design patterns? benefits</h2>
 <div class="outline-text-2" id="text-1">
-<ol class="org-ol">
-<li>deterministic patterns -&gt; higher maintainability <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>
 <ul class="org-ul">
-<li>less race conditions -&gt; <b>determinism and consistency</b> -&gt; simplify debugging and testing
+<li>speed up the development process by providing tested, proven development paradigms
 </li>
-</ul>
+<li>reusing skeletons prevents subtle issues that can cause major problems
 </li>
-<li>application oriented patterns -&gt; higher productivity <sup><a id="fnr.1.100" name="fnr.1.100" class="footref" href="#fn.1">1</a></sup>
+<li>improves code readability
+</li>
+<li>applicable to a boarder range of problems, not tied to a particular problem, 
 <ul class="org-ul">
-<li>patterns derived from common use cases in applications
-<ul class="org-ul">
-<li>universal patterns
-</li>
-<li>patterns that target specific domains
-</li>
-</ul>
-</li>
-<li>encourage high-level reasoning
-<ul class="org-ul">
-<li>focus users on parallelism and data locality
-</li>
-<li>simplify learning to write efficient programs
+<li>can be improved over time, not a ad-hoc design
 </li>
 </ul>
 </li>
 </ul>
-</li>
-</ol>
-</div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> problem statement</h3>
-</div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> research hypothesis and objectives</h3>
-</div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> timeliness and novelty</h3>
-</div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> significance</h3>
-</div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> beneficiaries</h3>
 </div>
 </div>
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> background</h2>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> programme and methodology</h2>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> evaluation</h2>
-</div>
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> expected outcomes</h2>
-</div>
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> research plan, milestones and deliverables</h2>
-<div class="outline-text-2" id="text-6">
+<h2 id="sec-2"><span class="section-number-2">2</span> creational design patterns</h2>
+<div class="outline-text-2" id="text-2">
 <ul class="org-ul">
-<li><code>[&#xa0;]</code> gantt chart
+<li>patterns are al bout class instantiation
 </li>
-<li><code>[&#xa0;]</code> milestones
-</li>
-<li><code>[&#xa0;]</code> deliverables
-</li>
-</ul>
-
-<div class="figure">
-<p><img src="./gantt.png" alt="gantt.png" />
-</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> objectives</h2>
-<div class="outline-text-2" id="text-7">
-<ol class="org-ol">
-<li>design interface 
-</li>
-<li></li>
-</ol>
-<ul class="org-ul">
-<li><a href="ipp/tut4.html">ipp tut4</a>: title, motivation/purpose, completion criteria, impact
+<li>a pattern can be further divided into class-creation patterns and object-creational patterns 
 </li>
 </ul>
 </div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> abstract factory</h3>
 </div>
-<div id="footnotes">
-<h2 class="footnotes">Footnotes: </h2>
-<div id="text-footnotes">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> builder</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>separate object construction from its representation
+</li>
+</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
-McCool, parallel book
-</p></div>
 
+<colgroup>
+<col  class="left" />
 
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">builder</th>
+<th scope="col" class="left">constructor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div></div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> factory method</h3>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> </h3>
+</div>
+</div>
+</div>
 </body>
 </html>
