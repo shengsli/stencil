@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>progress-plans-problems</title>
-<!-- 2019-03-13 Wed 20:34 -->
+<!-- 2019-03-14 Thu 16:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Sheng Li" />
@@ -151,12 +151,12 @@ for the JavaScript code in this tag.
 <tbody>
 <tr>
 <td class="left">IPP submission</td>
-<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-04-05 Fri 10:00&gt;</span></span></td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-04-05 Fri 10:00&gt;</span></span> w14</td>
 </tr>
 
 <tr>
 <td class="left">Project submission</td>
-<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-08-16 Fri 12:00&gt;</span></span></td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-08-16 Fri 12:00&gt;</span></span> w33</td>
 </tr>
 
 <tr>
@@ -166,7 +166,7 @@ for the JavaScript code in this tag.
 </tbody>
 </table>
 </center>
-<ul class="org-ul"><li><a id="sec-1" name="sec-1"></a><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-14 Thu 15:00&gt;</span></span><br  /><ul class="org-ul"><li><a id="sec-1-1" name="sec-1-1"></a>progress last week <code>[100%]</code><br  /><div class="outline-text-3" id="text-1-1">
+<ul class="org-ul"><li><a id="sec-1" name="sec-1"></a><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-14 Thu 15:00&gt;</span></span> w11<br  /><ul class="org-ul"><li><a id="sec-1-1" name="sec-1-1"></a>progress last week <code>[100%]</code><br  /><div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>did a tiny bit of coding for stencil skeleton
 </li>
@@ -177,9 +177,9 @@ for the JavaScript code in this tag.
 </li>
 <li><a id="sec-1-2" name="sec-1-2"></a>plan next week<br  /></li>
 <li><a id="sec-1-3" name="sec-1-3"></a>problems<br  /></li>
-<li><a id="sec-1-4" name="sec-1-4"></a>prepared questions for meeting<br  /><div class="outline-text-3" id="text-1-4">
-<ul class="org-ul">
-<li><code>[&#xa0;]</code> what is a research hypothesis? is it the possible outcome of my project? 
+<li><a id="sec-1-4" name="sec-1-4"></a><a id="prepared-questions-for-meeting" name="prepared-questions-for-meeting"></a><br  /><div class="outline-text-3" id="text-1-4">
+<ol class="org-ol">
+<li><code>[X]</code> what is a research hypothesis? is it the possible outcome of my project? 
 <ul class="org-ul">
 <li>if it is, i can think of 2 ways to compose my research hypothesis
 <ol class="org-ol">
@@ -189,13 +189,120 @@ for the JavaScript code in this tag.
 </li>
 </ol>
 </li>
+<li>murray: 
+<ol class="org-ol">
+<li>abstract the stencil pattern
+</li>
+<li>hidden to the users
+</li>
+<li>better than the naive program
+</li>
+<li>beneficial to someone
+</li>
+<li>help optimize the program*
+</li>
+<li>good performance compared to sequential and simple parallel (e.g. pthread)
+</li>
+</ol>
+</li>
 </ul>
 </li>
-<li><code>[&#xa0;]</code> </li>
+<li><code>[X]</code> coding style
+<ul class="org-ul">
+<li>e.g. <code>impl::MapOverlap1D</code> or <code>MapOverlapSkeleton</code>
+</li>
+<li>which one do you prefer? stencil or mapoverlap?
+<ul class="org-ul">
+<li>murray: stencil. most systems use stencil. skepu uses mapoverlap
+</li>
+<li>i will follow antonio's style, just to be consistent. 
+</li>
 </ul>
+</li>
+</ul>
+</li>
+<li><code>[X]</code> is there any way to test a skeleton? do i have to test it with an example?
+<ul class="org-ul">
+<li>murray: test it using some simple examples like jacobi
+</li>
+</ul>
+</li>
+<li><code>[X]</code> ipp
+<ol class="org-ol">
+<li>problem statement: 
+</li>
+<li>methodology: 
+</li>
+<li>should my proposal writing focus on explaining skeleton or stencil? 
+<ul class="org-ul">
+<li>background, motivation, problem statement more or less need some information about skeletons
+</li>
+<li>education purpose: help build a dice friendly parallel skeleton library
+</li>
+<li>industrial context: some twice-told stories, efficiency, cost, speed
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><code>[X]</code> evaluation, description on template below: 
+<ul class="org-ul">
+<li>Describe the specific methods of data collection.
+</li>
+<li>Explain how you intent to analyse and interpret the results.
+</li>
+<li>murray: 
+<ul class="org-ul">
+<li>test exmaples, fit eamples to my skeleton
+</li>
+<li>performance comparison with sequential and simple parallel program
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 </div>
 </li>
-<li><a id="sec-1-5" name="sec-1-5"></a>meeting notes<br  /></li></ul>
+<li><a id="sec-1-5" name="sec-1-5"></a>meeting notes<br  /><div class="outline-text-3" id="text-1-5">
+<ol class="org-ol">
+<li>some meeting notes are in <i>prepared questions for meeting&gt;</i> above
+</li>
+<li>ipp: # of pages for each section
+<ul class="org-ul">
+<li>2 pages background
+</li>
+<li>applications
+</li>
+<li>my plan will be the main body
+</li>
+<li>tasks 1 page
+</li>
+<li>talk a bit about skepu and other existing libraries
+</li>
+</ul>
+</li>
+<li>writing should focus more on stencil
+<ul class="org-ul">
+<li>i do need to mention skeltons, but within a few lines
+</li>
+</ul>
+</li>
+<li>ipp methodology
+<ul class="org-ul">
+<li>how i will evaluate my research hypothesis?
+<ul class="org-ul">
+<li>implement it
+</li>
+<li>and test it: test it with some examples
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</li></ul>
 </li>
 <li><a id="sec-2" name="sec-2"></a><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-07 Thu 15:00&gt;</span></span> w10 cancelled by sheng<br  /><ul class="org-ul"><li><a id="sec-2-1" name="sec-2-1"></a>progress last week <code>[75%]</code><br  /><div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
