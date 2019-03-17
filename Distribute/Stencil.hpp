@@ -24,7 +24,13 @@ public:
 	class StencilImplementation {
 	private:
 		size_t nthreads;
-		
+		size_t nDataBlocks;
+
+		template<typename IN, typename OUT>
+		class ThreadArgument {
+		public:
+			size_t chunkSize;
+		}
 	}
 };
 
