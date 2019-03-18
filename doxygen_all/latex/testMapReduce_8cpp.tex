@@ -1,0 +1,57 @@
+\hypertarget{testMapReduce_8cpp}{\section{/afs/inf.ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/test\-Map\-Reduce.cpp File Reference}
+\label{testMapReduce_8cpp}\index{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/test\-Map\-Reduce.\-cpp@{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/test\-Map\-Reduce.\-cpp}}
+}
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}test\-Map\-Reduce.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}def\-\_\-file.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}misc\-Fun.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Map\-Reduce.\-hpp\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ std\-::pair$<$ int, \\*
+double $>$ $>$ \hyperlink{testMapReduce_8cpp_a982ab1c1d6c7b161a241059437d33198}{M\-Relemental} (int input)
+\item 
+std\-::list$<$ double $>$ \hyperlink{testMapReduce_8cpp_a814df27d8058abe09027d1b5e4583b33}{M\-Rcombiner} (int key, std\-::list$<$ double $>$ values)
+\item 
+bool \hyperlink{testMapReduce_8cpp_a28990f07145d4dd8f71cd1126445bffb}{str\-Cmp} (std\-::pair$<$ int, std\-::vector$<$ double $>$$>$ p1, std\-::pair$<$ int, std\-::vector$<$ double $>$$>$ p2)
+\item 
+int \hyperlink{testMapReduce_8cpp_adab0c816b2cec548e68159961ecfb359}{Map\-Reduce\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{testMapReduce_8cpp_adab0c816b2cec548e68159961ecfb359}{\index{test\-Map\-Reduce.\-cpp@{test\-Map\-Reduce.\-cpp}!Map\-Reduce\-Main@{Map\-Reduce\-Main}}
+\index{Map\-Reduce\-Main@{Map\-Reduce\-Main}!testMapReduce.cpp@{test\-Map\-Reduce.\-cpp}}
+\subsubsection[{Map\-Reduce\-Main}]{\setlength{\rightskip}{0pt plus 5cm}int Map\-Reduce\-Main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{testMapReduce_8cpp_adab0c816b2cec548e68159961ecfb359}
+\hypertarget{testMapReduce_8cpp_a814df27d8058abe09027d1b5e4583b33}{\index{test\-Map\-Reduce.\-cpp@{test\-Map\-Reduce.\-cpp}!M\-Rcombiner@{M\-Rcombiner}}
+\index{M\-Rcombiner@{M\-Rcombiner}!testMapReduce.cpp@{test\-Map\-Reduce.\-cpp}}
+\subsubsection[{M\-Rcombiner}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<$double$>$ M\-Rcombiner (
+\begin{DoxyParamCaption}
+\item[{int}]{key, }
+\item[{std\-::list$<$ double $>$}]{values}
+\end{DoxyParamCaption}
+)}}\label{testMapReduce_8cpp_a814df27d8058abe09027d1b5e4583b33}
+\hypertarget{testMapReduce_8cpp_a982ab1c1d6c7b161a241059437d33198}{\index{test\-Map\-Reduce.\-cpp@{test\-Map\-Reduce.\-cpp}!M\-Relemental@{M\-Relemental}}
+\index{M\-Relemental@{M\-Relemental}!testMapReduce.cpp@{test\-Map\-Reduce.\-cpp}}
+\subsubsection[{M\-Relemental}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<$std\-::pair$<$int,double$>$ $>$ M\-Relemental (
+\begin{DoxyParamCaption}
+\item[{int}]{input}
+\end{DoxyParamCaption}
+)}}\label{testMapReduce_8cpp_a982ab1c1d6c7b161a241059437d33198}
+\hypertarget{testMapReduce_8cpp_a28990f07145d4dd8f71cd1126445bffb}{\index{test\-Map\-Reduce.\-cpp@{test\-Map\-Reduce.\-cpp}!str\-Cmp@{str\-Cmp}}
+\index{str\-Cmp@{str\-Cmp}!testMapReduce.cpp@{test\-Map\-Reduce.\-cpp}}
+\subsubsection[{str\-Cmp}]{\setlength{\rightskip}{0pt plus 5cm}bool str\-Cmp (
+\begin{DoxyParamCaption}
+\item[{std\-::pair$<$ int, std\-::vector$<$ double $>$$>$}]{p1, }
+\item[{std\-::pair$<$ int, std\-::vector$<$ double $>$$>$}]{p2}
+\end{DoxyParamCaption}
+)}}\label{testMapReduce_8cpp_a28990f07145d4dd8f71cd1126445bffb}

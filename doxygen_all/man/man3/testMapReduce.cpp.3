@@ -1,0 +1,56 @@
+.TH "/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/testMapReduce.cpp" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/testMapReduce.cpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cassert>\fP
+.br
+\fC#include <list>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include 'testMapReduce\&.hpp'\fP
+.br
+\fC#include 'def_file\&.hpp'\fP
+.br
+\fC#include 'miscFun\&.hpp'\fP
+.br
+\fC#include 'MapReduce\&.hpp'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "std::list< std::pair< int, 
+.br
+double > > \fBMRelemental\fP (int input)"
+.br
+.ti -1c
+.RI "std::list< double > \fBMRcombiner\fP (int key, std::list< double > values)"
+.br
+.ti -1c
+.RI "bool \fBstrCmp\fP (std::pair< int, std::vector< double >> p1, std::pair< int, std::vector< double >> p2)"
+.br
+.ti -1c
+.RI "int \fBMapReduceMain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int MapReduceMain (intargc, char **argv)"
+
+.SS "std::list<double> MRcombiner (intkey, std::list< double >values)"
+
+.SS "std::list<std::pair<int,double> > MRelemental (intinput)"
+
+.SS "bool strCmp (std::pair< int, std::vector< double >>p1, std::pair< int, std::vector< double >>p2)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

@@ -1,0 +1,50 @@
+.TH "PipeStage< IN, OUT >" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PipeStage< IN, OUT > \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Pipeline\&.hpp>\fP
+.PP
+Inherits \fBPipeStageBase\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBexecute\fP ()"
+.br
+.ti -1c
+.RI "virtual OUT \fBrun\fP (IN in)=0"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "vector< OUT > * \fBoutBuffer\fP"
+.br
+.ti -1c
+.RI "vector< IN > \fBinBuffer\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename IN, typename OUT> void \fBPipeStage\fP< IN, OUT >::execute ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBPipeStageBase\fP\&.
+.SS "template<typename IN, typename OUT> virtual OUT \fBPipeStage\fP< IN, OUT >::run (INin)\fC [pure virtual]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename IN, typename OUT> vector<IN> \fBPipeStage\fP< IN, OUT >::inBuffer"
+
+.SS "template<typename IN, typename OUT> vector<OUT>* \fBPipeStage\fP< IN, OUT >::outBuffer"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

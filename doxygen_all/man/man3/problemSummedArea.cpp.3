@@ -1,0 +1,103 @@
+.TH "/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/problemSummedArea.cpp" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/problemSummedArea.cpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cstdlib>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <cmath>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <typeinfo>\fP
+.br
+\fC#include <cassert>\fP
+.br
+\fC#include <algorithm>\fP
+.br
+\fC#include 'def_file\&.hpp'\fP
+.br
+\fC#include 'miscFun\&.hpp'\fP
+.br
+\fC#include 'Scan\&.hpp'\fP
+.br
+\fC#include 'Map\&.hpp'\fP
+.br
+\fC#include 'problemSummedArea\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBSummedArea::ThreadArgGetArea\fP"
+.br
+.ti -1c
+.RI "class \fBSummedArea::ThreadArgGetSummedArea\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "\fBSummedArea\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "double \fBSummedArea::fun\fP (double x)"
+.br
+.ti -1c
+.RI "template<typename F > double \fBSummedArea::Simpson\fP (double a, double b, F f, int n=10)"
+.br
+.ti -1c
+.RI "template<typename S , typename F > double \fBSummedArea::mapper\fP (double sample, double dx, S simpson, F fun, int n)"
+.br
+.ti -1c
+.RI "double \fBSummedArea::successor\fP (double a, double b)"
+.br
+.ti -1c
+.RI "std::vector< double > \fBSummedArea::SummedAreaSkel\fP (std::vector< double > samples, double dx, double a, double b, int n, double &mapTimings, double &scanTimings, double &skelSeqTiming)"
+.br
+.ti -1c
+.RI "std::vector< double > \fBSummedArea::SummedAreaSeq\fP (std::vector< double > samples, double dx, double a, double b, int n, double &nonParallelTimings)"
+.br
+.ti -1c
+.RI "void \fBSummedArea::pthreadGetAreas\fP (std::vector< ThreadArgGetArea > *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "void \fBSummedArea::pthreadBarrier\fP (size_t nThreadsToBarrier)"
+.br
+.ti -1c
+.RI "void \fBSummedArea::pthreadGetSummedArea\fP (std::vector< ThreadArgGetSummedArea > *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "std::vector< double > \fBSummedArea::SummedAreaPThreads\fP (std::vector< double > samples, double dx, double a, double b, int n, double &nonParallelTimings)"
+.br
+.ti -1c
+.RI "int \fBSummedArea::SummedAreaMain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "std::mutex \fBSummedArea::pthreadBarrierLock\fP"
+.br
+.ti -1c
+.RI "std::condition_variable \fBSummedArea::pthreadCond_Var\fP"
+.br
+.ti -1c
+.RI "size_t \fBSummedArea::pthreadThreadsArrived\fP"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

@@ -1,0 +1,147 @@
+.TH "KMeans" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+KMeans \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBKMPoint\fP"
+.br
+.ti -1c
+.RI "class \fBThreadArgClosestCentroid\fP"
+.br
+.ti -1c
+.RI "class \fBThreadArgNewCentroid\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef std::pair< double, double > \fBCOORD\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBiRand\fP (int iMin, int iMax)"
+.br
+.ti -1c
+.RI "double \fBfRand\fP (double fMin=0\&.0, double fMax=1\&.0)"
+.br
+.ti -1c
+.RI "double \fBdistanceOf\fP (\fBCOORD\fP &p1, \fBCOORD\fP &p2)"
+.br
+.ti -1c
+.RI "\fBKMPoint\fP * \fBelemental\fP (\fBKMPoint\fP *point, std::vector< \fBKMPoint\fP > &centroids)"
+.br
+.ti -1c
+.RI "template<typename R > \fBKMPoint\fP \fBmapToNewCentroidElemental\fP (std::vector< \fBKMPoint\fP * > *pointsInCentroid, R &reduce)"
+.br
+.ti -1c
+.RI "\fBKMPoint\fP * \fBcombiner\fP (\fBKMPoint\fP *p1, \fBKMPoint\fP *p2)"
+.br
+.ti -1c
+.RI "void \fBprintKMPoint\fP (\fBKMPoint\fP point)"
+.br
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP > \fBKMeansSkel\fP (std::vector< \fBKMPoint\fP > points, std::vector< \fBKMPoint\fP > centroids, std::vector< double > &mapTimings, std::vector< double > &reduceTimings, std::vector< double > &skelSeqTiming)"
+.br
+.ti -1c
+.RI "void \fBseqFindClosestCentroid\fP (std::vector< \fBKMPoint\fP * > &points, std::vector< \fBKMPoint\fP > &centroids)"
+.br
+.ti -1c
+.RI "void \fBseqFindNewCentroids\fP (\fBKMPoint\fP &newCentroid, std::vector< \fBKMPoint\fP * > &points)"
+.br
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP > \fBKMeansSeq\fP (std::vector< \fBKMPoint\fP > points, std::vector< \fBKMPoint\fP > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "void \fBpthreadClosestCentroid\fP (\fBThreadArgClosestCentroid\fP *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "void \fBpthreadNewCentroidBarrier\fP (size_t nThreadsToBarrier)"
+.br
+.ti -1c
+.RI "void \fBpthreadNewCentroid\fP (std::vector< \fBThreadArgNewCentroid\fP > *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "void \fBpThreadsFindNewCentroid\fP (\fBKMPoint\fP &newCentroid, std::vector< \fBKMPoint\fP * > &points)"
+.br
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP > \fBKMeansPThreads\fP (std::vector< \fBKMPoint\fP > points, std::vector< \fBKMPoint\fP > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "int \fBKMeansMain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "std::mutex \fBpthreadBarrierLock\fP"
+.br
+.ti -1c
+.RI "std::condition_variable \fBpthreadCond_Var\fP"
+.br
+.ti -1c
+.RI "size_t \fBpthreadThreadsArrived\fP"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef std::pair<double, double> \fBKMeans::COORD\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBKMPoint\fP* KMeans::combiner (KMPoint *p1, KMPoint *p2)"
+
+.SS "double KMeans::distanceOf (COORD &p1, COORD &p2)"
+
+.SS "\fBKMPoint\fP* KMeans::elemental (KMPoint *point, std::vector< KMPoint > &centroids)"
+
+.SS "double KMeans::fRand (doublefMin = \fC0\&.0\fP, doublefMax = \fC1\&.0\fP)"
+
+.SS "int KMeans::iRand (intiMin, intiMax)"
+
+.SS "int KMeans::KMeansMain (intargc, char **argv)"
+
+.SS "std::vector<\fBKMPoint\fP> KMeans::KMeansPThreads (std::vector< KMPoint >points, std::vector< KMPoint >centroids, std::vector< double > &nonParallelTimings)"
+
+.SS "std::vector<\fBKMPoint\fP> KMeans::KMeansSeq (std::vector< KMPoint >points, std::vector< KMPoint >centroids, std::vector< double > &nonParallelTimings)"
+
+.SS "std::vector<\fBKMPoint\fP> KMeans::KMeansSkel (std::vector< KMPoint >points, std::vector< KMPoint >centroids, std::vector< double > &mapTimings, std::vector< double > &reduceTimings, std::vector< double > &skelSeqTiming)"
+
+.SS "template<typename R > \fBKMPoint\fP KMeans::mapToNewCentroidElemental (std::vector< KMPoint * > *pointsInCentroid, R &reduce)"
+
+.SS "void KMeans::printKMPoint (KMPointpoint)"
+
+.SS "void KMeans::pthreadClosestCentroid (ThreadArgClosestCentroid *threadArguments, size_tthreadID)"
+
+.SS "void KMeans::pthreadNewCentroid (std::vector< ThreadArgNewCentroid > *threadArguments, size_tthreadID)"
+
+.SS "void KMeans::pthreadNewCentroidBarrier (size_tnThreadsToBarrier)"
+
+.SS "void KMeans::pThreadsFindNewCentroid (KMPoint &newCentroid, std::vector< KMPoint * > &points)"
+
+.SS "void KMeans::seqFindClosestCentroid (std::vector< KMPoint * > &points, std::vector< KMPoint > &centroids)"
+
+.SS "void KMeans::seqFindNewCentroids (KMPoint &newCentroid, std::vector< KMPoint * > &points)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "std::mutex KMeans::pthreadBarrierLock"
+
+.SS "std::condition_variable KMeans::pthreadCond_Var"
+
+.SS "size_t KMeans::pthreadThreadsArrived"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

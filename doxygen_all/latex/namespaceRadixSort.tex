@@ -1,0 +1,110 @@
+\hypertarget{namespaceRadixSort}{\section{Radix\-Sort Namespace Reference}
+\label{namespaceRadixSort}\index{Radix\-Sort@{Radix\-Sort}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\-\_\-t \hyperlink{namespaceRadixSort_ac13c88db80ae3076f6ea9690547ea76c}{get\-Rand\-Element} (size\-\_\-t number\-Len, size\-\_\-t base)
+\item 
+size\-\_\-t \hyperlink{namespaceRadixSort_a56dac59f88644c897d2024ef83ff59e6}{get\-Digit} (size\-\_\-t element, size\-\_\-t digit\-Pos, size\-\_\-t base)
+\item 
+std\-::list$<$ std\-::pair$<$ size\-\_\-t, \\*
+size\-\_\-t $>$ $>$ \hyperlink{namespaceRadixSort_a94215411eca63e3dec41a388ba5d4c90}{count\-Digit\-Occurrences} (size\-\_\-t element, size\-\_\-t digit\-Pos, size\-\_\-t base)
+\item 
+std\-::list$<$ size\-\_\-t $>$ \hyperlink{namespaceRadixSort_a0ce073514c0336316e5fc6f6eb882133}{reduce\-Digit\-Counts} (size\-\_\-t key, std\-::list$<$ size\-\_\-t $>$ counts, size\-\_\-t digit\-Pos, size\-\_\-t base)
+\item 
+size\-\_\-t \hyperlink{namespaceRadixSort_a74ff36cdd961ac981ad33a4a77edd6cd}{successor} (size\-\_\-t a, size\-\_\-t b)
+\item 
+std\-::vector$<$ size\-\_\-t $>$ \hyperlink{namespaceRadixSort_a42d0ff709befdd3b200bf12dbb397827}{Radix\-Sort\-Skel} (std\-::vector$<$ size\-\_\-t $>$ elements, size\-\_\-t number\-Len, size\-\_\-t base, std\-::vector$<$ double $>$ \&map\-Reduce\-Timings, std\-::vector$<$ double $>$ \&scan\-Timings, std\-::vector$<$ double $>$ \&skel\-Seq\-Timing)
+\item 
+std\-::vector$<$ size\-\_\-t $>$ \hyperlink{namespaceRadixSort_af578ab7d534fe45bf0b6e9a1425ec2f5}{Radix\-Sort\-Seq} (std\-::vector$<$ size\-\_\-t $>$ elements, size\-\_\-t number\-Len, size\-\_\-t base, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+std\-::vector$<$ size\-\_\-t $>$ \hyperlink{namespaceRadixSort_a49a4b8a61831a2d993b66b1d5c524ea6}{Radix\-Sort\-P\-Threads} (std\-::vector$<$ size\-\_\-t $>$ elements, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+int \hyperlink{namespaceRadixSort_aded21782e30d6d041ca21cfcb43c8496}{Radix\-Sort\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceRadixSort_a94215411eca63e3dec41a388ba5d4c90}{\index{Radix\-Sort@{Radix\-Sort}!count\-Digit\-Occurrences@{count\-Digit\-Occurrences}}
+\index{count\-Digit\-Occurrences@{count\-Digit\-Occurrences}!RadixSort@{Radix\-Sort}}
+\subsubsection[{count\-Digit\-Occurrences}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<$std\-::pair$<$size\-\_\-t,size\-\_\-t$>$ $>$ Radix\-Sort\-::count\-Digit\-Occurrences (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{element, }
+\item[{size\-\_\-t}]{digit\-Pos, }
+\item[{size\-\_\-t}]{base}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_a94215411eca63e3dec41a388ba5d4c90}
+\hypertarget{namespaceRadixSort_a56dac59f88644c897d2024ef83ff59e6}{\index{Radix\-Sort@{Radix\-Sort}!get\-Digit@{get\-Digit}}
+\index{get\-Digit@{get\-Digit}!RadixSort@{Radix\-Sort}}
+\subsubsection[{get\-Digit}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Radix\-Sort\-::get\-Digit (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{element, }
+\item[{size\-\_\-t}]{digit\-Pos, }
+\item[{size\-\_\-t}]{base}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_a56dac59f88644c897d2024ef83ff59e6}
+\hypertarget{namespaceRadixSort_ac13c88db80ae3076f6ea9690547ea76c}{\index{Radix\-Sort@{Radix\-Sort}!get\-Rand\-Element@{get\-Rand\-Element}}
+\index{get\-Rand\-Element@{get\-Rand\-Element}!RadixSort@{Radix\-Sort}}
+\subsubsection[{get\-Rand\-Element}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Radix\-Sort\-::get\-Rand\-Element (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{number\-Len, }
+\item[{size\-\_\-t}]{base}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_ac13c88db80ae3076f6ea9690547ea76c}
+\hypertarget{namespaceRadixSort_aded21782e30d6d041ca21cfcb43c8496}{\index{Radix\-Sort@{Radix\-Sort}!Radix\-Sort\-Main@{Radix\-Sort\-Main}}
+\index{Radix\-Sort\-Main@{Radix\-Sort\-Main}!RadixSort@{Radix\-Sort}}
+\subsubsection[{Radix\-Sort\-Main}]{\setlength{\rightskip}{0pt plus 5cm}int Radix\-Sort\-::\-Radix\-Sort\-Main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_aded21782e30d6d041ca21cfcb43c8496}
+\hypertarget{namespaceRadixSort_a49a4b8a61831a2d993b66b1d5c524ea6}{\index{Radix\-Sort@{Radix\-Sort}!Radix\-Sort\-P\-Threads@{Radix\-Sort\-P\-Threads}}
+\index{Radix\-Sort\-P\-Threads@{Radix\-Sort\-P\-Threads}!RadixSort@{Radix\-Sort}}
+\subsubsection[{Radix\-Sort\-P\-Threads}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$size\-\_\-t$>$ Radix\-Sort\-::\-Radix\-Sort\-P\-Threads (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ size\-\_\-t $>$}]{elements, }
+\item[{std\-::vector$<$ double $>$ \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_a49a4b8a61831a2d993b66b1d5c524ea6}
+\hypertarget{namespaceRadixSort_af578ab7d534fe45bf0b6e9a1425ec2f5}{\index{Radix\-Sort@{Radix\-Sort}!Radix\-Sort\-Seq@{Radix\-Sort\-Seq}}
+\index{Radix\-Sort\-Seq@{Radix\-Sort\-Seq}!RadixSort@{Radix\-Sort}}
+\subsubsection[{Radix\-Sort\-Seq}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$size\-\_\-t$>$ Radix\-Sort\-::\-Radix\-Sort\-Seq (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ size\-\_\-t $>$}]{elements, }
+\item[{size\-\_\-t}]{number\-Len, }
+\item[{size\-\_\-t}]{base, }
+\item[{std\-::vector$<$ double $>$ \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_af578ab7d534fe45bf0b6e9a1425ec2f5}
+\hypertarget{namespaceRadixSort_a42d0ff709befdd3b200bf12dbb397827}{\index{Radix\-Sort@{Radix\-Sort}!Radix\-Sort\-Skel@{Radix\-Sort\-Skel}}
+\index{Radix\-Sort\-Skel@{Radix\-Sort\-Skel}!RadixSort@{Radix\-Sort}}
+\subsubsection[{Radix\-Sort\-Skel}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$size\-\_\-t$>$ Radix\-Sort\-::\-Radix\-Sort\-Skel (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ size\-\_\-t $>$}]{elements, }
+\item[{size\-\_\-t}]{number\-Len, }
+\item[{size\-\_\-t}]{base, }
+\item[{std\-::vector$<$ double $>$ \&}]{map\-Reduce\-Timings, }
+\item[{std\-::vector$<$ double $>$ \&}]{scan\-Timings, }
+\item[{std\-::vector$<$ double $>$ \&}]{skel\-Seq\-Timing}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_a42d0ff709befdd3b200bf12dbb397827}
+\hypertarget{namespaceRadixSort_a0ce073514c0336316e5fc6f6eb882133}{\index{Radix\-Sort@{Radix\-Sort}!reduce\-Digit\-Counts@{reduce\-Digit\-Counts}}
+\index{reduce\-Digit\-Counts@{reduce\-Digit\-Counts}!RadixSort@{Radix\-Sort}}
+\subsubsection[{reduce\-Digit\-Counts}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<$size\-\_\-t$>$ Radix\-Sort\-::reduce\-Digit\-Counts (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{key, }
+\item[{std\-::list$<$ size\-\_\-t $>$}]{counts, }
+\item[{size\-\_\-t}]{digit\-Pos, }
+\item[{size\-\_\-t}]{base}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_a0ce073514c0336316e5fc6f6eb882133}
+\hypertarget{namespaceRadixSort_a74ff36cdd961ac981ad33a4a77edd6cd}{\index{Radix\-Sort@{Radix\-Sort}!successor@{successor}}
+\index{successor@{successor}!RadixSort@{Radix\-Sort}}
+\subsubsection[{successor}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Radix\-Sort\-::successor (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{a, }
+\item[{size\-\_\-t}]{b}
+\end{DoxyParamCaption}
+)}}\label{namespaceRadixSort_a74ff36cdd961ac981ad33a4a77edd6cd}

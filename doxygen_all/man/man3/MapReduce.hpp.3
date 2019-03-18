@@ -1,0 +1,74 @@
+.TH "/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/MapReduce.hpp" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/MapReduce.hpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cstdlib>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <list>\fP
+.br
+\fC#include <tuple>\fP
+.br
+\fC#include <type_traits>\fP
+.br
+\fC#include <functional>\fP
+.br
+\fC#include <stdarg\&.h>\fP
+.br
+\fC#include <typeinfo>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <thread>\fP
+.br
+\fC#include <unordered_map>\fP
+.br
+\fC#include <mutex>\fP
+.br
+\fC#include <condition_variable>\fP
+.br
+\fC#include <algorithm>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMapReduceSkeleton\fP"
+.br
+.ti -1c
+.RI "class \fBMapReduceSkeleton::MapReduceImplementation< EL, RE, HA >\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename HA , typename EL , typename RE > \fBMapReduceSkeleton::MapReduceImplementation\fP
+.br
+< EL, RE, HA > \fB__MapReduceWithAccess\fP (EL el, RE re, HA ha, size_t threads)"
+.br
+.ti -1c
+.RI "template<typename HA , typename EL , typename RE > \fBMapReduceSkeleton::MapReduceImplementation\fP
+.br
+< EL, RE, HA > \fBMapReduce\fP (EL el, RE re, HA hasher, size_t threads=0)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "template<typename HA , typename EL , typename RE > \fBMapReduceSkeleton::MapReduceImplementation\fP<EL, RE, HA> __MapReduceWithAccess (ELel, REre, HAha, size_tthreads)"
+
+.SS "template<typename HA , typename EL , typename RE > \fBMapReduceSkeleton::MapReduceImplementation\fP<EL, RE, HA> MapReduce (ELel, REre, HAhasher, size_tthreads = \fC0\fP)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

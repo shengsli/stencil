@@ -1,0 +1,133 @@
+.TH "KMeans_MapReduce" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+KMeans_MapReduce \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBKMPoint\fP"
+.br
+.ti -1c
+.RI "class \fBThreadArgPthread\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef std::pair< double, double > \fBCOORD\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBiRand\fP (int iMin, int iMax)"
+.br
+.ti -1c
+.RI "double \fBfRand\fP (double fMin=0\&.0, double fMax=1\&.0)"
+.br
+.ti -1c
+.RI "double \fBdistanceOf\fP (\fBCOORD\fP &p1, \fBCOORD\fP &p2)"
+.br
+.ti -1c
+.RI "void \fBprintKMPoint\fP (\fBKMPoint\fP point)"
+.br
+.ti -1c
+.RI "std::list< std::pair< \fBKMPoint\fP, 
+.br
+\fBKMPoint\fP > > \fBelementalMR_GetClosestCentroid\fP (\fBKMPoint\fP point, std::vector< \fBKMPoint\fP > &centroids)"
+.br
+.ti -1c
+.RI "std::list< \fBKMPoint\fP > \fBcombinerMR_GetNewCentroid\fP (\fBKMPoint\fP &centroid, std::list< \fBKMPoint\fP > points, std::vector< \fBKMPoint\fP >)"
+.br
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP > \fBKMeansMR_Skel\fP (std::vector< \fBKMPoint\fP > points, std::vector< \fBKMPoint\fP > centroids, std::vector< double > &mapReduceTimings, std::vector< double > &skelSeqTiming)"
+.br
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP > \fBKMeansMR_Seq\fP (std::vector< \fBKMPoint\fP > points, std::vector< \fBKMPoint\fP > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "void \fBpthreadClosestCentroidBarrier\fP (size_t nThreadsToBarrier)"
+.br
+.ti -1c
+.RI "void \fBpthreadFunction\fP (std::vector< \fBThreadArgPthread\fP > *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP > \fBKMeansMR_PThreads\fP (std::vector< \fBKMPoint\fP > points, std::vector< \fBKMPoint\fP > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "int \fBKMeansMapReduceMain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "auto \fBhashFunction\fP"
+.br
+.ti -1c
+.RI "std::mutex \fBpthreadBarrierLock\fP"
+.br
+.ti -1c
+.RI "std::condition_variable \fBpthreadCond_Var\fP"
+.br
+.ti -1c
+.RI "size_t \fBpthreadThreadsArrived\fP"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef std::pair<double, double> \fBKMeans_MapReduce::COORD\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "std::list<\fBKMPoint\fP> KMeans_MapReduce::combinerMR_GetNewCentroid (KMPoint &centroid, std::list< KMPoint >points, std::vector< KMPoint >)"
+
+.SS "double KMeans_MapReduce::distanceOf (COORD &p1, COORD &p2)"
+
+.SS "std::list<std::pair<\fBKMPoint\fP, \fBKMPoint\fP> > KMeans_MapReduce::elementalMR_GetClosestCentroid (KMPointpoint, std::vector< KMPoint > &centroids)"
+
+.SS "double KMeans_MapReduce::fRand (doublefMin = \fC0\&.0\fP, doublefMax = \fC1\&.0\fP)"
+
+.SS "int KMeans_MapReduce::iRand (intiMin, intiMax)"
+
+.SS "int KMeans_MapReduce::KMeansMapReduceMain (intargc, char **argv)"
+
+.SS "std::vector<\fBKMPoint\fP> KMeans_MapReduce::KMeansMR_PThreads (std::vector< KMPoint >points, std::vector< KMPoint >centroids, std::vector< double > &nonParallelTimings)"
+
+.SS "std::vector<\fBKMPoint\fP> KMeans_MapReduce::KMeansMR_Seq (std::vector< KMPoint >points, std::vector< KMPoint >centroids, std::vector< double > &nonParallelTimings)"
+
+.SS "std::vector<\fBKMPoint\fP> KMeans_MapReduce::KMeansMR_Skel (std::vector< KMPoint >points, std::vector< KMPoint >centroids, std::vector< double > &mapReduceTimings, std::vector< double > &skelSeqTiming)"
+
+.SS "void KMeans_MapReduce::printKMPoint (KMPointpoint)"
+
+.SS "void KMeans_MapReduce::pthreadClosestCentroidBarrier (size_tnThreadsToBarrier)"
+
+.SS "void KMeans_MapReduce::pthreadFunction (std::vector< ThreadArgPthread > *threadArguments, size_tthreadID)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "auto KMeans_MapReduce::hashFunction"
+\fBInitial value:\fP
+.PP
+.nf
+=
+            [](KMPoint centroid) {
+                return  (std::hash<double>()(centroid\&.coord\&.first) ^ (std::hash<double>()(centroid\&.coord\&.second) << 1)) >> 1;
+            }
+.fi
+.SS "std::mutex KMeans_MapReduce::pthreadBarrierLock"
+
+.SS "std::condition_variable KMeans_MapReduce::pthreadCond_Var"
+
+.SS "size_t KMeans_MapReduce::pthreadThreadsArrived"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

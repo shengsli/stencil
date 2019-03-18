@@ -1,0 +1,123 @@
+.TH "/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/problemKmeans_MR.cpp" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/problemKmeans_MR.cpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cstdlib>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <cmath>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <typeinfo>\fP
+.br
+\fC#include <cassert>\fP
+.br
+\fC#include <algorithm>\fP
+.br
+\fC#include 'def_file\&.hpp'\fP
+.br
+\fC#include 'miscFun\&.hpp'\fP
+.br
+\fC#include 'Map\&.hpp'\fP
+.br
+\fC#include 'Reduce\&.hpp'\fP
+.br
+\fC#include 'MapReduce\&.hpp'\fP
+.br
+\fC#include 'problemKmeans_MR\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBKMeans_MapReduce::KMPoint\fP"
+.br
+.ti -1c
+.RI "struct \fBKMeans_MapReduce::KMPoint::KeyHasher\fP"
+.br
+.ti -1c
+.RI "class \fBKMeans_MapReduce::ThreadArgPthread\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "\fBKMeans_MapReduce\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef std::pair< double, double > \fBKMeans_MapReduce::COORD\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBKMeans_MapReduce::iRand\fP (int iMin, int iMax)"
+.br
+.ti -1c
+.RI "double \fBKMeans_MapReduce::fRand\fP (double fMin=0\&.0, double fMax=1\&.0)"
+.br
+.ti -1c
+.RI "double \fBKMeans_MapReduce::distanceOf\fP (COORD &p1, COORD &p2)"
+.br
+.ti -1c
+.RI "void \fBKMeans_MapReduce::printKMPoint\fP (KMPoint point)"
+.br
+.ti -1c
+.RI "std::list< std::pair< KMPoint, 
+.br
+KMPoint > > \fBKMeans_MapReduce::elementalMR_GetClosestCentroid\fP (KMPoint point, std::vector< KMPoint > &centroids)"
+.br
+.ti -1c
+.RI "std::list< KMPoint > \fBKMeans_MapReduce::combinerMR_GetNewCentroid\fP (KMPoint &centroid, std::list< KMPoint > points, std::vector< KMPoint >)"
+.br
+.ti -1c
+.RI "std::vector< KMPoint > \fBKMeans_MapReduce::KMeansMR_Skel\fP (std::vector< KMPoint > points, std::vector< KMPoint > centroids, std::vector< double > &mapReduceTimings, std::vector< double > &skelSeqTiming)"
+.br
+.ti -1c
+.RI "std::vector< KMPoint > \fBKMeans_MapReduce::KMeansMR_Seq\fP (std::vector< KMPoint > points, std::vector< KMPoint > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "void \fBKMeans_MapReduce::pthreadClosestCentroidBarrier\fP (size_t nThreadsToBarrier)"
+.br
+.ti -1c
+.RI "void \fBKMeans_MapReduce::pthreadFunction\fP (std::vector< ThreadArgPthread > *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "std::vector< KMPoint > \fBKMeans_MapReduce::KMeansMR_PThreads\fP (std::vector< KMPoint > points, std::vector< KMPoint > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "int \fBKMeans_MapReduce::KMeansMapReduceMain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "auto \fBKMeans_MapReduce::hashFunction\fP"
+.br
+.ti -1c
+.RI "std::mutex \fBKMeans_MapReduce::pthreadBarrierLock\fP"
+.br
+.ti -1c
+.RI "std::condition_variable \fBKMeans_MapReduce::pthreadCond_Var\fP"
+.br
+.ti -1c
+.RI "size_t \fBKMeans_MapReduce::pthreadThreadsArrived\fP"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

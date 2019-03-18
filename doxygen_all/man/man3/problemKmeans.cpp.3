@@ -1,0 +1,131 @@
+.TH "/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/problemKmeans.cpp" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/afs/inf.ed.ac.uk/user/s18/s1837296/dev/stencil/Distribute/problemKmeans.cpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cstdlib>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <cmath>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <typeinfo>\fP
+.br
+\fC#include <cassert>\fP
+.br
+\fC#include <algorithm>\fP
+.br
+\fC#include 'def_file\&.hpp'\fP
+.br
+\fC#include 'miscFun\&.hpp'\fP
+.br
+\fC#include 'Map\&.hpp'\fP
+.br
+\fC#include 'Reduce\&.hpp'\fP
+.br
+\fC#include 'problemKmeans\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBKMeans::KMPoint\fP"
+.br
+.ti -1c
+.RI "class \fBKMeans::ThreadArgClosestCentroid\fP"
+.br
+.ti -1c
+.RI "class \fBKMeans::ThreadArgNewCentroid\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "\fBKMeans\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef std::pair< double, double > \fBKMeans::COORD\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBKMeans::iRand\fP (int iMin, int iMax)"
+.br
+.ti -1c
+.RI "double \fBKMeans::fRand\fP (double fMin=0\&.0, double fMax=1\&.0)"
+.br
+.ti -1c
+.RI "double \fBKMeans::distanceOf\fP (COORD &p1, COORD &p2)"
+.br
+.ti -1c
+.RI "KMPoint * \fBKMeans::elemental\fP (KMPoint *point, std::vector< KMPoint > &centroids)"
+.br
+.ti -1c
+.RI "template<typename R > KMPoint \fBKMeans::mapToNewCentroidElemental\fP (std::vector< KMPoint * > *pointsInCentroid, R &reduce)"
+.br
+.ti -1c
+.RI "KMPoint * \fBKMeans::combiner\fP (KMPoint *p1, KMPoint *p2)"
+.br
+.ti -1c
+.RI "void \fBKMeans::printKMPoint\fP (KMPoint point)"
+.br
+.ti -1c
+.RI "std::vector< KMPoint > \fBKMeans::KMeansSkel\fP (std::vector< KMPoint > points, std::vector< KMPoint > centroids, std::vector< double > &mapTimings, std::vector< double > &reduceTimings, std::vector< double > &skelSeqTiming)"
+.br
+.ti -1c
+.RI "void \fBKMeans::seqFindClosestCentroid\fP (std::vector< KMPoint * > &points, std::vector< KMPoint > &centroids)"
+.br
+.ti -1c
+.RI "void \fBKMeans::seqFindNewCentroids\fP (KMPoint &newCentroid, std::vector< KMPoint * > &points)"
+.br
+.ti -1c
+.RI "std::vector< KMPoint > \fBKMeans::KMeansSeq\fP (std::vector< KMPoint > points, std::vector< KMPoint > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "void \fBKMeans::pthreadClosestCentroid\fP (ThreadArgClosestCentroid *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "void \fBKMeans::pthreadNewCentroidBarrier\fP (size_t nThreadsToBarrier)"
+.br
+.ti -1c
+.RI "void \fBKMeans::pthreadNewCentroid\fP (std::vector< ThreadArgNewCentroid > *threadArguments, size_t threadID)"
+.br
+.ti -1c
+.RI "void \fBKMeans::pThreadsFindNewCentroid\fP (KMPoint &newCentroid, std::vector< KMPoint * > &points)"
+.br
+.ti -1c
+.RI "std::vector< KMPoint > \fBKMeans::KMeansPThreads\fP (std::vector< KMPoint > points, std::vector< KMPoint > centroids, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "int \fBKMeans::KMeansMain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "std::mutex \fBKMeans::pthreadBarrierLock\fP"
+.br
+.ti -1c
+.RI "std::condition_variable \fBKMeans::pthreadCond_Var\fP"
+.br
+.ti -1c
+.RI "size_t \fBKMeans::pthreadThreadsArrived\fP"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

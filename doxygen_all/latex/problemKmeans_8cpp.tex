@@ -1,0 +1,80 @@
+\hypertarget{problemKmeans_8cpp}{\section{/afs/inf.ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Kmeans.cpp File Reference}
+\label{problemKmeans_8cpp}\index{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Kmeans.\-cpp@{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Kmeans.\-cpp}}
+}
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$typeinfo$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}def\-\_\-file.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}misc\-Fun.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Map.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Reduce.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}problem\-Kmeans.\-hpp\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structKMeans_1_1KMPoint}{K\-Means\-::\-K\-M\-Point}
+\item 
+class \hyperlink{classKMeans_1_1ThreadArgClosestCentroid}{K\-Means\-::\-Thread\-Arg\-Closest\-Centroid}
+\item 
+class \hyperlink{classKMeans_1_1ThreadArgNewCentroid}{K\-Means\-::\-Thread\-Arg\-New\-Centroid}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceKMeans}{K\-Means}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::pair$<$ double, double $>$ \hyperlink{namespaceKMeans_a32ce08f4c8b30171faaeff5a3a466f30}{K\-Means\-::\-C\-O\-O\-R\-D}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceKMeans_aeccf7b9a20677968be2392b189462968}{K\-Means\-::i\-Rand} (int i\-Min, int i\-Max)
+\item 
+double \hyperlink{namespaceKMeans_aa1cc53313a5e71901410db444f2f1277}{K\-Means\-::f\-Rand} (double f\-Min=0.\-0, double f\-Max=1.\-0)
+\item 
+double \hyperlink{namespaceKMeans_ab1d0698be0b64e379858f444df37f184}{K\-Means\-::distance\-Of} (C\-O\-O\-R\-D \&p1, C\-O\-O\-R\-D \&p2)
+\item 
+K\-M\-Point $\ast$ \hyperlink{namespaceKMeans_a1290694d35842d45c40524d6f1d4cc01}{K\-Means\-::elemental} (K\-M\-Point $\ast$point, std\-::vector$<$ K\-M\-Point $>$ \&centroids)
+\item 
+{\footnotesize template$<$typename R $>$ }\\K\-M\-Point \hyperlink{namespaceKMeans_af6ddf3d8fcb489e1b35093fe7387a135}{K\-Means\-::map\-To\-New\-Centroid\-Elemental} (std\-::vector$<$ K\-M\-Point $\ast$ $>$ $\ast$points\-In\-Centroid, R \&reduce)
+\item 
+K\-M\-Point $\ast$ \hyperlink{namespaceKMeans_a59f0fc44e94dd722fea19b2c130b7811}{K\-Means\-::combiner} (K\-M\-Point $\ast$p1, K\-M\-Point $\ast$p2)
+\item 
+void \hyperlink{namespaceKMeans_a0168f204720c7b64714f53f142004a36}{K\-Means\-::print\-K\-M\-Point} (K\-M\-Point point)
+\item 
+std\-::vector$<$ K\-M\-Point $>$ \hyperlink{namespaceKMeans_a2aadc9387de95e9488dd5605465f7cd1}{K\-Means\-::\-K\-Means\-Skel} (std\-::vector$<$ K\-M\-Point $>$ points, std\-::vector$<$ K\-M\-Point $>$ centroids, std\-::vector$<$ double $>$ \&map\-Timings, std\-::vector$<$ double $>$ \&reduce\-Timings, std\-::vector$<$ double $>$ \&skel\-Seq\-Timing)
+\item 
+void \hyperlink{namespaceKMeans_a51a34cb9e3c9fa1b619342ce80834c7b}{K\-Means\-::seq\-Find\-Closest\-Centroid} (std\-::vector$<$ K\-M\-Point $\ast$ $>$ \&points, std\-::vector$<$ K\-M\-Point $>$ \&centroids)
+\item 
+void \hyperlink{namespaceKMeans_a3be77d9de58b3e3151ceb2a48681d40f}{K\-Means\-::seq\-Find\-New\-Centroids} (K\-M\-Point \&new\-Centroid, std\-::vector$<$ K\-M\-Point $\ast$ $>$ \&points)
+\item 
+std\-::vector$<$ K\-M\-Point $>$ \hyperlink{namespaceKMeans_a10702545b2f1319336b2789ee42e1bd6}{K\-Means\-::\-K\-Means\-Seq} (std\-::vector$<$ K\-M\-Point $>$ points, std\-::vector$<$ K\-M\-Point $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+void \hyperlink{namespaceKMeans_af1d43ce3d20a17d12527e0fac7832f37}{K\-Means\-::pthread\-Closest\-Centroid} (Thread\-Arg\-Closest\-Centroid $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+void \hyperlink{namespaceKMeans_a760600cbd27b19e04a612fa75b2e3d3b}{K\-Means\-::pthread\-New\-Centroid\-Barrier} (size\-\_\-t n\-Threads\-To\-Barrier)
+\item 
+void \hyperlink{namespaceKMeans_a7bbfb7d54cedb05d039f1660792b007d}{K\-Means\-::pthread\-New\-Centroid} (std\-::vector$<$ Thread\-Arg\-New\-Centroid $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+void \hyperlink{namespaceKMeans_abf69c32edce6417d0dce98e983c35af4}{K\-Means\-::p\-Threads\-Find\-New\-Centroid} (K\-M\-Point \&new\-Centroid, std\-::vector$<$ K\-M\-Point $\ast$ $>$ \&points)
+\item 
+std\-::vector$<$ K\-M\-Point $>$ \hyperlink{namespaceKMeans_a37946d061f5cdb3de7465fb0dca1a16e}{K\-Means\-::\-K\-Means\-P\-Threads} (std\-::vector$<$ K\-M\-Point $>$ points, std\-::vector$<$ K\-M\-Point $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+int \hyperlink{namespaceKMeans_ab6f8f31e6f0f753d15f544e340cf44d9}{K\-Means\-::\-K\-Means\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\-::mutex \hyperlink{namespaceKMeans_a5219c2c9759a95b517b455049f6563de}{K\-Means\-::pthread\-Barrier\-Lock}
+\item 
+std\-::condition\-\_\-variable \hyperlink{namespaceKMeans_a1001aa3caa40eaebdd2d3d500f313348}{K\-Means\-::pthread\-Cond\-\_\-\-Var}
+\item 
+size\-\_\-t \hyperlink{namespaceKMeans_ad847e407438dfefa275c4be95c2b46ef}{K\-Means\-::pthread\-Threads\-Arrived}
+\end{DoxyCompactItemize}

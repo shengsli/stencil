@@ -1,0 +1,185 @@
+\hypertarget{namespaceKMeans__MapReduce}{\section{K\-Means\-\_\-\-Map\-Reduce Namespace Reference}
+\label{namespaceKMeans__MapReduce}\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point}
+\item 
+class \hyperlink{classKMeans__MapReduce_1_1ThreadArgPthread}{Thread\-Arg\-Pthread}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::pair$<$ double, double $>$ \hyperlink{namespaceKMeans__MapReduce_a8dfbbc4a186c8ea8ae691f4a85db53e3}{C\-O\-O\-R\-D}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceKMeans__MapReduce_afdd814de48bd8f8ee4d3b5046452e120}{i\-Rand} (int i\-Min, int i\-Max)
+\item 
+double \hyperlink{namespaceKMeans__MapReduce_add51d8d3039809f3398107c0875c8c1b}{f\-Rand} (double f\-Min=0.\-0, double f\-Max=1.\-0)
+\item 
+double \hyperlink{namespaceKMeans__MapReduce_a641fcf6cec59b7626e10e89a580b3d3d}{distance\-Of} (\hyperlink{namespaceKMeans__MapReduce_a8dfbbc4a186c8ea8ae691f4a85db53e3}{C\-O\-O\-R\-D} \&p1, \hyperlink{namespaceKMeans__MapReduce_a8dfbbc4a186c8ea8ae691f4a85db53e3}{C\-O\-O\-R\-D} \&p2)
+\item 
+void \hyperlink{namespaceKMeans__MapReduce_a7cb6ca49c0fa1c2277452c37bccf53e1}{print\-K\-M\-Point} (\hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} point)
+\item 
+std\-::list$<$ std\-::pair$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point}, \\*
+\hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ $>$ \hyperlink{namespaceKMeans__MapReduce_a2c7d89ec14b9139bef11124ced4b6379}{elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid} (\hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} point, std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ \&centroids)
+\item 
+std\-::list$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ \hyperlink{namespaceKMeans__MapReduce_a0c17f1e970fe25155d1019441692f230}{combiner\-M\-R\-\_\-\-Get\-New\-Centroid} (\hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} \&centroid, std\-::list$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ points, std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$)
+\item 
+std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ \hyperlink{namespaceKMeans__MapReduce_a2ecd357b5ea731ac0ca5b12f64ab9326}{K\-Means\-M\-R\-\_\-\-Skel} (std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ points, std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ centroids, std\-::vector$<$ double $>$ \&map\-Reduce\-Timings, std\-::vector$<$ double $>$ \&skel\-Seq\-Timing)
+\item 
+std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ \hyperlink{namespaceKMeans__MapReduce_ab76faaf9ab0206e28cb35c0860b219b1}{K\-Means\-M\-R\-\_\-\-Seq} (std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ points, std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+void \hyperlink{namespaceKMeans__MapReduce_a632d36f6513159007c31a6869e979cf1}{pthread\-Closest\-Centroid\-Barrier} (size\-\_\-t n\-Threads\-To\-Barrier)
+\item 
+void \hyperlink{namespaceKMeans__MapReduce_a9ac8528832a61e437d66b2a509a3bdc1}{pthread\-Function} (std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1ThreadArgPthread}{Thread\-Arg\-Pthread} $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ \hyperlink{namespaceKMeans__MapReduce_a86bdd3f5df87711d559cfa1c1436bfca}{K\-Means\-M\-R\-\_\-\-P\-Threads} (std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ points, std\-::vector$<$ \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-M\-Point} $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+int \hyperlink{namespaceKMeans__MapReduce_a5c531cc24319a88d56ba5d6671b55679}{K\-Means\-Map\-Reduce\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \hyperlink{namespaceKMeans__MapReduce_adb399ee1c151b183ed1956ad1bfc2f18}{hash\-Function}
+\item 
+std\-::mutex \hyperlink{namespaceKMeans__MapReduce_abe48c6fe313eab1688c8243ef5c3a02b}{pthread\-Barrier\-Lock}
+\item 
+std\-::condition\-\_\-variable \hyperlink{namespaceKMeans__MapReduce_adc5383b10499ff2b0a302bb26c40f004}{pthread\-Cond\-\_\-\-Var}
+\item 
+size\-\_\-t \hyperlink{namespaceKMeans__MapReduce_a3ebc17582a2928c65c8196cf5284ff79}{pthread\-Threads\-Arrived}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespaceKMeans__MapReduce_a8dfbbc4a186c8ea8ae691f4a85db53e3}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!C\-O\-O\-R\-D@{C\-O\-O\-R\-D}}
+\index{C\-O\-O\-R\-D@{C\-O\-O\-R\-D}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{C\-O\-O\-R\-D}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::pair$<$double, double$>$ {\bf K\-Means\-\_\-\-Map\-Reduce\-::\-C\-O\-O\-R\-D}}}\label{namespaceKMeans__MapReduce_a8dfbbc4a186c8ea8ae691f4a85db53e3}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceKMeans__MapReduce_a0c17f1e970fe25155d1019441692f230}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!combiner\-M\-R\-\_\-\-Get\-New\-Centroid@{combiner\-M\-R\-\_\-\-Get\-New\-Centroid}}
+\index{combiner\-M\-R\-\_\-\-Get\-New\-Centroid@{combiner\-M\-R\-\_\-\-Get\-New\-Centroid}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{combiner\-M\-R\-\_\-\-Get\-New\-Centroid}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf K\-M\-Point}$>$ K\-Means\-\_\-\-Map\-Reduce\-::combiner\-M\-R\-\_\-\-Get\-New\-Centroid (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point \&}]{centroid, }
+\item[{std\-::list$<$ K\-M\-Point $>$}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a0c17f1e970fe25155d1019441692f230}
+\hypertarget{namespaceKMeans__MapReduce_a641fcf6cec59b7626e10e89a580b3d3d}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!distance\-Of@{distance\-Of}}
+\index{distance\-Of@{distance\-Of}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{distance\-Of}]{\setlength{\rightskip}{0pt plus 5cm}double K\-Means\-\_\-\-Map\-Reduce\-::distance\-Of (
+\begin{DoxyParamCaption}
+\item[{C\-O\-O\-R\-D \&}]{p1, }
+\item[{C\-O\-O\-R\-D \&}]{p2}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a641fcf6cec59b7626e10e89a580b3d3d}
+\hypertarget{namespaceKMeans__MapReduce_a2c7d89ec14b9139bef11124ced4b6379}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid@{elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid}}
+\index{elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid@{elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<$std\-::pair$<${\bf K\-M\-Point}, {\bf K\-M\-Point}$>$ $>$ K\-Means\-\_\-\-Map\-Reduce\-::elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point}]{point, }
+\item[{std\-::vector$<$ K\-M\-Point $>$ \&}]{centroids}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a2c7d89ec14b9139bef11124ced4b6379}
+\hypertarget{namespaceKMeans__MapReduce_add51d8d3039809f3398107c0875c8c1b}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!f\-Rand@{f\-Rand}}
+\index{f\-Rand@{f\-Rand}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{f\-Rand}]{\setlength{\rightskip}{0pt plus 5cm}double K\-Means\-\_\-\-Map\-Reduce\-::f\-Rand (
+\begin{DoxyParamCaption}
+\item[{double}]{f\-Min = {\ttfamily 0.0}, }
+\item[{double}]{f\-Max = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_add51d8d3039809f3398107c0875c8c1b}
+\hypertarget{namespaceKMeans__MapReduce_afdd814de48bd8f8ee4d3b5046452e120}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!i\-Rand@{i\-Rand}}
+\index{i\-Rand@{i\-Rand}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{i\-Rand}]{\setlength{\rightskip}{0pt plus 5cm}int K\-Means\-\_\-\-Map\-Reduce\-::i\-Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Min, }
+\item[{int}]{i\-Max}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_afdd814de48bd8f8ee4d3b5046452e120}
+\hypertarget{namespaceKMeans__MapReduce_a5c531cc24319a88d56ba5d6671b55679}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!K\-Means\-Map\-Reduce\-Main@{K\-Means\-Map\-Reduce\-Main}}
+\index{K\-Means\-Map\-Reduce\-Main@{K\-Means\-Map\-Reduce\-Main}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{K\-Means\-Map\-Reduce\-Main}]{\setlength{\rightskip}{0pt plus 5cm}int K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-Map\-Reduce\-Main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a5c531cc24319a88d56ba5d6671b55679}
+\hypertarget{namespaceKMeans__MapReduce_a86bdd3f5df87711d559cfa1c1436bfca}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!K\-Means\-M\-R\-\_\-\-P\-Threads@{K\-Means\-M\-R\-\_\-\-P\-Threads}}
+\index{K\-Means\-M\-R\-\_\-\-P\-Threads@{K\-Means\-M\-R\-\_\-\-P\-Threads}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{K\-Means\-M\-R\-\_\-\-P\-Threads}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf K\-M\-Point}$>$ K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-M\-R\-\_\-\-P\-Threads (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{centroids, }
+\item[{std\-::vector$<$ double $>$ \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a86bdd3f5df87711d559cfa1c1436bfca}
+\hypertarget{namespaceKMeans__MapReduce_ab76faaf9ab0206e28cb35c0860b219b1}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!K\-Means\-M\-R\-\_\-\-Seq@{K\-Means\-M\-R\-\_\-\-Seq}}
+\index{K\-Means\-M\-R\-\_\-\-Seq@{K\-Means\-M\-R\-\_\-\-Seq}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{K\-Means\-M\-R\-\_\-\-Seq}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf K\-M\-Point}$>$ K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-M\-R\-\_\-\-Seq (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{centroids, }
+\item[{std\-::vector$<$ double $>$ \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_ab76faaf9ab0206e28cb35c0860b219b1}
+\hypertarget{namespaceKMeans__MapReduce_a2ecd357b5ea731ac0ca5b12f64ab9326}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!K\-Means\-M\-R\-\_\-\-Skel@{K\-Means\-M\-R\-\_\-\-Skel}}
+\index{K\-Means\-M\-R\-\_\-\-Skel@{K\-Means\-M\-R\-\_\-\-Skel}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{K\-Means\-M\-R\-\_\-\-Skel}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf K\-M\-Point}$>$ K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-M\-R\-\_\-\-Skel (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{centroids, }
+\item[{std\-::vector$<$ double $>$ \&}]{map\-Reduce\-Timings, }
+\item[{std\-::vector$<$ double $>$ \&}]{skel\-Seq\-Timing}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a2ecd357b5ea731ac0ca5b12f64ab9326}
+\hypertarget{namespaceKMeans__MapReduce_a7cb6ca49c0fa1c2277452c37bccf53e1}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!print\-K\-M\-Point@{print\-K\-M\-Point}}
+\index{print\-K\-M\-Point@{print\-K\-M\-Point}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{print\-K\-M\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-\_\-\-Map\-Reduce\-::print\-K\-M\-Point (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point}]{point}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a7cb6ca49c0fa1c2277452c37bccf53e1}
+\hypertarget{namespaceKMeans__MapReduce_a632d36f6513159007c31a6869e979cf1}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!pthread\-Closest\-Centroid\-Barrier@{pthread\-Closest\-Centroid\-Barrier}}
+\index{pthread\-Closest\-Centroid\-Barrier@{pthread\-Closest\-Centroid\-Barrier}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{pthread\-Closest\-Centroid\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Closest\-Centroid\-Barrier (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{n\-Threads\-To\-Barrier}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a632d36f6513159007c31a6869e979cf1}
+\hypertarget{namespaceKMeans__MapReduce_a9ac8528832a61e437d66b2a509a3bdc1}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!pthread\-Function@{pthread\-Function}}
+\index{pthread\-Function@{pthread\-Function}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{pthread\-Function}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Function (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Thread\-Arg\-Pthread $>$ $\ast$}]{thread\-Arguments, }
+\item[{size\-\_\-t}]{thread\-I\-D}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans__MapReduce_a9ac8528832a61e437d66b2a509a3bdc1}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceKMeans__MapReduce_adb399ee1c151b183ed1956ad1bfc2f18}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!hash\-Function@{hash\-Function}}
+\index{hash\-Function@{hash\-Function}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{hash\-Function}]{\setlength{\rightskip}{0pt plus 5cm}auto K\-Means\-\_\-\-Map\-Reduce\-::hash\-Function}}\label{namespaceKMeans__MapReduce_adb399ee1c151b183ed1956ad1bfc2f18}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+            [](KMPoint centroid) \{
+                \textcolor{keywordflow}{return}  (std::hash<double>()(centroid.coord.first) ^ (std::hash<double>()(centroid.coord.
+      second) << 1)) >> 1;
+            \}
+\end{DoxyCode}
+\hypertarget{namespaceKMeans__MapReduce_abe48c6fe313eab1688c8243ef5c3a02b}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!pthread\-Barrier\-Lock@{pthread\-Barrier\-Lock}}
+\index{pthread\-Barrier\-Lock@{pthread\-Barrier\-Lock}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{pthread\-Barrier\-Lock}]{\setlength{\rightskip}{0pt plus 5cm}std\-::mutex K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Barrier\-Lock}}\label{namespaceKMeans__MapReduce_abe48c6fe313eab1688c8243ef5c3a02b}
+\hypertarget{namespaceKMeans__MapReduce_adc5383b10499ff2b0a302bb26c40f004}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!pthread\-Cond\-\_\-\-Var@{pthread\-Cond\-\_\-\-Var}}
+\index{pthread\-Cond\-\_\-\-Var@{pthread\-Cond\-\_\-\-Var}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{pthread\-Cond\-\_\-\-Var}]{\setlength{\rightskip}{0pt plus 5cm}std\-::condition\-\_\-variable K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Cond\-\_\-\-Var}}\label{namespaceKMeans__MapReduce_adc5383b10499ff2b0a302bb26c40f004}
+\hypertarget{namespaceKMeans__MapReduce_a3ebc17582a2928c65c8196cf5284ff79}{\index{K\-Means\-\_\-\-Map\-Reduce@{K\-Means\-\_\-\-Map\-Reduce}!pthread\-Threads\-Arrived@{pthread\-Threads\-Arrived}}
+\index{pthread\-Threads\-Arrived@{pthread\-Threads\-Arrived}!KMeans_MapReduce@{K\-Means\-\_\-\-Map\-Reduce}}
+\subsubsection[{pthread\-Threads\-Arrived}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Threads\-Arrived}}\label{namespaceKMeans__MapReduce_a3ebc17582a2928c65c8196cf5284ff79}

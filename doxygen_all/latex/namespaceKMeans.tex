@@ -1,0 +1,223 @@
+\hypertarget{namespaceKMeans}{\section{K\-Means Namespace Reference}
+\label{namespaceKMeans}\index{K\-Means@{K\-Means}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point}
+\item 
+class \hyperlink{classKMeans_1_1ThreadArgClosestCentroid}{Thread\-Arg\-Closest\-Centroid}
+\item 
+class \hyperlink{classKMeans_1_1ThreadArgNewCentroid}{Thread\-Arg\-New\-Centroid}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::pair$<$ double, double $>$ \hyperlink{namespaceKMeans_a32ce08f4c8b30171faaeff5a3a466f30}{C\-O\-O\-R\-D}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceKMeans_aeccf7b9a20677968be2392b189462968}{i\-Rand} (int i\-Min, int i\-Max)
+\item 
+double \hyperlink{namespaceKMeans_aa1cc53313a5e71901410db444f2f1277}{f\-Rand} (double f\-Min=0.\-0, double f\-Max=1.\-0)
+\item 
+double \hyperlink{namespaceKMeans_ab1d0698be0b64e379858f444df37f184}{distance\-Of} (\hyperlink{namespaceKMeans_a32ce08f4c8b30171faaeff5a3a466f30}{C\-O\-O\-R\-D} \&p1, \hyperlink{namespaceKMeans_a32ce08f4c8b30171faaeff5a3a466f30}{C\-O\-O\-R\-D} \&p2)
+\item 
+\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$ \hyperlink{namespaceKMeans_a1290694d35842d45c40524d6f1d4cc01}{elemental} (\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$point, std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ \&centroids)
+\item 
+{\footnotesize template$<$typename R $>$ }\\\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} \hyperlink{namespaceKMeans_af6ddf3d8fcb489e1b35093fe7387a135}{map\-To\-New\-Centroid\-Elemental} (std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$ $>$ $\ast$points\-In\-Centroid, R \&reduce)
+\item 
+\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$ \hyperlink{namespaceKMeans_a59f0fc44e94dd722fea19b2c130b7811}{combiner} (\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$p1, \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$p2)
+\item 
+void \hyperlink{namespaceKMeans_a0168f204720c7b64714f53f142004a36}{print\-K\-M\-Point} (\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} point)
+\item 
+std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ \hyperlink{namespaceKMeans_a2aadc9387de95e9488dd5605465f7cd1}{K\-Means\-Skel} (std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ points, std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ centroids, std\-::vector$<$ double $>$ \&map\-Timings, std\-::vector$<$ double $>$ \&reduce\-Timings, std\-::vector$<$ double $>$ \&skel\-Seq\-Timing)
+\item 
+void \hyperlink{namespaceKMeans_a51a34cb9e3c9fa1b619342ce80834c7b}{seq\-Find\-Closest\-Centroid} (std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$ $>$ \&points, std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ \&centroids)
+\item 
+void \hyperlink{namespaceKMeans_a3be77d9de58b3e3151ceb2a48681d40f}{seq\-Find\-New\-Centroids} (\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} \&new\-Centroid, std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$ $>$ \&points)
+\item 
+std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ \hyperlink{namespaceKMeans_a10702545b2f1319336b2789ee42e1bd6}{K\-Means\-Seq} (std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ points, std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+void \hyperlink{namespaceKMeans_af1d43ce3d20a17d12527e0fac7832f37}{pthread\-Closest\-Centroid} (\hyperlink{classKMeans_1_1ThreadArgClosestCentroid}{Thread\-Arg\-Closest\-Centroid} $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+void \hyperlink{namespaceKMeans_a760600cbd27b19e04a612fa75b2e3d3b}{pthread\-New\-Centroid\-Barrier} (size\-\_\-t n\-Threads\-To\-Barrier)
+\item 
+void \hyperlink{namespaceKMeans_a7bbfb7d54cedb05d039f1660792b007d}{pthread\-New\-Centroid} (std\-::vector$<$ \hyperlink{classKMeans_1_1ThreadArgNewCentroid}{Thread\-Arg\-New\-Centroid} $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+void \hyperlink{namespaceKMeans_abf69c32edce6417d0dce98e983c35af4}{p\-Threads\-Find\-New\-Centroid} (\hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} \&new\-Centroid, std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $\ast$ $>$ \&points)
+\item 
+std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ \hyperlink{namespaceKMeans_a37946d061f5cdb3de7465fb0dca1a16e}{K\-Means\-P\-Threads} (std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ points, std\-::vector$<$ \hyperlink{structKMeans_1_1KMPoint}{K\-M\-Point} $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+int \hyperlink{namespaceKMeans_ab6f8f31e6f0f753d15f544e340cf44d9}{K\-Means\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\-::mutex \hyperlink{namespaceKMeans_a5219c2c9759a95b517b455049f6563de}{pthread\-Barrier\-Lock}
+\item 
+std\-::condition\-\_\-variable \hyperlink{namespaceKMeans_a1001aa3caa40eaebdd2d3d500f313348}{pthread\-Cond\-\_\-\-Var}
+\item 
+size\-\_\-t \hyperlink{namespaceKMeans_ad847e407438dfefa275c4be95c2b46ef}{pthread\-Threads\-Arrived}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespaceKMeans_a32ce08f4c8b30171faaeff5a3a466f30}{\index{K\-Means@{K\-Means}!C\-O\-O\-R\-D@{C\-O\-O\-R\-D}}
+\index{C\-O\-O\-R\-D@{C\-O\-O\-R\-D}!KMeans@{K\-Means}}
+\subsubsection[{C\-O\-O\-R\-D}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::pair$<$double, double$>$ {\bf K\-Means\-::\-C\-O\-O\-R\-D}}}\label{namespaceKMeans_a32ce08f4c8b30171faaeff5a3a466f30}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceKMeans_a59f0fc44e94dd722fea19b2c130b7811}{\index{K\-Means@{K\-Means}!combiner@{combiner}}
+\index{combiner@{combiner}!KMeans@{K\-Means}}
+\subsubsection[{combiner}]{\setlength{\rightskip}{0pt plus 5cm}{\bf K\-M\-Point}$\ast$ K\-Means\-::combiner (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point $\ast$}]{p1, }
+\item[{K\-M\-Point $\ast$}]{p2}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a59f0fc44e94dd722fea19b2c130b7811}
+\hypertarget{namespaceKMeans_ab1d0698be0b64e379858f444df37f184}{\index{K\-Means@{K\-Means}!distance\-Of@{distance\-Of}}
+\index{distance\-Of@{distance\-Of}!KMeans@{K\-Means}}
+\subsubsection[{distance\-Of}]{\setlength{\rightskip}{0pt plus 5cm}double K\-Means\-::distance\-Of (
+\begin{DoxyParamCaption}
+\item[{C\-O\-O\-R\-D \&}]{p1, }
+\item[{C\-O\-O\-R\-D \&}]{p2}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_ab1d0698be0b64e379858f444df37f184}
+\hypertarget{namespaceKMeans_a1290694d35842d45c40524d6f1d4cc01}{\index{K\-Means@{K\-Means}!elemental@{elemental}}
+\index{elemental@{elemental}!KMeans@{K\-Means}}
+\subsubsection[{elemental}]{\setlength{\rightskip}{0pt plus 5cm}{\bf K\-M\-Point}$\ast$ K\-Means\-::elemental (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point $\ast$}]{point, }
+\item[{std\-::vector$<$ K\-M\-Point $>$ \&}]{centroids}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a1290694d35842d45c40524d6f1d4cc01}
+\hypertarget{namespaceKMeans_aa1cc53313a5e71901410db444f2f1277}{\index{K\-Means@{K\-Means}!f\-Rand@{f\-Rand}}
+\index{f\-Rand@{f\-Rand}!KMeans@{K\-Means}}
+\subsubsection[{f\-Rand}]{\setlength{\rightskip}{0pt plus 5cm}double K\-Means\-::f\-Rand (
+\begin{DoxyParamCaption}
+\item[{double}]{f\-Min = {\ttfamily 0.0}, }
+\item[{double}]{f\-Max = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_aa1cc53313a5e71901410db444f2f1277}
+\hypertarget{namespaceKMeans_aeccf7b9a20677968be2392b189462968}{\index{K\-Means@{K\-Means}!i\-Rand@{i\-Rand}}
+\index{i\-Rand@{i\-Rand}!KMeans@{K\-Means}}
+\subsubsection[{i\-Rand}]{\setlength{\rightskip}{0pt plus 5cm}int K\-Means\-::i\-Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Min, }
+\item[{int}]{i\-Max}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_aeccf7b9a20677968be2392b189462968}
+\hypertarget{namespaceKMeans_ab6f8f31e6f0f753d15f544e340cf44d9}{\index{K\-Means@{K\-Means}!K\-Means\-Main@{K\-Means\-Main}}
+\index{K\-Means\-Main@{K\-Means\-Main}!KMeans@{K\-Means}}
+\subsubsection[{K\-Means\-Main}]{\setlength{\rightskip}{0pt plus 5cm}int K\-Means\-::\-K\-Means\-Main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_ab6f8f31e6f0f753d15f544e340cf44d9}
+\hypertarget{namespaceKMeans_a37946d061f5cdb3de7465fb0dca1a16e}{\index{K\-Means@{K\-Means}!K\-Means\-P\-Threads@{K\-Means\-P\-Threads}}
+\index{K\-Means\-P\-Threads@{K\-Means\-P\-Threads}!KMeans@{K\-Means}}
+\subsubsection[{K\-Means\-P\-Threads}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf K\-M\-Point}$>$ K\-Means\-::\-K\-Means\-P\-Threads (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{centroids, }
+\item[{std\-::vector$<$ double $>$ \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a37946d061f5cdb3de7465fb0dca1a16e}
+\hypertarget{namespaceKMeans_a10702545b2f1319336b2789ee42e1bd6}{\index{K\-Means@{K\-Means}!K\-Means\-Seq@{K\-Means\-Seq}}
+\index{K\-Means\-Seq@{K\-Means\-Seq}!KMeans@{K\-Means}}
+\subsubsection[{K\-Means\-Seq}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf K\-M\-Point}$>$ K\-Means\-::\-K\-Means\-Seq (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{centroids, }
+\item[{std\-::vector$<$ double $>$ \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a10702545b2f1319336b2789ee42e1bd6}
+\hypertarget{namespaceKMeans_a2aadc9387de95e9488dd5605465f7cd1}{\index{K\-Means@{K\-Means}!K\-Means\-Skel@{K\-Means\-Skel}}
+\index{K\-Means\-Skel@{K\-Means\-Skel}!KMeans@{K\-Means}}
+\subsubsection[{K\-Means\-Skel}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf K\-M\-Point}$>$ K\-Means\-::\-K\-Means\-Skel (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$}]{centroids, }
+\item[{std\-::vector$<$ double $>$ \&}]{map\-Timings, }
+\item[{std\-::vector$<$ double $>$ \&}]{reduce\-Timings, }
+\item[{std\-::vector$<$ double $>$ \&}]{skel\-Seq\-Timing}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a2aadc9387de95e9488dd5605465f7cd1}
+\hypertarget{namespaceKMeans_af6ddf3d8fcb489e1b35093fe7387a135}{\index{K\-Means@{K\-Means}!map\-To\-New\-Centroid\-Elemental@{map\-To\-New\-Centroid\-Elemental}}
+\index{map\-To\-New\-Centroid\-Elemental@{map\-To\-New\-Centroid\-Elemental}!KMeans@{K\-Means}}
+\subsubsection[{map\-To\-New\-Centroid\-Elemental}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename R $>$ {\bf K\-M\-Point} K\-Means\-::map\-To\-New\-Centroid\-Elemental (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $\ast$ $>$ $\ast$}]{points\-In\-Centroid, }
+\item[{R \&}]{reduce}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_af6ddf3d8fcb489e1b35093fe7387a135}
+\hypertarget{namespaceKMeans_a0168f204720c7b64714f53f142004a36}{\index{K\-Means@{K\-Means}!print\-K\-M\-Point@{print\-K\-M\-Point}}
+\index{print\-K\-M\-Point@{print\-K\-M\-Point}!KMeans@{K\-Means}}
+\subsubsection[{print\-K\-M\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-::print\-K\-M\-Point (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point}]{point}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a0168f204720c7b64714f53f142004a36}
+\hypertarget{namespaceKMeans_af1d43ce3d20a17d12527e0fac7832f37}{\index{K\-Means@{K\-Means}!pthread\-Closest\-Centroid@{pthread\-Closest\-Centroid}}
+\index{pthread\-Closest\-Centroid@{pthread\-Closest\-Centroid}!KMeans@{K\-Means}}
+\subsubsection[{pthread\-Closest\-Centroid}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-::pthread\-Closest\-Centroid (
+\begin{DoxyParamCaption}
+\item[{Thread\-Arg\-Closest\-Centroid $\ast$}]{thread\-Arguments, }
+\item[{size\-\_\-t}]{thread\-I\-D}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_af1d43ce3d20a17d12527e0fac7832f37}
+\hypertarget{namespaceKMeans_a7bbfb7d54cedb05d039f1660792b007d}{\index{K\-Means@{K\-Means}!pthread\-New\-Centroid@{pthread\-New\-Centroid}}
+\index{pthread\-New\-Centroid@{pthread\-New\-Centroid}!KMeans@{K\-Means}}
+\subsubsection[{pthread\-New\-Centroid}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-::pthread\-New\-Centroid (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Thread\-Arg\-New\-Centroid $>$ $\ast$}]{thread\-Arguments, }
+\item[{size\-\_\-t}]{thread\-I\-D}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a7bbfb7d54cedb05d039f1660792b007d}
+\hypertarget{namespaceKMeans_a760600cbd27b19e04a612fa75b2e3d3b}{\index{K\-Means@{K\-Means}!pthread\-New\-Centroid\-Barrier@{pthread\-New\-Centroid\-Barrier}}
+\index{pthread\-New\-Centroid\-Barrier@{pthread\-New\-Centroid\-Barrier}!KMeans@{K\-Means}}
+\subsubsection[{pthread\-New\-Centroid\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-::pthread\-New\-Centroid\-Barrier (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{n\-Threads\-To\-Barrier}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a760600cbd27b19e04a612fa75b2e3d3b}
+\hypertarget{namespaceKMeans_abf69c32edce6417d0dce98e983c35af4}{\index{K\-Means@{K\-Means}!p\-Threads\-Find\-New\-Centroid@{p\-Threads\-Find\-New\-Centroid}}
+\index{p\-Threads\-Find\-New\-Centroid@{p\-Threads\-Find\-New\-Centroid}!KMeans@{K\-Means}}
+\subsubsection[{p\-Threads\-Find\-New\-Centroid}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-::p\-Threads\-Find\-New\-Centroid (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point \&}]{new\-Centroid, }
+\item[{std\-::vector$<$ K\-M\-Point $\ast$ $>$ \&}]{points}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_abf69c32edce6417d0dce98e983c35af4}
+\hypertarget{namespaceKMeans_a51a34cb9e3c9fa1b619342ce80834c7b}{\index{K\-Means@{K\-Means}!seq\-Find\-Closest\-Centroid@{seq\-Find\-Closest\-Centroid}}
+\index{seq\-Find\-Closest\-Centroid@{seq\-Find\-Closest\-Centroid}!KMeans@{K\-Means}}
+\subsubsection[{seq\-Find\-Closest\-Centroid}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-::seq\-Find\-Closest\-Centroid (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ K\-M\-Point $\ast$ $>$ \&}]{points, }
+\item[{std\-::vector$<$ K\-M\-Point $>$ \&}]{centroids}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a51a34cb9e3c9fa1b619342ce80834c7b}
+\hypertarget{namespaceKMeans_a3be77d9de58b3e3151ceb2a48681d40f}{\index{K\-Means@{K\-Means}!seq\-Find\-New\-Centroids@{seq\-Find\-New\-Centroids}}
+\index{seq\-Find\-New\-Centroids@{seq\-Find\-New\-Centroids}!KMeans@{K\-Means}}
+\subsubsection[{seq\-Find\-New\-Centroids}]{\setlength{\rightskip}{0pt plus 5cm}void K\-Means\-::seq\-Find\-New\-Centroids (
+\begin{DoxyParamCaption}
+\item[{K\-M\-Point \&}]{new\-Centroid, }
+\item[{std\-::vector$<$ K\-M\-Point $\ast$ $>$ \&}]{points}
+\end{DoxyParamCaption}
+)}}\label{namespaceKMeans_a3be77d9de58b3e3151ceb2a48681d40f}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceKMeans_a5219c2c9759a95b517b455049f6563de}{\index{K\-Means@{K\-Means}!pthread\-Barrier\-Lock@{pthread\-Barrier\-Lock}}
+\index{pthread\-Barrier\-Lock@{pthread\-Barrier\-Lock}!KMeans@{K\-Means}}
+\subsubsection[{pthread\-Barrier\-Lock}]{\setlength{\rightskip}{0pt plus 5cm}std\-::mutex K\-Means\-::pthread\-Barrier\-Lock}}\label{namespaceKMeans_a5219c2c9759a95b517b455049f6563de}
+\hypertarget{namespaceKMeans_a1001aa3caa40eaebdd2d3d500f313348}{\index{K\-Means@{K\-Means}!pthread\-Cond\-\_\-\-Var@{pthread\-Cond\-\_\-\-Var}}
+\index{pthread\-Cond\-\_\-\-Var@{pthread\-Cond\-\_\-\-Var}!KMeans@{K\-Means}}
+\subsubsection[{pthread\-Cond\-\_\-\-Var}]{\setlength{\rightskip}{0pt plus 5cm}std\-::condition\-\_\-variable K\-Means\-::pthread\-Cond\-\_\-\-Var}}\label{namespaceKMeans_a1001aa3caa40eaebdd2d3d500f313348}
+\hypertarget{namespaceKMeans_ad847e407438dfefa275c4be95c2b46ef}{\index{K\-Means@{K\-Means}!pthread\-Threads\-Arrived@{pthread\-Threads\-Arrived}}
+\index{pthread\-Threads\-Arrived@{pthread\-Threads\-Arrived}!KMeans@{K\-Means}}
+\subsubsection[{pthread\-Threads\-Arrived}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t K\-Means\-::pthread\-Threads\-Arrived}}\label{namespaceKMeans_ad847e407438dfefa275c4be95c2b46ef}

@@ -1,0 +1,58 @@
+\hypertarget{MapReduce_8hpp}{\section{/afs/inf.ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/\-Map\-Reduce.hpp File Reference}
+\label{MapReduce_8hpp}\index{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/\-Map\-Reduce.\-hpp@{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/\-Map\-Reduce.\-hpp}}
+}
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$tuple$>$}\\*
+{\ttfamily \#include $<$type\-\_\-traits$>$}\\*
+{\ttfamily \#include $<$functional$>$}\\*
+{\ttfamily \#include $<$stdarg.\-h$>$}\\*
+{\ttfamily \#include $<$typeinfo$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include $<$unordered\-\_\-map$>$}\\*
+{\ttfamily \#include $<$mutex$>$}\\*
+{\ttfamily \#include $<$condition\-\_\-variable$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classMapReduceSkeleton}{Map\-Reduce\-Skeleton}
+\item 
+class \hyperlink{classMapReduceSkeleton_1_1MapReduceImplementation}{Map\-Reduce\-Skeleton\-::\-Map\-Reduce\-Implementation$<$ E\-L, R\-E, H\-A $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename H\-A , typename E\-L , typename R\-E $>$ }\\\hyperlink{classMapReduceSkeleton_1_1MapReduceImplementation}{Map\-Reduce\-Skeleton\-::\-Map\-Reduce\-Implementation}\\*
+$<$ E\-L, R\-E, H\-A $>$ \hyperlink{MapReduce_8hpp_a466cdb9b1e9ebbf0c360c3d536f60a02}{\-\_\-\-\_\-\-Map\-Reduce\-With\-Access} (E\-L el, R\-E re, H\-A ha, size\-\_\-t threads)
+\item 
+{\footnotesize template$<$typename H\-A , typename E\-L , typename R\-E $>$ }\\\hyperlink{classMapReduceSkeleton_1_1MapReduceImplementation}{Map\-Reduce\-Skeleton\-::\-Map\-Reduce\-Implementation}\\*
+$<$ E\-L, R\-E, H\-A $>$ \hyperlink{MapReduce_8hpp_ab01b4da7220ee5f5d9ca44e6842f7c90}{Map\-Reduce} (E\-L el, R\-E re, H\-A hasher, size\-\_\-t threads=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{MapReduce_8hpp_a466cdb9b1e9ebbf0c360c3d536f60a02}{\index{Map\-Reduce.\-hpp@{Map\-Reduce.\-hpp}!\-\_\-\-\_\-\-Map\-Reduce\-With\-Access@{\-\_\-\-\_\-\-Map\-Reduce\-With\-Access}}
+\index{\-\_\-\-\_\-\-Map\-Reduce\-With\-Access@{\-\_\-\-\_\-\-Map\-Reduce\-With\-Access}!MapReduce.hpp@{Map\-Reduce.\-hpp}}
+\subsubsection[{\-\_\-\-\_\-\-Map\-Reduce\-With\-Access}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename H\-A , typename E\-L , typename R\-E $>$ {\bf Map\-Reduce\-Skeleton\-::\-Map\-Reduce\-Implementation}$<$E\-L, R\-E, H\-A$>$ \-\_\-\-\_\-\-Map\-Reduce\-With\-Access (
+\begin{DoxyParamCaption}
+\item[{E\-L}]{el, }
+\item[{R\-E}]{re, }
+\item[{H\-A}]{ha, }
+\item[{size\-\_\-t}]{threads}
+\end{DoxyParamCaption}
+)}}\label{MapReduce_8hpp_a466cdb9b1e9ebbf0c360c3d536f60a02}
+\hypertarget{MapReduce_8hpp_ab01b4da7220ee5f5d9ca44e6842f7c90}{\index{Map\-Reduce.\-hpp@{Map\-Reduce.\-hpp}!Map\-Reduce@{Map\-Reduce}}
+\index{Map\-Reduce@{Map\-Reduce}!MapReduce.hpp@{Map\-Reduce.\-hpp}}
+\subsubsection[{Map\-Reduce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename H\-A , typename E\-L , typename R\-E $>$ {\bf Map\-Reduce\-Skeleton\-::\-Map\-Reduce\-Implementation}$<$E\-L, R\-E, H\-A$>$ Map\-Reduce (
+\begin{DoxyParamCaption}
+\item[{E\-L}]{el, }
+\item[{R\-E}]{re, }
+\item[{H\-A}]{hasher, }
+\item[{size\-\_\-t}]{threads = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{MapReduce_8hpp_ab01b4da7220ee5f5d9ca44e6842f7c90}

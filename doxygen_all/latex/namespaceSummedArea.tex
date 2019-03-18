@@ -1,0 +1,164 @@
+\hypertarget{namespaceSummedArea}{\section{Summed\-Area Namespace Reference}
+\label{namespaceSummedArea}\index{Summed\-Area@{Summed\-Area}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSummedArea_1_1ThreadArgGetArea}{Thread\-Arg\-Get\-Area}
+\item 
+class \hyperlink{classSummedArea_1_1ThreadArgGetSummedArea}{Thread\-Arg\-Get\-Summed\-Area}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{namespaceSummedArea_a23da63c99eaf3779a955eaf64c24692c}{fun} (double x)
+\item 
+{\footnotesize template$<$typename F $>$ }\\double \hyperlink{namespaceSummedArea_a4528023a390e109ccd2f2913d7c2e2cb}{Simpson} (double a, double b, F f, int n=10)
+\item 
+{\footnotesize template$<$typename S , typename F $>$ }\\double \hyperlink{namespaceSummedArea_abb2663d88d1546ab79957d4a163c7171}{mapper} (double sample, double dx, S simpson, F \hyperlink{namespaceSummedArea_a23da63c99eaf3779a955eaf64c24692c}{fun}, int n)
+\item 
+double \hyperlink{namespaceSummedArea_a5bfa1de246fced49a7feac63c29152e2}{successor} (double a, double b)
+\item 
+std\-::vector$<$ double $>$ \hyperlink{namespaceSummedArea_a622887e5889536580ca8d3cea80eb7d2}{Summed\-Area\-Skel} (std\-::vector$<$ double $>$ samples, double dx, double a, double b, int n, double \&map\-Timings, double \&scan\-Timings, double \&skel\-Seq\-Timing)
+\item 
+std\-::vector$<$ double $>$ \hyperlink{namespaceSummedArea_ad3c493f61e906a1dce9649882744daac}{Summed\-Area\-Seq} (std\-::vector$<$ double $>$ samples, double dx, double a, double b, int n, double \&non\-Parallel\-Timings)
+\item 
+void \hyperlink{namespaceSummedArea_ab9a94bb4d4b9000c58022d816d19c06e}{pthread\-Get\-Areas} (std\-::vector$<$ \hyperlink{classSummedArea_1_1ThreadArgGetArea}{Thread\-Arg\-Get\-Area} $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+void \hyperlink{namespaceSummedArea_a7ee6f74994b86b577108cf74a435686b}{pthread\-Barrier} (size\-\_\-t n\-Threads\-To\-Barrier)
+\item 
+void \hyperlink{namespaceSummedArea_abf56efddeb21ba74a89c6516ca5aaa42}{pthread\-Get\-Summed\-Area} (std\-::vector$<$ \hyperlink{classSummedArea_1_1ThreadArgGetSummedArea}{Thread\-Arg\-Get\-Summed\-Area} $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+std\-::vector$<$ double $>$ \hyperlink{namespaceSummedArea_ab02a87090c4d81e708b043986e2bac80}{Summed\-Area\-P\-Threads} (std\-::vector$<$ double $>$ samples, double dx, double a, double b, int n, double \&non\-Parallel\-Timings)
+\item 
+int \hyperlink{namespaceSummedArea_a86ddb68dbedbd8826059c8d569a1e1e5}{Summed\-Area\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\-::mutex \hyperlink{namespaceSummedArea_af8704d6d0083e3c60018fdf3b75a738b}{pthread\-Barrier\-Lock}
+\item 
+std\-::condition\-\_\-variable \hyperlink{namespaceSummedArea_a31aaf6776f519e6a6baafdf4929eaa00}{pthread\-Cond\-\_\-\-Var}
+\item 
+size\-\_\-t \hyperlink{namespaceSummedArea_a2229d913ad7c3cffdadb8c9fced72474}{pthread\-Threads\-Arrived}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceSummedArea_a23da63c99eaf3779a955eaf64c24692c}{\index{Summed\-Area@{Summed\-Area}!fun@{fun}}
+\index{fun@{fun}!SummedArea@{Summed\-Area}}
+\subsubsection[{fun}]{\setlength{\rightskip}{0pt plus 5cm}double Summed\-Area\-::fun (
+\begin{DoxyParamCaption}
+\item[{double}]{x}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_a23da63c99eaf3779a955eaf64c24692c}
+\hypertarget{namespaceSummedArea_abb2663d88d1546ab79957d4a163c7171}{\index{Summed\-Area@{Summed\-Area}!mapper@{mapper}}
+\index{mapper@{mapper}!SummedArea@{Summed\-Area}}
+\subsubsection[{mapper}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename S , typename F $>$ double Summed\-Area\-::mapper (
+\begin{DoxyParamCaption}
+\item[{double}]{sample, }
+\item[{double}]{dx, }
+\item[{S}]{simpson, }
+\item[{F}]{fun, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_abb2663d88d1546ab79957d4a163c7171}
+\hypertarget{namespaceSummedArea_a7ee6f74994b86b577108cf74a435686b}{\index{Summed\-Area@{Summed\-Area}!pthread\-Barrier@{pthread\-Barrier}}
+\index{pthread\-Barrier@{pthread\-Barrier}!SummedArea@{Summed\-Area}}
+\subsubsection[{pthread\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}void Summed\-Area\-::pthread\-Barrier (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{n\-Threads\-To\-Barrier}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_a7ee6f74994b86b577108cf74a435686b}
+\hypertarget{namespaceSummedArea_ab9a94bb4d4b9000c58022d816d19c06e}{\index{Summed\-Area@{Summed\-Area}!pthread\-Get\-Areas@{pthread\-Get\-Areas}}
+\index{pthread\-Get\-Areas@{pthread\-Get\-Areas}!SummedArea@{Summed\-Area}}
+\subsubsection[{pthread\-Get\-Areas}]{\setlength{\rightskip}{0pt plus 5cm}void Summed\-Area\-::pthread\-Get\-Areas (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Thread\-Arg\-Get\-Area $>$ $\ast$}]{thread\-Arguments, }
+\item[{size\-\_\-t}]{thread\-I\-D}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_ab9a94bb4d4b9000c58022d816d19c06e}
+\hypertarget{namespaceSummedArea_abf56efddeb21ba74a89c6516ca5aaa42}{\index{Summed\-Area@{Summed\-Area}!pthread\-Get\-Summed\-Area@{pthread\-Get\-Summed\-Area}}
+\index{pthread\-Get\-Summed\-Area@{pthread\-Get\-Summed\-Area}!SummedArea@{Summed\-Area}}
+\subsubsection[{pthread\-Get\-Summed\-Area}]{\setlength{\rightskip}{0pt plus 5cm}void Summed\-Area\-::pthread\-Get\-Summed\-Area (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Thread\-Arg\-Get\-Summed\-Area $>$ $\ast$}]{thread\-Arguments, }
+\item[{size\-\_\-t}]{thread\-I\-D}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_abf56efddeb21ba74a89c6516ca5aaa42}
+\hypertarget{namespaceSummedArea_a4528023a390e109ccd2f2913d7c2e2cb}{\index{Summed\-Area@{Summed\-Area}!Simpson@{Simpson}}
+\index{Simpson@{Simpson}!SummedArea@{Summed\-Area}}
+\subsubsection[{Simpson}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ double Summed\-Area\-::\-Simpson (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{F}]{f, }
+\item[{int}]{n = {\ttfamily 10}}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_a4528023a390e109ccd2f2913d7c2e2cb}
+\hypertarget{namespaceSummedArea_a5bfa1de246fced49a7feac63c29152e2}{\index{Summed\-Area@{Summed\-Area}!successor@{successor}}
+\index{successor@{successor}!SummedArea@{Summed\-Area}}
+\subsubsection[{successor}]{\setlength{\rightskip}{0pt plus 5cm}double Summed\-Area\-::successor (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_a5bfa1de246fced49a7feac63c29152e2}
+\hypertarget{namespaceSummedArea_a86ddb68dbedbd8826059c8d569a1e1e5}{\index{Summed\-Area@{Summed\-Area}!Summed\-Area\-Main@{Summed\-Area\-Main}}
+\index{Summed\-Area\-Main@{Summed\-Area\-Main}!SummedArea@{Summed\-Area}}
+\subsubsection[{Summed\-Area\-Main}]{\setlength{\rightskip}{0pt plus 5cm}int Summed\-Area\-::\-Summed\-Area\-Main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_a86ddb68dbedbd8826059c8d569a1e1e5}
+\hypertarget{namespaceSummedArea_ab02a87090c4d81e708b043986e2bac80}{\index{Summed\-Area@{Summed\-Area}!Summed\-Area\-P\-Threads@{Summed\-Area\-P\-Threads}}
+\index{Summed\-Area\-P\-Threads@{Summed\-Area\-P\-Threads}!SummedArea@{Summed\-Area}}
+\subsubsection[{Summed\-Area\-P\-Threads}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$double$>$ Summed\-Area\-::\-Summed\-Area\-P\-Threads (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ double $>$}]{samples, }
+\item[{double}]{dx, }
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{int}]{n, }
+\item[{double \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_ab02a87090c4d81e708b043986e2bac80}
+\hypertarget{namespaceSummedArea_ad3c493f61e906a1dce9649882744daac}{\index{Summed\-Area@{Summed\-Area}!Summed\-Area\-Seq@{Summed\-Area\-Seq}}
+\index{Summed\-Area\-Seq@{Summed\-Area\-Seq}!SummedArea@{Summed\-Area}}
+\subsubsection[{Summed\-Area\-Seq}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$double$>$ Summed\-Area\-::\-Summed\-Area\-Seq (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ double $>$}]{samples, }
+\item[{double}]{dx, }
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{int}]{n, }
+\item[{double \&}]{non\-Parallel\-Timings}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_ad3c493f61e906a1dce9649882744daac}
+\hypertarget{namespaceSummedArea_a622887e5889536580ca8d3cea80eb7d2}{\index{Summed\-Area@{Summed\-Area}!Summed\-Area\-Skel@{Summed\-Area\-Skel}}
+\index{Summed\-Area\-Skel@{Summed\-Area\-Skel}!SummedArea@{Summed\-Area}}
+\subsubsection[{Summed\-Area\-Skel}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$double$>$ Summed\-Area\-::\-Summed\-Area\-Skel (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ double $>$}]{samples, }
+\item[{double}]{dx, }
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{int}]{n, }
+\item[{double \&}]{map\-Timings, }
+\item[{double \&}]{scan\-Timings, }
+\item[{double \&}]{skel\-Seq\-Timing}
+\end{DoxyParamCaption}
+)}}\label{namespaceSummedArea_a622887e5889536580ca8d3cea80eb7d2}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceSummedArea_af8704d6d0083e3c60018fdf3b75a738b}{\index{Summed\-Area@{Summed\-Area}!pthread\-Barrier\-Lock@{pthread\-Barrier\-Lock}}
+\index{pthread\-Barrier\-Lock@{pthread\-Barrier\-Lock}!SummedArea@{Summed\-Area}}
+\subsubsection[{pthread\-Barrier\-Lock}]{\setlength{\rightskip}{0pt plus 5cm}std\-::mutex Summed\-Area\-::pthread\-Barrier\-Lock}}\label{namespaceSummedArea_af8704d6d0083e3c60018fdf3b75a738b}
+\hypertarget{namespaceSummedArea_a31aaf6776f519e6a6baafdf4929eaa00}{\index{Summed\-Area@{Summed\-Area}!pthread\-Cond\-\_\-\-Var@{pthread\-Cond\-\_\-\-Var}}
+\index{pthread\-Cond\-\_\-\-Var@{pthread\-Cond\-\_\-\-Var}!SummedArea@{Summed\-Area}}
+\subsubsection[{pthread\-Cond\-\_\-\-Var}]{\setlength{\rightskip}{0pt plus 5cm}std\-::condition\-\_\-variable Summed\-Area\-::pthread\-Cond\-\_\-\-Var}}\label{namespaceSummedArea_a31aaf6776f519e6a6baafdf4929eaa00}
+\hypertarget{namespaceSummedArea_a2229d913ad7c3cffdadb8c9fced72474}{\index{Summed\-Area@{Summed\-Area}!pthread\-Threads\-Arrived@{pthread\-Threads\-Arrived}}
+\index{pthread\-Threads\-Arrived@{pthread\-Threads\-Arrived}!SummedArea@{Summed\-Area}}
+\subsubsection[{pthread\-Threads\-Arrived}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Summed\-Area\-::pthread\-Threads\-Arrived}}\label{namespaceSummedArea_a2229d913ad7c3cffdadb8c9fced72474}

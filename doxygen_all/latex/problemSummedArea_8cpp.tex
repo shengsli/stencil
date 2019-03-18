@@ -1,0 +1,61 @@
+\hypertarget{problemSummedArea_8cpp}{\section{/afs/inf.ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Summed\-Area.cpp File Reference}
+\label{problemSummedArea_8cpp}\index{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Summed\-Area.\-cpp@{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Summed\-Area.\-cpp}}
+}
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$typeinfo$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}def\-\_\-file.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}misc\-Fun.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Scan.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Map.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}problem\-Summed\-Area.\-hpp\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSummedArea_1_1ThreadArgGetArea}{Summed\-Area\-::\-Thread\-Arg\-Get\-Area}
+\item 
+class \hyperlink{classSummedArea_1_1ThreadArgGetSummedArea}{Summed\-Area\-::\-Thread\-Arg\-Get\-Summed\-Area}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSummedArea}{Summed\-Area}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{namespaceSummedArea_a23da63c99eaf3779a955eaf64c24692c}{Summed\-Area\-::fun} (double x)
+\item 
+{\footnotesize template$<$typename F $>$ }\\double \hyperlink{namespaceSummedArea_a4528023a390e109ccd2f2913d7c2e2cb}{Summed\-Area\-::\-Simpson} (double a, double b, F f, int n=10)
+\item 
+{\footnotesize template$<$typename S , typename F $>$ }\\double \hyperlink{namespaceSummedArea_abb2663d88d1546ab79957d4a163c7171}{Summed\-Area\-::mapper} (double sample, double dx, S simpson, F fun, int n)
+\item 
+double \hyperlink{namespaceSummedArea_a5bfa1de246fced49a7feac63c29152e2}{Summed\-Area\-::successor} (double a, double b)
+\item 
+std\-::vector$<$ double $>$ \hyperlink{namespaceSummedArea_a622887e5889536580ca8d3cea80eb7d2}{Summed\-Area\-::\-Summed\-Area\-Skel} (std\-::vector$<$ double $>$ samples, double dx, double a, double b, int n, double \&map\-Timings, double \&scan\-Timings, double \&skel\-Seq\-Timing)
+\item 
+std\-::vector$<$ double $>$ \hyperlink{namespaceSummedArea_ad3c493f61e906a1dce9649882744daac}{Summed\-Area\-::\-Summed\-Area\-Seq} (std\-::vector$<$ double $>$ samples, double dx, double a, double b, int n, double \&non\-Parallel\-Timings)
+\item 
+void \hyperlink{namespaceSummedArea_ab9a94bb4d4b9000c58022d816d19c06e}{Summed\-Area\-::pthread\-Get\-Areas} (std\-::vector$<$ Thread\-Arg\-Get\-Area $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+void \hyperlink{namespaceSummedArea_a7ee6f74994b86b577108cf74a435686b}{Summed\-Area\-::pthread\-Barrier} (size\-\_\-t n\-Threads\-To\-Barrier)
+\item 
+void \hyperlink{namespaceSummedArea_abf56efddeb21ba74a89c6516ca5aaa42}{Summed\-Area\-::pthread\-Get\-Summed\-Area} (std\-::vector$<$ Thread\-Arg\-Get\-Summed\-Area $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+std\-::vector$<$ double $>$ \hyperlink{namespaceSummedArea_ab02a87090c4d81e708b043986e2bac80}{Summed\-Area\-::\-Summed\-Area\-P\-Threads} (std\-::vector$<$ double $>$ samples, double dx, double a, double b, int n, double \&non\-Parallel\-Timings)
+\item 
+int \hyperlink{namespaceSummedArea_a86ddb68dbedbd8826059c8d569a1e1e5}{Summed\-Area\-::\-Summed\-Area\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\-::mutex \hyperlink{namespaceSummedArea_af8704d6d0083e3c60018fdf3b75a738b}{Summed\-Area\-::pthread\-Barrier\-Lock}
+\item 
+std\-::condition\-\_\-variable \hyperlink{namespaceSummedArea_a31aaf6776f519e6a6baafdf4929eaa00}{Summed\-Area\-::pthread\-Cond\-\_\-\-Var}
+\item 
+size\-\_\-t \hyperlink{namespaceSummedArea_a2229d913ad7c3cffdadb8c9fced72474}{Summed\-Area\-::pthread\-Threads\-Arrived}
+\end{DoxyCompactItemize}

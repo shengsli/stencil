@@ -1,0 +1,74 @@
+\hypertarget{problemKmeans__MR_8cpp}{\section{/afs/inf.ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Kmeans\-\_\-\-M\-R.cpp File Reference}
+\label{problemKmeans__MR_8cpp}\index{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Kmeans\-\_\-\-M\-R.\-cpp@{/afs/inf.\-ed.\-ac.\-uk/user/s18/s1837296/dev/stencil/\-Distribute/problem\-Kmeans\-\_\-\-M\-R.\-cpp}}
+}
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$typeinfo$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}def\-\_\-file.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}misc\-Fun.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Map.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Reduce.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Map\-Reduce.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}problem\-Kmeans\-\_\-\-M\-R.\-hpp\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classKMeans__MapReduce_1_1KMPoint}{K\-Means\-\_\-\-Map\-Reduce\-::\-K\-M\-Point}
+\item 
+struct \hyperlink{structKMeans__MapReduce_1_1KMPoint_1_1KeyHasher}{K\-Means\-\_\-\-Map\-Reduce\-::\-K\-M\-Point\-::\-Key\-Hasher}
+\item 
+class \hyperlink{classKMeans__MapReduce_1_1ThreadArgPthread}{K\-Means\-\_\-\-Map\-Reduce\-::\-Thread\-Arg\-Pthread}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceKMeans__MapReduce}{K\-Means\-\_\-\-Map\-Reduce}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::pair$<$ double, double $>$ \hyperlink{namespaceKMeans__MapReduce_a8dfbbc4a186c8ea8ae691f4a85db53e3}{K\-Means\-\_\-\-Map\-Reduce\-::\-C\-O\-O\-R\-D}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceKMeans__MapReduce_afdd814de48bd8f8ee4d3b5046452e120}{K\-Means\-\_\-\-Map\-Reduce\-::i\-Rand} (int i\-Min, int i\-Max)
+\item 
+double \hyperlink{namespaceKMeans__MapReduce_add51d8d3039809f3398107c0875c8c1b}{K\-Means\-\_\-\-Map\-Reduce\-::f\-Rand} (double f\-Min=0.\-0, double f\-Max=1.\-0)
+\item 
+double \hyperlink{namespaceKMeans__MapReduce_a641fcf6cec59b7626e10e89a580b3d3d}{K\-Means\-\_\-\-Map\-Reduce\-::distance\-Of} (C\-O\-O\-R\-D \&p1, C\-O\-O\-R\-D \&p2)
+\item 
+void \hyperlink{namespaceKMeans__MapReduce_a7cb6ca49c0fa1c2277452c37bccf53e1}{K\-Means\-\_\-\-Map\-Reduce\-::print\-K\-M\-Point} (K\-M\-Point point)
+\item 
+std\-::list$<$ std\-::pair$<$ K\-M\-Point, \\*
+K\-M\-Point $>$ $>$ \hyperlink{namespaceKMeans__MapReduce_a2c7d89ec14b9139bef11124ced4b6379}{K\-Means\-\_\-\-Map\-Reduce\-::elemental\-M\-R\-\_\-\-Get\-Closest\-Centroid} (K\-M\-Point point, std\-::vector$<$ K\-M\-Point $>$ \&centroids)
+\item 
+std\-::list$<$ K\-M\-Point $>$ \hyperlink{namespaceKMeans__MapReduce_a0c17f1e970fe25155d1019441692f230}{K\-Means\-\_\-\-Map\-Reduce\-::combiner\-M\-R\-\_\-\-Get\-New\-Centroid} (K\-M\-Point \&centroid, std\-::list$<$ K\-M\-Point $>$ points, std\-::vector$<$ K\-M\-Point $>$)
+\item 
+std\-::vector$<$ K\-M\-Point $>$ \hyperlink{namespaceKMeans__MapReduce_a2ecd357b5ea731ac0ca5b12f64ab9326}{K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-M\-R\-\_\-\-Skel} (std\-::vector$<$ K\-M\-Point $>$ points, std\-::vector$<$ K\-M\-Point $>$ centroids, std\-::vector$<$ double $>$ \&map\-Reduce\-Timings, std\-::vector$<$ double $>$ \&skel\-Seq\-Timing)
+\item 
+std\-::vector$<$ K\-M\-Point $>$ \hyperlink{namespaceKMeans__MapReduce_ab76faaf9ab0206e28cb35c0860b219b1}{K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-M\-R\-\_\-\-Seq} (std\-::vector$<$ K\-M\-Point $>$ points, std\-::vector$<$ K\-M\-Point $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+void \hyperlink{namespaceKMeans__MapReduce_a632d36f6513159007c31a6869e979cf1}{K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Closest\-Centroid\-Barrier} (size\-\_\-t n\-Threads\-To\-Barrier)
+\item 
+void \hyperlink{namespaceKMeans__MapReduce_a9ac8528832a61e437d66b2a509a3bdc1}{K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Function} (std\-::vector$<$ Thread\-Arg\-Pthread $>$ $\ast$thread\-Arguments, size\-\_\-t thread\-I\-D)
+\item 
+std\-::vector$<$ K\-M\-Point $>$ \hyperlink{namespaceKMeans__MapReduce_a86bdd3f5df87711d559cfa1c1436bfca}{K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-M\-R\-\_\-\-P\-Threads} (std\-::vector$<$ K\-M\-Point $>$ points, std\-::vector$<$ K\-M\-Point $>$ centroids, std\-::vector$<$ double $>$ \&non\-Parallel\-Timings)
+\item 
+int \hyperlink{namespaceKMeans__MapReduce_a5c531cc24319a88d56ba5d6671b55679}{K\-Means\-\_\-\-Map\-Reduce\-::\-K\-Means\-Map\-Reduce\-Main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \hyperlink{namespaceKMeans__MapReduce_adb399ee1c151b183ed1956ad1bfc2f18}{K\-Means\-\_\-\-Map\-Reduce\-::hash\-Function}
+\item 
+std\-::mutex \hyperlink{namespaceKMeans__MapReduce_abe48c6fe313eab1688c8243ef5c3a02b}{K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Barrier\-Lock}
+\item 
+std\-::condition\-\_\-variable \hyperlink{namespaceKMeans__MapReduce_adc5383b10499ff2b0a302bb26c40f004}{K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Cond\-\_\-\-Var}
+\item 
+size\-\_\-t \hyperlink{namespaceKMeans__MapReduce_a3ebc17582a2928c65c8196cf5284ff79}{K\-Means\-\_\-\-Map\-Reduce\-::pthread\-Threads\-Arrived}
+\end{DoxyCompactItemize}

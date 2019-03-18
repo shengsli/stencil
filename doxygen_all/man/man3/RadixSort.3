@@ -1,0 +1,64 @@
+.TH "RadixSort" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RadixSort \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBgetRandElement\fP (size_t numberLen, size_t base)"
+.br
+.ti -1c
+.RI "size_t \fBgetDigit\fP (size_t element, size_t digitPos, size_t base)"
+.br
+.ti -1c
+.RI "std::list< std::pair< size_t, 
+.br
+size_t > > \fBcountDigitOccurrences\fP (size_t element, size_t digitPos, size_t base)"
+.br
+.ti -1c
+.RI "std::list< size_t > \fBreduceDigitCounts\fP (size_t key, std::list< size_t > counts, size_t digitPos, size_t base)"
+.br
+.ti -1c
+.RI "size_t \fBsuccessor\fP (size_t a, size_t b)"
+.br
+.ti -1c
+.RI "std::vector< size_t > \fBRadixSortSkel\fP (std::vector< size_t > elements, size_t numberLen, size_t base, std::vector< double > &mapReduceTimings, std::vector< double > &scanTimings, std::vector< double > &skelSeqTiming)"
+.br
+.ti -1c
+.RI "std::vector< size_t > \fBRadixSortSeq\fP (std::vector< size_t > elements, size_t numberLen, size_t base, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "std::vector< size_t > \fBRadixSortPThreads\fP (std::vector< size_t > elements, std::vector< double > &nonParallelTimings)"
+.br
+.ti -1c
+.RI "int \fBRadixSortMain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "std::list<std::pair<size_t,size_t> > RadixSort::countDigitOccurrences (size_telement, size_tdigitPos, size_tbase)"
+
+.SS "size_t RadixSort::getDigit (size_telement, size_tdigitPos, size_tbase)"
+
+.SS "size_t RadixSort::getRandElement (size_tnumberLen, size_tbase)"
+
+.SS "int RadixSort::RadixSortMain (intargc, char **argv)"
+
+.SS "std::vector<size_t> RadixSort::RadixSortPThreads (std::vector< size_t >elements, std::vector< double > &nonParallelTimings)"
+
+.SS "std::vector<size_t> RadixSort::RadixSortSeq (std::vector< size_t >elements, size_tnumberLen, size_tbase, std::vector< double > &nonParallelTimings)"
+
+.SS "std::vector<size_t> RadixSort::RadixSortSkel (std::vector< size_t >elements, size_tnumberLen, size_tbase, std::vector< double > &mapReduceTimings, std::vector< double > &scanTimings, std::vector< double > &skelSeqTiming)"
+
+.SS "std::list<size_t> RadixSort::reduceDigitCounts (size_tkey, std::list< size_t >counts, size_tdigitPos, size_tbase)"
+
+.SS "size_t RadixSort::successor (size_ta, size_tb)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

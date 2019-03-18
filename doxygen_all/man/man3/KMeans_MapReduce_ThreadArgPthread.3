@@ -1,0 +1,58 @@
+.TH "KMeans_MapReduce::ThreadArgPthread" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+KMeans_MapReduce::ThreadArgPthread \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBThreadArgPthread\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP * > * \fBpoints\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBKMPoint\fP > * \fBcentroids\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< size_t, 
+.br
+std::pair< \fBKMPoint\fP, std::list
+.br
+< \fBKMPoint\fP > * > > \fBthreadHashTable\fP"
+.br
+.ti -1c
+.RI "std::vector< size_t > \fBkeys\fP"
+.br
+.ti -1c
+.RI "size_t * \fBchunkIndices\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "KMeans_MapReduce::ThreadArgPthread::ThreadArgPthread ()\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::vector<\fBKMPoint\fP>* KMeans_MapReduce::ThreadArgPthread::centroids"
+
+.SS "size_t* KMeans_MapReduce::ThreadArgPthread::chunkIndices"
+
+.SS "std::vector<size_t> KMeans_MapReduce::ThreadArgPthread::keys"
+
+.SS "std::vector<\fBKMPoint\fP*>* KMeans_MapReduce::ThreadArgPthread::points"
+
+.SS "std::unordered_map<size_t,std::pair< \fBKMPoint\fP,std::list<\fBKMPoint\fP>* > > KMeans_MapReduce::ThreadArgPthread::threadHashTable"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.

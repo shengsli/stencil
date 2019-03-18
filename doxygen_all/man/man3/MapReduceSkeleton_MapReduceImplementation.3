@@ -1,0 +1,43 @@
+.TH "MapReduceSkeleton::MapReduceImplementation< EL, RE, HA >" 3 "Mon Mar 18 2019" "DICE-friendlySkeletons" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MapReduceSkeleton::MapReduceImplementation< EL, RE, HA > \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <MapReduce\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename IN , typename K2 , typename V2 , typename\&.\&.\&. ARGs> void \fBoperator()\fP (std::vector< std::pair< K2, V2 >> &output, std::vector< IN > &input, ARGs\&.\&.\&.args)"
+.br
+.ti -1c
+.RI "template<typename IN , typename K2 , typename V2 , typename\&.\&.\&. ARGs> void \fBoperator()\fP (std::vector< std::pair< K2, std::vector< V2 >>> &output, std::vector< IN > &input, ARGs\&.\&.\&.args)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "template<typename HA2 , typename EL2 , typename RE2 > \fBMapReduceSkeleton::MapReduceImplementation\fP
+.br
+< EL2, RE2, HA2 > \fB__MapReduceWithAccess\fP (EL2 el, RE2 re, HA2 hasher, size_t threads)"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename EL, typename RE, typename HA> template<typename IN , typename K2 , typename V2 , typename\&.\&.\&. ARGs> void \fBMapReduceSkeleton::MapReduceImplementation\fP< EL, RE, HA >::operator() (std::vector< std::pair< K2, V2 >> &output, std::vector< IN > &input, ARGs\&.\&.\&.args)\fC [inline]\fP"
+
+.SS "template<typename EL, typename RE, typename HA> template<typename IN , typename K2 , typename V2 , typename\&.\&.\&. ARGs> void \fBMapReduceSkeleton::MapReduceImplementation\fP< EL, RE, HA >::operator() (std::vector< std::pair< K2, std::vector< V2 >>> &output, std::vector< IN > &input, ARGs\&.\&.\&.args)\fC [inline]\fP"
+
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "template<typename EL, typename RE, typename HA> template<typename HA2 , typename EL2 , typename RE2 > \fBMapReduceSkeleton::MapReduceImplementation\fP<EL2, RE2, HA2> __MapReduceWithAccess (EL2el, RE2re, HA2hasher, size_tthreads)\fC [friend]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DICE-friendlySkeletons from the source code\&.
