@@ -1,9 +1,9 @@
-/*
- * File:   Stencil.hpp
- * Author: sheng
- * 
- * Created on March 14, 2019, 02:00 PM
- * This skeleton follows tonio's style. 
+/**
+ * Stencil.hpp
+ * \class: StencilSkeleton
+ * \author: sheng
+ * \version: 0.0.0
+ * \date: 2019-03-14 Thu 14:14
  */
 
 #ifndef STENCIL_HPP
