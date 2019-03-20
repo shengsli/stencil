@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>log</title>
+<title>brainwaves</title>
 <!-- 2019-03-20 Wed 23:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
@@ -138,27 +138,137 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">log</h1>
-<p>
-this file keeps miscellaneous logs from <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-02-25 Mon 21:23&gt;</span></span>. i attended ipp tut4 today, and in the tut, we made some draft plans for our projects. i think i should have a second place to log miscellanea of stencil project, apart from  <a href="ppp.html"><b>Weekly progress reporting</b></a> which is the extract of the week, mainly for murray to track my progress. 
-</p>
-<hr  />
+<h1 class="title">brainwaves</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-20 Wed 14:44&gt;</span></span></a>
+<ul>
+<li><a href="#sec-1-1">1.1. terminologies: appeared in stencil optimizations</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. from ppls lec14, why skeletons/patterns?</a></li>
+<li><a href="#sec-3">3. existing parallel programming models</a></li>
+<li><a href="#sec-4">4. more on stencil</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-20 Wed 14:44&gt;</span></span></h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> terminologies: appeared in stencil optimizations</h3>
+<div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-20 Wed 20:21&gt;</span></span> reading: ghost cell pattern
+<li>shift
 </li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-18 Mon 16:48&gt;</span></span> doxygen is alive, docs online make no sense. 
+<li>strip mining aka. loop sectioning
 </li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-18 Mon 10:21&gt;</span></span> <a href="ipp/tut7.html">ipp tut7</a>
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-11 Mon 10:22&gt;</span></span> ipp tut6 shut up and write
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-06 Wed 14:08&gt;</span></span> <a href="ipp/lec5.html">ipp lec5</a>
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-04 Mon 10:08&gt;</span></span> <a href="file://ipp/tut5.html">ipp tut5</a>: expectations, activities, resources, resources, deliverables, ethics
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-02-25 Mon 21:24&gt;</span></span> <a href="ipp/tut4.html">ipp tut4</a>: title, motivation/purpose, completion criteria, impact
+<li>set associative caches
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> from ppls lec14, why skeletons/patterns?</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>In shared memory models like 
+<ul class="org-ul">
+<li>programmers take control over all details of parallelism
+<ul class="org-ul">
+<li>create threads or processes
+</li>
+<li>locking
+</li>
+<li>conditional variables
+</li>
+<li>synchronization
+</li>
+<li>shared memory
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+Existing parallel programming models, like Pthreads and 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> existing parallel programming models</h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li>refer to survey on parallel programming model p269, citations 87 only
+<ul class="org-ul">
+<li>seven criteria for evaluating a parallel programming model:
+<ol class="org-ol">
+<li>system architectures:
+<ul class="org-ul">
+<li>shared/distributed memory:
+<ul class="org-ul">
+<li>shared: a single address space, e.g. SMP/MPP
+</li>
+<li>distributed: one address space per node
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>programming methodologies: 
+<ul class="org-ul">
+<li><b>i.e. how parallelism capabilities are exposed to programmers.</b>
+</li>
+<li><b>For examples, API, special directives, new language specification, etc.</b>
+</li>
+</ul>
+</li>
+<li>worker management: explicit/implicit
+</li>
+<li>workload partitioning scheme: explicit/implicit
+</li>
+<li>task-to-worker mapping: explicit/implicit
+</li>
+<li>synchronization: explicit/implicit
+<ul class="org-ul">
+<li>how workers access shared data
+</li>
+</ul>
+</li>
+<li>communication model: what communication paradigm is used by the model?
+</li>
+</ol>
+</li>
+<li>these 7 criteria <b>might be a bit branch out.</b>
+</li>
+<li>don't present explicitly like in a section
+</li>
+<li>but borrow these terminologies, enrich my content 
+</li>
+</ul>
+</li>
+<li>i might wanna mention some commonly used ones
+<ul class="org-ul">
+<li>pthreads
+</li>
+<li>openmp
+</li>
+</ul>
+</li>
+<li>perhaps briefly mention some message passing library, like openmpi
+</li>
+<li>and then narrow down to shared memory model only
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> more on stencil</h2>
+</div>
 </div>
 </body>
 </html>

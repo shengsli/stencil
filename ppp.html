@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>progress-plans-problems</title>
-<!-- 2019-03-18 Mon 16:40 -->
+<!-- 2019-03-20 Wed 23:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Sheng Li" />
@@ -166,8 +166,28 @@ for the JavaScript code in this tag.
 </tbody>
 </table>
 </center>
-<ul class="org-ul"><li><a id="sec-1" name="sec-1"></a><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-21 Thu 15:00&gt;</span></span> w12<br  /><ul class="org-ul"><li><a id="sec-1-1" name="sec-1-1"></a>progress last week<br  /></li>
-<li><a id="sec-1-2" name="sec-1-2"></a>plan next week<br  /></li>
+<ul class="org-ul"><li><a id="sec-1" name="sec-1"></a><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-21 Thu 15:00&gt;</span></span> w12<br  /><ul class="org-ul"><li><a id="sec-1-1" name="sec-1-1"></a>progress last week <code>[50%]</code><br  /><div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li><code>[X]</code> reading parallel book, other papers (see <a href="read_log.html">my reading log</a>)
+</li>
+<li><code>[X]</code> doxygen
+</li>
+<li><code>[&#xa0;]</code> remove "code and data sharing"
+</li>
+<li><code>[&#xa0;]</code> add stencil applications to ipp
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-1-2" name="sec-1-2"></a>plan next week<br  /><div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li><code>[&#xa0;]</code> look up strip mining
+</li>
+<li><code>[&#xa0;]</code> coding stencil interface
+</li>
+</ul>
+</div>
+</li>
 <li><a id="sec-1-3" name="sec-1-3"></a>problems<br  /></li>
 <li><a id="sec-1-4" name="sec-1-4"></a>prepared questions for meeting<br  /><div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
@@ -177,7 +197,25 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><code>[&#xa0;]</code> hot to document cpp? 
+<li><code>[&#xa0;]</code> how to document cpp? I use doxygen now. c-style doc.  
+</li>
+<li><code>[&#xa0;]</code> optimizing stencil's communication
+<ul class="org-ul">
+<li>how to find the balance point between communication and computation?
+<ul class="org-ul">
+<li>redundant work &lt; overhead
+</li>
+<li>latency of send &lt; transmission time
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>[&#xa0;]</code> avoid synchronization
+<ul class="org-ul">
+<li>ghost cell pattern paper P13: MPI<sub>Send</sub> alike synchronous op "have to be performed in the order in which they are appeared in the code". Really?
+</li>
+</ul>
 </li>
 </ul>
 </div>
@@ -198,7 +236,13 @@ for the JavaScript code in this tag.
 </div>
 </li>
 <li><a id="sec-2-2" name="sec-2-2"></a>plan next week<br  /><ul class="org-ul"><li><a id="sec-2-2-1" name="sec-2-2-1"></a><span class="todo TODO">TODO</span> write problem statement<br  /></li>
-<li><a id="sec-2-2-2" name="sec-2-2-2"></a><span class="todo TODO">TODO</span> create gantt chart based on objectives, i need to think about time and milestones<br  /></li>
+<li><a id="sec-2-2-2" name="sec-2-2-2"></a><span class="done DONE">DONE</span> create gantt chart based on objectives, i need to think about time and milestones<br  /><div class="outline-text-4" id="text-2-2-2">
+<ul class="org-ul">
+<li>likely that it will require adjustment
+</li>
+</ul>
+</div>
+</li>
 <li><a id="sec-2-2-3" name="sec-2-2-3"></a><span class="todo TODO">TODO</span> how stencil use shifts to optimize it?<br  /></li>
 <li><a id="sec-2-2-4" name="sec-2-2-4"></a><span class="todo TODO">TODO</span> how stencil use cache?<br  /><div class="outline-text-4" id="text-2-2-4">
 <ul class="org-ul">
@@ -330,7 +374,7 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><code>[&#xa0;]</code> remove code and data sharing
+<li><code>[&#xa0;]</code> remove "code and data sharing"
 </li>
 <li><code>[&#xa0;]</code> add stencil applications to ipp
 </li>
