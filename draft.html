@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>draft outline for ipp</title>
-<!-- 2019-03-20 Wed 23:15 -->
+<!-- 2019-04-04 Thu 13:16 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Sheng Li" />
@@ -135,6 +135,48 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="content">
@@ -156,11 +198,28 @@ for the JavaScript code in this tag.
 <li><a href="#sec-3">3. programme and methodology</a></li>
 <li><a href="#sec-4">4. evaluation</a></li>
 <li><a href="#sec-5">5. expected outcomes</a></li>
-<li><a href="#sec-6">6. research plan, milestones and deliverables</a></li>
+<li><a href="#sec-6">6. research plan, milestones and deliverables</a>
+<ul>
+<li><a href="#sec-6-1">6.1. gantt chart</a></li>
+<li><a href="#sec-6-2">6.2. milestones</a></li>
+<li><a href="#sec-6-3">6.3. deliverables</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Extra</a>
+<ul>
+<li><a href="#sec-7-1">7.1. ipp writing</a></li>
+<li><a href="#sec-7-2">7.2. version: major.minor.revision</a></li>
+<li><a href="#sec-7-3">7.3. template sections that conflict</a>
+<ul>
+<li><a href="#sec-7-3-1">7.3.1. scope, disclaimer</a></li>
+<li><a href="#sec-7-3-2">7.3.2. motivation and background</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> motivation</h2>
 <div class="outline-text-2" id="text-1">
@@ -201,6 +260,17 @@ The motivation of this project is to simplify the challenge of writing efficient
 <li>describe general subject area
 </li>
 </ul>
+<ol class="org-ol">
+<li>why skeleton
+<ul class="org-ul">
+<li></li>
+</ul>
+</li>
+<li>why make our own skeleton
+</li>
+<li>why stencil skeleton
+</li>
+</ol>
 </div>
 <div id="outline-container-sec-1-1" class="outline-3">
 <h3 id="sec-1-1"><span class="section-number-3">1.1</span> problem statement</h3>
@@ -312,7 +382,7 @@ The motivation of this project is to simplify the challenge of writing efficient
 </li>
 </ul>
 </li>
-<li>code and data sharing
+<li><del>code and data sharing</del>
 </li>
 </ol>
 </li>
@@ -332,13 +402,17 @@ The motivation of this project is to simplify the challenge of writing efficient
 <h2 id="sec-6"><span class="section-number-2">6</span> research plan, milestones and deliverables</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
-<li><code>[&#xa0;]</code> gantt chart
+<li><code>[X]</code> gantt chart
 </li>
-<li><code>[&#xa0;]</code> milestones
+<li><code>[X]</code> milestones
 </li>
-<li><code>[&#xa0;]</code> deliverables
+<li><code>[X]</code> deliverables
 </li>
 </ul>
+</div>
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> gantt chart</h3>
+<div class="outline-text-3" id="text-6-1">
 <ol class="org-ol">
 <li><code>[&#xa0;]</code> design: prototype skeleton 
 </li>
@@ -407,14 +481,185 @@ The motivation of this project is to simplify the challenge of writing efficient
 </ol>
 
 <div class="figure">
-<p><img src="./gantt.png" alt="gantt.png" />
+<p><img src="file:///afs/inf.ed.ac.uk/user/s18/s1837296/dev/ipp-stencil/gantt.png" alt="gantt.png" />
 </p>
 </div>
+</div>
+</div>
 
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> milestones</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+#caption: Milestones defined in this project.           
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left"><b>Milestone #</b></th>
+<th scope="col" class="left"><b>Week</b></th>
+<th scope="col" class="left"><b>Date</b></th>
+<th scope="col" class="left"><b>Description</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">\(M_1\)</td>
+<td class="left">W18</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-05-05 Sun&gt;</span></span></td>
+<td class="left">End of 0th implementation/test</td>
+</tr>
+
+<tr>
+<td class="left">\(M_2\)</td>
+<td class="left">W24</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-06-16 Sun&gt;</span></span></td>
+<td class="left">End of 0th cycle</td>
+</tr>
+
+<tr>
+<td class="left">\(M_3\)</td>
+<td class="left">W28</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-07-14 Sun&gt;</span></span></td>
+<td class="left">End of 1st cycle</td>
+</tr>
+
+<tr>
+<td class="left">\(M_4\)</td>
+<td class="left">W32</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-08-11 Sun&gt;</span></span></td>
+<td class="left">End of 2nd cycle</td>
+</tr>
+
+<tr>
+<td class="left">\(M_5\)</td>
+<td class="left">W33</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-08-16 Fri&gt;</span></span></td>
+<td class="left">Submission of code and dissertation</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> deliverables</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+#caption: List of deliverables defined in this project.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left"><b>Deliverable #</b></th>
+<th scope="col" class="left"><b>Week</b></th>
+<th scope="col" class="left"><b>Date</b></th>
+<th scope="col" class="left"><b>Description</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">\(D_1\)</td>
+<td class="left">W18</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-05-05 Sun&gt;</span></span></td>
+<td class="left">0th code</td>
+</tr>
+
+<tr>
+<td class="left">\(D_2\)</td>
+<td class="left">W24</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-06-16 Sun&gt;</span></span></td>
+<td class="left">0th code and benchmark</td>
+</tr>
+
+<tr>
+<td class="left">\(D_3\)</td>
+<td class="left">W28</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-07-14 Sun&gt;</span></span></td>
+<td class="left">1th code and benchmark</td>
+</tr>
+
+<tr>
+<td class="left">\(D_4\)</td>
+<td class="left">W32</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-08-11 Sun&gt;</span></span></td>
+<td class="left">2nd code and benchmark</td>
+</tr>
+
+<tr>
+<td class="left">\(D_5\)</td>
+<td class="left">W33</td>
+<td class="left"><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-08-16 Fri&gt;</span></span></td>
+<td class="left">code and dissertation</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Extra</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> ipp writing</h3>
+<div class="outline-text-3" id="text-7-1">
 <ul class="org-ul">
-<li><a href="ipp/tut4.html">ipp tut4</a>: title, motivation/purpose, completion criteria, impact
+<li><a href="ipp/tut4.org">ipp tut4</a>: title, motivation/purpose, completion criteria, impact
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> version: major.minor.revision</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>revision = bug fix
+</li>
+<li>minor = feature fixes and small adjustments
+</li>
+<li>major = new features and other large changes
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> template sections that conflict</h3>
+<div class="outline-text-3" id="text-7-3">
+</div><div id="outline-container-sec-7-3-1" class="outline-4">
+<h4 id="sec-7-3-1"><span class="section-number-4">7.3.1</span> scope, disclaimer</h4>
+<div class="outline-text-4" id="text-7-3-1">
+<ul class="org-ul">
+<li>[Motivation]-&gt;[Indicate the general scope of your project.] 
+</li>
+<li>[Research Hypothesis and Objectives]-&gt;[Clearly spell out any research hypothesis you are following.]
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-7-3-2" class="outline-4">
+<h4 id="sec-7-3-2"><span class="section-number-4">7.3.2</span> motivation and background</h4>
+</div>
 </div>
 </div>
 <div id="footnotes">

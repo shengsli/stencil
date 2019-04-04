@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>log</title>
+<title>stencil examples</title>
 <!-- 2019-04-04 Thu 13:16 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
@@ -138,31 +138,93 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">log</h1>
+<h1 class="title">stencil examples</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. big picture, from parallel book sec 7.2 p200-201</a></li>
+<li><a href="#sec-2">2. simple examples</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> big picture, from parallel book sec 7.2 p200-201</h2>
+<div class="outline-text-2" id="text-1">
 <p>
-this file keeps miscellaneous logs from <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-02-25 Mon 21:23&gt;</span></span>. i attended ipp tut4 today, and in the tut, we made some draft plans for our projects. i think i should have a second place to log miscellanea of stencil project, apart from  <a href="ppp.html"><b>Weekly progress reporting</b></a> which is the extract of the week, mainly for murray to track my progress. 
+o| field                                         | operations                                              | how?           | use case   |
 </p>
-<hr  />
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">image and signal processing</th>
+<th scope="col" class="left">particularly convolution (linear op)</th>
+<th scope="col" class="left">weight, offset</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">bilateral filtering for noise reduction (non-linear op)</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">simulations e.g. computer aided Eng., imaging</td>
+<td class="left">partial differential equations (PDE)</td>
+<td class="left">&#xa0;</td>
+<td class="left">box filter</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> simple examples</h2>
+<div class="outline-text-2" id="text-2">
 <ul class="org-ul">
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-25 Mon 15:16&gt;</span></span> finish reading parallel book chapter 7 stencil and recurrence
+<li>filtering
 </li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-25 Mon 10:19&gt;</span></span> <a href="ipp/tut8.html">ipp tut8</a>
+<li>smoothening
 </li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-20 Wed 20:21&gt;</span></span> reading: ghost cell pattern
+<li>Jacobi 
+<ul class="org-ul">
+<li>simple and parallelizable
 </li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-18 Mon 16:48&gt;</span></span> doxygen is alive, docs online make no sense. 
+<li>but has slow convergent rate
 </li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-18 Mon 10:21&gt;</span></span> <a href="ipp/tut7.html">ipp tut7</a>
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-11 Mon 10:22&gt;</span></span> ipp tut6 shut up and write
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-06 Wed 14:08&gt;</span></span> <a href="ipp/lec5.html">ipp lec5</a>
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-04 Mon 10:08&gt;</span></span> <a href="file://ipp/tut5.html">ipp tut5</a>: expectations, activities, resources, resources, deliverables, ethics
-</li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2019-02-25 Mon 21:24&gt;</span></span> <a href="ipp/tut4.html">ipp tut4</a>: title, motivation/purpose, completion criteria, impact
+<li>can speed up convergent rate by over predict
 </li>
 </ul>
+</li>
+<li>SOR: successive over relaxation
+<ul class="org-ul">
+<li>an alternative method of PDE to speed up 
+</li>
+</ul>
+</li>
+<li>red-black SOR
+<ul class="org-ul">
+<li>parallel updates in place
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </body>
 </html>
