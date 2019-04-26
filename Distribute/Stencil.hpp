@@ -30,6 +30,9 @@ public:
 		class ThreadArgument {
 		public:
 			size_t chunkSize;
+			size_t nDataBlocks;
+			std::vector<IN> *input;
+			std::vector<OUT> *output;
 		}
 	}
 };
