@@ -5,7 +5,7 @@
 * Description
 - Project title: A Stencil Skeleton for a DICE-Friendly Parallel Skeleton Library
 - Goal: To build and evaluate a stencil skeleton for an existing C++ skeleton-based parallel programming library.
-- Main page: https://shengsli.github.io/stencil/
+- Main page: https://shengsli.github.io/ed/stencil/
 
 Writing parallel programs which are correct and efficient is widely acknowledged to be a challenging task. The use of parallel algorithmic patterns (or “skeletons”) to abstract and simplify this challenge is growing in popularity. Each pattern captures the core structure of a class of parallel algorithms. The programmer specializes the pattern to a particular situation by writing some type definitions and sequential code, while the pre-defined pattern implementation handles the hard work of providing and optimizing the necessary parallel code.
 
