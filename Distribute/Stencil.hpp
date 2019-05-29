@@ -55,6 +55,7 @@ public:
 				delete dataBlockMutex;
 			}
 		};
+
 		template<typename IN, typename OUT, typename ...ARGs>
 		void threadMap(ThreadArgument<IN, OUT> *threadArguments, size_t threadID, ARGs... args) {
 			auto input = threadArguments[threadID].input;
@@ -69,7 +70,39 @@ public:
 				
 			} while (assistedThreadID != threadID);
 		}
+
+		Elemental<EL> elemental;
+
+		StencilImplementation(Elemental<EL> elemental, size_t threads) : Elemental(elemental), nthreads(threads) {
+			this->nDataBlocks = NDATABLOCKS;
+			this->BLOCK_FLAG_INITIAL_VALUE = 1;
+		}
+
+	public:
+		template<typename IN, typename OUT, typename ...ARGs>
+		void operator()(std::vector<OUT> &output, std:vector<IN> &input, ARGs... args) {
+			
+		}
+
+		template<typename EL2>
+		friend StencilImplementation<EL2> __StencilWithAccess(EL2 el, const size_t &threads);
 	};
+
+	template<typename EL2>
+	friend StencilImplementation<EL2> __StencilWithAccess(EL2 el, const size_t &thhreads);
 };
+
+template<typename EL>
+StencilSkeleton::StencilImplementation<EL> __StencilWithAccess(EL el, const size_t &threads) {
+    StencilSkeleton::Elemental<EL> elemental(el);
+    StencilSkeleton::StencilolImplementation<EL> stencil(elemental, threads);
+    return stencil;
+}
+
+template<typename EL>
+StencilSkeleton::StencilImplementation<EL> Stencil(EL el, const size_t &threads = 0) {
+    return __StencilWithAccess(el, threads);
+}
+
 
 #endif /* STENCIL_HPP */
