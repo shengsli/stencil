@@ -32,220 +32,215 @@
 
 class MapSkeleton {
 
-private:
-	MapSkeleton(){}
+    private:
+        MapSkeleton(){}
 
-	/*
-	 *
-	 * Elemental
-	 *
-	 *
-	 */
-	template<typename EL>
-	class Elemental {
-	public:
-		Elemental(EL el) : elemental(el) {}
-		EL elemental;
-	};
+        /*
+         *
+         * Elemental
+         *
+         *
+         */
+        template<typename EL>
+        class Elemental {
+            public:
+                Elemental(EL el) : elemental(el) {}
+                EL elemental;
+        };
 
-public:
+    public:
 
-	/**
-	 *
-	 * MapImplementation
-	 *
-	 *
-	 */
-	template<typename EL>
-	class MapImplementation {
+        /**
+         *
+         * MapImplementation
+         *
+         *
+         */
+        template<typename EL>
+        class MapImplementation {
 
-	private:
-		unsigned char BLOCK_FLAG_INITIAL_VALUE;
-		size_t nthreads;
-		size_t nDataBlocks;
+             private:
+                unsigned char BLOCK_FLAG_INITIAL_VALUE;
+                size_t nthreads;
+                size_t nDataBlocks;
 
-		/*
-		 *
-		 *ThreadArgument
-		 *
-		 */
-		template<typename IN, typename OUT>
-		class ThreadArgument {
+                /*
+                 *
+                 *ThreadArgument
+                 *
+                 */
+                template<typename IN, typename OUT>
+                class ThreadArgument {
 
-		public:
-			size_t threadInputIndex;
-			size_t chunkSize;
+                    public:
+                        size_t threadInputIndex;
+                        size_t chunkSize;
 
-			size_t nDataBlocks;
-			std::mutex *dataBlockMutex;
-			unsigned char *dataBlockFlags;
-			size_t *dataBlockIndices;
-					
-			std::vector<IN> *input;
-			std::vector<OUT> *output;
-					
-			ThreadArgument() {}
+                        size_t nDataBlocks;
+                        std::mutex *dataBlockMutex;
+                        unsigned char *dataBlockFlags;
+                        size_t *dataBlockIndices;
 
-			ThreadArgument(std::vector<OUT> &output,
-						   std::vector<IN> &input,
-						   size_t threadInputIndex,
-						   size_t chunkSize)
-				: threadInputIndex(threadInputIndex),
-				  chunkSize(chunkSize),
-				  input(&input),
-				  output(&output)
-			{
-			}
-			~ThreadArgument() {
-				delete[] dataBlockIndices;
-				delete[] dataBlockFlags;
-				delete dataBlockMutex;
-			}
+                        std::vector<IN> *input;
+                        std::vector<OUT> *output;
 
-		};
+                        ThreadArgument() {}
+
+                        ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input, size_t threadInputIndex, size_t chunkSize)
+                                : threadInputIndex(threadInputIndex), chunkSize(chunkSize), input(&input), output(&output) {
+                        }
+
+                        ~ThreadArgument() {
+
+                            delete[] dataBlockIndices;
+                            delete[] dataBlockFlags;
+                            delete dataBlockMutex;
+                        }
+
+                };
 
 
-		template<typename IN, typename OUT, typename ...ARGs>
-		void threadMap(ThreadArgument<IN,OUT> *threadArguments, size_t threadID, ARGs... args) {
+                template<typename IN, typename OUT, typename ...ARGs>
+                void threadMap(ThreadArgument<IN,OUT> *threadArguments, size_t threadID, ARGs... args) {
 
-			auto input = threadArguments[threadID].input;
-			auto output = threadArguments[threadID].output;
+                    auto input = threadArguments[threadID].input;
+                    auto output = threadArguments[threadID].output;
 
-			size_t assistedThreadID = threadID;
-			do {
+                    size_t assistedThreadID = threadID;
+                    do {
 
-				std::mutex* dataBlockMutex = threadArguments[assistedThreadID].dataBlockMutex;
-				unsigned char* dataBlockFlags = threadArguments[assistedThreadID].dataBlockFlags;
-				std::size_t* dataBlockIndices = threadArguments[assistedThreadID].dataBlockIndices;
-				size_t nDataBlocks = threadArguments[assistedThreadID].nDataBlocks;
+                        std::mutex* dataBlockMutex = threadArguments[assistedThreadID].dataBlockMutex;
+                        unsigned char* dataBlockFlags = threadArguments[assistedThreadID].dataBlockFlags;
+                        std::size_t* dataBlockIndices = threadArguments[assistedThreadID].dataBlockIndices;
+                        size_t nDataBlocks = threadArguments[assistedThreadID].nDataBlocks;
 
-				size_t dataBlock = 0;
+                        size_t dataBlock = 0;
 
-				// why shouldn't we 'steal' even the first dataBlock? :P
-				while( dataBlock < nDataBlocks ) {
+                        // why shouldn't we 'steal' even the first dataBlock? :P
+                        while( dataBlock < nDataBlocks ) {
 
-					if( dataBlockFlags[ dataBlock ] == 0 // if the data block has been, or being processed by another thread...
-						|| dataBlockIndices[ dataBlock ] == dataBlockIndices[ dataBlock+1 ] ){
-						++dataBlock;
-						continue; //as we iterate in reverse -> continue. In case there are no more dataBlocks, as chunkSize might be less than NDATABLOCKS
-					}
+                            if( dataBlockFlags[ dataBlock ] == 0 // if the data block has been, or being processed by another thread...
+                                || dataBlockIndices[ dataBlock ] == dataBlockIndices[ dataBlock+1 ] ){
+                                ++dataBlock;
+                                continue; //as we iterate in reverse -> continue. In case there are no more dataBlocks, as chunkSize might be less than NDATABLOCKS
+                            }
 
-					dataBlockMutex->lock();
-					if( dataBlockFlags[ dataBlock ] == 1 ){ // were the flag is zero, the following flags are zero too.
-						dataBlockFlags[ dataBlock ] = 0;
-						dataBlockMutex->unlock();
+                            dataBlockMutex->lock();
+                            if( dataBlockFlags[ dataBlock ] == 1 ){ // were the flag is zero, the following flags are zero too.
+                                dataBlockFlags[ dataBlock ] = 0;
+                                dataBlockMutex->unlock();
 
-						for(size_t elementIndex = dataBlockIndices[ dataBlock ]; elementIndex < dataBlockIndices[ dataBlock+1 ]; ++elementIndex) {
-							output->at(elementIndex) = elemental.elemental( input->at(elementIndex), args... );
-						}
-					}
-					else { // Just in case after the first if, the flag changes its value to 0 from another thread
-						dataBlockMutex->unlock();
-					}
-					++dataBlock;
-				}
+                                for(size_t elementIndex = dataBlockIndices[ dataBlock ]; elementIndex < dataBlockIndices[ dataBlock+1 ]; ++elementIndex) {
+                                    output->at(elementIndex) = elemental.elemental( input->at(elementIndex), args... );
+                                }
+                            }
+                            else { // Just in case after the first if, the flag changes its value to 0 from another thread
+                                dataBlockMutex->unlock();
+                            }
+                            ++dataBlock;
+                        }
 
-				assistedThreadID = (assistedThreadID + 1) % nthreads;
-			}while(  assistedThreadID != threadID  );
-		}
+                        assistedThreadID = (assistedThreadID + 1) % nthreads;
+                    }while(  assistedThreadID != threadID  );
+                }
 
-		Elemental<EL> elemental;
+                Elemental<EL> elemental;
 
-		MapImplementation(Elemental<EL> elemental, size_t threads) : elemental(elemental), nthreads(threads){
-			this->nDataBlocks = NDATABLOCKS; 
-			// this->nDataBlocks = 1; MIC! was 10
-			this->BLOCK_FLAG_INITIAL_VALUE = 1;
-		}
+                MapImplementation(Elemental<EL> elemental, size_t threads) : elemental(elemental), nthreads(threads){
+		  this->nDataBlocks = NDATABLOCKS; 
+                    // this->nDataBlocks = 1; MIC! was 10
+                    this->BLOCK_FLAG_INITIAL_VALUE = 1;
+                }
 
-	public:
+            public:
 
-		template<typename IN, typename OUT, typename ...ARGs>
-		void operator()(std::vector<OUT> &output, std::vector<IN> &input, ARGs... args) {
+                template<typename IN, typename OUT, typename ...ARGs>
+                void operator()(std::vector<OUT> &output, std::vector<IN> &input, ARGs... args) {
 
-			nthreads = nthreads ? nthreads : std::thread::hardware_concurrency();
+                    nthreads = nthreads ? nthreads : std::thread::hardware_concurrency();
 
-			nthreads = nthreads >= input.size() ? input.size() / 2 : nthreads;
+                    nthreads = nthreads >= input.size() ? input.size() / 2 : nthreads;
 
-			/*
-			 * TODO: Handle input.size == 0 or 1
-			 * Hardcoded for now...
-			 */
-			if( input.size() == 0 ) {
-				return;
-			}
-			if( input.size() == 1 ) {
+                    /*
+                     * TODO: Handle input.size == 0 or 1
+                     * Hardcoded for now...
+                     */
+                    if( input.size() == 0 ) {
+                        return;
+                    }
+                    if( input.size() == 1 ) {
 
-				output[0] = elemental.elemental( input[0], args...);
-				return;
-			}
+                        output[0] = elemental.elemental( input[0], args...);
+                        return;
+                    }
 
-			std::thread *THREADS[nthreads];
-			ThreadArgument<IN,OUT> *threadArguments = new ThreadArgument<IN,OUT>[nthreads];
+                    std::thread *THREADS[nthreads];
+                    ThreadArgument<IN,OUT> *threadArguments = new ThreadArgument<IN,OUT>[nthreads];
 
-			std::vector<OUT> tempOutput( input.size() );
-			size_t chunkIndex = 0;
+                    std::vector<OUT> tempOutput( input.size() );
+                    size_t chunkIndex = 0;
 
 
-			for(size_t t=0; t< nthreads; ++t ){
+                    for(size_t t=0; t< nthreads; ++t ){
 
-				if( t < (input.size() % nthreads) ) threadArguments[t].chunkSize = 1 + input.size() / nthreads;
-				else threadArguments[t].chunkSize = input.size() / nthreads;
+                        if( t < (input.size() % nthreads) ) threadArguments[t].chunkSize = 1 + input.size() / nthreads;
+                        else threadArguments[t].chunkSize = input.size() / nthreads;
 
-				threadArguments[t].input = &input;
-				threadArguments[t].output = &tempOutput;
-				threadArguments[t].threadInputIndex = chunkIndex;
+                        threadArguments[t].input = &input;
+                        threadArguments[t].output = &tempOutput;
+                        threadArguments[t].threadInputIndex = chunkIndex;
 
-				chunkIndex += threadArguments[t].chunkSize;
+                        chunkIndex += threadArguments[t].chunkSize;
 
-				/*
-				 * Data Blocks
-				 */
-				nDataBlocks = nDataBlocks > threadArguments[t].chunkSize ? threadArguments[t].chunkSize / 2 : nDataBlocks;
+                        /*
+                         * Data Blocks
+                         */
+                        nDataBlocks = nDataBlocks > threadArguments[t].chunkSize ? threadArguments[t].chunkSize / 2 : nDataBlocks;
 
-				threadArguments[t].nDataBlocks = nDataBlocks;
+                        threadArguments[t].nDataBlocks = nDataBlocks;
 
-				threadArguments[t].dataBlockFlags = new unsigned char[nDataBlocks]();
-				std::fill_n( threadArguments[t].dataBlockFlags, nDataBlocks, BLOCK_FLAG_INITIAL_VALUE );
+                        threadArguments[t].dataBlockFlags = new unsigned char[nDataBlocks]();
+                        std::fill_n( threadArguments[t].dataBlockFlags, nDataBlocks, BLOCK_FLAG_INITIAL_VALUE );
 
-				threadArguments[t].dataBlockMutex = new std::mutex;
+                        threadArguments[t].dataBlockMutex = new std::mutex;
 
-				threadArguments[t].dataBlockIndices = new size_t[nDataBlocks+1]();
+                        threadArguments[t].dataBlockIndices = new size_t[nDataBlocks+1]();
 
-				size_t blockSize, blockStart = threadArguments[t].threadInputIndex, blockEnd;
+                        size_t blockSize, blockStart = threadArguments[t].threadInputIndex, blockEnd;
 
-				for(size_t block = 0; block < nDataBlocks; ++block) {
+                        for(size_t block = 0; block < nDataBlocks; ++block) {
 
-					if( block < (threadArguments[t].chunkSize % nDataBlocks) ) blockSize = 1 + threadArguments[t].chunkSize / nDataBlocks;
-					else blockSize = threadArguments[t].chunkSize / nDataBlocks;
+                            if( block < (threadArguments[t].chunkSize % nDataBlocks) ) blockSize = 1 + threadArguments[t].chunkSize / nDataBlocks;
+                            else blockSize = threadArguments[t].chunkSize / nDataBlocks;
 
-					blockEnd = blockStart + blockSize;
-					threadArguments[t].dataBlockIndices[ block ] = blockStart;
-					blockStart = blockEnd;
-				}
-				threadArguments[t].dataBlockIndices[ nDataBlocks ] = blockEnd;
+                            blockEnd = blockStart + blockSize;
+                            threadArguments[t].dataBlockIndices[ block ] = blockStart;
+                            blockStart = blockEnd;
+                        }
+                        threadArguments[t].dataBlockIndices[ nDataBlocks ] = blockEnd;
 
-			}
+                    }
 
-			for(size_t t=0; t< nthreads; ++t ){
-				THREADS[t] = new std::thread(&MapImplementation<EL>::threadMap<IN,OUT,ARGs...>, this, threadArguments, t, args...);
-			}
+                    for(size_t t=0; t< nthreads; ++t ){
+                        THREADS[t] = new std::thread(&MapImplementation<EL>::threadMap<IN,OUT,ARGs...>, this, threadArguments, t, args...);
+                    }
 
-			for(size_t t=0; t< nthreads; ++t){
-				THREADS[t]->join();
-				delete THREADS[t];
-			}
+                    for(size_t t=0; t< nthreads; ++t){
+                        THREADS[t]->join();
+                        delete THREADS[t];
+                    }
 
-			output = tempOutput;
+                    output = tempOutput;
 
-			delete[] threadArguments;
-		}
+                    delete[] threadArguments;
+                }
 
-		template<typename EL2>
-		friend MapImplementation<EL2> __MapWithAccess(EL2 el, const size_t &threads);
-	};
+            template<typename EL2>
+            friend MapImplementation<EL2> __MapWithAccess(EL2 el, const size_t &threads);
+        };
 
-	template<typename EL2>
-	friend MapImplementation<EL2> __MapWithAccess(EL2 el, const size_t &threads);
+        template<typename EL2>
+        friend MapImplementation<EL2> __MapWithAccess(EL2 el, const size_t &threads);
 };
 
 /*
@@ -269,4 +264,3 @@ MapSkeleton::MapImplementation<EL> Map(EL el, const size_t &threads = 0) {
 }
 
 #endif /* MAP_HPP */
-

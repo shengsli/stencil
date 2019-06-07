@@ -10,6 +10,7 @@
 #define STENCIL_HPP
 
 #include <iostream>
+#include <vector>
 
 class StencilSkeleton {
 private:
@@ -66,8 +67,7 @@ public:
 				unsigned char *dataBlockFlags = threadArguments[assistedThreadID].dataBlockFlags;
 				std::size_t *dataBlockIndices = threadArguments[assistedThreadID].dataBlockIndices;
 				size_t nDataBlock = threadArguments[assistedThreadID].nDataBlocks;
-				size_t dataBlock = 0;
-				
+				size_t dataBlock = 0;				
 			} while (assistedThreadID != threadID);
 		}
 
