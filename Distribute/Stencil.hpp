@@ -35,7 +35,7 @@ public:
 			size_t threadInputIndex;/*???*/
 			size_t chunkSize;
 			size_t nDataBlocks;
-			std::mutex *dataBlockMutex;/*???*/
+			std::mutex *dataBlockMutex;
 			unsigned char *dataBlockFlags;/*???*/
 			size_t *dataBlockIndices;/*???*/
 			std::vector<IN> *input;
@@ -57,7 +57,7 @@ public:
 		};
 
 		template<typename IN, typename OUT, typename ...ARGs>
-		void threadMap(ThreadArgument<IN, OUT> *threadArguments, size_t threadID, ARGs... args) {
+		void threadStencil(ThreadArgument<IN, OUT> *threadArguments, size_t threadID, ARGs... args) {
 			auto input = threadArguments[threadID].input;
 			auto output = threadArguments[threadID].output;
 			size_t assistedThreadID = threadID;
@@ -67,7 +67,6 @@ public:
 				std::size_t *dataBlockIndices = threadArguments[assistedThreadID].dataBlockIndices;
 				size_t nDataBlock = threadArguments[assistedThreadID].nDataBlocks;
 				size_t dataBlock = 0;
-				
 			} while (assistedThreadID != threadID);
 		}
 
