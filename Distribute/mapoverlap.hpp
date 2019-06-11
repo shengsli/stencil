@@ -12,20 +12,22 @@ namespace impl
 {
 	template<typename, typename, typename...>
 	class MapOverlap1D;
-
-	template<typename, typename, typename...>
-	class MapOverlap2D;
-
-	template<typename, typename, typename...>
-	class MapOverlap3D;
 }
 
 
 namespace impl
 {
-	template<typename In, typename Out, typename... Opts>
-	class MapOverlap1D;
-
-	template<typename In, typename Out, typename... Opts>
-	class MapOverlap1D;
+	template<typename In, typename Out, typename... Args>
+	class MapOverlap1D
+	{
+	public:
+		void setBackEnd(BackendSpec) {}
+		void resetBackend() {}
+		void setExecPlan(ExecPlan *plan)
+		{
+			delete plan;
+		}
+		template<typename... Args>
+		void tune(Args&&... args) {}
+	};
 }

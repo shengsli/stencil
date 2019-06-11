@@ -1,6 +1,9 @@
 /**
- * author: sheng
- * date: 2019-03-14 Thu 14:14
+ * Stencil.hpp
+ * \class: StencilSkeleton
+ * \author: sheng
+ * \version: 0.0.0
+ * \date: 2019-03-14 Thu 14:14
  */
 
 #ifndef STENCIL_HPP

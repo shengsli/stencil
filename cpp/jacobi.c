@@ -1,15 +1,16 @@
-/* Jacobi iteration using pthreads
-
-   usage on Solaris:
-     gcc jacobi.c -lpthread -lposix4
-     a.out gridSize numWorkers numIters
-
-*/
+//Jacobi iteration using pthreads by Greg Andrews
+//http://www.cs.arizona.edu/people/greg/mpdbook/programs/jacobi.c
+//
+//   usage on DICE:
+//     gcc -o jacobi -lpthread jacobi.c
+//     ./jacobi gridSize numWorkers numIters
+//
 
 #define _REENTRANT
 #include <pthread.h>
 #include <semaphore.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/times.h>
 #include <limits.h>
 #define SHARED 1
