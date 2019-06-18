@@ -7,12 +7,10 @@
 #define NITEMS 8
 
 typedef struct arg_pack_tag {
-	int id;
-	double *arr;
+	int tid;
+	double *in;
+	double *out
 	int size;
-	double arg1;
-	double arg2;
-	double arg3;
 } arg_pack;
 
 typedef arg_pack *argptr;
@@ -64,7 +62,7 @@ double find_median (double *arr, int size)
 }
 
 /**
- * This function hard coded filter as a 1x3 filter. 
+ * This function hard codes filter as a 1x3 filter. 
  */
 void sequential_median (double *arr)
 {
@@ -82,16 +80,19 @@ void sequential_median (double *arr)
 
 void *median (void *args)
 {
-	int id;
-	double *arr,arg1,arg2,arg3;
-	id=((arg_pack*)args)->id;
-	arr=((arg_pack*)args)->arr;
-	arg1=((arg_pack*)args)->arg1;
-	arg2=((arg_pack*)args)->arg2;
-	arg3=((arg_pack*)args)->arg3;
-	double sum = arg1+arg2+arg3;
-	arr[id]=sum;
-	printf("This is thread %d. args are %.2f, %.2f, %.2f. Sum = %.2f\n", id, arg1, arg2, arg3, sum);
+	int tid, size;
+	double *arr;
+	tid=((arg_pack*)args)->tid;
+	in=((arg_pack*)args)->in;
+	size=((arg_pack*)args)->size;
+	double* data;
+	data = malloc(3*sizeof(double));
+	data[0] = in[(i-1+NITEMS)%NITEMS];
+	data[1] = in[i];
+	data[2] = in[(i+1+NITEMS)%NITEMS];
+	double median = find_median(data, 3);
+	in[idx]=median;
+	printf("This is thread %d. Median = %.2f\n", tid, median);
 }
 
 void* parallel_median(double *arr)
@@ -103,7 +104,7 @@ void* parallel_median(double *arr)
 	int i;
 	for (i=0; i<NTHREADS; i++)
 	{
-		threadargs[i].id = i;
+		threadargs[i].tid = i;
 		threadargs[i].arr = arr;
 		threadargs[i].arg1 = arr[(i-1+NITEMS)%NITEMS];
 		threadargs[i].arg2 = arr[i];
@@ -139,7 +140,6 @@ int main (int argc, char* argv[])
 	{
 		int num;
 		num = rand()%10;
-		printf("%d\n", num);
 		arr1[i] = arr2[i] = (double) num;
 	}
 
