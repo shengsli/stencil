@@ -8,9 +8,11 @@
 
 typedef struct arg_pack_tag {
 	int tid;
-	double *in;
-	double *out
+	double *arr;
 	int size;
+	int arg1;
+	int arg2;
+	int arg3;
 } arg_pack;
 
 typedef arg_pack *argptr;
@@ -82,16 +84,20 @@ void *median (void *args)
 {
 	int tid, size;
 	double *arr;
+	double arg1, arg2, arg3;
 	tid=((arg_pack*)args)->tid;
-	in=((arg_pack*)args)->in;
+	arr=((arg_pack*)args)->arr;
 	size=((arg_pack*)args)->size;
+	arg1=((arg_pack*)args)->arg1;
+	arg2=((arg_pack*)args)->arg2;
+	arg3=((arg_pack*)args)->arg3;
 	double* data;
 	data = malloc(3*sizeof(double));
-	data[0] = in[(i-1+NITEMS)%NITEMS];
-	data[1] = in[i];
-	data[2] = in[(i+1+NITEMS)%NITEMS];
+	data[0] = arg1;
+	data[1] = arg2;
+	data[2] = arg3;
 	double median = find_median(data, 3);
-	in[idx]=median;
+	arr[tid]=median;
 	printf("This is thread %d. Median = %.2f\n", tid, median);
 }
 
