@@ -8,11 +8,9 @@
 
 typedef struct arg_pack_tag {
 	int tid;
-	double *arr;
-	int size;
-	int arg1;
-	int arg2;
-	int arg3;
+	int chunk_size;
+ 	double *input; // a pointer to the first element of input array
+	double *output; // a pointer to the first element of output array
 } arg_pack;
 
 typedef arg_pack *argptr;
@@ -68,54 +66,77 @@ double find_median (double *arr, int size)
  */
 void sequential_median (double *arr)
 {
-	double* data;
-	data = malloc(3*sizeof(double));
+	int radius = 1;
+	int padding_size = 1;
+	int window_size = radius*2 + 1;
+	double* neighbourhood;
+	neighbourhood = malloc(window_size+padding_size*2*sizeof(double));
 	int i;
 	for (i=0; i<NITEMS; i++)
 	{
-		data[0] = arr[(i-1+NITEMS)%NITEMS];
-		data[1] = arr[i];
-		data[2] = arr[(i+1+NITEMS)%NITEMS];
-		arr[i] = find_median(data, 3);
+		int tmp_idx;
+		tmp_idx = (i-1 < 0) ? 0 : i-1;
+		neighbourhood[0] = arr[tmp_idx];
+		neighbourhood[1] = arr[i];
+		tmp_idx = (i+1 > NITEMS-1) ? NITEMS-1 : i+1;
+		neighbourhood[2] = arr[tmp_idx];
+		arr[i] = find_median(neighbourhood, window_size);
 	}
 }
 
 void *median (void *args)
 {
-	int tid, size;
-	double *arr;
-	double arg1, arg2, arg3;
+	int tid, chunk_size;
+	double *input, *output;
 	tid=((arg_pack*)args)->tid;
-	arr=((arg_pack*)args)->arr;
-	size=((arg_pack*)args)->size;
-	arg1=((arg_pack*)args)->arg1;
-	arg2=((arg_pack*)args)->arg2;
-	arg3=((arg_pack*)args)->arg3;
-	double* data;
-	data = malloc(3*sizeof(double));
-	data[0] = arg1;
-	data[1] = arg2;
-	data[2] = arg3;
-	double median = find_median(data, 3);
-	arr[tid]=median;
-	printf("This is thread %d. Median = %.2f\n", tid, median);
+	chunk_size=((arg_pack*)args)->chunk_size;
+	input=((arg_pack*)args)->input;
+	output=((arg_pack*)args)->output;
+
+	// TODO: loop over data chunk
+	int i;
+	for (i=0; i<chunk_size; i++)
+	{
+		int radius = 1;
+		int padding_size = 1;
+		int window_size = radius*2 + 1;
+	   	double *neighbourhood;
+		neighbourhood = malloc(window_size+padding_size*2*sizeof(double));
+		neighbourhood[0] = *(input+i-1);
+		neighbourhood[1] = *input;
+		neighbourhood[2] = *(input+i+1);
+		printf("%d: %.2f\n", tid, neighbourhood[0]);
+		double median = find_median(neighbourhood, window_size);
+		*output=median;
+		// printf("%d: ", tid);
+		// print_arr(neighbourhood, 3);
+	}
 }
 
-void* parallel_median(double *arr)
+/**
+ * \param input points to the array to process. 
+ * \param output points to the ouput array.
+ * \param size is the size of input array.
+ */
+void parallel_median(double *input, double *output, int size)
 {
 	pthread_t *threads;
 	arg_pack *threadargs;
-	threads = (pthread_t *) malloc (NTHREADS*sizeof(pthread_t));
-	threadargs  = (arg_pack *) malloc (NTHREADS*sizeof(arg_pack));
+	threads = (pthread_t *) malloc(NTHREADS*sizeof(pthread_t));
+	threadargs  = (arg_pack *) malloc(NTHREADS*sizeof(arg_pack));
+
+	int chunk_size = size / NTHREADS;
 	int i;
 	for (i=0; i<NTHREADS; i++)
 	{
 		threadargs[i].tid = i;
-		threadargs[i].arr = arr;
-		threadargs[i].arg1 = arr[(i-1+NITEMS)%NITEMS];
-		threadargs[i].arg2 = arr[i];
-		threadargs[i].arg3 = arr[(i+1+NITEMS)%NITEMS];
+		threadargs[i].chunk_size = chunk_size;
+		threadargs[i].input = input + chunk_size*i;
+		threadargs[i].output = output + chunk_size*i;
 	}
+	// give rest items to the last thread
+	threadargs[NTHREADS-1].chunk_size += size - chunk_size * NTHREADS;
+
 	for (i=0; i<NTHREADS; i++)
 	{
 		pthread_create(&threads[i],NULL,median,(void*)&threadargs[i]);
@@ -137,40 +158,46 @@ int check_result (double *expected_arr, double *arr, int size) {
 
 int main (int argc, char* argv[])
 {
-	double *arr1, *arr2;
-	arr1 = malloc(NITEMS*sizeof(double));
-	arr2 = malloc(NITEMS*sizeof(double));
+	double *seq_arr, *input_par_arr, *output_par_arr;
+	seq_arr = malloc(NITEMS*sizeof(double));
+	input_par_arr = malloc(NITEMS*sizeof(double));
+	output_par_arr = malloc(NITEMS*sizeof(double));
+
+	// init array
 	int i;
 	srand(0);
 	for (i=0; i<NITEMS; i++)
 	{
 		int num;
 		num = rand()%10;
-		arr1[i] = arr2[i] = (double) num;
+		seq_arr[i] = input_par_arr[i] = (double) num;
 	}
 
-	// print init value of arr1 and arr2
-	printf("init arr: ");
-	print_arr(arr1, NITEMS);
+	// print init value of seq_arr and input_par_arr
+	printf("init seq_arr: ");
+	print_arr(seq_arr, NITEMS);
+	printf("init input_par_arr: ");
+	print_arr(input_par_arr, NITEMS);
+	printf("init output_par_arr: ");
+	print_arr(output_par_arr, NITEMS);
 
-	// sequential
-	sequential_median(arr1);
+	// sequential version median filtering
+	sequential_median(seq_arr);
 	printf("sequential_median result: ");
-	print_arr(arr1, NITEMS);
+	print_arr(seq_arr, NITEMS);
 
-	// parallel
-	parallel_median(arr2);
+	// parallel version median filtering
+	parallel_median(input_par_arr, output_par_arr, NITEMS);
 	printf("parallel_median result: ");
-	print_arr(arr2, NITEMS);
+	print_arr(output_par_arr, NITEMS);
 
-	if (check_result (arr1, arr2, NITEMS))
+	if (check_result (seq_arr, output_par_arr, NITEMS))
 	{
-		printf("Parallel result matched sequential result.\n");
+		printf("Sucess: parallel result matched sequential result.\n");
 	}
 	else
 	{
 		printf("FAIL: NOT MATCHED.\n");
 	}
-	
 	return 0;
 }

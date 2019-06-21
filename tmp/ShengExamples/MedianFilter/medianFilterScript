@@ -1,7 +1,7 @@
 # Test workload on multiple threads problemsizes and repeats
 # repeat runs are generated from within the executable
 #
-# USAGE: ./murrayMandelScript threads ndatablocks runs resultfile xres yres itermax
+# USAGE: ./medianFilterScript threads ndatablocks runs resultfile xres yres itermax
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial
@@ -25,9 +25,9 @@ itermax=$7
 echo "time, nthreads, ndatablocks, itermax, size" >> $resultfile
 for threadcount in $(seq 1 $threads)
 do
-  g++ -o murrayMandel -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DHXRES=$xres -DHYRES=$yres -DITERMAX=$itermax -DNDATABLOCKS=$ndatablocks murrayMandel.cpp
+  g++ -o medianFilter -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DHXRES=$xres -DHYRES=$yres -DITERMAX=$itermax -DNDATABLOCKS=$ndatablocks medianFilter.cpp
   for run in $(seq 1 $runs)
   do
-    ./murrayMandel >> $resultfile
+    ./medianFilter >> $resultfile
   done
 done
