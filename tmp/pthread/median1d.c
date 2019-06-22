@@ -1,10 +1,14 @@
+/**
+ * median1d.c
+ * @brief	1D median filtering. It assumes NITEMS>=NTHREADS. NITEMS<NTHREADS is not considered. 
+ * Usage	gcc -o median1d median1d.c -lpthread -DNTHREADS=<NTHREADS> -DNITEMS=<NITEMS>
+ *			./median1d
+ *			e.g. gcc -o median1d median1d.c -lpthread -DNTHREADS=3 -DNITEMS=10 && ./median1d
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include <string.h>
-
-#define NTHREADS 3
-#define NITEMS 10
 
 typedef struct arg_pack_tag {
 	int tid;
@@ -27,8 +31,8 @@ void print_arr(char *msg, double *arr, int size)
 }
 
 void swap(double *xp, double *yp) 
-{ 
-    double temp = *xp; 
+{
+    double temp = *xp;
     *xp = *yp; 
     *yp = temp;
 } 
@@ -97,9 +101,9 @@ void *median (void *args)
 }
 
 /**
- * \param input 
- * \param output 
- * \param size is the size of input array.
+ * @param input 
+ * @param output 
+ * @param size is the size of input array.
  */
 void parallel_median(double *input, double *output)
 {
@@ -152,7 +156,7 @@ int main (int argc, char* argv[])
 		num = rand()%10;
 		seq_input[i] = par_input[i] = (double) num;
 	}
-
+x
 	// print init value of seq_input and par_input
 	print_arr("init seq_input:  ", seq_input, NITEMS);
 	print_arr("init par_input:  ", par_input, NITEMS);
