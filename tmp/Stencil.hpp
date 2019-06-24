@@ -116,9 +116,9 @@ class StencilSkeleton {
 		StencilImplementation(Elemental<EL> elemental, size_t threads)
 			: elemental(elemental), nthreads(threads)
 		{
-			// this->nDataBlocks = NDATABLOCKS; 
-			// // this->nDataBlocks = 1; MIC! was 10
-			// this->BLOCK_FLAG_INITIAL_VALUE = 1;
+			this->nDataBlocks = NDATABLOCKS; 
+			// this->nDataBlocks = 1; // MIC! was 10
+			this->BLOCK_FLAG_INITIAL_VALUE = 1;
 			std::cout << "call StencilImplementation" << std::endl;
 		}
 
@@ -144,8 +144,8 @@ class StencilSkeleton {
 			std::vector<OUT> tempOutput( input.size() );
 			size_t chunkIndex = 0;
 
-			for(size_t t=0; t< nthreads; ++t ){
-				if( t < (input.size() % nthreads) )
+			for(size_t t=0; t< nthreads; ++t ) {
+ 				if( t < (input.size() % nthreads) )
 					threadArguments[t].chunkSize = 1 + input.size() / nthreads;
 				else
 					threadArguments[t].chunkSize = input.size() / nthreads;

@@ -1,0 +1,288 @@
+time, nthreads, ndatablocks, itermax, size
+0.722838, 1, 10, 1000, 1048576
+0.723698, 1, 10, 1000, 1048576
+0.723854, 1, 10, 1000, 1048576
+0.722019, 1, 10, 1000, 1048576
+0.719146, 1, 10, 1000, 1048576
+0.379452, 2, 10, 1000, 1048576
+0.375941, 2, 10, 1000, 1048576
+0.377785, 2, 10, 1000, 1048576
+0.381692, 2, 10, 1000, 1048576
+0.376932, 2, 10, 1000, 1048576
+0.27537, 3, 10, 1000, 1048576
+0.274531, 3, 10, 1000, 1048576
+0.273299, 3, 10, 1000, 1048576
+0.275882, 3, 10, 1000, 1048576
+0.272431, 3, 10, 1000, 1048576
+0.211105, 4, 10, 1000, 1048576
+0.209996, 4, 10, 1000, 1048576
+0.209343, 4, 10, 1000, 1048576
+0.208925, 4, 10, 1000, 1048576
+0.208955, 4, 10, 1000, 1048576
+time, nthreads, ndatablocks, itermax, size
+0.000300884, 4, 10, 10, 4
+0.000174999, 4, 10, 10, 4
+0.000223875, 4, 10, 10, 4
+0.000211, 4, 10, 10, 4
+0.000187159, 4, 10, 10, 4
+0.000183821, 4, 10, 10, 4
+0.000174999, 4, 10, 10, 4
+0.00018692, 4, 10, 10, 4
+0.000185013, 4, 10, 10, 4
+0.000185966, 4, 10, 10, 4
+0.000331879, 4, 10, 10, 4
+0.000292778, 4, 10, 10, 4
+0.000187159, 4, 10, 10, 4
+0.000177145, 4, 10, 10, 4
+0.000198126, 4, 10, 10, 4
+0.0002141, 4, 10, 10, 4
+0.00019598, 4, 10, 10, 4
+0.000189066, 4, 10, 10, 4
+0.00018096, 4, 10, 10, 4
+0.000290155, 4, 10, 10, 4
+time, nthreads, ndatablocks, itermax, size
+0.000289202, 4, 10, 10, 4
+0.000248909, 4, 10, 10, 4
+0.000236034, 4, 10, 10, 4
+0.000211, 4, 10, 10, 4
+0.000304937, 4, 10, 10, 4
+0.000380993, 4, 10, 10, 4
+0.000248909, 4, 10, 10, 4
+0.000257969, 4, 10, 10, 4
+0.000211, 4, 10, 10, 4
+0.000232935, 4, 10, 10, 4
+0.000241041, 4, 10, 10, 4
+0.000229836, 4, 10, 10, 4
+0.000203133, 4, 10, 10, 4
+0.00018096, 4, 10, 10, 4
+0.000287056, 4, 10, 10, 4
+0.000236034, 4, 10, 10, 4
+0.000217915, 4, 10, 10, 4
+0.000241041, 4, 10, 10, 4
+0.00020504, 4, 10, 10, 4
+0.00027895, 4, 10, 10, 4
+time, nthreads, ndatablocks, itermax, size
+0.000243902, 4, 10, 10, 4
+0.00022912, 4, 10, 10, 4
+0.000234842, 4, 10, 10, 4
+0.000231028, 4, 10, 10, 4
+0.00026083, 4, 10, 10, 4
+0.000248909, 4, 10, 10, 4
+0.000276089, 4, 10, 10, 4
+0.000257969, 4, 10, 10, 4
+0.000252008, 4, 10, 10, 4
+0.000231981, 4, 10, 10, 4
+0.000279903, 4, 10, 10, 4
+0.000241995, 4, 10, 10, 4
+0.000219107, 4, 10, 10, 4
+0.00022912, 4, 10, 10, 4
+0.000236988, 4, 10, 10, 4
+0.000230074, 4, 10, 10, 4
+0.000244141, 4, 10, 10, 4
+0.000254869, 4, 10, 10, 4
+0.000326872, 4, 10, 10, 4
+0.000276089, 4, 10, 10, 4
+time, nthreads, ndatablocks, itermax, size
+0.000231028, 4, 10, 10, 4
+0.000285149, 4, 10, 10, 4
+0.00022912, 4, 10, 10, 4
+0.000264883, 4, 10, 10, 4
+0.000247002, 4, 10, 10, 4
+0.000298023, 4, 10, 10, 4
+0.000257969, 4, 10, 10, 4
+0.000213146, 4, 10, 10, 4
+0.000262976, 4, 10, 10, 4
+0.000231981, 4, 10, 10, 4
+0.000245094, 4, 10, 10, 4
+0.000281096, 4, 10, 10, 4
+0.000227928, 4, 10, 10, 4
+0.000258923, 4, 10, 10, 4
+0.000287056, 4, 10, 10, 4
+0.000208139, 4, 10, 10, 4
+0.000205994, 4, 10, 10, 4
+0.000211954, 4, 10, 10, 4
+0.000241041, 4, 10, 10, 4
+0.000282049, 4, 10, 10, 4
+time, nthreads, ndatablocks, itermax, size
+call StencilImplementation
+1
+0.727013, 1, 10, 1000, 1048576
+call StencilImplementation
+1
+0.726957, 1, 10, 1000, 1048576
+call StencilImplementation
+1
+0.727788, 1, 10, 1000, 1048576
+call StencilImplementation
+1
+0.724527, 1, 10, 1000, 1048576
+call StencilImplementation
+1
+0.726324, 1, 10, 1000, 1048576
+call StencilImplementation
+2
+0.383653, 2, 10, 1000, 1048576
+call StencilImplementation
+2
+0.378497, 2, 10, 1000, 1048576
+call StencilImplementation
+2
+0.387479, 2, 10, 1000, 1048576
+call StencilImplementation
+2
+0.383416, 2, 10, 1000, 1048576
+call StencilImplementation
+2
+0.380078, 2, 10, 1000, 1048576
+call StencilImplementation
+3
+0.287803, 3, 10, 1000, 1048576
+call StencilImplementation
+3
+0.275157, 3, 10, 1000, 1048576
+call StencilImplementation
+3
+0.274384, 3, 10, 1000, 1048576
+call StencilImplementation
+3
+0.274057, 3, 10, 1000, 1048576
+call StencilImplementation
+3
+0.274091, 3, 10, 1000, 1048576
+call StencilImplementation
+4
+0.211923, 4, 10, 1000, 1048576
+call StencilImplementation
+4
+0.210821, 4, 10, 1000, 1048576
+call StencilImplementation
+4
+0.210871, 4, 10, 1000, 1048576
+call StencilImplementation
+4
+0.213141, 4, 10, 1000, 1048576
+call StencilImplementation
+4
+0.209686, 4, 10, 1000, 1048576
+time, nthreads, ndatablocks, itermax, size
+call StencilImplementation
+nthreads = 1
+0.725269, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.727567, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.725247, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.728644, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.726423, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.390875, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.382021, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.379075, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.379781, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.381906, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.281696, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.288135, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.276958, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.278603, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.274363, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.215296, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.216246, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.211304, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.212744, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.21097, 4, 10, 1000, 1048576
+time, nthreads, ndatablocks, itermax, size
+call StencilImplementation
+nthreads = 1
+0.724338, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.724012, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.724348, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.723378, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 1
+0.722744, 1, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.383374, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.37913, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.380699, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.379703, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 2
+0.383077, 2, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.274761, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.291126, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.277229, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.278932, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 3
+0.275898, 3, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.21339, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.211439, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.21094, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.213877, 4, 10, 1000, 1048576
+call StencilImplementation
+nthreads = 4
+0.213448, 4, 10, 1000, 1048576
