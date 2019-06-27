@@ -97,7 +97,7 @@ class StencilSkeleton {
 							++elementIndex)
 						{
 							output->at(elementIndex) =
-								elemental.elemental(input->at(elementIndex), args...);
+								elemental.elemental(input->at(elementIndex), radius, args...);
 						}
 					}
 					else
@@ -136,7 +136,7 @@ class StencilSkeleton {
 				return;
 			}
 			if( input.size() == 1 ) {
-				output[0] = elemental.elemental(input[0], args...);
+				output[0] = elemental.elemental(input[0], radius, args...);
 				return;
 			}
 			std::thread *THREADS[nthreads];
