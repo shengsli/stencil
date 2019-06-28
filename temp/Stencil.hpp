@@ -100,7 +100,7 @@ class StencilSkeleton
 						dataBlockFlags[ dataBlock ] = 0;
 						dataBlockMutex->unlock();
 
-						IN *neighbourhood = (IN *) malloc(width*sizeof(IN));
+						IN *neighbourhood = (IN *) malloc(sizeof(IN)*(width*2+1));
 
 						for(size_t elementIndex = dataBlockIndices[dataBlock];
 							elementIndex < dataBlockIndices[ dataBlock+1 ];
@@ -135,7 +135,6 @@ class StencilSkeleton
 			this->nDataBlocks = NDATABLOCKS; 
 			// this->nDataBlocks = 1; // MIC! was 10
 			this->BLOCK_FLAG_INITIAL_VALUE = 1;
-			std::cout << "call StencilImplementation" << std::endl;
 		}
 
     	public:

@@ -1,8 +1,9 @@
 /**
- * g++ sum.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DHXRES=1024 -DHYRES=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o sum
- * ./temp
+ * g++ return.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DHXRES=1024 -DHYRES=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o return
+ * ./return
  * gimp stenciltest.ppm &
  */
+
 #include <cassert>
 #include <sys/time.h>
 
@@ -15,29 +16,22 @@ double second() {
 	i = gettimeofday(&tp,&tzp);
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
-
+ 
 typedef struct {
 	int r;
 	int g;
 	int b;
 } pixel_t;
 
+FILE *outfile;
+
+/**
+ * Take an integer and scale it to 0..255.   
+ */
 pixel_t stencilkernel (int neighbourhood[], int width) {
-	int hx, hy;
 	pixel_t pixel;
-
-	int sum = 0;
-	for (int i=0; i<WIDTH*2+1; ++i)
-	{
-		sum += neighbourhood[i];
-	}
-	hx = neighbourhood[width]%HXRES;
-	hy = neighbourhood[width]/HYRES;
-
-	pixel.r = hx*256/HXRES;
-	pixel.g = hx*256/HXRES;
-	pixel.b = hx*256/HXRES;
-	
+	int color =  neighbourhood[width]*255 / (HXRES*HYRES);
+	pixel.r = pixel.g = pixel.b = color;
 	return pixel;
 }
 
@@ -51,9 +45,8 @@ int main(int argc, char** argv) {
         in[i] = i;
 
     std::vector<pixel_t> image (in.size());
-	std::cout << image.size() << std::endl;
-    auto stencil = Stencil(stencilkernel, 2, NTHREADS);
-    stencil(image,in);
+    auto stencil = Stencil(stencilkernel, WIDTH, NTHREADS);
+    stencil(image, in);
 
 #ifdef OUTPUT
     // Output results
@@ -69,6 +62,6 @@ int main(int argc, char** argv) {
 #endif
    
     tstop = second();
-    std::cout << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
+    std::cout << tstop-tstart << ", " << WIDTH << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
 	return 0;
 }
