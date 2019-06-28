@@ -100,7 +100,7 @@ class StencilSkeleton
 						dataBlockFlags[ dataBlock ] = 0;
 						dataBlockMutex->unlock();
 
-						IN *neighbourhood = (IN *) malloc(sizeof(IN)*(width*2+1));
+						IN *neighbourhood = (IN *) malloc((width*2+1)*sizeof(IN));
 
 						for(size_t elementIndex = dataBlockIndices[dataBlock];
 							elementIndex < dataBlockIndices[ dataBlock+1 ];
@@ -225,8 +225,7 @@ class StencilSkeleton
  * We need a wrapper!
  */
 template<typename EL>
-StencilSkeleton::StencilImplementation<EL> __StencilWithAccess(EL el, const size_t &width,
-															   const size_t &threads)
+StencilSkeleton::StencilImplementation<EL> __StencilWithAccess(EL el, const size_t &width, const size_t &threads)
 {
     StencilSkeleton::Elemental<EL> elemental(el);
     StencilSkeleton::StencilImplementation<EL> stencil(elemental, width, threads);
@@ -234,8 +233,7 @@ StencilSkeleton::StencilImplementation<EL> __StencilWithAccess(EL el, const size
 }
 
 template<typename EL>
-StencilSkeleton::StencilImplementation<EL> Stencil(EL el, const size_t &width,
-												   const size_t &threads = 0)
+StencilSkeleton::StencilImplementation<EL> Stencil(EL el, const size_t &width, const size_t &threads = 0)
 {
     return __StencilWithAccess(el, width, threads);
 }

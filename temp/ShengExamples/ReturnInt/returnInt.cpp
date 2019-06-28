@@ -8,6 +8,30 @@
 
 #include "../../Stencil.hpp"
 
+bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
+{
+	if (vec1.size() != vec2.size())
+		return false;
+	auto it1 = vec1.begin();
+	auto it2 = vec2.begin();
+	for (; it1 != vec1.end(); ++it1)
+	{
+		if (*it1 != *it2)
+			return false;
+		++it2;
+	}
+	return true;
+}
+
+void printVector(const std::vector<int> &vec)
+{
+	auto it = vec.begin();
+	for (; it != vec.end(); ++it)
+	{
+		std::cout << *it << std::endl;
+	}
+}
+
 double second() {
 	struct timeval tp;
 	struct timezone tzp;
@@ -16,11 +40,8 @@ double second() {
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
 
-/**
- * Take an integer and scale it to 0..255.   
- */
 int stencilkernel (int neighbourhood[], int width) {
-	return *neighbourhood;
+	return neighbourhood[width];
 }
 
 int main(int argc, char** argv) {
@@ -36,6 +57,11 @@ int main(int argc, char** argv) {
     stencil(out, in);
 	
     tstop = second();
-    std::cout << tstop-tstart << ", " << WIDTH << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
+    std::cout << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
+
+	if (compareResult(in, out))
+		std::cout << "out is the same as in" << std:: endl;
+	else
+		std::cout << "ERROR: out != in" << std::endl;
 	return 0;
 }
