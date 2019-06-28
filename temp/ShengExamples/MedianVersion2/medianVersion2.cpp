@@ -1,10 +1,11 @@
 /**
- * g++ median.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DSIZE=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o median
- * ./median
+ * g++ medianVersion2.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DSIZE=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o medianVersion2
+ * ./medianVersion2
  */
 
 #include <cassert>
 #include <sys/time.h>
+#include <algorithm>
 
 #include "../../Stencil.hpp"
 
@@ -24,11 +25,14 @@ void bubble_sort (int *arr, int size)
 				swap(&arr[j], &arr[j+1]);
 } 
 
+/**
+ * size is an odd number in this example. 
+ */
 int find_median (int *arr, int size)
 {
 	bubble_sort(arr, size);
 	if (size%2 != 0) return arr[size/2];
-	return (arr[(size-1)/2] + arr[size/2])/2;
+	return (arr[(size-1)/2] + arr[size/2])/2; // size is odd, this line will not be executed. 
 }
 
 bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
@@ -64,9 +68,19 @@ double second()
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
 
-int stencilkernel (int neighbourhood[], int width)
+/**
+ * size is an odd number in this example. 
+ */
+int findMedian (std::vector<int> &neighbourhood, int size)
 {
-	return find_median(neighbourhood, width*2+1);
+	std::sort(neighbourhood.begin(), neighbourhood.end());
+	if (size%2 != 0) return neighbourhood[size/2];
+	return (neighbourhood[(size-1)/2] + neighbourhood[size/2])/2; // size is odd, this line will not be executed. 
+}
+
+int stencilkernel (std::vector<int> &neighbourhood, int width)
+{
+	return findMedian(neighbourhood, width*2+1);
 }
 
 void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
