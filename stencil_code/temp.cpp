@@ -11,7 +11,7 @@
 #include <cassert>
 #include <sys/time.h>
 
-#include "../../Stencil.hpp"
+#include "Stencil.hpp"
 
 double second() {
 

@@ -11,26 +11,31 @@
 #include <thread>
 #include <mutex>
 
-class StencilSkeleton {
+class StencilSkeleton
+{
     private:
-	StencilSkeleton(){}
+	StencilSkeleton() {}
 	template<typename EL>
-	class Elemental {
-	public:
+	class Elemental
+	{
+	    public:
 		Elemental(EL el) : elemental(el) {}
 		EL elemental;
 	};
 
     public:
 	template<typename EL>
-	class StencilImplementation {
+	class StencilImplementation
+	{
 	    private:
 		unsigned char BLOCK_FLAG_INITIAL_VALUE;
 		size_t nthreads;
 		size_t nDataBlocks;
+		size_t width;
 
 		template<typename IN, typename OUT>
-		class ThreadArgument {
+		class ThreadArgument
+		{
 		    public:
 			size_t threadInputIndex;
 			size_t chunkSize;
@@ -60,7 +65,9 @@ class StencilSkeleton {
 		};
 
 		template<typename IN, typename OUT, typename ...ARGs>
-		void threadStencil(ThreadArgument<IN,OUT> *threadArguments, size_t threadID, ARGs... args) {
+		void threadStencil(ThreadArgument<IN,OUT> *threadArguments, size_t width,
+						   size_t threadID, ARGs... args)
+		{
 			auto input = threadArguments[threadID].input;
 			auto output = threadArguments[threadID].output;
 			size_t assistedThreadID = threadID;
@@ -70,6 +77,7 @@ class StencilSkeleton {
 				std::size_t* dataBlockIndices = threadArguments[assistedThreadID].dataBlockIndices;
 				size_t nDataBlocks = threadArguments[assistedThreadID].nDataBlocks;
 				size_t dataBlock = 0;
+				size_t inputSize = input->size();
 
 				// why shouldn't we 'steal' even the first dataBlock? :P
 				while( dataBlock < nDataBlocks )
@@ -92,13 +100,21 @@ class StencilSkeleton {
 						dataBlockFlags[ dataBlock ] = 0;
 						dataBlockMutex->unlock();
 
+						IN *neighbourhood = (IN *) malloc(width*sizeof(IN));
+
 						for(size_t elementIndex = dataBlockIndices[dataBlock];
 							elementIndex < dataBlockIndices[ dataBlock+1 ];
 							++elementIndex)
 						{
+							for (size_t i=0; i<=2*width; i++)
+							{
+								neighbourhood[i] =
+									input->at((elementIndex-width+i+inputSize)%inputSize);
+							}
 							output->at(elementIndex) =
-								elemental.elemental(input->at(elementIndex), radius, args...);
+								elemental.elemental(neighbourhood, width, args...);
 						}
+						free(neighbourhood);
 					}
 					else
 					{
@@ -113,8 +129,8 @@ class StencilSkeleton {
 		}
 
 		Elemental<EL> elemental;
-		StencilImplementation(Elemental<EL> elemental, size_t threads)
-			: elemental(elemental), nthreads(threads)
+		StencilImplementation(Elemental<EL> elemental, size_t width, size_t threads)
+			: elemental(elemental), width(width), nthreads(threads)
 		{
 			this->nDataBlocks = NDATABLOCKS; 
 			// this->nDataBlocks = 1; // MIC! was 10
@@ -124,7 +140,8 @@ class StencilSkeleton {
 
     	public:
 		template<typename IN, typename OUT, typename ...ARGs>
-		void operator()(std::vector<OUT> &output, std::vector<IN> &input, ARGs... args) {
+		void operator()(std::vector<OUT> &output, std::vector<IN> &input, ARGs... args)
+		{
 			nthreads = nthreads ? nthreads : std::thread::hardware_concurrency();
 			nthreads = nthreads >= input.size() ? input.size() / 2 : nthreads;
 
@@ -132,11 +149,13 @@ class StencilSkeleton {
 			 * TODO: Handle input.size == 0 or 1
 			 * Hardcoded for now...
 			 */
-			if( input.size() == 0 ) {
+			if( input.size() == 0 ) 
+			{
 				return;
 			}
-			if( input.size() == 1 ) {
-				output[0] = elemental.elemental(input[0], radius, args...);
+			if( input.size() == 1 )
+			{
+				//output[0] = elemental.elemental(input[0], width, args...);
 				return;
 			}
 			std::thread *THREADS[nthreads];
@@ -144,7 +163,8 @@ class StencilSkeleton {
 			std::vector<OUT> tempOutput( input.size() );
 			size_t chunkIndex = 0;
 
-			for(size_t t=0; t< nthreads; ++t ) {
+			for(size_t t=0; t< nthreads; ++t )
+			{
  				if( t < (input.size() % nthreads) )
 					threadArguments[t].chunkSize = 1 + input.size() / nthreads;
 				else
@@ -179,12 +199,14 @@ class StencilSkeleton {
 				threadArguments[t].dataBlockIndices[ nDataBlocks ] = blockEnd;
 			}
 
-			for(size_t t=0; t< nthreads; ++t ) {
+			for(size_t t=0; t< nthreads; ++t )
+			{
 				THREADS[t]=new std::thread(&StencilImplementation<EL>::threadStencil<IN,OUT,ARGs...>,
-										   this, threadArguments, t, args...);
+										   this, threadArguments, width, t, args...);
 			}
 
-			for(size_t t=0; t< nthreads; ++t) {
+			for(size_t t=0; t< nthreads; ++t)
+			{
 				THREADS[t]->join();
 				delete THREADS[t];
 			}
@@ -192,10 +214,10 @@ class StencilSkeleton {
 			delete[] threadArguments;
 		}
 		template<typename EL2>
-		friend StencilImplementation<EL2> __StencilWithAccess(EL2 el, const size_t &threads);
+		friend StencilImplementation<EL2> __StencilWithAccess(EL2 el, const size_t &width, const size_t &threads);
 	};
 	template<typename EL2>
-	friend StencilImplementation<EL2> __StencilWithAccess(EL2 el, const size_t &threads);
+	friend StencilImplementation<EL2> __StencilWithAccess(EL2 el, const size_t &width, const size_t &threads);
 };
 
 /*
@@ -204,15 +226,19 @@ class StencilSkeleton {
  * We need a wrapper!
  */
 template<typename EL>
-StencilSkeleton::StencilImplementation<EL> __StencilWithAccess(EL el, const size_t &threads) {
+StencilSkeleton::StencilImplementation<EL> __StencilWithAccess(EL el, const size_t &width,
+															   const size_t &threads)
+{
     StencilSkeleton::Elemental<EL> elemental(el);
-    StencilSkeleton::StencilImplementation<EL> stencil(elemental, threads);
+    StencilSkeleton::StencilImplementation<EL> stencil(elemental, width, threads);
     return stencil;
 }
 
 template<typename EL>
-StencilSkeleton::StencilImplementation<EL> Stencil(EL el, const size_t &threads = 0) {
-    return __StencilWithAccess(el, threads);
+StencilSkeleton::StencilImplementation<EL> Stencil(EL el, const size_t &width,
+												   const size_t &threads = 0)
+{
+    return __StencilWithAccess(el, width, threads);
 }
 
 #endif /* STENCIL_HPP */
