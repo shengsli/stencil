@@ -1,5 +1,5 @@
 /**
- * g++ median.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DSIZE=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o median
+ * g++ median.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o median
  * ./median
  */
 
@@ -78,7 +78,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 	int *neighbourhood = (int *) malloc((WIDTH*2+1)*sizeof(int));
 	
 	int inputSize = input.size();
-	for (int targetIdx=0; targetIdx<SIZE; ++targetIdx)
+	for (int targetIdx=0; targetIdx<NITEMS; ++targetIdx)
 	{
 		int median=0;
 		for (int i=0; i<WIDTH*2+1; ++i)
@@ -101,13 +101,13 @@ void parallelMedian(std::vector<int> &output, std::vector<int> &input)
     stencil(output, input);
 	
     tstop = second();
-    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << SIZE <<  std::endl;
+    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NITEMS <<  std::endl;
 }
 
 int main(int argc, char** argv)
 {
-    std::vector<int> input(SIZE);
-    for(size_t i = 0; i < SIZE; ++i)
+    std::vector<int> input(NITEMS);
+    for(size_t i = 0; i < NITEMS; ++i)
     {
 		input[i] = i;
 	}

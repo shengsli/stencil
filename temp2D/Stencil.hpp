@@ -47,14 +47,10 @@ class StencilSkeleton
 			std::vector<OUT> *output;
 
 			ThreadArgument() {}
-			ThreadArgument(std::vector<OUT> &output,
-						   std::vector<IN> &input,
-						   size_t threadInputIndex,
-						   size_t chunkSize)
-				: threadInputIndex(threadInputIndex),
-				  chunkSize(chunkSize),
-				  input(&input),
-				  output(&output) {}
+			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input,
+						   size_t threadInputIndex, size_t chunkSize)
+				: threadInputIndex(threadInputIndex), chunkSize(chunkSize),
+				  input(&input), output(&output) {}
 
 			~ThreadArgument()
 			{
@@ -100,7 +96,7 @@ class StencilSkeleton
 						dataBlockFlags[ dataBlock ] = 0;
 						dataBlockMutex->unlock();
 
-						IN *neighbourhood = (IN *) malloc((width*2+1)*sizeof(IN));
+						IN *neighbourhood = (IN *) malloc((width*2+1)*(width*2+1)*sizeof(IN));
 
 						for(size_t elementIndex = dataBlockIndices[dataBlock];
 							elementIndex < dataBlockIndices[ dataBlock+1 ];

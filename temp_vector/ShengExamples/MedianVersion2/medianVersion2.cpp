@@ -1,5 +1,5 @@
 /**
- * g++ medianVersion2.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DSIZE=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o medianVersion2
+ * g++ medianVersion2.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o medianVersion2
  * ./medianVersion2
  */
 
@@ -88,13 +88,13 @@ void parallelMedian(std::vector<int> &output, std::vector<int> &input)
     stencil(output, input);
 	
     tstop = second();
-    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << SIZE <<  std::endl;
+    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NITEMS <<  std::endl;
 }
 
 int main(int argc, char** argv)
 {
-    std::vector<int> input(SIZE);
-    for(size_t i = 0; i < SIZE; ++i)
+    std::vector<int> input(NITEMS);
+    for(size_t i = 0; i < NITEMS; ++i)
     {
 		input[i] = i;
 	}

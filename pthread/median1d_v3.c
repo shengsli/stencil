@@ -1,9 +1,9 @@
 /**
  * median1d.c
  * @brief	1D median filtering. It assumes NITEMS>=NTHREADS. NITEMS<NTHREADS is not considered. 
- * Usage	gcc -o median1d median1d.c -lpthread -DWIDTH=1 -DNTHREADS=3 -DNITEMS=10 
+ * Usage	gcc -o median1d median1d.c -lpthread -DNTHREADS=<NTHREADS> -DNITEMS=<NITEMS>
  *			./median1d
- *			
+ *			e.g. gcc -o median1d median1d.c -lpthread -DNTHREADS=3 -DNITEMS=10 && ./median1d
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,31 +13,31 @@
 typedef struct arg_pack_tag {
 	int tid;
 	int cur_chunk_size;
- 	int *input;
-	int *output;
+ 	double *input;
+	double *output;
 } arg_pack;
 
 typedef arg_pack *argptr;
 
-void print_arr(char *msg, int *arr, int size)
+void print_arr(char *msg, double *arr, int size)
 {
 	printf("%s", msg);
 	int i;
 	for (i=0; i<size-1; i++)
 	{
-		printf("%d, ", arr[i]);
+		printf("%.2f, ", arr[i]);
 	}
-	printf("%d\n", arr[i]);
+	printf("%.2f\n", arr[i]);
 }
 
-void swap(int *xp, int *yp) 
+void swap(double *xp, double *yp) 
 {
-    int temp = *xp;
+    double temp = *xp;
     *xp = *yp; 
     *yp = temp;
 } 
 
-void bubble_sort (int *arr, int size) 
+void bubble_sort (double *arr, int size) 
 {
 	int i, j;
 	for (i = 0; i<size-1; i++)
@@ -46,7 +46,7 @@ void bubble_sort (int *arr, int size)
 				swap(&arr[j], &arr[j+1]);
 } 
 
-int find_median (int *arr, int size)
+double find_median (double *arr, int size)
 {
 	bubble_sort(arr, size);
 	if (size%2 != 0) return arr[size/2];
@@ -56,46 +56,47 @@ int find_median (int *arr, int size)
 /**
  * This function hard codes filter as a 1x3 filter. 
  */
-void sequential_median (int* input, int *output)
+void sequential_median (double* input, double *output)
 {
-	int* neighbourhood;
-	neighbourhood = malloc((WIDTH*2+1)*sizeof(int));
-	int targetIdx;
-	for (targetIdx=0; targetIdx<NITEMS; targetIdx++)
+	int radius = 1;
+	int window_size = radius*2 + 1;
+	double* neighbourhood;
+	neighbourhood = malloc(window_size*sizeof(double));
+	int i;
+	for (i=0; i<NITEMS; i++)
 	{
-		int i;
-		for (i=0; i<WIDTH*2+1; ++i)
-		{
-			neighbourhood[i] = input[(targetIdx+i-WIDTH+NITEMS)%NITEMS];
-		}
-		output[targetIdx] = find_median(neighbourhood, WIDTH*2+1);
+		neighbourhood[0] = input[(i-1+NITEMS)%NITEMS];
+		neighbourhood[1] = input[i];
+		neighbourhood[2] = input[(i+1+NITEMS)%NITEMS];
+		double median = find_median(neighbourhood, window_size);
+		output[i] = median;
 	}
 }
 
 void *median (void *args)
 {
 	int tid, cur_chunk_size;
-	int *input, *output;
+	double *input, *output;
 	tid=((arg_pack*)args)->tid;
 	cur_chunk_size=((arg_pack*)args)->cur_chunk_size;
 	input=((arg_pack*)args)->input;
 	output=((arg_pack*)args)->output;
 
-	// iterate over data chunk
+	// TODO: loop over data chunk
 	int i;
 	for (i=0; i<cur_chunk_size; i++)
 	{
-	   	int *neighbourhood;
-		neighbourhood = malloc((WIDTH*2+1)*sizeof(int));
+		int radius = 1;
+		int window_size = radius*2 + 1;
+	   	double *neighbourhood;
+		neighbourhood = malloc(window_size*sizeof(double));
 		int chunk_size = NITEMS / NTHREADS; // chunk size of 0..n-1 chunks
-
-		// create neighbourhood
-		int j;
-		for (j=0; j<WIDTH*2+1; j++)
-		{
-			neighbourhood[j] = input[(tid*chunk_size+i+NITEMS-WIDTH+j)%NITEMS];
-		}
-		output[tid*chunk_size+i] = find_median(neighbourhood, (WIDTH*2+1));
+		double *cur = input+tid*chunk_size+i;
+		neighbourhood[0] = input[(tid*chunk_size+i+NITEMS-1)%NITEMS];
+		neighbourhood[1] = input[tid*chunk_size+i];
+		neighbourhood[2] = input[(tid*chunk_size+i+NITEMS+1)%NITEMS];
+		double median = find_median(neighbourhood, window_size);
+		output[tid*chunk_size+i] = median;
 	}
 }
 
@@ -104,7 +105,7 @@ void *median (void *args)
  * @param output 
  * @param size is the size of input array.
  */
-void parallel_median(int *input, int *output)
+void parallel_median(double *input, double *output)
 {
 	pthread_t *threads;
 	arg_pack *threadargs;
@@ -129,7 +130,7 @@ void parallel_median(int *input, int *output)
 		pthread_join(threads[i], NULL);
 }
 
-int check_result (int *expected_arr, int *arr, int size) {
+int check_result (double *expected_arr, double *arr, int size) {
 	int i;
 	for (i=0; i<size; i++)
 	{
@@ -140,19 +141,22 @@ int check_result (int *expected_arr, int *arr, int size) {
 
 int main (int argc, char* argv[])
 {
-	int *seq_input, *seq_output, *par_input, *par_output;
-	seq_input = malloc(NITEMS*sizeof(int));
-	seq_output = malloc(NITEMS*sizeof(int));
-	par_input = malloc(NITEMS*sizeof(int));
-	par_output = malloc(NITEMS*sizeof(int));
+	double *seq_input, *seq_output, *par_input, *par_output;
+	seq_input = malloc(NITEMS*sizeof(double));
+	seq_output = malloc(NITEMS*sizeof(double));
+	par_input = malloc(NITEMS*sizeof(double));
+	par_output = malloc(NITEMS*sizeof(double));
 
 	// init array
 	int i;
+	srand(0);
 	for (i=0; i<NITEMS; i++)
 	{
-		seq_input[i] = par_input[i] = rand()%10;
+		int num;
+		num = rand()%10;
+		seq_input[i] = par_input[i] = (double) num;
 	}
-
+x
 	// print init value of seq_input and par_input
 	print_arr("init seq_input:  ", seq_input, NITEMS);
 	print_arr("init par_input:  ", par_input, NITEMS);

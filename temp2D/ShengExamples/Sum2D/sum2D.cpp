@@ -1,35 +1,12 @@
 /**
- * g++ median.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DSIZE=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o median
- * ./median
+ * g++ sum2D.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o sum2D 
+ * ./sum2D
  */
 
 #include <cassert>
 #include <sys/time.h>
 
 #include "../../Stencil.hpp"
-
-void swap(int *xp, int *yp) 
-{
-    int temp = *xp;
-    *xp = *yp; 
-    *yp = temp;
-} 
-
-void bubble_sort (int *arr, int size) 
-{
-	int i, j;
-	for (i = 0; i<size-1; i++)
-		for (j = 0; j<size-i-1; j++)
-			if (arr[j] > arr[j+1])
-				swap(&arr[j], &arr[j+1]);
-} 
-
-int find_median (int *arr, int size)
-{
-	bubble_sort(arr, size);
-	if (size%2 != 0) return arr[size/2];
-	return (arr[(size-1)/2] + arr[size/2])/2;
-}
 
 bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
 {
@@ -66,33 +43,34 @@ double second()
 
 int stencilkernel (int neighbourhood[], int width)
 {
-	return find_median(neighbourhood, width*2+1);
+	int sum = 0;
+	for (int i=0; i<width*2+1; ++i)
+		sum += neighbourhood[i];
+	return sum;
 }
 
-void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
+void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 {
 	double tstart, tstop;
     tstart = second();
 
 	// TODO
-	int *neighbourhood = (int *) malloc((WIDTH*2+1)*sizeof(int));
-	
 	int inputSize = input.size();
-	for (int targetIdx=0; targetIdx<SIZE; ++targetIdx)
+	for (int targetIdx=0; targetIdx<NITEMS; ++targetIdx)
 	{
-		int median=0;
+		int sum=0;
 		for (int i=0; i<WIDTH*2+1; ++i)
 		{
-			neighbourhood[i] = input[(targetIdx+i-WIDTH+inputSize)%inputSize];
+			sum += input[(targetIdx+i-WIDTH+inputSize)%inputSize];
 		}
-		output[targetIdx] = find_median(neighbourhood, WIDTH*2+1);
+		output[targetIdx] = sum;
 	}
 	
     tstop = second();
-    std::cout << "sequentialMedian, " << tstop-tstart << std::endl;
+    std::cout << "sequentialSum, " << tstop-tstart << std::endl;
 }
 
-void parallelMedian(std::vector<int> &output, std::vector<int> &input)
+void parallelSum(std::vector<int> &output, std::vector<int> &input)
 {
     double tstart, tstop;
     tstart = second();
@@ -101,21 +79,21 @@ void parallelMedian(std::vector<int> &output, std::vector<int> &input)
     stencil(output, input);
 	
     tstop = second();
-    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << SIZE <<  std::endl;
+    std::cout << "parallelSum, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NITEMS <<  std::endl;
 }
 
 int main(int argc, char** argv)
 {
-    std::vector<int> input(SIZE);
-    for(size_t i = 0; i < SIZE; ++i)
+    std::vector<int> input(NITEMS);
+    for(size_t i = 0; i < NITEMS; ++i)
     {
 		input[i] = i;
 	}
     std::vector<int> seqOutput(input.size());
     std::vector<int> parOutput(input.size());
 
-	sequentialMedian(seqOutput, input);
-	parallelMedian(parOutput, input);
+	sequentialSum(seqOutput, input);
+	parallelSum(parOutput, input);
 	
 	if (compareResult(seqOutput, parOutput))
 		std::cout << "out is the same as in" << std:: endl;
