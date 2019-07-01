@@ -1,0 +1,33 @@
+# Tests the sum2Dstencil app
+
+# Test workload on multiple threads problem sizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./sum2DstencilScript threads ndatablocks runs resultfile nrows ncols
+#
+# threads:    max threadcount
+# ndatablocks number of sub-blocks (for stealing) created from the initial
+#             work partition allocated to a thread
+# runs:       number of repeat runs
+# resultfile: results are sent here
+# nrows:      number of rows in whole input
+# ncols:      number of columns in whole input
+
+#echo "grain	threads	time" >> $5
+
+threads=$1
+ndatablocks=$2
+runs=$3
+resultfile=$4
+nrows=$5
+ncols=$6
+
+echo "time, nthreads, ndatablocks, nrows, ncols" > $resultfile
+for threadcount in $(seq 1 $threads)
+do
+  g++ -o sum2Dstencil -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNROWS=$nrows -DNCOLS=$ncols -DNDATABLOCKS=$ndatablocks sum2Dstencil.cpp
+  for run in $(seq 1 $runs)
+  do
+    ./sum2Dstencil >> $resultfile
+  done
+done

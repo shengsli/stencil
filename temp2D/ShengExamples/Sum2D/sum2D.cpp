@@ -1,12 +1,12 @@
 /**
- * g++ sum2D.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o sum2D 
+ * g++ sum2D.cpp -std=c++11 -O2 -lpthread -DWIDTH=1 -DNTHREADS=4 -DNROWS=4 -DNCOLS=4 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o sum2D 
  * ./sum2D
  */
 
 #include <cassert>
 #include <sys/time.h>
 
-#include "../../Stencil.hpp"
+#include "../../Stencil2D.hpp"
 
 bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
 {
@@ -26,9 +26,13 @@ bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
 void printVector(const std::vector<int> &vec)
 {
 	auto it = vec.begin();
-	for (; it != vec.end(); ++it)
+	for (int row=0; row<NROWS; ++row)
 	{
-		std::cout << *it << std::endl;
+		for (int col=0; col<NCOLS; ++col)
+		{
+			printf("%4d", vec[col+row*NCOLS]);
+		}
+		std::cout << std::endl;
 	}
 }
 
@@ -44,8 +48,10 @@ double second()
 int stencilkernel (int neighbourhood[], int width)
 {
 	int sum = 0;
-	for (int i=0; i<width*2+1; ++i)
+	for (int i=0; i<(width*2+1)*(width*2+1); ++i)
+	{
 		sum += neighbourhood[i];
+	}
 	return sum;
 }
 
@@ -54,16 +60,26 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 	double tstart, tstop;
     tstart = second();
 
-	// TODO
-	int inputSize = input.size();
-	for (int targetIdx=0; targetIdx<NITEMS; ++targetIdx)
+	// TODO: compuate sum
+	int nItems = NROWS*NCOLS;
+	for (int elIdx=0; elIdx<nItems; ++elIdx)
 	{
+		int elCol = elIdx % NCOLS;
+		int elRow = elIdx / NCOLS;
+		int neighbourCol, neighbourRow;
 		int sum=0;
-		for (int i=0; i<WIDTH*2+1; ++i)
+		
+		// iterate over filter window
+		for (int row=0; row<2*WIDTH+1; ++row)
 		{
-			sum += input[(targetIdx+i-WIDTH+inputSize)%inputSize];
+			for (int col=0; col<2*WIDTH+1; ++col)
+			{
+				neighbourCol = (elCol+col+NCOLS-WIDTH)%NCOLS;
+				neighbourRow = (elRow+row+NROWS-WIDTH)%NROWS;
+				sum += input[neighbourCol+neighbourRow*NCOLS];
+			}
 		}
-		output[targetIdx] = sum;
+		output[elIdx] = sum;
 	}
 	
     tstop = second();
@@ -75,17 +91,17 @@ void parallelSum(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil = Stencil(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil2D(stencilkernel, WIDTH, NROWS, NCOLS, NTHREADS);
     stencil(output, input);
 	
     tstop = second();
-    std::cout << "parallelSum, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NITEMS <<  std::endl;
+    std::cout << "parallelSum, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NROWS << ", " << NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)
 {
-    std::vector<int> input(NITEMS);
-    for(size_t i = 0; i < NITEMS; ++i)
+    std::vector<int> input(NROWS*NCOLS);
+    for(size_t i = 0; i < NROWS*NCOLS; ++i)
     {
 		input[i] = i;
 	}

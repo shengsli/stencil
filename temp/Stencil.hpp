@@ -106,7 +106,7 @@ class StencilSkeleton
 							elementIndex < dataBlockIndices[ dataBlock+1 ];
 							++elementIndex)
 						{
-							for (size_t i=0; i<=2*width+1; i++)
+							for (size_t i=0; i<2*width+1; i++)
 							{
 								neighbourhood[i] =
 									input->at((elementIndex-width+i+inputSize)%inputSize);
