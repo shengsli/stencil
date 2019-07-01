@@ -1,5 +1,5 @@
-#ifndef STENCIL_HPP
-#define STENCIL_HPP
+#ifndef STENCIL2D_HPP
+#define STENCIL2D_HPP
 #include <cstdlib>
 #include <iostream>
 #include <vector>
@@ -234,8 +234,8 @@ template<typename EL>
 Stencil2DSkeleton::Stencil2DImplementation<EL> __Stencil2DWithAccess(EL el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads)
 {
     Stencil2DSkeleton::Elemental<EL> elemental(el);
-    Stencil2DSkeleton::Stencil2DImplementation<EL> stencil(elemental, width, nrows, ncols, threads);
-    return stencil;
+    Stencil2DSkeleton::Stencil2DImplementation<EL> stencil2d(elemental, width, nrows, ncols, threads);
+    return stencil2d;
 }
 
 template<typename EL>
@@ -244,4 +244,4 @@ Stencil2DSkeleton::Stencil2DImplementation<EL> Stencil2D(EL el, const size_t &wi
     return __Stencil2DWithAccess(el, width, nrows, ncols, threads);
 }
 
-#endif /* STENCIL_HPP */
+#endif /* STENCIL2D_HPP */
