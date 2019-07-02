@@ -7,7 +7,7 @@
 #include <cassert>
 #include <sys/time.h>
 
-#include "../../Stencil.hpp"
+#include "../../Stencil1D.hpp"
 
 double second() {
 	struct timeval tp;
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
         in[i] = i;
 
     std::vector<pixel_t> image (in.size());
-    auto stencil = Stencil(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
     stencil(image, in);
 
 #ifdef OUTPUT

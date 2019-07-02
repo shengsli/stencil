@@ -6,7 +6,7 @@
 #include <cassert>
 #include <sys/time.h>
 
-#include "../../Stencil.hpp"
+#include "../../Stencil1D.hpp"
 
 bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
 {
@@ -75,7 +75,7 @@ void parallelSum(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil = Stencil(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
     stencil(output, input);
 	
     tstop = second();

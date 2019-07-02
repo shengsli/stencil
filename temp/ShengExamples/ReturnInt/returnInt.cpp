@@ -6,7 +6,7 @@
 #include <cassert>
 #include <sys/time.h>
 
-#include "../../Stencil.hpp"
+#include "../../Stencil1D.hpp"
 
 bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
 {
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
         in[i] = i;
 	
     std::vector<int> out (in.size());
-    auto stencil = Stencil(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
     stencil(out, in);
 	
     tstop = second();

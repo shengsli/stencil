@@ -1,5 +1,5 @@
 /**
- * g++ sum2D.cpp -std=c++11 -O2 -lpthread -DWIDTH=1 -DNTHREADS=4 -DNROWS=4 -DNCOLS=4 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o sum2D 
+ * g++ sum2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DWIDTH=1 -DNROWS=4 -DNCOLS=5 -DOUTPUT -o sum2D
  * ./sum2D
  */
 
@@ -95,7 +95,7 @@ void parallelSum(std::vector<int> &output, std::vector<int> &input)
     stencil2d(output, input);
 	
     tstop = second();
-    std::cout << "parallelSum, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NROWS << ", " << NCOLS <<  std::endl;
+    std::cout << "parallelSum, " << tstop-tstart << ", " << WIDTH << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)
@@ -110,6 +110,31 @@ int main(int argc, char** argv)
 
 	sequentialSum(seqOutput, input);
 	parallelSum(parOutput, input);
+
+    #ifdef OUTPUT
+    // Output results
+	FILE *outfile;
+    outfile = fopen("sum2Dtest.txt","w");
+    fprintf(outfile,"Input: ");
+    for (size_t i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%4d", input[i]);
+    }
+
+    fprintf(outfile,"\nSequential Output: ");
+    for (size_t i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%4d", seqOutput[i]);
+    }
+
+    fprintf(outfile,"\nParallel Output: ");
+    for (size_t i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%4d", parOutput[i]);
+    }
+	fprintf(outfile," \n");
+	fclose(outfile);
+    #endif
 	
 	if (compareResult(seqOutput, parOutput))
 		std::cout << "out is the same as in" << std:: endl;

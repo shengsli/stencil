@@ -1,12 +1,22 @@
 /**
- * g++ median.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o median
- * ./median
+ * g++ median2D.cpp -std=c++11 -O2 -lpthread -DWIDTH=1 -DNTHREADS=4 -DNROWS=4 -DNCOLS=5 -DNDATABLOCKS=100 -DOUTPUT -o median2D
+ * ./median2D
  */
 
 #include <cassert>
 #include <sys/time.h>
 
-#include "../../Stencil1D.hpp"
+#include "../../Stencil2D.hpp"
+
+void print_arr(int *arr, int size)
+{
+	int i;
+	for (i=0; i<size-1; i++)
+	{
+		printf("%d, ", arr[i]);
+	}
+	printf("%d\n", arr[i]);
+}
 
 void swap(int *xp, int *yp) 
 {
@@ -49,9 +59,13 @@ bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
 void printVector(const std::vector<int> &vec)
 {
 	auto it = vec.begin();
-	for (; it != vec.end(); ++it)
+	for (int row=0; row<NROWS; ++row)
 	{
-		std::cout << *it << std::endl;
+		for (int col=0; col<NCOLS; ++col)
+		{
+			printf("%4d", vec[col+row*NCOLS]);
+		}
+		std::cout << std::endl;
 	}
 }
 
@@ -66,7 +80,7 @@ double second()
 
 int stencilkernel (int neighbourhood[], int width)
 {
-	return find_median(neighbourhood, width*2+1);
+	return find_median(neighbourhood, (2*width+1)*(2*width+1));
 }
 
 void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
@@ -75,17 +89,25 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
     tstart = second();
 
 	// find median
-	int *neighbourhood = (int *) malloc((WIDTH*2+1)*sizeof(int));
-	
-	int inputSize = input.size();
-	for (int targetIdx=0; targetIdx<NITEMS; ++targetIdx)
+	int *neighbourhood = (int *) malloc((WIDTH*2+1)*(WIDTH*2+1)*sizeof(int));
+	int nItems = NROWS*NCOLS;
+	for (int elIdx=0; elIdx<nItems; ++elIdx)
 	{
-		int median=0;
-		for (int i=0; i<WIDTH*2+1; ++i)
+		int elCol = elIdx % NCOLS;
+		int elRow = elIdx / NCOLS;
+		int neighbourCol, neighbourRow;
+		
+		// iterate over filter window
+		for (int row=0; row<2*WIDTH+1; ++row)
 		{
-			neighbourhood[i] = input[(targetIdx+i-WIDTH+inputSize)%inputSize];
+			for (int col=0; col<2*WIDTH+1; ++col)
+			{
+				neighbourCol = (elCol+col+NCOLS-WIDTH)%NCOLS;
+				neighbourRow = (elRow+row+NROWS-WIDTH)%NROWS;
+				neighbourhood[col+row*(2*WIDTH+1)] = input[neighbourCol+neighbourRow*NCOLS];
+			}
 		}
-		output[targetIdx] = find_median(neighbourhood, WIDTH*2+1);
+		output[elIdx] = find_median(neighbourhood,(WIDTH*2+1)*(WIDTH*2+1));
 	}
 	
     tstop = second();
@@ -97,17 +119,17 @@ void parallelMedian(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
-    stencil(output, input);
+    auto stencil2d = Stencil2D(stencilkernel, WIDTH, NROWS, NCOLS, NTHREADS);
+    stencil2d(output, input);
 	
     tstop = second();
-    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NITEMS <<  std::endl;
+    std::cout << "parallelMedian, " << tstop-tstart << ", " << WIDTH << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)
 {
-    std::vector<int> input(NITEMS);
-    for(size_t i = 0; i < NITEMS; ++i)
+    std::vector<int> input(NROWS*NCOLS);
+    for(size_t i = 0; i < NROWS*NCOLS; ++i)
     {
 		input[i] = i;
 	}
@@ -116,29 +138,36 @@ int main(int argc, char** argv)
 
 	sequentialMedian(seqOutput, input);
 	parallelMedian(parOutput, input);
+
+	printVector(input);
+	puts("");
+	printVector(seqOutput);
 	
     #ifdef OUTPUT
     // Output results
 	FILE *outfile;
-    outfile = fopen("mediantest.txt","w");
+    outfile = fopen("median2Dtest.txt","w");
     fprintf(outfile,"Input: ");
-    for (size_t i = 0; i<NITEMS; i++) {
+    for (size_t i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
       fprintf(outfile,"%4d", input[i]);
     }
 
     fprintf(outfile,"\nSequential Output: ");
-    for (size_t i = 0; i<NITEMS; i++) {
+    for (size_t i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
       fprintf(outfile,"%4d", seqOutput[i]);
     }
 
     fprintf(outfile,"\nParallel Output: ");
-    for (size_t i = 0; i<NITEMS; i++) {
+    for (size_t i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
       fprintf(outfile,"%4d", parOutput[i]);
     }
 	fprintf(outfile," \n");
 	fclose(outfile);
     #endif
-
+	
 	if (compareResult(seqOutput, parOutput))
 		std::cout << "out is the same as in" << std:: endl;
 	else

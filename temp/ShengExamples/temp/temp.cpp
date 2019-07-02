@@ -11,7 +11,7 @@
 #include <cassert>
 #include <sys/time.h>
 
-#include "../../Stencil.hpp"
+#include "../../Stencil1D.hpp"
 
 double second() {
 	struct timeval tp;
@@ -24,7 +24,7 @@ double second() {
 
 // add -DOUTPUT to test if required
 
-// g++ temp.cpp -std=c++11 -lpthread -O2 -DNTHREADS=32 -DHXRES=1024 -DHYRES=1024 -DITERMAX=10000 -DNDATABLOCKS=10000 -o temp
+// g++ temp.cpp -std=c++11 -lpthread -O2 -DNTHREADS=32 -DHXRES=1024 -DHYRES=1024 -DITERMAX=10000 -DNDATABLOCKS=10000 -DOUTPUT -o temp
 
 // ./tempScript 4 20 5 results.csv 1024 1024 1000
 
@@ -48,9 +48,18 @@ pixel_t stencilkernel (int neighbourhood[], int width) {
 	hx = neighbourhood[width]%HXRES;
 	hy = neighbourhood[width]/HYRES;
 
-	pixel.r = hx*256/HXRES;
-	pixel.g = hx*256/HXRES;
-	pixel.b = hx*256/HXRES;
+	if (hx<hy)
+	{
+		pixel.r = 255;
+		pixel.g = 0;
+		pixel.b = 0;
+	}
+	else
+	{
+		pixel.r = 0;
+		pixel.g = 0;
+		pixel.b = 255;
+	}
 	
 	return pixel;
 }
@@ -65,7 +74,7 @@ int main(int argc, char** argv) {
         in[i] = i;
 
     std::vector<pixel_t> image (in.size());
-    auto stencil = Stencil(stencilkernel, 2, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, 2, NTHREADS);
     stencil(image,in);
 
 #ifdef OUTPUT

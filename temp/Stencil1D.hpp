@@ -1,5 +1,5 @@
-#ifndef STENCIL2D_HPP
-#define STENCIL2D_HPP
+#ifndef STENCIL1D_HPP
+#define STENCIL1D_HPP
 #include <cstdlib>
 #include <iostream>
 #include <vector>
@@ -11,10 +11,10 @@
 #include <thread>
 #include <mutex>
 
-class Stencil2DSkeleton
+class Stencil1DSkeleton
 {
     private:
-	Stencil2DSkeleton() {}
+	Stencil1DSkeleton() {}
 	template<typename EL>
 	class Elemental
 	{
@@ -25,15 +25,13 @@ class Stencil2DSkeleton
 
     public:
 	template<typename EL>
-	class Stencil2DImplementation
+	class Stencil1DImplementation
 	{
 	    private:
 		unsigned char BLOCK_FLAG_INITIAL_VALUE;
 		size_t nthreads;
 		size_t nDataBlocks;
 		size_t width;
-		size_t nrows;
-		size_t ncols;
 
 		template<typename IN, typename OUT>
 		class ThreadArgument
@@ -49,10 +47,14 @@ class Stencil2DSkeleton
 			std::vector<OUT> *output;
 
 			ThreadArgument() {}
-			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input,
-						   size_t threadInputIndex, size_t chunkSize)
-				: threadInputIndex(threadInputIndex), chunkSize(chunkSize),
-				  input(&input), output(&output) {}
+			ThreadArgument(std::vector<OUT> &output,
+						   std::vector<IN> &input,
+						   size_t threadInputIndex,
+						   size_t chunkSize)
+				: threadInputIndex(threadInputIndex),
+				  chunkSize(chunkSize),
+				  input(&input),
+				  output(&output) {}
 
 			~ThreadArgument()
 			{
@@ -63,8 +65,8 @@ class Stencil2DSkeleton
 		};
 
 		template<typename IN, typename OUT, typename ...ARGs>
-		void threadStencil2D(ThreadArgument<IN,OUT> *threadArguments, size_t width,
-							 size_t nrows, size_t ncols, size_t threadID, ARGs... args)
+		void threadStencil1D(ThreadArgument<IN,OUT> *threadArguments, size_t width,
+						   size_t threadID, ARGs... args)
 		{
 			auto input = threadArguments[threadID].input;
 			auto output = threadArguments[threadID].output;
@@ -98,26 +100,16 @@ class Stencil2DSkeleton
 						dataBlockFlags[ dataBlock ] = 0;
 						dataBlockMutex->unlock();
 
-						IN *neighbourhood = (IN *) malloc((width*2+1)*(width*2+1)*sizeof(IN));
+						IN *neighbourhood = (IN *) malloc((width*2+1)*sizeof(IN));
 
 						for(size_t elementIndex = dataBlockIndices[dataBlock];
 							elementIndex < dataBlockIndices[ dataBlock+1 ];
 							++elementIndex)
 						{
-							int elCol = elementIndex % ncols;
-							int elRow = elementIndex / ncols;
-							int neighbourCol, neighbourRow;
-
-							// iterate over filter window
-							for (int row=0; row<2*width+1; ++row)
+							for (size_t i=0; i<2*width+1; i++)
 							{
-								for (int col=0; col<2*width+1; ++col)
-								{
-									neighbourCol = (elCol+col+ncols-width)%ncols;
-									neighbourRow = (elRow+row+nrows-width)%nrows;
-									neighbourhood[col+row*(2*width+1)] = input->at(neighbourCol+neighbourRow*ncols);
-								}
-							}							
+								neighbourhood[i]=input->at((elementIndex-width+i+inputSize)%inputSize);
+							}
 							output->at(elementIndex)=elemental.elemental(neighbourhood,width,args...);
 						}
 						free(neighbourhood);
@@ -135,9 +127,8 @@ class Stencil2DSkeleton
 		}
 
 		Elemental<EL> elemental;
-		Stencil2DImplementation(Elemental<EL> elemental, size_t width,
-								size_t nrows, size_t ncols, size_t threads)
-			: elemental(elemental), width(width), nrows(nrows), ncols(ncols), nthreads(threads)
+		Stencil1DImplementation(Elemental<EL> elemental, size_t width, size_t threads)
+			: elemental(elemental), width(width), nthreads(threads)
 		{
 			this->nDataBlocks = NDATABLOCKS; 
 			// this->nDataBlocks = 1; // MIC! was 10
@@ -207,7 +198,7 @@ class Stencil2DSkeleton
 
 			for(size_t t=0; t< nthreads; ++t )
 			{
-				THREADS[t]=new std::thread(&Stencil2DImplementation<EL>::threadStencil2D<IN,OUT,ARGs...>, this, threadArguments, width, nrows, ncols, t, args...);
+				THREADS[t]=new std::thread(&Stencil1DImplementation<EL>::threadStencil1D<IN,OUT,ARGs...>, this, threadArguments, width, t, args...);
 			}
 
 			for(size_t t=0; t< nthreads; ++t)
@@ -219,10 +210,10 @@ class Stencil2DSkeleton
 			delete[] threadArguments;
 		}
 		template<typename EL2>
-		friend Stencil2DImplementation<EL2> __Stencil2DWithAccess(EL2 el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads);
+		friend Stencil1DImplementation<EL2> __Stencil1DWithAccess(EL2 el, const size_t &width, const size_t &threads);
 	};
 	template<typename EL2>
-	friend Stencil2DImplementation<EL2> __Stencil2DWithAccess(EL2 el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads);
+	friend Stencil1DImplementation<EL2> __Stencil1DWithAccess(EL2 el, const size_t &width, const size_t &threads);
 };
 
 /*
@@ -231,17 +222,17 @@ class Stencil2DSkeleton
  * We need a wrapper!
  */
 template<typename EL>
-Stencil2DSkeleton::Stencil2DImplementation<EL> __Stencil2DWithAccess(EL el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads)
+Stencil1DSkeleton::Stencil1DImplementation<EL> __Stencil1DWithAccess(EL el, const size_t &width, const size_t &threads)
 {
-    Stencil2DSkeleton::Elemental<EL> elemental(el);
-    Stencil2DSkeleton::Stencil2DImplementation<EL> stencil2d(elemental, width, nrows, ncols, threads);
-    return stencil2d;
+    Stencil1DSkeleton::Elemental<EL> elemental(el);
+    Stencil1DSkeleton::Stencil1DImplementation<EL> stencil1D(elemental, width, threads);
+    return stencil1D;
 }
 
 template<typename EL>
-Stencil2DSkeleton::Stencil2DImplementation<EL> Stencil2D(EL el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads = 0)
+Stencil1DSkeleton::Stencil1DImplementation<EL> Stencil1D(EL el, const size_t &width, const size_t &threads = 0)
 {
-    return __Stencil2DWithAccess(el, width, nrows, ncols, threads);
+    return __Stencil1DWithAccess(el, width, threads);
 }
 
-#endif /* STENCIL2D_HPP */
+#endif /* STENCIL1D_HPP */
