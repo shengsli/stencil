@@ -34,9 +34,35 @@ void bubble_sort (int *arr, int size)
 				swap(&arr[j], &arr[j+1]);
 } 
 
+int partition (int arr[], int low, int high)
+{
+    int pivot = arr[high];
+    int i = low-1;
+    for (int j=low; j<=high-1; j++)
+    {
+        if (arr[j] <= pivot)
+        {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+  
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        int pi = partition(arr, low, high); 
+        quickSort(arr, low, pi - 1); 
+        quickSort(arr, pi + 1, high); 
+    } 
+} 
+
 int find_median (int *arr, int size)
 {
-	bubble_sort(arr, size);
+	quickSort(arr, 0, size-1);
 	if (size%2 != 0) return arr[size/2];
 	return (arr[(size-1)/2] + arr[size/2])/2;
 }
