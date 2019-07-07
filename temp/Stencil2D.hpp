@@ -11,6 +11,10 @@
 #include <thread>
 #include <mutex>
 
+#define WRAP_AROUND 0
+#define FIXED_VALUE 1
+#define REPLICATE_LAST_ELEMENT 2
+
 class Stencil2DSkeleton
 {
     private:
@@ -31,9 +35,10 @@ class Stencil2DSkeleton
 		unsigned char BLOCK_FLAG_INITIAL_VALUE;
 		size_t nthreads;
 		size_t nDataBlocks;
-		size_t width;
+		size_t radius;
 		size_t nrows;
 		size_t ncols;
+		unsigned char paddingOption;
 
 		template<typename IN, typename OUT>
 		class ThreadArgument
@@ -49,11 +54,7 @@ class Stencil2DSkeleton
 			std::vector<OUT> *output;
 
 			ThreadArgument() {}
-			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input,
-						   size_t threadInputIndex, size_t chunkSize)
-				: threadInputIndex(threadInputIndex), chunkSize(chunkSize),
-				  input(&input), output(&output) {}
-
+			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input, size_t threadInputIndex, size_t chunkSize) : threadInputIndex(threadInputIndex), chunkSize(chunkSize), input(&input), output(&output) {}
 			~ThreadArgument()
 			{
 				delete[] dataBlockIndices;
@@ -63,8 +64,7 @@ class Stencil2DSkeleton
 		};
 
 		template<typename IN, typename OUT, typename ...ARGs>
-		void threadStencil2D(ThreadArgument<IN,OUT> *threadArguments, size_t width,
-							 size_t nrows, size_t ncols, size_t threadID, ARGs... args)
+		void threadStencil2D(ThreadArgument<IN,OUT> *threadArguments, size_t radius, size_t nrows, size_t ncols, unsigned char paddingOption, size_t threadID, ARGs... args)
 		{
 			auto input = threadArguments[threadID].input;
 			auto output = threadArguments[threadID].output;
@@ -98,7 +98,7 @@ class Stencil2DSkeleton
 						dataBlockFlags[ dataBlock ] = 0;
 						dataBlockMutex->unlock();
 
-						IN *neighbourhood = (IN *) malloc((width*2+1)*(width*2+1)*sizeof(IN));
+						IN *neighbourhood = (IN *) malloc((radius*2+1)*(radius*2+1)*sizeof(IN));
 
 						for(size_t elementIndex = dataBlockIndices[dataBlock];
 							elementIndex < dataBlockIndices[ dataBlock+1 ];
@@ -109,16 +109,54 @@ class Stencil2DSkeleton
 							int neighbourCol, neighbourRow;
 
 							// iterate over filter window
-							for (int row=0; row<2*width+1; ++row)
+							for (int row=0; row<2*radius+1; ++row)
 							{
-								for (int col=0; col<2*width+1; ++col)
+								for (int col=0; col<2*radius+1; ++col)
 								{
-									neighbourCol = (elCol+col+ncols-width)%ncols;
-									neighbourRow = (elRow+row+nrows-width)%nrows;
-									neighbourhood[col+row*(2*width+1)] = input->at(neighbourCol+neighbourRow*ncols);
+									switch (paddingOption)
+									{
+									case WRAP_AROUND:
+										{
+											neighbourCol = (elCol+col+ncols-radius)%ncols;
+											neighbourRow = (elRow+row+nrows-radius)%nrows;
+											neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+neighbourRow*ncols);
+										}
+										break;
+									case FIXED_VALUE:
+										{
+											neighbourCol = elCol+col-radius;
+											neighbourRow = elRow+row-radius;
+											if (neighbourCol<0 || neighbourCol>=ncols || neighbourRow<0 || neighbourRow>=nrows)
+												neighbourhood[col+row*(2*radius+1)] = 0;
+											else
+												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+neighbourRow*ncols);
+										}
+										break;
+									case REPLICATE_LAST_ELEMENT:
+										{
+											neighbourCol = elCol+col-radius;
+											neighbourRow = elRow+row-radius;
+											if ((neighbourCol<0 || neighbourCol>=ncols) && (neighbourRow<0 || neighbourRow>=nrows))
+												neighbourhood[col+row*(2*radius+1)] = 0;
+											else if (neighbourCol<0)
+												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourRow*ncols);
+											else if (neighbourCol>=ncols)
+												neighbourhood[col+row*(2*radius+1)] = input->at((neighbourRow+1)*ncols-1);
+											else if (neighbourRow<0)
+												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol);
+											else if (neighbourRow>=nrows)
+												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+(neighbourRow-1)*ncols);
+											else
+												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+neighbourRow*ncols);
+										}
+										break;
+									default:
+										throw std::invalid_argument("Invalid padding option.");
+										break;
+									}
 								}
 							}							
-							output->at(elementIndex)=elemental.elemental(neighbourhood,width,args...);
+							output->at(elementIndex)=elemental.elemental(neighbourhood,radius,args...);
 						}
 						free(neighbourhood);
 					}
@@ -135,9 +173,7 @@ class Stencil2DSkeleton
 		}
 
 		Elemental<EL> elemental;
-		Stencil2DImplementation(Elemental<EL> elemental, size_t width,
-								size_t nrows, size_t ncols, size_t threads)
-			: elemental(elemental), width(width), nrows(nrows), ncols(ncols), nthreads(threads)
+		Stencil2DImplementation(Elemental<EL> elemental, size_t radius, size_t nrows, size_t ncols, unsigned char paddingOption, size_t threads) : elemental(elemental), radius(radius), nrows(nrows), ncols(ncols), paddingOption(paddingOption), nthreads(threads)
 		{
 			this->nDataBlocks = NDATABLOCKS; 
 			// this->nDataBlocks = 1; // MIC! was 10
@@ -161,7 +197,7 @@ class Stencil2DSkeleton
 			}
 			if( input.size() == 1 )
 			{
-				//output[0] = elemental.elemental(input[0], width, args...);
+				//output[0] = elemental.elemental(input[0], radius, args...);
 				return;
 			}
 			std::thread *THREADS[nthreads];
@@ -207,7 +243,7 @@ class Stencil2DSkeleton
 
 			for(size_t t=0; t< nthreads; ++t )
 			{
-				THREADS[t]=new std::thread(&Stencil2DImplementation<EL>::threadStencil2D<IN,OUT,ARGs...>, this, threadArguments, width, nrows, ncols, t, args...);
+				THREADS[t]=new std::thread(&Stencil2DImplementation<EL>::threadStencil2D<IN,OUT,ARGs...>, this, threadArguments, radius, nrows, ncols, paddingOption, t, args...);
 			}
 
 			for(size_t t=0; t< nthreads; ++t)
@@ -219,10 +255,10 @@ class Stencil2DSkeleton
 			delete[] threadArguments;
 		}
 		template<typename EL2>
-		friend Stencil2DImplementation<EL2> __Stencil2DWithAccess(EL2 el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads);
+		friend Stencil2DImplementation<EL2> __Stencil2DWithAccess(EL2 el, const size_t &radius, const size_t nrows, const size_t ncols, const unsigned char &paddingOption, const size_t &threads);
 	};
 	template<typename EL2>
-	friend Stencil2DImplementation<EL2> __Stencil2DWithAccess(EL2 el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads);
+	friend Stencil2DImplementation<EL2> __Stencil2DWithAccess(EL2 el, const size_t &radius, const size_t nrows, const size_t ncols, const unsigned char &paddingOption, const size_t &threads);
 };
 
 /*
@@ -231,17 +267,17 @@ class Stencil2DSkeleton
  * We need a wrapper!
  */
 template<typename EL>
-Stencil2DSkeleton::Stencil2DImplementation<EL> __Stencil2DWithAccess(EL el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads)
+Stencil2DSkeleton::Stencil2DImplementation<EL> __Stencil2DWithAccess(EL el, const size_t &radius, const size_t nrows, const size_t ncols, const unsigned char &paddingOption, const size_t &threads)
 {
     Stencil2DSkeleton::Elemental<EL> elemental(el);
-    Stencil2DSkeleton::Stencil2DImplementation<EL> stencil2D(elemental, width, nrows, ncols, threads);
+    Stencil2DSkeleton::Stencil2DImplementation<EL> stencil2D(elemental, radius, nrows, ncols, paddingOption, threads);
     return stencil2D;
 }
 
 template<typename EL>
-Stencil2DSkeleton::Stencil2DImplementation<EL> Stencil2D(EL el, const size_t &width, const size_t nrows, const size_t ncols, const size_t &threads = 0)
+Stencil2DSkeleton::Stencil2DImplementation<EL> Stencil2D(EL el, const size_t &radius, const size_t nrows, const size_t ncols, const unsigned char &paddingOption, const size_t &threads = 0)
 {
-    return __Stencil2DWithAccess(el, width, nrows, ncols, threads);
+    return __Stencil2DWithAccess(el, radius, nrows, ncols, paddingOption, threads);
 }
 
 #endif /* STENCIL2D_HPP */

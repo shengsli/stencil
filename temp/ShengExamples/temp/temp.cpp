@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
         in[i] = i;
 
     std::vector<pixel_t> image (in.size());
-    auto stencil = Stencil1D(stencilkernel, 2, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, 2, WRAP_AROUND, NTHREADS); // WRAP_AROUND does nothing
     stencil(image,in);
 
 #ifdef OUTPUT

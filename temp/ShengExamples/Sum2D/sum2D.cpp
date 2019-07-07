@@ -1,5 +1,5 @@
 /**
- * g++ sum2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DWIDTH=1 -DNROWS=4 -DNCOLS=5 -DOUTPUT -o sum2D
+ * g++ sum2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DRADIUS=1 -DNROWS=4 -DNCOLS=5 -DPADDING=0 -DOUTPUT -o sum2D
  * ./sum2D
  */
 
@@ -45,10 +45,10 @@ double second()
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
 
-int stencilkernel (int neighbourhood[], int width)
+int stencilkernel (int neighbourhood[], int radius)
 {
 	int sum = 0;
-	for (int i=0; i<(width*2+1)*(width*2+1); ++i)
+	for (int i=0; i<(radius*2+1)*(radius*2+1); ++i)
 	{
 		sum += neighbourhood[i];
 	}
@@ -70,13 +70,49 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 		int sum=0;
 		
 		// iterate over filter window
-		for (int row=0; row<2*WIDTH+1; ++row)
+		for (int row=0; row<2*RADIUS+1; ++row)
 		{
-			for (int col=0; col<2*WIDTH+1; ++col)
+			for (int col=0; col<2*RADIUS+1; ++col)
 			{
-				neighbourCol = (elCol+col+NCOLS-WIDTH)%NCOLS;
-				neighbourRow = (elRow+row+NROWS-WIDTH)%NROWS;
-				sum += input[neighbourCol+neighbourRow*NCOLS];
+				switch (PADDING)
+				{
+				case WRAP_AROUND:
+					{
+						neighbourCol = (elCol+col+NCOLS-RADIUS)%NCOLS;
+						neighbourRow = (elRow+row+NROWS-RADIUS)%NROWS;
+						sum += input[neighbourCol+neighbourRow*NCOLS];
+					}
+					break;
+				case FIXED_VALUE:
+					{
+						neighbourCol = elCol+col-RADIUS;
+						neighbourRow = elRow+row-RADIUS;
+						if (neighbourCol>=0 && neighbourCol<NCOLS && neighbourRow>=0 && neighbourRow<NROWS)
+						    sum += input[neighbourCol+neighbourRow*NCOLS];
+					}
+					break;
+				case REPLICATE_LAST_ELEMENT:
+					{
+						neighbourCol = elCol+col-RADIUS;
+						neighbourRow = elRow+row-RADIUS;
+						if ((neighbourCol<0 || neighbourCol>=NCOLS) && (neighbourRow<0 || neighbourRow>=NROWS))
+							sum += 0;
+						else if (neighbourCol<0)
+							sum += input[neighbourRow*NCOLS];
+						else if (neighbourCol>=NCOLS)
+							sum += input[(neighbourRow+1)*NCOLS-1];
+						else if (neighbourRow<0)
+							sum += input[neighbourCol];
+						else if (neighbourRow>=NROWS)
+							sum += input[neighbourCol+(neighbourRow-1)*NCOLS];
+						else
+							sum += input[neighbourCol+neighbourRow*NCOLS];
+					}
+					break;
+				default:
+					throw std::invalid_argument("Invalid padding option.");
+					break;
+				}
 			}
 		}
 		output[elIdx] = sum;
@@ -91,11 +127,11 @@ void parallelSum(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil2d = Stencil2D(stencilkernel, WIDTH, NROWS, NCOLS, NTHREADS);
+    auto stencil2d = Stencil2D(stencilkernel, RADIUS, NROWS, NCOLS, PADDING, NTHREADS);
     stencil2d(output, input);
 	
     tstop = second();
-    std::cout << "parallelSum, " << tstop-tstart << ", " << WIDTH << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
+    std::cout << "parallelSum, " << tstop-tstart << ", " << RADIUS << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)

@@ -1,5 +1,5 @@
 /**
- * g++ median.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o median
+ * g++ median.cpp -std=c++11 -O2 -lpthread -DRADIUS=2 -DNTHREADS=4 -DNITEMS=1024 -DNDATABLOCKS=100 -DPADDING=0 -DOUTPUT -o median
  * ./median
  */
 
@@ -90,9 +90,9 @@ double second()
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
 
-int stencilkernel (int neighbourhood[], int width)
+int stencilkernel (int neighbourhood[], int radius)
 {
-	return find_median(neighbourhood, width*2+1);
+	return find_median(neighbourhood, radius*2+1);
 }
 
 void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
@@ -101,17 +101,45 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
     tstart = second();
 
 	// find median
-	int *neighbourhood = (int *) malloc((WIDTH*2+1)*sizeof(int));
+	int *neighbourhood = (int *) malloc((RADIUS*2+1)*sizeof(int));
 	
 	int inputSize = input.size();
-	for (int targetIdx=0; targetIdx<NITEMS; ++targetIdx)
+	for (int elementIndex=0; elementIndex<NITEMS; ++elementIndex)
 	{
 		int median=0;
-		for (int i=0; i<WIDTH*2+1; ++i)
+		for (int i=0; i<RADIUS*2+1; ++i)
 		{
-			neighbourhood[i] = input[(targetIdx+i-WIDTH+inputSize)%inputSize];
+			switch (PADDING)
+			{
+			case WRAP_AROUND:
+				neighbourhood[i] = input[(elementIndex+i-RADIUS+inputSize)%inputSize];
+				break;
+			case FIXED_VALUE:
+				{
+					int idx = elementIndex-RADIUS+i;
+					if (idx >= 0 && idx < inputSize)
+						neighbourhood[i]=input[idx];
+					else
+						neighbourhood[i]=0;
+				}
+				break;
+			case REPLICATE_LAST_ELEMENT:
+				{
+					int idx = elementIndex-RADIUS+i;
+					if (idx >= 0 && idx < inputSize)
+						neighbourhood[i]=input[idx];
+					else if (idx<0)
+						neighbourhood[i]=input[0];
+					else if (idx>=inputSize)
+						neighbourhood[i]=input[inputSize-1];
+				}
+				break;
+			default:
+				throw std::invalid_argument("Invalid padding option.");
+				break;
+			}
 		}
-		output[targetIdx] = find_median(neighbourhood, WIDTH*2+1);
+		output[elementIndex] = find_median(neighbourhood, RADIUS*2+1);
 	}
 	
     tstop = second();
@@ -123,11 +151,11 @@ void parallelMedian(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, RADIUS, PADDING, NTHREADS);
     stencil(output, input);
 	
     tstop = second();
-    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NITEMS <<  std::endl;
+    std::cout << "parallelMedian, " << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << NITEMS <<  std::endl;
 }
 
 int main(int argc, char** argv)

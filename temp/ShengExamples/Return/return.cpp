@@ -1,5 +1,5 @@
 /**
- * g++ return.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DHXRES=1024 -DHYRES=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o return
+ * g++ return.cpp -std=c++11 -O2 -lpthread -DRADIUS=2 -DNTHREADS=4 -DHXRES=1024 -DHYRES=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o return
  * ./return
  * gimp stenciltest.ppm &
  */
@@ -28,9 +28,9 @@ FILE *outfile;
 /**
  * Take an integer and scale it to 0..255.   
  */
-pixel_t stencilkernel (int neighbourhood[], int width) {
+pixel_t stencilkernel (int neighbourhood[], int radius) {
 	pixel_t pixel;
-	int color =  neighbourhood[width]*255 / (HXRES*HYRES);
+	int color =  neighbourhood[radius]*255 / (HXRES*HYRES);
 	pixel.r = pixel.g = pixel.b = color;
 	return pixel;
 }
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
         in[i] = i;
 
     std::vector<pixel_t> image (in.size());
-    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, RADIUS, WRAP_AROUND, NTHREADS); // WRAP_AROUND does nothing
     stencil(image, in);
 
 #ifdef OUTPUT
@@ -62,6 +62,6 @@ int main(int argc, char** argv) {
 #endif
    
     tstop = second();
-    std::cout << tstop-tstart << ", " << WIDTH << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
+    std::cout << tstop-tstart << ", " << RADIUS << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
 	return 0;
 }

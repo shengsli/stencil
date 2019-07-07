@@ -1,5 +1,5 @@
 /**
- * g++ sum.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o sum
+ * g++ sum.cpp -std=c++11 -O2 -lpthread -DRADIUS=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DPADDING=0 -DOUTPUT -o sum
  * ./sum
  */
 
@@ -41,10 +41,10 @@ double second()
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
 
-int stencilkernel (int neighbourhood[], int width)
+int stencilkernel (int neighbourhood[], int radius)
 {
 	int sum = 0;
-	for (int i=0; i<width*2+1; ++i)
+	for (int i=0; i<radius*2+1; ++i)
 		sum += neighbourhood[i];
 	return sum;
 }
@@ -54,16 +54,41 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 	double tstart, tstop;
     tstart = second();
 
-	// TODO
 	int inputSize = input.size();
-	for (int targetIdx=0; targetIdx<NITEMS; ++targetIdx)
+	for (int elementIndex=0; elementIndex<NITEMS; ++elementIndex)
 	{
 		int sum=0;
-		for (int i=0; i<WIDTH*2+1; ++i)
+		for (int i=0; i<RADIUS*2+1; ++i)
 		{
-			sum += input[(targetIdx+i-WIDTH+inputSize)%inputSize];
+			switch (PADDING)
+			{
+			case WRAP_AROUND:
+				sum += input[(elementIndex+i-RADIUS+inputSize)%inputSize];
+				break;
+			case FIXED_VALUE:
+				{
+					int idx = elementIndex+i-RADIUS;
+					if (idx >= 0 && idx < inputSize)
+						sum += input[idx];
+				}
+				break;
+			case REPLICATE_LAST_ELEMENT:
+				{
+					int idx = elementIndex-RADIUS+i;
+					if (idx >= 0 && idx < inputSize)
+						sum+=input[idx];
+					else if (idx<0)
+						sum+=input[0];
+					else if (idx>=inputSize)
+						sum+=input[inputSize-1];
+				}
+				break;
+			default:
+				throw std::invalid_argument("Invalid padding option.");
+				break;
+			}
 		}
-		output[targetIdx] = sum;
+		output[elementIndex] = sum;
 	}
 	
     tstop = second();
@@ -75,7 +100,7 @@ void parallelSum(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, RADIUS, PADDING, NTHREADS);
     stencil(output, input);
 	
     tstop = second();
@@ -95,6 +120,28 @@ int main(int argc, char** argv)
 	sequentialSum(seqOutput, input);
 	parallelSum(parOutput, input);
 	
+    #ifdef OUTPUT
+    // Output results
+	FILE *outfile;
+    outfile = fopen("sumtest.txt","w");
+    fprintf(outfile,"Input: ");
+    for (size_t i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%4d", input[i]);
+    }
+
+    fprintf(outfile,"\nSequential Output: ");
+    for (size_t i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%4d", seqOutput[i]);
+    }
+
+    fprintf(outfile,"\nParallel Output: ");
+    for (size_t i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%4d", parOutput[i]);
+    }
+	fprintf(outfile," \n");
+	fclose(outfile);
+    #endif
+
 	if (compareResult(seqOutput, parOutput))
 		std::cout << "out is the same as in" << std:: endl;
 	else

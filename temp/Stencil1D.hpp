@@ -11,6 +11,10 @@
 #include <thread>
 #include <mutex>
 
+#define WRAP_AROUND 0
+#define FIXED_VALUE 1
+#define REPLICATE_LAST_ELEMENT 2
+
 class Stencil1DSkeleton
 {
     private:
@@ -31,7 +35,8 @@ class Stencil1DSkeleton
 		unsigned char BLOCK_FLAG_INITIAL_VALUE;
 		size_t nthreads;
 		size_t nDataBlocks;
-		size_t width;
+		size_t radius;
+		unsigned char paddingOption;
 
 		template<typename IN, typename OUT>
 		class ThreadArgument
@@ -47,15 +52,7 @@ class Stencil1DSkeleton
 			std::vector<OUT> *output;
 
 			ThreadArgument() {}
-			ThreadArgument(std::vector<OUT> &output,
-						   std::vector<IN> &input,
-						   size_t threadInputIndex,
-						   size_t chunkSize)
-				: threadInputIndex(threadInputIndex),
-				  chunkSize(chunkSize),
-				  input(&input),
-				  output(&output) {}
-
+			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input, size_t threadInputIndex, size_t chunkSize) : threadInputIndex(threadInputIndex), chunkSize(chunkSize), input(&input), output(&output) {}
 			~ThreadArgument()
 			{
 				delete[] dataBlockIndices;
@@ -65,8 +62,7 @@ class Stencil1DSkeleton
 		};
 
 		template<typename IN, typename OUT, typename ...ARGs>
-		void threadStencil1D(ThreadArgument<IN,OUT> *threadArguments, size_t width,
-						   size_t threadID, ARGs... args)
+		void threadStencil1D(ThreadArgument<IN,OUT> *threadArguments, size_t radius, unsigned char paddingOption, size_t threadID, ARGs... args)
 		{
 			auto input = threadArguments[threadID].input;
 			auto output = threadArguments[threadID].output;
@@ -100,17 +96,45 @@ class Stencil1DSkeleton
 						dataBlockFlags[ dataBlock ] = 0;
 						dataBlockMutex->unlock();
 
-						IN *neighbourhood = (IN *) malloc((width*2+1)*sizeof(IN));
+						IN *neighbourhood = (IN *) malloc((radius*2+1)*sizeof(IN));
 
 						for(size_t elementIndex = dataBlockIndices[dataBlock];
 							elementIndex < dataBlockIndices[ dataBlock+1 ];
 							++elementIndex)
 						{
-							for (size_t i=0; i<2*width+1; i++)
+							for (size_t i=0; i<2*radius+1; i++)
 							{
-								neighbourhood[i]=input->at((elementIndex-width+i+inputSize)%inputSize);
+								switch (paddingOption)
+								{
+								case WRAP_AROUND:
+									neighbourhood[i]=input->at((elementIndex-radius+i+inputSize)%inputSize);
+									break;
+								case FIXED_VALUE:
+									{
+										int idx = elementIndex-radius+i;
+										if (idx >= 0 && idx < inputSize)
+											neighbourhood[i]=input->at(idx);
+										else
+											neighbourhood[i]=0;
+									}
+									break;
+								case REPLICATE_LAST_ELEMENT:
+									{
+										int idx = elementIndex-radius+i;
+										if (idx >= 0 && idx < inputSize)
+											neighbourhood[i]=input->at(idx);
+										else if (idx<0)
+											neighbourhood[i]=input->at(0);
+										else if (idx>=inputSize)
+											neighbourhood[i]=input->at(inputSize-1);
+									}
+									break;
+								default:
+									throw std::invalid_argument("Invalid padding option.");
+									break;
+								}
 							}
-							output->at(elementIndex)=elemental.elemental(neighbourhood,width,args...);
+							output->at(elementIndex)=elemental.elemental(neighbourhood,radius,args...);
 						}
 						free(neighbourhood);
 					}
@@ -127,8 +151,7 @@ class Stencil1DSkeleton
 		}
 
 		Elemental<EL> elemental;
-		Stencil1DImplementation(Elemental<EL> elemental, size_t width, size_t threads)
-			: elemental(elemental), width(width), nthreads(threads)
+		Stencil1DImplementation(Elemental<EL> elemental, size_t radius, unsigned char paddingOption, size_t threads) : elemental(elemental), radius(radius), paddingOption(paddingOption), nthreads(threads)
 		{
 			this->nDataBlocks = NDATABLOCKS; 
 			// this->nDataBlocks = 1; // MIC! was 10
@@ -152,7 +175,7 @@ class Stencil1DSkeleton
 			}
 			if( input.size() == 1 )
 			{
-				//output[0] = elemental.elemental(input[0], width, args...);
+				//output[0] = elemental.elemental(input[0], radius, args...);
 				return;
 			}
 			std::thread *THREADS[nthreads];
@@ -198,7 +221,7 @@ class Stencil1DSkeleton
 
 			for(size_t t=0; t< nthreads; ++t )
 			{
-				THREADS[t]=new std::thread(&Stencil1DImplementation<EL>::threadStencil1D<IN,OUT,ARGs...>, this, threadArguments, width, t, args...);
+				THREADS[t]=new std::thread(&Stencil1DImplementation<EL>::threadStencil1D<IN,OUT,ARGs...>, this, threadArguments, radius, paddingOption, t, args...);
 			}
 
 			for(size_t t=0; t< nthreads; ++t)
@@ -210,10 +233,10 @@ class Stencil1DSkeleton
 			delete[] threadArguments;
 		}
 		template<typename EL2>
-		friend Stencil1DImplementation<EL2> __Stencil1DWithAccess(EL2 el, const size_t &width, const size_t &threads);
+		friend Stencil1DImplementation<EL2> __Stencil1DWithAccess(EL2 el, const size_t &radius, const unsigned char &paddingOption, const size_t &threads);
 	};
 	template<typename EL2>
-	friend Stencil1DImplementation<EL2> __Stencil1DWithAccess(EL2 el, const size_t &width, const size_t &threads);
+	friend Stencil1DImplementation<EL2> __Stencil1DWithAccess(EL2 el, const size_t &radius, const unsigned char &paddingOption, const size_t &threads);
 };
 
 /*
@@ -222,17 +245,17 @@ class Stencil1DSkeleton
  * We need a wrapper!
  */
 template<typename EL>
-Stencil1DSkeleton::Stencil1DImplementation<EL> __Stencil1DWithAccess(EL el, const size_t &width, const size_t &threads)
+Stencil1DSkeleton::Stencil1DImplementation<EL> __Stencil1DWithAccess(EL el, const size_t &radius, const unsigned char &paddingOption, const size_t &threads)
 {
     Stencil1DSkeleton::Elemental<EL> elemental(el);
-    Stencil1DSkeleton::Stencil1DImplementation<EL> stencil1D(elemental, width, threads);
+    Stencil1DSkeleton::Stencil1DImplementation<EL> stencil1D(elemental, radius, paddingOption, threads);
     return stencil1D;
 }
 
 template<typename EL>
-Stencil1DSkeleton::Stencil1DImplementation<EL> Stencil1D(EL el, const size_t &width, const size_t &threads = 0)
+Stencil1DSkeleton::Stencil1DImplementation<EL> Stencil1D(EL el, const size_t &radius, const unsigned char &paddingOption, const size_t &threads = 0)
 {
-    return __Stencil1DWithAccess(el, width, threads);
+    return __Stencil1DWithAccess(el, radius, paddingOption, threads);
 }
 
 #endif /* STENCIL1D_HPP */

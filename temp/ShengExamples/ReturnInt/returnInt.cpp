@@ -1,5 +1,5 @@
 /**
- * g++ returnInt.cpp -std=c++11 -O2 -lpthread -DWIDTH=2 -DNTHREADS=4 -DHXRES=1024 -DHYRES=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o returnInt
+ * g++ returnInt.cpp -std=c++11 -O2 -lpthread -DRADIUS=2 -DNTHREADS=4 -DNITEMS=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT -o returnInt
  * ./returnInt
  */
 
@@ -40,24 +40,24 @@ double second() {
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
 
-int stencilkernel (int neighbourhood[], int width) {
-	return neighbourhood[width];
+int stencilkernel (int neighbourhood[], int radius) {
+	return neighbourhood[radius];
 }
 
 int main(int argc, char** argv) {
     double tstart, tstop;
     tstart = second();
 	
-    std::vector<int> in(HXRES*HYRES);
-    for(size_t i = 0; i < HXRES*HYRES; ++i)
+    std::vector<int> in(NITEMS);
+    for(size_t i = 0; i < NITEMS; ++i)
         in[i] = i;
 	
     std::vector<int> out (in.size());
-    auto stencil = Stencil1D(stencilkernel, WIDTH, NTHREADS);
+    auto stencil = Stencil1D(stencilkernel, RADIUS, WRAP_AROUND, NTHREADS);
     stencil(out, in);
 	
     tstop = second();
-    std::cout << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
+    std::cout << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << NITEMS <<  std::endl;
 
 	if (compareResult(in, out))
 		std::cout << "out is the same as in" << std:: endl;

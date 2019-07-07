@@ -1,5 +1,5 @@
 /**
- * g++ median2D.cpp -std=c++11 -O2 -lpthread -DWIDTH=1 -DNTHREADS=4 -DNROWS=4 -DNCOLS=5 -DNDATABLOCKS=100 -DOUTPUT -o median2D
+ * g++ median2D.cpp -std=c++11 -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNROWS=4 -DNCOLS=5 -DNDATABLOCKS=100 -DPADDING=0 -DOUTPUT -o median2D
  * ./median2D
  */
 
@@ -104,9 +104,9 @@ double second()
 	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
 
-int stencilkernel (int neighbourhood[], int width)
+int stencilkernel (int neighbourhood[], int radius)
 {
-	return find_median(neighbourhood, (2*width+1)*(2*width+1));
+	return find_median(neighbourhood, (2*radius+1)*(2*radius+1));
 }
 
 void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
@@ -115,25 +115,63 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
     tstart = second();
 
 	// find median
-	int *neighbourhood = (int *) malloc((WIDTH*2+1)*(WIDTH*2+1)*sizeof(int));
+	int *neighbourhood = (int *) malloc((RADIUS*2+1)*(RADIUS*2+1)*sizeof(int));
 	int nItems = NROWS*NCOLS;
 	for (int elIdx=0; elIdx<nItems; ++elIdx)
 	{
 		int elCol = elIdx % NCOLS;
 		int elRow = elIdx / NCOLS;
 		int neighbourCol, neighbourRow;
-		
+
 		// iterate over filter window
-		for (int row=0; row<2*WIDTH+1; ++row)
+		for (int row=0; row<2*RADIUS+1; ++row)
 		{
-			for (int col=0; col<2*WIDTH+1; ++col)
+			for (int col=0; col<2*RADIUS+1; ++col)
 			{
-				neighbourCol = (elCol+col+NCOLS-WIDTH)%NCOLS;
-				neighbourRow = (elRow+row+NROWS-WIDTH)%NROWS;
-				neighbourhood[col+row*(2*WIDTH+1)] = input[neighbourCol+neighbourRow*NCOLS];
+				switch (PADDING)
+				{
+				case WRAP_AROUND:
+					{
+						neighbourCol = (elCol+col+NCOLS-RADIUS)%NCOLS;
+						neighbourRow = (elRow+row+NROWS-RADIUS)%NROWS;
+						neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
+					}
+					break;
+				case FIXED_VALUE:
+					{
+						neighbourCol = elCol+col-RADIUS;
+						neighbourRow = elRow+row-RADIUS;
+						if (neighbourCol<0 || neighbourCol>=NCOLS || neighbourRow<0 || neighbourRow>=NROWS)
+							neighbourhood[col+row*(2*RADIUS+1)] = 0;
+						else
+							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
+					}
+					break;
+				case REPLICATE_LAST_ELEMENT:
+					{
+						neighbourCol = elCol+col-RADIUS;
+						neighbourRow = elRow+row-RADIUS;
+						if ((neighbourCol<0 || neighbourCol>=NCOLS) && (neighbourRow<0 || neighbourRow>=NROWS))
+							neighbourhood[col+row*(2*RADIUS+1)] = 0;
+						else if (neighbourCol<0)
+							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourRow*NCOLS];
+						else if (neighbourCol>=NCOLS)
+							neighbourhood[col+row*(2*RADIUS+1)] = input[(neighbourRow+1)*NCOLS-1];
+						else if (neighbourRow<0)
+							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol];
+						else if (neighbourRow>=NROWS)
+							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+(neighbourRow-1)*NCOLS];
+						else
+							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
+					}
+					break;
+				default:
+					throw std::invalid_argument("Invalid padding option.");
+					break;
+				}
 			}
 		}
-		output[elIdx] = find_median(neighbourhood,(WIDTH*2+1)*(WIDTH*2+1));
+		output[elIdx] = find_median(neighbourhood,(RADIUS*2+1)*(RADIUS*2+1));
 	}
 	
     tstop = second();
@@ -145,11 +183,11 @@ void parallelMedian(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil2d = Stencil2D(stencilkernel, WIDTH, NROWS, NCOLS, NTHREADS);
+    auto stencil2d = Stencil2D(stencilkernel, RADIUS, NROWS, NCOLS, PADDING, NTHREADS);
     stencil2d(output, input);
 	
     tstop = second();
-    std::cout << "parallelMedian, " << tstop-tstart << ", " << WIDTH << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
+    std::cout << "parallelMedian, " << tstop-tstart << ", " << RADIUS << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)
@@ -164,10 +202,6 @@ int main(int argc, char** argv)
 
 	sequentialMedian(seqOutput, input);
 	parallelMedian(parOutput, input);
-
-	printVector(input);
-	puts("");
-	printVector(seqOutput);
 	
     #ifdef OUTPUT
     // Output results
