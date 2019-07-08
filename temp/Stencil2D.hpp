@@ -54,7 +54,8 @@ class Stencil2DSkeleton
 			std::vector<OUT> *output;
 
 			ThreadArgument() {}
-			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input, size_t threadInputIndex, size_t chunkSize) : threadInputIndex(threadInputIndex), chunkSize(chunkSize), input(&input), output(&output) {}
+			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input, size_t threadInputIndex, size_t chunkSize)
+				: threadInputIndex(threadInputIndex), chunkSize(chunkSize), input(&input), output(&output) {}
 			~ThreadArgument()
 			{
 				delete[] dataBlockIndices;
@@ -145,7 +146,7 @@ class Stencil2DSkeleton
 											else if (neighbourRow<0)
 												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol);
 											else if (neighbourRow>=nrows)
-												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+(neighbourRow-1)*ncols);
+												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+(nrows-1)*ncols);
 											else
 												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+neighbourRow*ncols);
 										}

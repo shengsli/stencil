@@ -15,38 +15,6 @@
 #define FIXED_VALUE 1
 #define REPLICATE_LAST_ELEMENT 2
 
-int counter=0;
-pthread_mutex_t barrier;
-pthread_cond_t go;
-int numArrived = 0;
-void Barrier() {
-	pthread_mutex_lock(&barrier);
-	numArrived++;
-	if (numArrived == NTHREADS)
-	{
-		numArrived = 0;
-		pthread_cond_broadcast(&go);
-	}
-	else
-	{
-		pthread_cond_wait(&go, &barrier);
-	}
-	pthread_mutex_unlock(&barrier);
-}
-
-void printVector(std::vector<int> &vec)
-{
-	auto it = vec.begin();
-	for (int row=0; row<NROWS; ++row)
-	{
-		for (int col=0; col<NCOLS; ++col)
-		{
-			printf("%d, ", vec[col+row*NCOLS]);
-		}
-		std::cout << std::endl;
-	}
-}
-
 class Stencil2DSkeleton
 {
     private:
@@ -72,6 +40,7 @@ class Stencil2DSkeleton
 		size_t ncols;
 		unsigned char paddingOption;
 		size_t nIters;
+		pthread_barrier_t barrier;
 
 		template<typename IN, typename OUT>
 		class ThreadArgument
@@ -113,11 +82,6 @@ class Stencil2DSkeleton
 					output = temp;
 				}
 
-				// puts("------before do while loop------");
-				// printVector(*input);
-				// printVector(*output);
-				// puts("------before do while loop------\n\n");
-				
 				do {
 					std::mutex* dataBlockMutex = threadArguments[assistedThreadID].dataBlockMutex;
 					unsigned char* dataBlockFlags = threadArguments[assistedThreadID].dataBlockFlags;
@@ -220,12 +184,7 @@ class Stencil2DSkeleton
 					assistedThreadID = (assistedThreadID + 1) % nthreads;
 				} while(assistedThreadID != threadID);
 
-				// puts("------after do while loop------");
-				// printVector(*input);
-				// printVector(*output);
-				// puts("------after do while loop------\n\n\n\n");
-
-				Barrier();
+				pthread_barrier_wait(&barrier);
 				std::fill_n(threadArguments[assistedThreadID].dataBlockFlags, nDataBlocks, BLOCK_FLAG_INITIAL_VALUE);
 			}
 		}
@@ -236,6 +195,7 @@ class Stencil2DSkeleton
 			this->nDataBlocks = NDATABLOCKS; 
 			// this->nDataBlocks = 1; // MIC! was 10
 			this->BLOCK_FLAG_INITIAL_VALUE = 1;
+			pthread_barrier_init(&barrier, NULL, nthreads);
 		}
 
     	public:

@@ -52,7 +52,8 @@ class Stencil1DSkeleton
 			std::vector<OUT> *output;
 
 			ThreadArgument() {}
-			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input, size_t threadInputIndex, size_t chunkSize) : threadInputIndex(threadInputIndex), chunkSize(chunkSize), input(&input), output(&output) {}
+			ThreadArgument(std::vector<OUT> &output, std::vector<IN> &input, size_t threadInputIndex, size_t chunkSize)
+				: threadInputIndex(threadInputIndex), chunkSize(chunkSize), input(&input), output(&output) {}
 			~ThreadArgument()
 			{
 				delete[] dataBlockIndices;

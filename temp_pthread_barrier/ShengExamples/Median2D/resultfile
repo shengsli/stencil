@@ -1,0 +1,5 @@
+time, nthreads, ndatablocks, nrows, ncols
+sequentialSum, 6.91414e-06
+sequentialSum, 6.91414e-06
+sequentialSum, 7.15256e-06
+sequentialSum, 6.91414e-06

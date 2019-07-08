@@ -160,7 +160,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 						else if (neighbourRow<0)
 							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol];
 						else if (neighbourRow>=NROWS)
-							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+(neighbourRow-1)*NCOLS];
+							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+(NROWS-1)*NCOLS];
 						else
 							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
 					}

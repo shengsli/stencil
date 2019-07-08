@@ -104,7 +104,7 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 						else if (neighbourRow<0)
 							sum += input[neighbourCol];
 						else if (neighbourRow>=NROWS)
-							sum += input[neighbourCol+(neighbourRow-1)*NCOLS];
+							sum += input[neighbourCol+(NROWS-1)*NCOLS];
 						else
 							sum += input[neighbourCol+neighbourRow*NCOLS];
 					}
