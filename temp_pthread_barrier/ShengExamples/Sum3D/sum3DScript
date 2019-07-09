@@ -1,0 +1,35 @@
+# Tests the sum3Dstencil app
+
+# Test workload on multiple threads problem sizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./sum3DScript threads ndatablocks runs resultfile width nrows ncols
+#
+# threads:    max threadcount
+# ndatablocks number of sub-blocks (for stealing) created from the initial
+#             work partition allocated to a thread
+# runs:       number of repeat runs
+# resultfile: results are sent here
+# width:	  filter size is 2*width+1
+# nrows:      number of rows in whole input
+# ncols:      number of columns in whole input
+
+#echo "grain    threads time" >> $5
+
+threads=$1
+ndatablocks=$2
+runs=$3
+resultfile=$4
+width=$5
+nrows=$6
+ncols=$7
+
+echo "time, nthreads, ndatablocks, nrows, ncols" > $resultfile
+for threadcount in $(seq 1 $threads)
+do
+  g++ sum3D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DWIDTH=$width -DNROWS=$nrows -DNCOLS=$ncols -DOUTPUT -o sum3D
+  for run in $(seq 1 $runs)
+  do
+    ./sum3D >> $resultfile
+  done
+done
