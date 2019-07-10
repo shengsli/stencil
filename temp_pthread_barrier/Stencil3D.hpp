@@ -120,7 +120,7 @@ class Stencil3DSkeleton
 							{
 								int elx = elementIndex % nxs;
 								int ely = (elementIndex / nxs) % nys;
-								int elz = (elementIndex / nxs / nys) % nzs;
+								int elz = elementIndex / nxs / nys;
 								int neighbourx, neighboury, neighbourz;
 
 								// iterate over filter window
@@ -136,7 +136,7 @@ class Stencil3DSkeleton
 												{
 													neighbourx = (elx+filterx-radius+nxs)%nxs;
 													neighboury = (ely+filtery-radius+nys)%nys;
-													neighbourz = (elx+filterz-radius+nzs)%nzs;
+													neighbourz = (elz+filterz-radius+nzs)%nzs;
 													neighbourhood[filterx+(2*radius+1)*(filtery+(2*radius+1)*filterz)] = input->at(neighbourx+nxs*(neighboury+nys*neighbourz));
 												}
 												break;

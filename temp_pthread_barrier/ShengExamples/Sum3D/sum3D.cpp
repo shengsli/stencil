@@ -79,7 +79,7 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 		{
 			int elx = elIdx % NXS;
 			int ely = (elIdx / NXS) % NYS;
-			int elz = (elIdx / NXS / NYS) % NZS;
+			int elz = elIdx / NXS / NYS;
 			int neighbourx, neighboury, neighbourz;
 			int sum=0;
 		
@@ -96,7 +96,7 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 							{
 								neighbourx = (elx+filterx-RADIUS+NXS)%NXS;
 								neighboury = (ely+filtery-RADIUS+NYS)%NYS;
-								neighbourz = (elx+filterz-RADIUS+NZS)%NZS;
+								neighbourz = (elz+filterz-RADIUS+NZS)%NZS;
 								sum += input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
 							}
 							break;
@@ -151,9 +151,9 @@ int main(int argc, char** argv)
     outfile = fopen("sum3Dtest.txt","w");
     fprintf(outfile,"Input: ");
     for (size_t i=0; i<NXS*NYS*NZS; i++) {
-      if (i%NXS == 0) fprintf(outfile," \n");
-      if (i%NYS == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%d, ", seqInput[i]);
+      if (i%NXS == 0) fprintf(outfile," \t");
+      if (i%(NXS*NYS) == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%5d, ", seqInput[i]);
     }
 	#endif
 	
@@ -163,16 +163,16 @@ int main(int argc, char** argv)
 	#ifdef OUTPUT
     fprintf(outfile,"\nSequential Output: ");
     for (size_t i=0; i<NXS*NYS*NZS; i++) {
-      if (i%NXS == 0) fprintf(outfile," \n");
-      if (i%NYS == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%d, ", seqOutput[i]);
+      if (i%NXS == 0) fprintf(outfile," \t");
+      if (i%(NXS*NYS) == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%5d, ", seqOutput[i]);
     }
 	fprintf(outfile,"\n");
     fprintf(outfile,"\nParallel Output: ");
     for (size_t i=0; i<NXS*NYS*NZS; i++) {
-      if (i%NXS == 0) fprintf(outfile," \n");
-      if (i%NYS == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%d, ", parOutput[i]);
+      if (i%NXS == 0) fprintf(outfile," \t");
+      if (i%(NXS*NYS) == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%5d, ", parOutput[i]);
     }
 	fprintf(outfile,"\n");
 	fclose(outfile);
