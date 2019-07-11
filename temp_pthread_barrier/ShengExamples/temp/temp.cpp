@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
         in[i] = i;
 
     std::vector<pixel_t> image (in.size());
-    auto stencil = Stencil1D(stencilkernel, 2, WRAP_AROUND, NTHREADS); // WRAP_AROUND does nothing
+    auto stencil = Stencil1D(stencilkernel, 2, WRAP_AROUND, 1, NTHREADS); // WRAP_AROUND does nothing
     stencil(image,in);
 
 #ifdef OUTPUT
@@ -91,6 +91,6 @@ int main(int argc, char** argv) {
 #endif
    
     tstop = second();
-    std::cout << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS << ", " << ITERMAX << ", " << HXRES*HYRES <<  std::endl;
+    std::cout << tstop-tstart << ", " << NTHREADS <<  ", " << NDATABLOCKS  << ", " << HXRES*HYRES <<  std::endl;
 	return 0;
 }

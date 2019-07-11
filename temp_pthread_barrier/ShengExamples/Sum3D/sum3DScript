@@ -34,7 +34,7 @@ niters=$10
 echo "time, nthreads, ndatablocks, nxs, nyz, nzs, padding, niters" > $resultfile
 for threadcount in $(seq 1 $threads)
 do
-  g++ sum3D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DPADDING=$padding -DNITERS=$niters -DOUTPUT -o sum3D
+  g++ sum3D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DPADDING=$padding -DNITERS=$niters -o sum3D
   for run in $(seq 1 $runs)
   do
     ./sum3D >> $resultfile

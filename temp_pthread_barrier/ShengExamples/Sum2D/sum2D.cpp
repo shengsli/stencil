@@ -130,7 +130,7 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 	}
 	
     tstop = second();
-    std::cout << "sequentialSum, " << tstop-tstart << std::endl;
+    // std::cout << "sequentialSum, " << tstop-tstart << std::endl;
 }
 
 void parallelSum(std::vector<int> &output, std::vector<int> &input)
@@ -142,7 +142,7 @@ void parallelSum(std::vector<int> &output, std::vector<int> &input)
     stencil2d(output, input);
 	
     tstop = second();
-    std::cout << "parallelSum, " << tstop-tstart << ", " << RADIUS << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
+    std::cout << tstop-tstart << ", " << NTHREADS  << ", " << NDATABLOCKS << ", "  << NROWS*NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)
@@ -183,11 +183,12 @@ int main(int argc, char** argv)
     }
 	fprintf(outfile,"\n");
 	fclose(outfile);
-    #endif
-	
+
 	if (compareResult(seqOutput, parOutput))
 		std::cout << "out is the same as in" << std:: endl;
 	else
 		std::cout << "ERROR: out != in" << std::endl;
+    #endif
+	
 	return 0;
 }

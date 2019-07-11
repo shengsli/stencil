@@ -4,7 +4,7 @@
 # repeat runs are generated from within the executable
 #
 # USAGE: ./sum1DScript threads ndatablocks runs resultfile radius nitems
-# e.g.	 ./sum1DScript 4 100 5 sum1Dresult 3 1024 0 20
+# e.g.	 ./sum1DScript 4 100 5 sum1Dresult.csv 3 1024 0 20
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial
@@ -30,7 +30,7 @@ niters=$8
 echo "time, nthreads, ndatablocks, nitems, padding, niters" > $resultfile
 for threadcount in $(seq 1 $threads)
 do
-  g++ sum1D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNITEMS=$nitems -DPADDING=$padding -DNITERS=$niters -DOUTPUT -o sum1D
+  g++ sum1D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNITEMS=$nitems -DPADDING=$padding -DNITERS=$niters -o sum1D
   for run in $(seq 1 $runs)
   do
     ./sum1D >> $resultfile

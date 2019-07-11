@@ -32,7 +32,7 @@ niters=$9
 echo "time, nthreads, ndatablocks, nrows, ncols, padding, niters" > $resultfile
 for threadcount in $(seq 1 $threads)
 do
-  g++ median2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -DOUTPUT -o median2D
+  g++ median2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o median2D
   for run in $(seq 1 $runs)
   do
     ./median2D >> $resultfile
