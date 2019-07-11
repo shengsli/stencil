@@ -1,5 +1,5 @@
 /**
- * g++ median2D.cpp -std=c++11 -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNROWS=4 -DNCOLS=5 -DNDATABLOCKS=100 -DPADDING=0 -DNITERS=4 -DOUTPUT -o median2D
+ * g++ median2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DRADIUS=1 -DNROWS=4 -DNCOLS=5 -DPADDING=0 -DNITERS=4 -DOUTPUT -o median2D
  * ./median2D
  */
 

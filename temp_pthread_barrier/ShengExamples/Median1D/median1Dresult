@@ -1,0 +1,61 @@
+time, nthreads, ndatablocks, nitems, padding, niters
+sequentialMedian, 0.00209904
+parallelMedian, 0.00273585, 1, 100, 1024
+out is the same as in
+sequentialMedian, 0.00474405
+parallelMedian, 0.00910807, 1, 100, 1024
+out is the same as in
+sequentialMedian, 0.00506711
+parallelMedian, 0.00916696, 1, 100, 1024
+out is the same as in
+sequentialMedian, 0.00468087
+parallelMedian, 0.00905585, 1, 100, 1024
+out is the same as in
+sequentialMedian, 0.00491691
+parallelMedian, 0.00911403, 1, 100, 1024
+out is the same as in
+sequentialMedian, 0.00473785
+parallelMedian, 0.00580192, 2, 100, 1024
+out is the same as in
+sequentialMedian, 0.00481915
+parallelMedian, 0.00468493, 2, 100, 1024
+out is the same as in
+sequentialMedian, 0.00328016
+parallelMedian, 0.00410485, 2, 100, 1024
+out is the same as in
+sequentialMedian, 0.00203705
+parallelMedian, 0.00231409, 2, 100, 1024
+out is the same as in
+sequentialMedian, 0.00180888
+parallelMedian, 0.00184011, 2, 100, 1024
+out is the same as in
+sequentialMedian, 0.00133109
+parallelMedian, 0.00121617, 3, 100, 1024
+out is the same as in
+sequentialMedian, 0.00128007
+parallelMedian, 0.00155902, 3, 100, 1024
+out is the same as in
+sequentialMedian, 0.00133991
+parallelMedian, 0.00117207, 3, 100, 1024
+out is the same as in
+sequentialMedian, 0.00131106
+parallelMedian, 0.00114393, 3, 100, 1024
+out is the same as in
+sequentialMedian, 0.00491619
+parallelMedian, 0.00312495, 3, 100, 1024
+out is the same as in
+sequentialMedian, 0.00271392
+parallelMedian, 0.00472999, 4, 100, 1024
+out is the same as in
+sequentialMedian, 0.00177407
+parallelMedian, 0.00158787, 4, 100, 1024
+out is the same as in
+sequentialMedian, 0.00187707
+parallelMedian, 0.00156283, 4, 100, 1024
+out is the same as in
+sequentialMedian, 0.00181103
+parallelMedian, 0.00191402, 4, 100, 1024
+out is the same as in
+sequentialMedian, 0.00180507
+parallelMedian, 0.00160909, 4, 100, 1024
+out is the same as in

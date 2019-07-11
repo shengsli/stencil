@@ -1,0 +1,13 @@
+time, nthreads, ndatablocks, nxs, nyz, nzs, padding, niters
+sequentialSum, 1.35371
+parallelMedian, 1.65137, 3, 1, 10, 10, 10
+out is the same as in
+sequentialSum, 1.36381
+parallelMedian, 0.831001, 3, 2, 10, 10, 10
+out is the same as in
+sequentialSum, 1.36115
+parallelMedian, 0.562732, 3, 3, 10, 10, 10
+out is the same as in
+sequentialSum, 1.35033
+parallelMedian, 0.455983, 3, 4, 10, 10, 10
+out is the same as in

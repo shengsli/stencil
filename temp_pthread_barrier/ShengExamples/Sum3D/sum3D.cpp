@@ -128,8 +128,8 @@ void parallelSum(std::vector<int> &output, std::vector<int> &input)
     double tstart, tstop;
     tstart = second();
 	
-    auto stencil2d = Stencil3D(stencilkernel, RADIUS, NXS, NYS, NZS, PADDING, NITERS, NTHREADS);
-    stencil2d(output, input);
+    auto stencil3d = Stencil3D(stencilkernel, RADIUS, NXS, NYS, NZS, PADDING, NITERS, NTHREADS);
+    stencil3d(output, input);
 	
     tstop = second();
     std::cout << "parallelSum, " << tstop-tstart << ", " << RADIUS << ", " << NTHREADS  << ", " << NXS << ", " << NYS << ", " << NZS <<  std::endl;

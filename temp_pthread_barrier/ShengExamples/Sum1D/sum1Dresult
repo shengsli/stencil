@@ -1,0 +1,61 @@
+time, nthreads, ndatablocks, nitems, padding, niters
+sequentialSum, 0.000444174
+parallelSum, 0.00177693, 1, 100, 1024
+out is the same as in
+sequentialSum, 0.00142789
+parallelSum, 0.00605297, 1, 100, 1024
+out is the same as in
+sequentialSum, 0.00159192
+parallelSum, 0.00613403, 1, 100, 1024
+out is the same as in
+sequentialSum, 0.00380397
+parallelSum, 0.00616002, 1, 100, 1024
+out is the same as in
+sequentialSum, 0.00140095
+parallelSum, 0.00629997, 1, 100, 1024
+out is the same as in
+sequentialSum, 0.00039196
+parallelSum, 0.00133514, 2, 100, 1024
+out is the same as in
+sequentialSum, 0.000442028
+parallelSum, 0.00107098, 2, 100, 1024
+out is the same as in
+sequentialSum, 0.00041914
+parallelSum, 0.00103211, 2, 100, 1024
+out is the same as in
+sequentialSum, 0.000396013
+parallelSum, 0.001055, 2, 100, 1024
+out is the same as in
+sequentialSum, 0.000410795
+parallelSum, 0.00106597, 2, 100, 1024
+out is the same as in
+sequentialSum, 0.000451088
+parallelSum, 0.000960112, 3, 100, 1024
+out is the same as in
+sequentialSum, 0.00041008
+parallelSum, 0.000905037, 3, 100, 1024
+out is the same as in
+sequentialSum, 0.00144887
+parallelSum, 0.00381112, 3, 100, 1024
+out is the same as in
+sequentialSum, 0.00144982
+parallelSum, 0.00659585, 3, 100, 1024
+out is the same as in
+sequentialSum, 0.00140691
+parallelSum, 0.00338817, 3, 100, 1024
+out is the same as in
+sequentialSum, 0.000407934
+parallelSum, 0.00112796, 4, 100, 1024
+out is the same as in
+sequentialSum, 0.000394821
+parallelSum, 0.00105214, 4, 100, 1024
+out is the same as in
+sequentialSum, 0.000424862
+parallelSum, 0.00140214, 4, 100, 1024
+out is the same as in
+sequentialSum, 0.000420094
+parallelSum, 0.0011971, 4, 100, 1024
+out is the same as in
+sequentialSum, 0.000486135
+parallelSum, 0.00129318, 4, 100, 1024
+out is the same as in

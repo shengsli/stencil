@@ -1,0 +1,13 @@
+time, nthreads, ndatablocks, radius, nrows, ncols, padding, niters
+sequentialSum, 0.035063
+parallelSum, 0.86685, 3, 1, 1024, 1024
+out is the same as in
+sequentialSum, 0.0356741
+parallelSum, 0.447342, 3, 2, 1024, 1024
+out is the same as in
+sequentialSum, 0.0351269
+parallelSum, 0.307149, 3, 3, 1024, 1024
+out is the same as in
+sequentialSum, 0.036613
+parallelSum, 0.236032, 3, 4, 1024, 1024
+out is the same as in
