@@ -1,10 +1,10 @@
-# Tests the sum2Dstencil app
+# Tests the sum2D stencil app
 
 # Test workload on multiple threads problem sizes and repeats
 # repeat runs are generated from within the executable
 #
 # USAGE: ./sum2DScript threads ndatablocks runs resultfile radius nrows ncols padding niters
-# e.g.	 ./sum2DScript 4 100 5 sum2Dresult 3 1024 1024 0 20
+# e.g.	 ./sum2DScript 4 100 5 sum2Dresult.csv 1 4 4 0 1
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial
@@ -30,6 +30,11 @@ padding=$8
 niters=$9
 
 echo "time, nthreads, ndatablocks, radius, nrows, ncols, padding, niters" > $resultfile
+for threadcount in $(seq 1 $threads)
+do
+  g++ seqSum2D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o seqSum2D
+  ./seqSum2D >> $resultfile
+done
 for threadcount in $(seq 1 $threads)
 do
   g++ sum2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o sum2D

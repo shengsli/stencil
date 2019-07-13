@@ -1,4 +1,4 @@
-# Tests the median1Dstencil app
+# Tests the median1D stencil app
 
 # Test workload on multiple threads problem sizes and repeats
 # repeat runs are generated from within the executable
@@ -28,6 +28,11 @@ padding=$7
 niters=$8
 
 echo "time, nthreads, ndatablocks, nitems, padding, niters" > $resultfile
+for run in $(seq 1 $runs)
+do
+  g++ seqMedian1D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNITEMS=$nitems -DNITERS=$niters -DPADDING=$padding -o seqMedian1D
+  ./seqMedian1D >> $resultfile
+done
 for threadcount in $(seq 1 $threads)
 do
   g++ median1D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNITEMS=$nitems -DPADDING=$padding -DNITERS=$niters -o median1D
