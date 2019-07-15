@@ -1,4 +1,0 @@
-[tracer]s1837296: ./sum2DScript 4 100 5 sum2Dresult.csv 3 100 100 0 20
-[tracer]s1837296: Rscript Rtest.R sum2Dresult.csv sum2Dresult.pdf
-Saving 7 x 7 in image
-[tracer]s1837296: evince sum2Dresult.pdf

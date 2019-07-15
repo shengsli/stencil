@@ -1,5 +1,5 @@
 /**
- * g++ median3D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DRADIUS=1 -DNXS=3 -DNYS=3 -DNZS=3 -DPADDING=0 -DNITERS=1 -DOUTPUT -o median3D
+ * g++ median3D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DRADIUS=1 -DNXS=3 -DNYS=3 -DNZS=3 -DPADDING=0 -DNITERS=1 -o median3D
  * ./median3D
  */
 
@@ -8,30 +8,11 @@
 
 #include "../../Stencil3D.hpp"
 
-void print_arr(int *arr, int size)
-{
-	int i;
-	for (i=0; i<size-1; i++)
-	{
-		printf("%d, ", arr[i]);
-	}
-	printf("%d\n", arr[i]);
-}
-
 void swap(int *xp, int *yp) 
 {
     int temp = *xp;
     *xp = *yp; 
     *yp = temp;
-} 
-
-void bubble_sort (int *arr, int size) 
-{
-	int i, j;
-	for (i = 0; i<size-1; i++)
-		for (j = 0; j<size-i-1; j++)
-			if (arr[j] > arr[j+1])
-				swap(&arr[j], &arr[j+1]);
 } 
 
 int partition (int arr[], int low, int high)
@@ -66,36 +47,6 @@ int find_median (int *arr, int size)
 	if (size%2 != 0) return arr[size/2];
 	return (arr[(size-1)/2] + arr[size/2])/2;
 }
-bool compareResult(const std::vector<int> &vec1, const std::vector<int> &vec2)
-{
-	if (vec1.size() != vec2.size())
-		return false;
-	auto it1 = vec1.begin();
-	auto it2 = vec2.begin();
-	for (; it1 != vec1.end(); ++it1)
-	{
-		if (*it1 != *it2)
-			return false;
-		++it2;
-	}
-	return true;
-}
-
-void printVector(const std::vector<int> &vec)
-{
-	auto it = vec.begin();
-	for (int z=0; z<NZS; ++z)
-	{
-		for (int y=0; y<NYS; ++y)
-		{
-			for (int x=0; x<NXS; ++x)
-			{
-				printf("%d, ", vec[x+NXS*(y+NYS*z)]);
-			}
-			std::cout << std::endl;
-		}
-	}
-}
 
 double second()
 {
@@ -109,72 +60,6 @@ double second()
 int stencilkernel (int neighbourhood[], int radius)
 {
 	return find_median(neighbourhood, (RADIUS*2+1)*(RADIUS*2+1)*(RADIUS*2+1));
-}
-
-void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
-{
-	double tstart, tstop;
-    tstart = second();
-
-	// median
-	int *neighbourhood = (int *) malloc((RADIUS*2+1)*(RADIUS*2+1)*(RADIUS*2+1)*sizeof(int));
-	int nItems = NXS*NYS*NZS;
-	for (int iter=0; iter<NITERS; iter++)
-	{
-		// NEW
-		if (iter>0)
-		{
-			auto temp = input;
-		    input = output;
-			output = temp;
-		}
-
-		for (int elIdx=0; elIdx<nItems; ++elIdx)
-		{
-			int elx = elIdx % NXS;
-			int ely = (elIdx / NXS) % NYS;
-			int elz = elIdx / NXS / NYS;
-			int neighbourx, neighboury, neighbourz;
-			int sum=0;
-		
-			// iterate over filter window
-			for (int filterz=0; filterz<2*RADIUS+1; ++filterz)
-			{
-				for (int filtery=0; filtery<2*RADIUS+1; ++filtery)
-				{
-					for (int filterx=0; filterx<2*RADIUS+1; ++filterx)
-					{
-						switch (PADDING)
-						{
-						case WRAP_AROUND:
-							{
-								neighbourx = (elx+filterx-RADIUS+NXS)%NXS;
-								neighboury = (ely+filtery-RADIUS+NYS)%NYS;
-								neighbourz = (elz+filterz-RADIUS+NZS)%NZS;
-							    neighbourhood[filterx+(2*RADIUS+1)*(filtery+(2*RADIUS+1)*filterz)] = input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
-							}
-							break;
-						case FIXED_VALUE:
-							{
-							}
-							break;
-						case REPLICATE_LAST_ELEMENT:
-							{
-							}
-							break;
-						default:
-							throw std::invalid_argument("Invalid padding option.");
-							break;
-						}
-					}
-				}
-			}
-			output[elIdx] = find_median(neighbourhood, (2*RADIUS+1)*(2*RADIUS+1)*(2*RADIUS+1));
-		}
-	}
-	
-    tstop = second();
-    // std::cout << "sequentialSum, " << tstop-tstart << std::endl;
 }
 
 void parallelMedian(std::vector<int> &output, std::vector<int> &input)
@@ -191,51 +76,12 @@ void parallelMedian(std::vector<int> &output, std::vector<int> &input)
 
 int main(int argc, char** argv)
 {
-    std::vector<int> seqInput(NXS*NYS*NZS);
     std::vector<int> parInput(NXS*NYS*NZS);
+    std::vector<int> parOutput(parInput.size());
     for(size_t i=0; i<NXS*NYS*NZS; ++i)
     {
-		seqInput[i] = parInput[i] = i;
+	    parInput[i] = i;
 	}
-    std::vector<int> seqOutput(seqInput.size());
-    std::vector<int> parOutput(parInput.size());
-
-    #ifdef OUTPUT
-	FILE *outfile;
-    outfile = fopen("median3Dtest.txt","w");
-    fprintf(outfile,"Input: ");
-    for (size_t i=0; i<NXS*NYS*NZS; i++) {
-      if (i%NXS == 0) fprintf(outfile," \t");
-      if (i%(NXS*NYS) == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%5d, ", seqInput[i]);
-    }
-	#endif
-	
-	sequentialMedian(seqOutput, seqInput);
 	parallelMedian(parOutput, parInput);
-
-	#ifdef OUTPUT
-    fprintf(outfile,"\nSequential Output: ");
-    for (size_t i=0; i<NXS*NYS*NZS; i++) {
-      if (i%NXS == 0) fprintf(outfile," \t");
-      if (i%(NXS*NYS) == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%5d, ", seqOutput[i]);
-    }
-	fprintf(outfile,"\n");
-    fprintf(outfile,"\nParallel Output: ");
-    for (size_t i=0; i<NXS*NYS*NZS; i++) {
-      if (i%NXS == 0) fprintf(outfile," \t");
-      if (i%(NXS*NYS) == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%5d, ", parOutput[i]);
-    }
-	fprintf(outfile,"\n");
-	fclose(outfile);
-
-	if (compareResult(seqOutput, parOutput))
-		std::cout << "out is the same as in" << std:: endl;
-	else
-		std::cout << "ERROR: out != in" << std::endl;
-    #endif
-	
 	return 0;
 }

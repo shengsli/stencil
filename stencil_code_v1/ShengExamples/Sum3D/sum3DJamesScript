@@ -1,0 +1,49 @@
+# Tests the sum3D stencil app
+
+# Test workload on multiple threads problem sizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./sum3DJamesScript threads ndatablocks runs resultfile radius nrows nxs nys nzs padding niters
+# e.g.	 ./sum3DJamesScript 64 100 5 sum3Dresult.csv 1 10 15 20 0 5
+#
+# threads:    max threadcount
+# ndatablocks number of sub-blocks (for stealing) created from the initial
+#             work partition allocated to a thread
+# runs:       number of repeat runs
+# resultfile: results are sent here
+# radius:	  filter size is 2*radius+1
+# nxs
+# nys
+# nzs
+# padding: 	  padding option can be 0,1,2
+# niters:	  nuber of iterations
+
+#echo "grain    threads time" >> $5
+
+threads=$1
+ndatablocks=$2
+runs=$3
+resultfile=$4
+radius=$5
+nxs=$6
+nys=$7
+nzs=$8
+padding=$9
+niters=$10
+
+echo "time, nthreads, ndatablocks, nxs, nyz, nzs, padding, niters" > $resultfile
+for run in $(seq 1 $runs)
+do
+  g++ seqSum3D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DPADDING=$padding -DNITERS=$niters -o seqSum3D
+  ./seqSum3D >> $resultfile
+done
+threadcount=1
+while [ $threadcount -le $threads ]
+do
+  g++ sum3D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DPADDING=$padding -DNITERS=$niters -o sum3D
+  for run in $(seq 1 $runs)
+  do
+    ./sum3D >> $resultfile
+  done
+  threadcount=$((2*threadcount))
+done

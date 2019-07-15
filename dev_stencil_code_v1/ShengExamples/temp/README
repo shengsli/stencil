@@ -1,0 +1,31 @@
+
+// This is a test area for building an aliased version of map -> stencil
+// currently the test program is temp.cpp
+
+// ./tempScript threads ndatablocks runs resultfile xres yres itermax
+
+
+
+// single run test
+
+// additionally compile with -DOUTPUT for testing if required
+
+[fantine]mic: g++ -o temp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DHXRES=1024 -DHYRES=1024 -DITERMAX=1000 -DNDATABLOCKS=100 -DOUTPUT temp.cpp
+
+[fantine]mic: ./temp
+
+// check output if compiled with -DOUTPUT
+[fantine]mic: gimp stenciltest.ppm &
+
+
+
+//run a full test set (no output)
+
+[fantine]mic: ./tempScript 4 10 5 results4.csv 1024 1024 1000
+
+
+[fantine]mic: Rscript Rtest.R results4.csv results4.pdf
+Saving 7 x 7 in image
+
+
+[fantine]mic: acroread results4.pdf
