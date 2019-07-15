@@ -15,7 +15,7 @@ MySummary2 <- ddply(MyData, c("nthreads"), summarise,
                se      = sd / sqrt(N)
 )
 
-ggplot(MySummary2, aes(x=nthreads, y=runtime)) + 
+ggplot(MySummary2, aes(x=reorder(nthreads,sort(as.numeric(nthreads))), y=runtime)) + 
     geom_bar(position=position_dodge(), stat="identity", fill = "#FF6666") +
     geom_errorbar(aes(ymin=runtime-se, ymax=runtime+se),
                   width=.2,                    # Width of the error bars

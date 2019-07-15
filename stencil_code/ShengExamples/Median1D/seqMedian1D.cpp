@@ -118,7 +118,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 	}
 	
     tstop = second();
-	std::cout << tstop-tstart << ", seq, 0, " << NITEMS << std::endl;
+	std::cout << tstop-tstart << ", 0, 0, " << NITEMS << std::endl;
 }
 
 int main(int argc, char** argv)

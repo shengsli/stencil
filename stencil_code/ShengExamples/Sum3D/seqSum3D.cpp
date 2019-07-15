@@ -78,7 +78,7 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 	}
 	
     tstop = second();
-    std::cout << tstop-tstart << ", seq, 0, "<< NXS*NYS*NZS <<  std::endl;
+    std::cout << tstop-tstart << ", 0, 0, "<< NXS*NYS*NZS <<  std::endl;
 }
 
 int main (int argc, char** argv)
