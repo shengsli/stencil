@@ -1,10 +1,10 @@
-# Tests the sum2Dstencil app
+# Tests the gaussianBlur2D stencil app
 
 # Test workload on multiple threads problem sizes and repeats
 # repeat runs are generated from within the executable
 #
-# USAGE: ./sum2DScript threads ndatablocks runs resultfile radius nrows ncols padding niters
-# e.g.	 ./sum2DScript 4 100 5 sum2Dresult.csv 3 1024 1024 0 20
+# USAGE: ./gaussianBlur2DScript threads ndatablocks runs resultfile radius nrows ncols padding niters
+# e.g.	 ./gaussianBlur2DScript 4 100 5 gaussianBlur2Dresult.csv 3 1024 1024 0 20
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial
@@ -32,9 +32,9 @@ niters=$9
 echo "time, nthreads, ndatablocks, radius, nrows, ncols, padding, niters" > $resultfile
 for threadcount in $(seq 1 $threads)
 do
-  g++ sum2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o sum2D
+  g++ gaussianBlur2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o gaussianBlur2D
   for run in $(seq 1 $runs)
   do
-    ./sum2D >> $resultfile
+    ./gaussianBlur2D >> $resultfile
   done
 done

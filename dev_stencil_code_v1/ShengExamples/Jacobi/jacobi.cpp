@@ -8,7 +8,7 @@
 
 #include "../../Stencil2D.hpp"
 
-void prdouble_arr(double *arr, double size)
+void print_arr(double *arr, double size)
 {
 	int i;
 	for (i=0; i<size-1; i++)
