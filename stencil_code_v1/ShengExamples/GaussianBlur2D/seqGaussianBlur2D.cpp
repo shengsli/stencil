@@ -1,52 +1,25 @@
 /**
  * gaussian filter is hardcoded as a 5x5 filter. radius must be 2. 
- * g++ gaussianBlur2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DRADIUS=2 -DNROWS=6 -DNCOLS=6 -DPADDING=0 -DNITERS=4 -DOUTPUT -o gaussianBlur2D
- * ./gaussianBlur2D
+ * g++ seqGaussianBlur2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DRADIUS=2 -DNROWS=6 -DNCOLS=6 -DPADDING=0 -DNITERS=4 -o seqGaussianBlur2D
+ * ./seqGaussianBlur2D
  */
 
 #include <cassert>
 #include <sys/time.h>
+#include <vector>
+#include <iostream>
+#include <utility>
+#include <stdexcept>
 
-#include "../../Stencil2D.hpp"
+#define WRAP_AROUND 0
+#define FIXED_VALUE 1
+#define REPLICATE_LAST_ELEMENT 2
 
-void print_arr(double *arr, double size)
-{
-	int i;
-	for (i=0; i<size-1; i++)
-	{
-		printf("%.2f, ", arr[i]);
-	}
-	printf("%.2f\n", arr[i]);
-}
-
-
-bool compareResult(const std::vector<double> &vec1, const std::vector<double> &vec2)
-{
-	if (vec1.size() != vec2.size())
-		return false;
-	auto it1 = vec1.begin();
-	auto it2 = vec2.begin();
-	for (; it1 != vec1.end(); ++it1)
-	{
-		if (*it1 != *it2)
-			return false;
-		++it2;
-	}
-	return true;
-}
-
-void printVector(const std::vector<double> &vec)
-{
-	auto it = vec.begin();
-	for (int row=0; row<NROWS; ++row)
-	{
-		for (int col=0; col<NCOLS; ++col)
-		{
-			printf("%4d", vec[col+row*NCOLS]);
-		}
-		std::cout << std::endl;
-	}
-}
+double filter[] = {1./273, 4./273, 7./273, 4./273, 1./273, 
+				   4./273,16./273,26./273,16./273, 4./273,
+				   7./273,26./273,41./273,26./273, 7./273,
+				   4./273,16./273,26./273,16./273, 4./273,
+				   1./273, 4./273, 7./273, 4./273, 1./273};
 
 double second()
 {
@@ -64,16 +37,6 @@ double conv(double *lhs, double *rhs, int size)
 		sum += lhs[i]*rhs[i];
 	}
 	return sum;
-}
-
-double filter[] = {1./273, 4./273, 7./273, 4./273, 1./273, 
-				   4./273,16./273,26./273,16./273, 4./273,
-				   7./273,26./273,41./273,26./273, 7./273,
-				   4./273,16./273,26./273,16./273, 4./273,
-				   1./273, 4./273, 7./273, 4./273, 1./273};
-double stencilkernel (double neighbourhood[], int radius)
-{
-	return conv(neighbourhood, filter, (2*radius+1)*(2*radius+1));
 }
 
 void sequentialGaussianBlur(std::vector<double> &output, std::vector<double> &input)
@@ -148,64 +111,16 @@ void sequentialGaussianBlur(std::vector<double> &output, std::vector<double> &in
 	}
 	
     tstop = second();
-    std::cout << "sequentialGaussianBlur, " << tstop-tstart << std::endl;
-}
-
-void parallelGaussianBlur(std::vector<double> &output, std::vector<double> &input)
-{
-    double tstart, tstop;
-    tstart = second();
-	
-    auto stencil2d = Stencil2D(stencilkernel, RADIUS, NROWS, NCOLS, PADDING, NITERS, NTHREADS);
-    stencil2d(output, input);
-	
-    tstop = second();
-    std::cout << "parallelGaussianBlur, " << tstop-tstart << ", " << RADIUS << ", " << NTHREADS  << ", " << NROWS << ", " << NCOLS <<  std::endl;
+	std::cout << tstop-tstart << ", 0, 0, " << NROWS*NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)
 {
     std::vector<double> seqInput(NROWS*NCOLS);
-    std::vector<double> parInput(NROWS*NCOLS);
-    for(size_t i = 0; i < NROWS*NCOLS; ++i)
-    {
-		seqInput[i] = parInput[i] = i;
-	}
     std::vector<double> seqOutput(seqInput.size());
-    std::vector<double> parOutput(parInput.size());
-
-    #ifdef OUTPUT
-	FILE *outfile;
-    outfile = fopen("gaussianBlur2Dtest.txt","w");
-    fprintf(outfile,"Input: ");
-    for (size_t i = 0; i<NROWS*NCOLS; i++) {
-      if (i%NCOLS == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%.2f, ", seqInput[i]);
-    }
-	#endif
-	
-	sequentialGaussianBlur(seqOutput, seqInput);
-	parallelGaussianBlur(parOutput, parInput);
-	
-    #ifdef OUTPUT
-    fprintf(outfile,"\nSequential Output: ");
-    for (size_t i = 0; i<NROWS*NCOLS; i++) {
-      if (i%NCOLS == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%.2f, ", seqOutput[i]);
-    }
-	fprintf(outfile,"\n");
-    fprintf(outfile,"\nParallel Output: ");
-    for (size_t i = 0; i<NROWS*NCOLS; i++) {
-      if (i%NCOLS == 0) fprintf(outfile," \n");
-      fprintf(outfile,"%.2f, ", parOutput[i]);
-    }
-	fprintf(outfile,"\n");
-	fclose(outfile);
-    #endif
-	
-	if (compareResult(seqOutput, parOutput))
-		std::cout << "out is the same as in" << std:: endl;
-	else
-		std::cout << "ERROR: out != in" << std::endl;
+    for(size_t i=0; i<NROWS*NCOLS; ++i) {
+	    seqInput[i] = i;
+	}
+    sequentialGaussianBlur(seqOutput, seqInput);
 	return 0;
 }
