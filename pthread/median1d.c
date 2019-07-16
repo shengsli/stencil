@@ -1,10 +1,8 @@
 /**
- * median1d.c
- * @brief	1D median filtering. It assumes NITEMS>=NTHREADS. NITEMS<NTHREADS is not considered. 
- * Usage	gcc -o median1d median1d.c -lpthread -DWIDTH=1 -DNTHREADS=3 -DNITEMS=10 
- *			./median1d
- *			
+ * 1D median filtering. It assumes NITEMS>=NTHREADS. NITEMS<NTHREADS is not considered. 
+ * gcc median1d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNITEMS=100 -DOUTPUT -o median1d 
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -35,15 +33,6 @@ void swap(int *xp, int *yp)
     int temp = *xp;
     *xp = *yp; 
     *yp = temp;
-} 
-
-void bubble_sort (int *arr, int size) 
-{
-	int i, j;
-	for (i = 0; i<size-1; i++)
-		for (j = 0; j<size-i-1; j++)
-			if (arr[j] > arr[j+1])
-				swap(&arr[j], &arr[j+1]);
 } 
 
 int partition (int arr[], int low, int high)
@@ -80,22 +69,17 @@ int find_median (int *arr, int size)
 	return (arr[(size-1)/2] + arr[size/2])/2.0;
 }
 
-/**
- * This function hard codes filter as a 1x3 filter. 
- */
 void sequential_median (int* input, int *output)
 {
 	int* neighbourhood;
-	neighbourhood = malloc((WIDTH*2+1)*sizeof(int));
-	int targetIdx;
-	for (targetIdx=0; targetIdx<NITEMS; targetIdx++)
-	{
+	neighbourhood = malloc((RADIUS*2+1)*sizeof(int));
+	int elementIndex;
+	for (elementIndex=0; elementIndex<NITEMS; elementIndex++) {
 		int i;
-		for (i=0; i<WIDTH*2+1; ++i)
-		{
-			neighbourhood[i] = input[(targetIdx+i-WIDTH+NITEMS)%NITEMS];
+		for (i=0; i<RADIUS*2+1; ++i) {
+			neighbourhood[i] = input[(elementIndex+i-RADIUS+NITEMS)%NITEMS];
 		}
-		output[targetIdx] = find_median(neighbourhood, WIDTH*2+1);
+		output[elementIndex] = find_median(neighbourhood, RADIUS*2+1);
 	}
 }
 
@@ -113,16 +97,16 @@ void *median (void *args)
 	for (i=0; i<cur_chunk_size; i++)
 	{
 	   	int *neighbourhood;
-		neighbourhood = malloc((WIDTH*2+1)*sizeof(int));
+		neighbourhood = malloc((RADIUS*2+1)*sizeof(int));
 		int chunk_size = NITEMS / NTHREADS; // chunk size of 0..n-1 chunks
 
 		// create neighbourhood
 		int j;
-		for (j=0; j<WIDTH*2+1; j++)
+		for (j=0; j<RADIUS*2+1; j++)
 		{
-			neighbourhood[j] = input[(tid*chunk_size+i+NITEMS-WIDTH+j)%NITEMS];
+			neighbourhood[j] = input[(tid*chunk_size+i+NITEMS-RADIUS+j)%NITEMS];
 		}
-		output[tid*chunk_size+i] = find_median(neighbourhood, (WIDTH*2+1));
+		output[tid*chunk_size+i] = find_median(neighbourhood, (RADIUS*2+1));
 	}
 }
 
@@ -173,28 +157,41 @@ int main (int argc, char* argv[])
 	par_input = malloc(NITEMS*sizeof(int));
 	par_output = malloc(NITEMS*sizeof(int));
 
-	// init array
+	// init arr
 	int i;
-	for (i=0; i<NITEMS; i++)
-	{
-		seq_input[i] = par_input[i] = rand()%10;
+	for (i=0; i<NITEMS; i++) {
+		seq_input[i] = par_input[i] = i;
 	}
 
-	// print init value of seq_input and par_input
-	print_arr("init seq_input:  ", seq_input, NITEMS);
-	print_arr("init par_input:  ", par_input, NITEMS);
-	print_arr("init seq_output: ", seq_output, NITEMS);
-	print_arr("init par_output: ", par_output, NITEMS);
+#ifdef OUTPUT
+	FILE *outfile;
+    outfile = fopen("median1d_test.txt","w");
+    fprintf(outfile,"seq_input: ");
+    for (i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%d, ", seq_input[i]);
+    }
+#endif
+	
+	sequential_median(seq_input, seq_output);
+	parallel_median(par_input, par_output);
 
-	sequential_median(seq_input, seq_output); // sequential version median filtering
-	print_arr("seq_output: ", seq_output, NITEMS);
-
-	parallel_median(par_input, par_output); // parallel version median filtering
-	print_arr("par_output: ", par_output, NITEMS);
+#ifdef OUTPUT
+    fprintf(outfile,"\nSequential Output: ");
+    for (i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%d, ", seq_output[i]);
+    }
+    fprintf(outfile,"\nParallel Output: ");
+    for (i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%d, ", par_output[i]);
+    }
+	fprintf(outfile,"\n");
+	fclose(outfile);
 
 	if (check_result (seq_output, par_output, NITEMS))
 		printf("Sucess: parallel result matched sequential result.\n");
 	else
 		printf("FAIL: NOT MATCHED.\n");
+#endif
+	
 	return 0;
 }
