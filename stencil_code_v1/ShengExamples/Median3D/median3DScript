@@ -4,7 +4,7 @@
 # repeat runs are generated from within the executable
 #
 # USAGE: ./median3DScript threads ndatablocks runs resultfile radius nrows nxs nys nzs padding niters
-# e.g.	 ./median3DScript 4 100 5 median3Dresult.csv 3 3 4 5 0 1
+# e.g.	 ./median3DScript 4 100 5 median3DresultDICE.csv 1 10 15 20 0 5
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial

@@ -1,4 +1,4 @@
-[tracer]s1837296: ./median3DScript 4 100 5 median3Dresult.csv 3 10 10 10 0 1
-[tracer]s1837296: Rscript Rtest.R median3Dresult.csv median3Dresult.pdf
+[tracer]s1837296: ./median3DScript 4 100 5 median3DresultDICE.csv 1 10 15 20 0 5
+[tracer]s1837296: Rscript Rtest.R median3DresultDICE.csv median3DresultDICE.pdf
 Saving 7 x 7 in image
-[tracer]s1837296: evince median3Dresult.pdf 
+[tracer]s1837296: evince median3DresultDICE.pdf 

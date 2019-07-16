@@ -4,7 +4,7 @@
 # repeat runs are generated from within the executable
 #
 # USAGE: ./sum2DScript threads ndatablocks runs resultfile radius nrows ncols padding niters
-# e.g.	 ./sum2DScript 4 100 5 sum2Dresult.csv 1 4 4 0 1
+# e.g.	 ./sum2DScript 4 100 5 sum2DresultDICE.csv 3 100 100 0 20
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial
