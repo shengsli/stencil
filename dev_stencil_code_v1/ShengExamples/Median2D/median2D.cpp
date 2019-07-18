@@ -139,7 +139,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 					{
 						neighbourCol = (elCol+col+NCOLS-RADIUS)%NCOLS;
 						neighbourRow = (elRow+row+NROWS-RADIUS)%NROWS;
-						neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
+						neighbourhood[filterIdx] = input[neighbourCol+neighbourRow*NCOLS];
 						break;
 					}
 				    case FIXED_VALUE:
@@ -147,9 +147,9 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 						neighbourCol = elCol+col-RADIUS;
 						neighbourRow = elRow+row-RADIUS;
 						if (neighbourCol<0 || neighbourCol>=NCOLS || neighbourRow<0 || neighbourRow>=NROWS)
-							neighbourhood[col+row*(2*RADIUS+1)] = 0;
+							neighbourhood[filterIdx] = 0;
 						else
-							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
+							neighbourhood[filterIdx] = input[neighbourCol+neighbourRow*NCOLS];
 						break;
 					}
 				    case REPLICATE_LAST_ELEMENT:
@@ -157,17 +157,17 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 						neighbourCol = elCol+col-RADIUS;
 						neighbourRow = elRow+row-RADIUS;
 						if ((neighbourCol<0 || neighbourCol>=NCOLS) && (neighbourRow<0 || neighbourRow>=NROWS))
-							neighbourhood[col+row*(2*RADIUS+1)] = 0;
+							neighbourhood[filterIdx] = 0;
 						else if (neighbourCol<0)
-							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourRow*NCOLS];
+							neighbourhood[filterIdx] = input[neighbourRow*NCOLS];
 						else if (neighbourCol>=NCOLS)
-							neighbourhood[col+row*(2*RADIUS+1)] = input[(neighbourRow+1)*NCOLS-1];
+							neighbourhood[filterIdx] = input[(neighbourRow+1)*NCOLS-1];
 						else if (neighbourRow<0)
-							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol];
+							neighbourhood[filterIdx] = input[neighbourCol];
 						else if (neighbourRow>=NROWS)
-							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+(NROWS-1)*NCOLS];
+							neighbourhood[filterIdx] = input[neighbourCol+(NROWS-1)*NCOLS];
 						else
-							neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
+							neighbourhood[filterIdx] = input[neighbourCol+neighbourRow*NCOLS];
 						break;
 					}
 				    default:

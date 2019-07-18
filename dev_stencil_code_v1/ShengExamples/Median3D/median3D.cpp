@@ -148,7 +148,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 						neighbourx = (elx+filterx-RADIUS+NXS)%NXS;
 						neighboury = (ely+filtery-RADIUS+NYS)%NYS;
 						neighbourz = (elz+filterz-RADIUS+NZS)%NZS;
-						neighbourhood[filterx+(2*RADIUS+1)*(filtery+(2*RADIUS+1)*filterz)] = input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
+						neighbourhood[filterIdx] = input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
 						break;
 					}
 				    case FIXED_VALUE:

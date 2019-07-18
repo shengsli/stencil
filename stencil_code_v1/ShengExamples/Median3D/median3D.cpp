@@ -41,7 +41,7 @@ void quickSort(int arr[], int low, int high)
     } 
 } 
 
-int find_median (int *arr, int size)
+int findMedian (int *arr, int size)
 {
 	quickSort(arr, 0, size-1);
 	if (size%2 != 0) return arr[size/2];
@@ -59,7 +59,7 @@ double second()
 
 int stencilkernel (int neighbourhood[], int radius)
 {
-	return find_median(neighbourhood, (RADIUS*2+1)*(RADIUS*2+1)*(RADIUS*2+1));
+	return findMedian(neighbourhood, (RADIUS*2+1)*(RADIUS*2+1)*(RADIUS*2+1));
 }
 
 void parallelMedian(std::vector<int> &output, std::vector<int> &input)

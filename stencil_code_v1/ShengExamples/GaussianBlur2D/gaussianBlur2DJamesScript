@@ -4,7 +4,7 @@
 # repeat runs are generated from within the executable
 #
 # USAGE: ./gaussianBlur2DJamesScript threads ndatablocks runs resultfile radius nrows ncols padding niters
-# e.g.	 ./gaussianBlur2DJamesScript 64 100 5 gaussianBlur2Dresult.csv 3 100 100 0 20
+# e.g.	 ./gaussianBlur2DJamesScript 64 100 5 gaussianBlur2DresultJames.csv 3 100 100 0 20
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial

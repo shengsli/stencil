@@ -47,7 +47,7 @@ void quickSort(int arr[], int low, int high)
     } 
 } 
 
-int find_median (int *arr, int size)
+int findMedian (int *arr, int size)
 {
 	quickSort(arr, 0, size-1);
 	if (size%2 != 0) return arr[size/2];
@@ -98,7 +98,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 						neighbourx = (elx+filterx-RADIUS+NXS)%NXS;
 						neighboury = (ely+filtery-RADIUS+NYS)%NYS;
 						neighbourz = (elz+filterz-RADIUS+NZS)%NZS;
-						neighbourhood[filterx+(2*RADIUS+1)*(filtery+(2*RADIUS+1)*filterz)] = input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
+						neighbourhood[filterIdx] = input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
 						break;
 					}
 				    case FIXED_VALUE:
@@ -110,7 +110,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 					break;
 				}
 			}
-			output[elIdx] = find_median(neighbourhood, filterSize*filterSize*filterSize);
+			output[elIdx] = findMedian(neighbourhood, filterSize*filterSize*filterSize);
 		}
 	}
 	

@@ -47,7 +47,7 @@ void quickSort(int arr[], int low, int high)
     } 
 } 
 
-int find_median (int *arr, int size)
+int findMedian (int *arr, int size)
 {
 	quickSort(arr, 0, size-1);
 	if (size%2 != 0) return arr[size/2];
@@ -113,7 +113,7 @@ void sequentialMedian(std::vector<int> &output, std::vector<int> &input)
 						break;
 				}
 			}
-			output[elementIndex] = find_median(neighbourhood, RADIUS*2+1);
+			output[elementIndex] = findMedian(neighbourhood, RADIUS*2+1);
 		}
 	}
 	

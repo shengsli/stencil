@@ -121,7 +121,7 @@ class Stencil3DSkeleton
 											neighbourx = (elx+filterx-radius+nxs)%nxs;
 											neighboury = (ely+filtery-radius+nys)%nys;
 											neighbourz = (elz+filterz-radius+nzs)%nzs;
-											neighbourhood[filterx+(2*radius+1)*(filtery+(2*radius+1)*filterz)] = input->at(neighbourx+nxs*(neighboury+nys*neighbourz));
+											neighbourhood[filterIdx] = input->at(neighbourx+nxs*(neighboury+nys*neighbourz));
 											break;
 										}
 									case FIXED_VALUE:

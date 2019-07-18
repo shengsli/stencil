@@ -118,7 +118,7 @@ class Stencil2DSkeleton
 										{
 											neighbourCol = (elCol+col+ncols-radius)%ncols;
 											neighbourRow = (elRow+row+nrows-radius)%nrows;
-											neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+neighbourRow*ncols);
+											neighbourhood[filterIdx] = input->at(neighbourCol+neighbourRow*ncols);
 											break;
 										}
 									    case FIXED_VALUE:
@@ -126,9 +126,9 @@ class Stencil2DSkeleton
 											neighbourCol = elCol+col-radius;
 											neighbourRow = elRow+row-radius;
 											if (neighbourCol<0 || neighbourCol>=ncols || neighbourRow<0 || neighbourRow>=nrows)
-												neighbourhood[col+row*(2*radius+1)] = 0;
+												neighbourhood[filterIdx] = 0;
 											else
-												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+neighbourRow*ncols);
+												neighbourhood[filterIdx] = input->at(neighbourCol+neighbourRow*ncols);
 											break;
 										}
 									    case REPLICATE_LAST_ELEMENT:
@@ -136,17 +136,17 @@ class Stencil2DSkeleton
 											neighbourCol = elCol+col-radius;
 											neighbourRow = elRow+row-radius;
 											if ((neighbourCol<0 || neighbourCol>=ncols) && (neighbourRow<0 || neighbourRow>=nrows))
-												neighbourhood[col+row*(2*radius+1)] = 0;
+												neighbourhood[filterIdx] = 0;
 											else if (neighbourCol<0)
-												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourRow*ncols);
+												neighbourhood[filterIdx] = input->at(neighbourRow*ncols);
 											else if (neighbourCol>=ncols)
-												neighbourhood[col+row*(2*radius+1)] = input->at((neighbourRow+1)*ncols-1);
+												neighbourhood[filterIdx] = input->at((neighbourRow+1)*ncols-1);
 											else if (neighbourRow<0)
-												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol);
+												neighbourhood[filterIdx] = input->at(neighbourCol);
 											else if (neighbourRow>=nrows)
-												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+(nrows-1)*ncols);
+												neighbourhood[filterIdx] = input->at(neighbourCol+(nrows-1)*ncols);
 											else
-												neighbourhood[col+row*(2*radius+1)] = input->at(neighbourCol+neighbourRow*ncols);
+												neighbourhood[filterIdx] = input->at(neighbourCol+neighbourRow*ncols);
 											break;
 										}
 									    default:
