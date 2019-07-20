@@ -15,7 +15,7 @@ echo "Sum3D test done"
 
 cd ~/stencil/stencil_code_v1/ShengExamples/Median1D
 ./median1DScript 4 100 5 median1DresultDICE.csv 3 100000 0 20
-Rscript Rtest.R sum1DresultDICE.csv sum1DresultDICE.pdf
+Rscript Rtest.R median1DresultDICE.csv median1DresultDICE.pdf
 echo "Median1D test done"
 
 cd ~/stencil/stencil_code_v1/ShengExamples/Median2D
