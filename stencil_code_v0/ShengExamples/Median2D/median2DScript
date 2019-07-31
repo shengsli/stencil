@@ -1,10 +1,10 @@
-# Tests the median2Dstencil app
+# Tests the median2D stencil app
 
 # Test workload on multiple threads problem sizes and repeats
 # repeat runs are generated from within the executable
 #
 # USAGE: ./median2DScript threads ndatablocks runs resultfile radius nrows ncols
-# e.g.	 ./median2DScript 4 100 5 median2Dresult 3 1024 1024 0 20
+# e.g.	 ./median2DScript 4 100 5 median2DresultDICE.csv 3 100 100 0 20
 #
 # threads:    max threadcount
 # ndatablocks number of sub-blocks (for stealing) created from the initial
@@ -30,6 +30,11 @@ padding=$8
 niters=$9
 
 echo "time, nthreads, ndatablocks, nrows, ncols, padding, niters" > $resultfile
+for run in $(seq 1 $runs)
+do
+  g++ seqMedian2D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o seqMedian2D
+  ./seqMedian2D >> $resultfile
+done
 for threadcount in $(seq 1 $threads)
 do
   g++ median2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o median2D

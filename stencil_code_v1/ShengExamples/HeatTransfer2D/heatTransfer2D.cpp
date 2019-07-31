@@ -21,8 +21,8 @@ double second()
 double average(double neighbourhood[])
 {
 	double sum = 0;
-	sum = neighbourhood[1] + neighbourhood[3] + neighbourhood[4] + neighbourhood[5] + neighbourhood[7];
-	return sum/5.; // hard coded 5
+	sum = neighbourhood[1] + neighbourhood[3] + neighbourhood[5] + neighbourhood[7];
+	return sum/4.; // hard coded 4
 }
 
 double stencilkernel (double neighbourhood[], int radius)
