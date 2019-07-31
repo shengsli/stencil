@@ -30,11 +30,11 @@ python3 plot.py heatTransfer2DresultDICE.csv heatTransfer2DresultDICE.pdf
 echo "HeatTransfer2D test done"
 
 cd ~/stencil/stencil_code_v0/ShengExamples/Sum3D
-./sum3DScript 4 100 5 sum3DresultDICE.csv 1 10 15 20 0 5
+./sum3DScript 4 100 5 sum3DresultDICE.csv 1 40 40 40 0 20
 python3 plot.py sum3DresultDICE.csv sum3DresultDICE.pdf
 echo "Sum3D test done"
 
 cd ~/stencil/stencil_code_v0/ShengExamples/Median3D
-./median3DScript 4 100 5 median3DresultDICE.csv 1 10 15 20 0 5
+./median3DScript 4 100 5 median3DresultDICE.csv 1 40 40 40 0 20
 python3 plot.py median3DresultDICE.csv median3DresultDICE.pdf
 echo "Median3D test done"
