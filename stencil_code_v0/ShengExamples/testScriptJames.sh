@@ -27,7 +27,7 @@ echo "GaussianBlur2D test done"
 cd ~/stencil/stencil_code_v0/ShengExamples/HeatTransfer2D
 ./heatTransfer2DJamesScript 64 100 5 heatTransfer2DresultJames.csv 3 100 100 0 20
 python3 plot.py heatTransfer2DresultJames.csv heatTransfer2DresultJames.pdf
-echo "HeatTransfer3D test done"
+echo "HeatTransfer2D test done"
 
 cd ~/stencil/stencil_code_v0/ShengExamples/Sum3D
 ./sum3DJamesScript 64 100 5 sum3DresultJames.csv 1 40 40 40 0 20
