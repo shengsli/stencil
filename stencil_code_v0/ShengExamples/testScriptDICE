@@ -29,10 +29,10 @@ Rscript Rtest.R median3DresultDICE.csv median3DresultDICE.pdf
 echo "Median3D test done"
 
 cd ~/stencil/stencil_code_v0/ShengExamples/GaussianBlur2D
-./gaussianBlur2DScript 4 100 5 gaussianBlur2DresultDICE.csv 3 100 100 0 20
+./gaussianBlur2DScript 4 100 5 gaussianBlur2DresultDICE.csv 2 100 100 0 20
 Rscript Rtest.R gaussianBlur2DresultDICE.csv gaussianBlur2DresultDICE.pdf
 
 cd ~/stencil/stencil_code_v0/ShengExamples/HeatTransfer2D
-./heatTransfer2DScript 4 100 5 heatTransfer2DresultDICE.csv 3 100 100 0 20
+./heatTransfer2DScript 4 100 5 heatTransfer2DresultDICE.csv 1 100 100 0 20
 Rscript Rtest.R heatTransfer2DresultDICE.csv heatTransfer2DresultDICE.pdf
 echo "HeatTransfer3D test done"

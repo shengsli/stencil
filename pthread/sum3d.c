@@ -1,5 +1,5 @@
 /**
- * gcc sum2d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNROWS=100 -DNCOLS=100 -DNITERS=20 -o sum2d 
+ * gcc sum3d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNXS=10 -DNYS=10 -DNZS=10 -DNITERS=3 -o sum3d 
  */
 
 #include <stdio.h>
@@ -37,22 +37,26 @@ void *sum (void *args)
 	
 		int i;
 		for (i=0; i<cur_chunk_size; i++) { // iterate over data chunk
-			int chunk_size = NROWS*NCOLS / NTHREADS; // chunk size of 0..n-1 chunks
+			int chunk_size = NXS*NYS*NZS / NTHREADS; // chunk size of 0..n-1 chunks
 			int sum=0;
 			int j;
 
 			int elIdx = tid*chunk_size+i;
-			int elCol = elIdx % NCOLS;
-			int elRow = elIdx / NCOLS;
-			int neighbourCol, neighbourRow;
+			int elx = elIdx % NXS;
+			int ely = (elIdx / NXS) % NYS;
+			int elz = elIdx / NXS / NYS;
+			int neighbourx, neighboury, neighbourz;
 
 			// iterate over filter window
-			int row, col;
-			for (row=0; row<2*RADIUS+1; ++row) {
-				for (col=0; col<2*RADIUS+1; ++col) {
-					neighbourCol = (elCol+col+NCOLS-RADIUS)%NCOLS;
-					neighbourRow = (elRow+row+NROWS-RADIUS)%NROWS;
-					sum += input[neighbourCol+neighbourRow*NCOLS];
+			int filterx, filtery, filterz;
+			for (filterz=0; filterz<2*RADIUS+1; ++filterz) {
+				for (filtery=0; filtery<2*RADIUS+1; ++filtery) {
+					for (filterx=0; filterx<2*RADIUS+1; ++filterx) {
+						neighbourx = (elx+filterx-RADIUS+NXS)%NXS;
+						neighboury = (ely+filtery-RADIUS+NYS)%NYS;
+						neighbourz = (elz+filterz-RADIUS+NZS)%NZS;
+					    sum += input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
+					}
 				}
 			}
 			output[tid*chunk_size+i] = sum;
@@ -69,7 +73,7 @@ void parallel_sum(int *input, int *output)
 	threads = (pthread_t *) malloc(NTHREADS*sizeof(pthread_t));
 	threadargs  = (arg_pack *) malloc(NTHREADS*sizeof(arg_pack));
 
-	int chunk_size = NROWS*NCOLS / NTHREADS;
+	int chunk_size = NXS*NYS*NZS / NTHREADS;
 	int i;
 	for (i=0; i<NTHREADS; i++)
 	{
@@ -79,7 +83,7 @@ void parallel_sum(int *input, int *output)
 		threadargs[i].output = output;
 	}
 	// give rest items to the last thread
-	threadargs[NTHREADS-1].cur_chunk_size += NROWS*NCOLS - chunk_size * NTHREADS;
+	threadargs[NTHREADS-1].cur_chunk_size += NXS*NYS*NZS - chunk_size * NTHREADS;
 
 	for (i=0; i<NTHREADS; i++)
 		pthread_create(&threads[i],NULL,sum,(void*)&threadargs[i]);
@@ -90,11 +94,11 @@ void parallel_sum(int *input, int *output)
 int main (int argc, char* argv[])
 {
 	int *par_input, *par_output;
-	par_input = malloc(NROWS*NCOLS*sizeof(int));
-	par_output = malloc(NROWS*NCOLS*sizeof(int));
+	par_input = malloc(NXS*NYS*NZS*sizeof(int));
+	par_output = malloc(NXS*NYS*NZS*sizeof(int));
 
 	int i;
-	for (i=0; i<NROWS*NCOLS; i++) { // init arr
+	for (i=0; i<NXS*NYS*NZS; i++) { // init arr
 		par_input[i] = i;
 	}
 	parallel_sum(par_input, par_output);	

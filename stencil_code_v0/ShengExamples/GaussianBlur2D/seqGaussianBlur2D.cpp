@@ -1,5 +1,5 @@
 /**
- * gaussian filter is hardcoded as a 5x5 filter. radius must be 2. 
+ * Gaussian filter is hardcoded as a 5x5 filter. Radius must be 2. 
  * g++ seqGaussianBlur2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=4 -DNDATABLOCKS=100 -DRADIUS=2 -DNROWS=6 -DNCOLS=6 -DPADDING=0 -DNITERS=4 -o seqGaussianBlur2D
  * ./seqGaussianBlur2D
  */

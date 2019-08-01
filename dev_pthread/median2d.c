@@ -1,5 +1,5 @@
 /**
- * gcc median2d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNROWS=100 -DNCOLS=100 -DNITERS=20 -o median2d 
+ * gcc median2d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNROWS=100 -DNCOLS=100 -DNITERS=20 -DOUTPUT -o median2d 
  */
 
 #include <stdio.h>
@@ -17,6 +17,17 @@ typedef struct arg_pack_tag {
 typedef arg_pack *argptr;
 
 pthread_barrier_t barrier;
+
+void print_arr(char *msg, int *arr, int size)
+{
+	printf("%s", msg);
+	int i;
+	for (i=0; i<size-1; i++)
+	{
+		printf("%d, ", arr[i]);
+	}
+	printf("%d\n", arr[i]);
+}
 
 void swap(int *xp, int *yp) 
 {
@@ -57,6 +68,39 @@ int find_median (int *arr, int size)
 	quick_sort(arr, 0, size-1);
 	if (size%2 != 0) return arr[size/2];
 	return (arr[(size-1)/2] + arr[size/2])/2.0;
+}
+
+void sequential_median (int* input, int *output)
+{
+	int* neighbourhood;
+	neighbourhood = malloc((RADIUS*2+1)*(RADIUS*2+1)*sizeof(int));
+
+	int iter;
+	for (iter=0; iter<NITERS; iter++) {
+		if (iter>0) {
+			int* temp = input;
+		    input = output;
+			output = temp;
+		}
+
+		int elIdx;
+		for (elIdx=0; elIdx<NROWS*NCOLS; ++elIdx)
+		{
+			int elCol = elIdx % NCOLS;
+			int elRow = elIdx / NCOLS;
+			int neighbourCol, neighbourRow;
+			int row, col;
+		
+			for (row=0; row<2*RADIUS+1; ++row) { // iterate over filter window
+				for (col=0; col<2*RADIUS+1; ++col) {
+					neighbourCol = (elCol+col+NCOLS-RADIUS)%NCOLS;
+					neighbourRow = (elRow+row+NROWS-RADIUS)%NROWS;
+					neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
+				}
+			}
+			output[elIdx] = find_median(neighbourhood, (2*RADIUS+1)*(2*RADIUS+1));
+		}
+	}
 }
 
 void *median (void *args)
@@ -128,16 +172,62 @@ void parallel_median(int *input, int *output)
 		pthread_join(threads[i], NULL);
 }
 
+int check_result (int *expected_arr, int *arr, int size) {
+	int i;
+	for (i=0; i<size; i++)
+	{
+		if (arr[i] != expected_arr[i]) return 0;
+	}
+	return 1;
+}
+
 int main (int argc, char* argv[])
 {
-	int *par_input, *par_output;
+	int *seq_input, *seq_output, *par_input, *par_output;
+	seq_input = malloc(NROWS*NCOLS*sizeof(int));
+	seq_output = malloc(NROWS*NCOLS*sizeof(int));
 	par_input = malloc(NROWS*NCOLS*sizeof(int));
 	par_output = malloc(NROWS*NCOLS*sizeof(int));
 
+	// init arr
 	int i;
-	for (i=0; i<NROWS*NCOLS; i++) { // init arr
-		par_input[i] = i;
+	for (i=0; i<NROWS*NCOLS; i++) {
+		seq_input[i] = par_input[i] = i;
 	}
+
+#ifdef OUTPUT
+	FILE *outfile;
+    outfile = fopen("median2d_test.txt","w");
+    fprintf(outfile,"Input: ");
+    for (i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%d, ", seq_input[i]);
+    }
+#endif
+	
+	sequential_median(seq_input, seq_output);
 	parallel_median(par_input, par_output);
+
+#ifdef OUTPUT
+    fprintf(outfile,"\nSequential Output: ");
+    for (i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%d, ", seq_output[i]);
+    }
+	fprintf(outfile,"\n");
+    fprintf(outfile,"\nParallel Output: ");
+    for (i = 0; i<NROWS*NCOLS; i++) {
+      if (i%NCOLS == 0) fprintf(outfile," \n");
+      fprintf(outfile,"%d, ", par_output[i]);
+    }
+	fprintf(outfile,"\n");
+	fclose(outfile);
+
+	if (check_result (seq_output, par_output, NROWS*NCOLS))
+		printf("Sucess: parallel result matched sequential result.\n");
+	else
+		printf("FAIL: NOT MATCHED.\n");
+#endif
+	
 	return 0;
 }

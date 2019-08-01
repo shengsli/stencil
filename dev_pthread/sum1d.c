@@ -18,6 +18,39 @@ typedef arg_pack *argptr;
 
 pthread_barrier_t barrier;
 
+void print_arr(char *msg, int *arr, int size)
+{
+	printf("%s", msg);
+	int i;
+	for (i=0; i<size-1; i++)
+	{
+		printf("%d, ", arr[i]);
+	}
+	printf("%d\n", arr[i]);
+}
+
+void sequential_sum (int* input, int *output)
+{
+	int iter;
+	for (iter=0; iter<NITERS; iter++) {
+		if (iter>0) {
+			int* temp = input;
+		    input = output;
+			output = temp;
+		}
+		
+		int elIdx;
+		for (elIdx=0; elIdx<NITEMS; elIdx++) {
+			int sum=0;
+			int i;
+			for (i=0; i<RADIUS*2+1; ++i) {
+				sum += input[(elIdx+i-RADIUS+NITEMS)%NITEMS];
+			}
+			output[elIdx] = sum;
+		}
+	}
+}
+
 void *sum (void *args)
 {
 	int tid, cur_chunk_size;
@@ -75,16 +108,58 @@ void parallel_sum(int *input, int *output)
 		pthread_join(threads[i], NULL);
 }
 
+int check_result (int *expected_arr, int *arr, int size) {
+	int i;
+	for (i=0; i<size; i++)
+	{
+		if (arr[i] != expected_arr[i]) return 0;
+	}
+	return 1;
+}
+
 int main (int argc, char* argv[])
 {
-	int *par_input, *par_output;
+	int *seq_input, *seq_output, *par_input, *par_output;
+	seq_input = malloc(NITEMS*sizeof(int));
+	seq_output = malloc(NITEMS*sizeof(int));
 	par_input = malloc(NITEMS*sizeof(int));
 	par_output = malloc(NITEMS*sizeof(int));
 
+	// init arr
 	int i;
-	for (i=0; i<NITEMS; i++) { // init arr
-		par_input[i] = i;
+	for (i=0; i<NITEMS; i++) {
+		seq_input[i] = par_input[i] = i;
 	}
-	parallel_sum(par_input, par_output);	
+
+#ifdef OUTPUT
+	FILE *outfile;
+    outfile = fopen("sum1d_test.txt","w");
+    fprintf(outfile,"seq_input: ");
+    for (i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%d, ", seq_input[i]);
+    }
+#endif
+	
+	sequential_sum(seq_input, seq_output);
+	parallel_sum(par_input, par_output);
+
+#ifdef OUTPUT
+    fprintf(outfile,"\nSequential Output: ");
+    for (i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%d, ", seq_output[i]);
+    }
+    fprintf(outfile,"\nParallel Output: ");
+    for (i = 0; i<NITEMS; i++) {
+      fprintf(outfile,"%d, ", par_output[i]);
+    }
+	fprintf(outfile,"\n");
+	fclose(outfile);
+
+	if (check_result (seq_output, par_output, NITEMS))
+		printf("Sucess: parallel result matched sequential result.\n");
+	else
+		printf("FAIL: NOT MATCHED.\n");
+#endif
+	
 	return 0;
 }

@@ -1,6 +1,5 @@
 /**
- * 1D median filtering. It assumes NITEMS>=NTHREADS. NITEMS<NTHREADS is not considered. 
- * gcc median1d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNITEMS=100 -DNITERS=20 -o median1d 
+ * gcc median3d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNXS=10 -DNYS=10 -DNZS=10 -DNITERS=3 -o median3d 
  */
 
 #include <stdio.h>
@@ -60,7 +59,7 @@ int find_median (int *arr, int size)
 	return (arr[(size-1)/2] + arr[size/2])/2.0;
 }
 
-void *median (void *args)
+void *sum (void *args)
 {
 	int tid, cur_chunk_size;
 	int *input, *output;
@@ -79,21 +78,37 @@ void *median (void *args)
 	
 		int i;
 		for (i=0; i<cur_chunk_size; i++) { // iterate over data chunk
-			int *neighbourhood;
-			neighbourhood = malloc((RADIUS*2+1)*sizeof(int));
-			int chunk_size = NITEMS / NTHREADS; // chunk size of 0..n-1 chunks
-
+			int chunk_size = NXS*NYS*NZS / NTHREADS; // chunk size of 0..n-1 chunks
+			int sum=0;
 			int j;
-			for (j=0; j<RADIUS*2+1; j++) { // create neighbourhood
-				neighbourhood[j] = input[(tid*chunk_size+i+NITEMS-RADIUS+j)%NITEMS];
+
+			int elIdx = tid*chunk_size+i;
+			int elx = elIdx % NXS;
+			int ely = (elIdx / NXS) % NYS;
+			int elz = elIdx / NXS / NYS;
+			int neighbourx, neighboury, neighbourz;
+			int* neighbourhood;
+			neighbourhood = malloc((RADIUS*2+1)*(RADIUS*2+1)*(RADIUS*2+1)*sizeof(int));
+
+			// iterate over filter window
+			int filterx, filtery, filterz;
+			for (filterz=0; filterz<2*RADIUS+1; ++filterz) {
+				for (filtery=0; filtery<2*RADIUS+1; ++filtery) {
+					for (filterx=0; filterx<2*RADIUS+1; ++filterx) {
+						neighbourx = (elx+filterx-RADIUS+NXS)%NXS;
+						neighboury = (ely+filtery-RADIUS+NYS)%NYS;
+						neighbourz = (elz+filterz-RADIUS+NZS)%NZS;
+					    neighbourhood[filterx+(2*RADIUS+1)*(filtery+(2*RADIUS+1)*filterz)]= input[neighbourx+NXS*(neighboury+NYS*neighbourz)];
+					}
+				}
 			}
-			output[tid*chunk_size+i] = find_median(neighbourhood, (RADIUS*2+1));
+			output[tid*chunk_size+i] = find_median(neighbourhood, (2*RADIUS+1)*(2*RADIUS+1)*(2*RADIUS+1));
 		}
 		pthread_barrier_wait(&barrier);
 	}
 }
 
-void parallel_median(int *input, int *output)
+void parallel_sum(int *input, int *output)
 {
 	pthread_barrier_init(&barrier, NULL, NTHREADS);
 	pthread_t *threads;
@@ -101,7 +116,7 @@ void parallel_median(int *input, int *output)
 	threads = (pthread_t *) malloc(NTHREADS*sizeof(pthread_t));
 	threadargs  = (arg_pack *) malloc(NTHREADS*sizeof(arg_pack));
 
-	int chunk_size = NITEMS / NTHREADS;
+	int chunk_size = NXS*NYS*NZS / NTHREADS;
 	int i;
 	for (i=0; i<NTHREADS; i++)
 	{
@@ -111,24 +126,24 @@ void parallel_median(int *input, int *output)
 		threadargs[i].output = output;
 	}
 	// give rest items to the last thread
-	threadargs[NTHREADS-1].cur_chunk_size += NITEMS - chunk_size * NTHREADS;
+	threadargs[NTHREADS-1].cur_chunk_size += NXS*NYS*NZS - chunk_size * NTHREADS;
 
 	for (i=0; i<NTHREADS; i++)
-		pthread_create(&threads[i],NULL,median,(void*)&threadargs[i]);
+		pthread_create(&threads[i],NULL,sum,(void*)&threadargs[i]);
 	for (i=0; i<NTHREADS; i++)
 		pthread_join(threads[i], NULL);
 }
 
 int main (int argc, char* argv[])
 {
-	int  *par_input, *par_output;
-	par_input = malloc(NITEMS*sizeof(int));
-	par_output = malloc(NITEMS*sizeof(int));
+	int *par_input, *par_output;
+	par_input = malloc(NXS*NYS*NZS*sizeof(int));
+	par_output = malloc(NXS*NYS*NZS*sizeof(int));
 
 	int i;
-	for (i=0; i<NITEMS; i++) { // init arr
+	for (i=0; i<NXS*NYS*NZS; i++) { // init arr
 		par_input[i] = i;
 	}
-	parallel_median(par_input, par_output);
+	parallel_sum(par_input, par_output);	
 	return 0;
 }

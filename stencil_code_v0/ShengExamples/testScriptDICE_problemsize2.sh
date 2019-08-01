@@ -20,12 +20,12 @@ python3 plot.py median2DresultDICE_problemsize2.csv median2DresultDICE_problemsi
 echo "Median2D test done"
 
 cd ~/stencil/stencil_code_v0/ShengExamples/GaussianBlur2D
-./gaussianBlur2DScript 4 100 5 gaussianBlur2DresultDICE_problemsize2.csv 3 50 50 0 20
+./gaussianBlur2DScript 4 100 5 gaussianBlur2DresultDICE_problemsize2.csv 2 50 50 0 20
 python3 plot.py gaussianBlur2DresultDICE_problemsize2.csv gaussianBlur2DresultDICE_problemsize2.pdf
 echo "GaussianBlur2D test done"
 
 cd ~/stencil/stencil_code_v0/ShengExamples/HeatTransfer2D
-./heatTransfer2DScript 4 100 5 heatTransfer2DresultDICE_problemsize2.csv 3 50 50 0 20
+./heatTransfer2DScript 4 100 5 heatTransfer2DresultDICE_problemsize2.csv 1 50 50 0 20
 python3 plot.py heatTransfer2DresultDICE_problemsize2.csv heatTransfer2DresultDICE_problemsize2.pdf
 echo "HeatTransfer2D test done"
 

@@ -1,5 +1,6 @@
 /**
- * gcc sum2d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNROWS=100 -DNCOLS=100 -DNITERS=20 -o sum2d 
+ * By 2D conduction formula, radius must be 1. 
+ * gcc heattransfer2d.c -O2 -lpthread -DRADIUS=1 -DNTHREADS=4 -DNROWS=100 -DNCOLS=100 -DNITERS=20 -o heattransfer2d 
  */
 
 #include <stdio.h>
@@ -10,18 +11,25 @@
 typedef struct arg_pack_tag {
 	int tid;
 	int cur_chunk_size;
- 	int *input;
-	int *output;
+ 	double *input;
+	double *output;
 } arg_pack;
 
 typedef arg_pack *argptr;
 
 pthread_barrier_t barrier;
 
-void *sum (void *args)
+double average (double *neighbourhood, int size)
+{
+	double sum = 0;
+	sum = neighbourhood[1] + neighbourhood[3] + neighbourhood[5] + neighbourhood[7];
+	return sum/4.; // hard coded 4
+}
+
+void *heat_transfer (void *args)
 {
 	int tid, cur_chunk_size;
-	int *input, *output;
+	double *input, *output;
 	tid=((arg_pack*)args)->tid;
 	cur_chunk_size=((arg_pack*)args)->cur_chunk_size;
 	input=((arg_pack*)args)->input;
@@ -30,21 +38,21 @@ void *sum (void *args)
 	int iter;
 	for (iter=0; iter<NITERS; iter++) {
 		if (iter>0) {
-			int* temp = input;
+			double* temp = input;
 		    input = output;
 			output = temp;
 		}
-	
 		int i;
 		for (i=0; i<cur_chunk_size; i++) { // iterate over data chunk
 			int chunk_size = NROWS*NCOLS / NTHREADS; // chunk size of 0..n-1 chunks
-			int sum=0;
 			int j;
 
 			int elIdx = tid*chunk_size+i;
 			int elCol = elIdx % NCOLS;
 			int elRow = elIdx / NCOLS;
 			int neighbourCol, neighbourRow;
+			double* neighbourhood;
+			neighbourhood = malloc((RADIUS*2+1)*(RADIUS*2+1)*sizeof(double));
 
 			// iterate over filter window
 			int row, col;
@@ -52,16 +60,16 @@ void *sum (void *args)
 				for (col=0; col<2*RADIUS+1; ++col) {
 					neighbourCol = (elCol+col+NCOLS-RADIUS)%NCOLS;
 					neighbourRow = (elRow+row+NROWS-RADIUS)%NROWS;
-					sum += input[neighbourCol+neighbourRow*NCOLS];
+					neighbourhood[col+row*(2*RADIUS+1)] = input[neighbourCol+neighbourRow*NCOLS];
 				}
 			}
-			output[tid*chunk_size+i] = sum;
+			output[tid*chunk_size+i] = average(neighbourhood, (2*RADIUS+1)*(2*RADIUS+1));
 		}
 		pthread_barrier_wait(&barrier);
 	}
 }
 
-void parallel_sum(int *input, int *output)
+void parallel_heat_transfer(double *input, double *output)
 {
 	pthread_barrier_init(&barrier, NULL, NTHREADS);
 	pthread_t *threads;
@@ -82,21 +90,21 @@ void parallel_sum(int *input, int *output)
 	threadargs[NTHREADS-1].cur_chunk_size += NROWS*NCOLS - chunk_size * NTHREADS;
 
 	for (i=0; i<NTHREADS; i++)
-		pthread_create(&threads[i],NULL,sum,(void*)&threadargs[i]);
+		pthread_create(&threads[i],NULL,heat_transfer,(void*)&threadargs[i]);
 	for (i=0; i<NTHREADS; i++)
 		pthread_join(threads[i], NULL);
 }
 
 int main (int argc, char* argv[])
 {
-	int *par_input, *par_output;
-	par_input = malloc(NROWS*NCOLS*sizeof(int));
-	par_output = malloc(NROWS*NCOLS*sizeof(int));
+	double *par_input, *par_output;
+	par_input = malloc(NROWS*NCOLS*sizeof(double));
+	par_output = malloc(NROWS*NCOLS*sizeof(double));
 
 	int i;
 	for (i=0; i<NROWS*NCOLS; i++) { // init arr
-		par_input[i] = i;
+		par_input[i] = (double)i;
 	}
-	parallel_sum(par_input, par_output);	
+	parallel_heat_transfer(par_input, par_output);
 	return 0;
 }
