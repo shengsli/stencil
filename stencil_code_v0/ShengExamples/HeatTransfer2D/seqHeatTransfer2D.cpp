@@ -108,7 +108,7 @@ void sequentialMedian(std::vector<double> &output, std::vector<double> &input)
 	}
 	
     tstop = second();
-    // std::cout << "sequentialMedian, " << tstop-tstart << std::endl;
+    std::cout << tstop-tstart << ", 0, 0, " << NROWS*NCOLS <<  std::endl;
 }
 
 int main(int argc, char** argv)

@@ -1,5 +1,6 @@
 import sys
 import csv
+import numpy as np
 import matplotlib.pyplot as plt
 
 list = sys.argv
@@ -8,35 +9,51 @@ if len(list) != 3:
 filename = sys.argv[1]
 # print("read file %s" % filename)
 
+skeletonTimesStds = []
+pthreadsTimesStds = []
+
 with open(filename) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', skipinitialspace=True)
     fstrow = next(reader)
     # print("x-axis is %s" % fstrow[1]) # expect nthreads
     # print("y-axis is %s" % fstrow[0]) # expect time
 
-    times = []
+    skeletonTimes = []
+    pthreadsTimes = []
     nthreads = []
     NUMRUNS=5
     sum=0.
+    tempStds = []
     for count, row in enumerate(reader, start=0):
+        tempStds.append(row[0])
         sum += float(row[0])
         if count % NUMRUNS == 4:
-            # nthreads=row[1]
-            # time=row[0]
-            # print(nthreads, time)
+            avg = sum/NUMRUNS
+            tempStdsNdarray = np.array(tempStds, dtype='f')
+            tempStd = np.std(tempStdsNdarray)
             if row[1]=="0":
+                skeletonTimes.append(avg)
                 nthreads.append("seq")
+                skeletonTimesStds.append(tempStd)
+            elif row[1][0]=='p':
+                pthreadsTimes.append(avg)
+                pthreadsTimesStds.append(tempStd)
             else:
                 nthreads.append(row[1])
-            avg = sum/NUMRUNS
-            times.append(avg)
+                skeletonTimes.append(avg)
+                skeletonTimesStds.append(tempStd)
             sum=0
-# print(*times)
-# print(*nthreads)
+            tempStds = []
 
-# plt.figure()
-plt.bar(nthreads, times)
+print(*skeletonTimes)
+print(*nthreads)
+print(*pthreadsTimes)
+
+ind = range(len(nthreads))
+plt.figure()
+plt.bar(nthreads, skeletonTimes, yerr=skeletonTimesStds)
+plt.bar(nthreads[1:], pthreadsTimes, yerr=pthreadsTimesStds)
 plt.xlabel("nthreads")
 plt.ylabel("time")
-# plt.show()
+plt.show()
 plt.savefig(sys.argv[2])

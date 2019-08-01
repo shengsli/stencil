@@ -33,6 +33,16 @@ do
   g++ seqSum1D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNITEMS=$nitems -DNITERS=$niters -DPADDING=$padding -o seqSum1D
   ./seqSum1D >> $resultfile
 done
+
+for threadcount in $(seq 1 $threads)
+do
+  gcc sum1d.c -O2 -lpthread -DRADIUS=$radius -DNTHREADS=$threadcount -DNITEMS=$nitems -DNITERS=$niters -o sum1d
+  for run in $(seq 1 $runs)
+  do
+    ./sum1d >> $resultfile
+  done
+done
+
 for threadcount in $(seq 1 $threads)
 do
   g++ sum1D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNITEMS=$nitems -DPADDING=$padding -DNITERS=$niters -o sum1D

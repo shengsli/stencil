@@ -33,6 +33,16 @@ do
   g++ seqMedian1D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNITEMS=$nitems -DNITERS=$niters -DPADDING=$padding -o seqMedian1D
   ./seqMedian1D >> $resultfile
 done
+
+for threadcount in $(seq 1 $threads)
+do
+  gcc median1d.c -O2 -lpthread -DRADIUS=$radius -DNTHREADS=$threadcount -DNITEMS=$nitems -DNITERS=$niters -o median1d
+  for run in $(seq 1 $runs)
+  do
+    ./median1d >> $resultfile
+  done
+done
+
 for threadcount in $(seq 1 $threads)
 do
   g++ median1D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNITEMS=$nitems -DPADDING=$padding -DNITERS=$niters -o median1D

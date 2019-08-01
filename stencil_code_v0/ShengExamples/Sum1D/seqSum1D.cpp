@@ -73,7 +73,8 @@ void sequentialSum(std::vector<int> &output, std::vector<int> &input)
 			}
 			output[elementIndex] = sum;
 		}		
-	}	
+	}
+	
     tstop = second();
 	std::cout << tstop-tstart << ", 0, 0, " << NITEMS <<  std::endl;
 }

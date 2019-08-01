@@ -30,11 +30,21 @@ padding=$8
 niters=$9
 
 echo "time, nthreads, ndatablocks, radius, nrows, ncols, padding, niters" > $resultfile
-for threadcount in $(seq 1 $threads)
+for run in $(seq 1 $runs)
 do
   g++ seqSum2D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o seqSum2D
   ./seqSum2D >> $resultfile
 done
+
+for threadcount in $(seq 1 $threads)
+do
+  gcc sum2d.c -O2 -lpthread -DRADIUS=$radius -DNTHREADS=$threadcount -DNROWS=$nrows -DNCOLS=$ncols -DNITERS=$niters -o sum2d 
+  for run in $(seq 1 $runs)
+  do
+    ./sum2d >> $resultfile
+  done
+done
+
 for threadcount in $(seq 1 $threads)
 do
   g++ sum2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o sum2D
