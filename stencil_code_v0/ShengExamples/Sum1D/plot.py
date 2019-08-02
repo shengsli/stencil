@@ -45,17 +45,17 @@ with open(filename) as csvfile:
             sum=0
             tempStds = []
 
-print(*skeletonTimes)
-print(*nthreads)
-print(*pthreadsTimes)
+# print(*skeletonTimes)
+# print(*nthreads)
+# print(*pthreadsTimes)
 
 ind = range(len(nthreads))
-plt.figure()
+# plt.figure()
 plt.bar(nthreads[0], skeletonTimes[0], yerr=skeletonTimesStds[0], label="sequential")
 plt.bar(nthreads[1:], skeletonTimes[1:], yerr=skeletonTimesStds[1:], label="skeleton")
 plt.bar(nthreads[1:], pthreadsTimes, yerr=pthreadsTimesStds, label="pthread")
 plt.xlabel("nthreads")
 plt.ylabel("time")
 plt.legend()
-plt.show()
+# plt.show()
 plt.savefig(sys.argv[2])
