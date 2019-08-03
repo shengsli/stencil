@@ -37,6 +37,18 @@ do
   g++ seqMedian3D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DPADDING=$padding -DNITERS=$niters -o seqMedian3D
   ./seqMedian3D >> $resultfile
 done
+
+threadcount=1
+while [ $threadcount -le $threads ]
+do
+  gcc median3d.c -O2 -lpthread -DRADIUS=$radius -DNTHREADS=$threadcount -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DNITERS=$niters -o median3d
+  for run in $(seq 1 $runs)
+  do
+    ./median3d >> $resultfile
+  done
+  threadcount=$((2*threadcount))
+done
+
 threadcount=1
 while [ $threadcount -le $threads ]
 do

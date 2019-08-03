@@ -30,11 +30,23 @@ padding=$8
 niters=$9
 
 echo "time, nthreads, ndatablocks, radius, nrows, ncols, padding, niters" > $resultfile
-for threadcount in $(seq 1 $threads)
+for run in $(seq 1 $runs)
 do
   g++ seqGaussianBlur2D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNROWS=$nrows -DNCOLS=$ncols -DPADDING=$padding -DNITERS=$niters -o seqGaussianBlur2D
   ./seqGaussianBlur2D >> $resultfile
 done
+
+threadcount=1
+while [ $threadcount -le $threads ]
+do
+  gcc gaussianblur2d.c -O2 -lpthread -DRADIUS=$radius -DNTHREADS=$threadcount -DNROWS=$nrows -DNCOLS=$ncols -DNITERS=$niters -o gaussianblur2d
+  for run in $(seq 1 $runs)
+  do
+    ./gaussianblur2d >> $resultfile
+  done
+  threadcount=$((2*threadcount))
+done
+
 threadcount=1
 while [ $threadcount -le $threads ]
 do

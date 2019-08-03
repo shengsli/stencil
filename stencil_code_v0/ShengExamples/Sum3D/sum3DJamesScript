@@ -37,6 +37,18 @@ do
   g++ seqSum3D.cpp -std=c++11 -O2 -lpthread -DRADIUS=$radius -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DPADDING=$padding -DNITERS=$niters -o seqSum3D
   ./seqSum3D >> $resultfile
 done
+
+threadcount=1
+while [ $threadcount -le $threads ]
+do
+  gcc sum3d.c -O2 -lpthread -DRADIUS=$radius -DNTHREADS=$threadcount -DNXS=$nxs -DNYS=$nys -DNZS=$nzs -DNITERS=$niters -o sum3d
+  for run in $(seq 1 $runs)
+  do
+    ./sum3d >> $resultfile
+  done
+  threadcount=$((2*threadcount))
+done
+
 threadcount=1
 while [ $threadcount -le $threads ]
 do
