@@ -1,6 +1,7 @@
 import sys
 import csv
 import numpy as np
+import numpy.ma as ma
 import matplotlib.pyplot as plt
 
 list = sys.argv
@@ -18,6 +19,8 @@ with open(filename) as csvfile:
     # print("x-axis is %s" % fstrow[1]) # expect nthreads
     # print("y-axis is %s" % fstrow[0]) # expect time
 
+    seqTime = None
+    seqTimeStd = None
     skeletonTimes = []
     pthreadsTimes = []
     nthreads = []
@@ -32,9 +35,8 @@ with open(filename) as csvfile:
             tempStdsNdarray = np.array(tempStds, dtype='f')
             tempStd = np.std(tempStdsNdarray)
             if row[1]=="0":
-                skeletonTimes.append(avg)
-                nthreads.append("seq")
-                skeletonTimesStds.append(tempStd)
+                seqTime = avg
+                seqTimeStd = tempStd
             elif row[1][0]=='p':
                 pthreadsTimes.append(avg)
                 pthreadsTimesStds.append(tempStd)
@@ -49,11 +51,21 @@ with open(filename) as csvfile:
 # print(*nthreads)
 # print(*pthreadsTimes)
 
+# skeletonTimesArr = np.array(skeletonTimes)
+# pthreadsTimesArr = np.array(pthreadsTimes)
+# skeletonTimesStdsArr = np.array(skeletonTimesStds)
+# pthreadsTimesStdsArr = np.array(pthreadsTimesStds)
+# mask1 = ma.where(skeletonTimesArr>=pthreadsTimesArr)
+# mask2 = ma.where(skeletonTimesArr<pthreadsTimesArr)
+
 ind = range(len(nthreads))
 # plt.figure()
-plt.bar(nthreads[0], skeletonTimes[0], yerr=skeletonTimesStds[0], label="sequential")
-plt.bar(nthreads[1:], skeletonTimes[1:], yerr=skeletonTimesStds[1:], label="skeleton")
-plt.bar(nthreads[1:], pthreadsTimes, yerr=pthreadsTimesStds, label="pthread")
+# plt.plot(['seq'], seqTime, label="sequential")
+# plt.plot(nthreads, skeletonTimes, label="skeleton")
+# plt.plot(nthreads, pthreadsTimes, label="pthread")
+# plt.errorbar(['seq'], seqTime, [seqTimeStd], marker='^')
+plt.errorbar(['seq']+nthreads, [seqTime]+skeletonTimes, [seqTimeStd]+skeletonTimesStds, marker='^', label="skeleton")
+plt.errorbar(['seq']+nthreads, [seqTime]+pthreadsTimes, [seqTimeStd]+pthreadsTimesStds, marker='^', label="pthread")
 plt.xlabel("nthreads")
 plt.ylabel("time")
 plt.legend()
