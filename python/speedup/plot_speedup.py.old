@@ -1,0 +1,63 @@
+import sys
+import csv
+import numpy as np
+import matplotlib.pyplot as plt
+
+list = sys.argv
+if len(list) != 3:
+    sys.exit("usage: python3 %s <filename.csv> <filename.pdf>" % sys.argv[0]);
+filename = sys.argv[1]
+# print("read file %s" % filename)
+
+skeletonTimesStds = []
+pthreadsTimesStds = []
+
+with open(filename) as csvfile:
+    reader = csv.reader(csvfile, delimiter=',', skipinitialspace=True)
+    fstrow = next(reader)
+    # print("x-axis is %s" % fstrow[1]) # expect nthreads
+    # print("y-axis is %s" % fstrow[0]) # expect time
+
+    seqTime = None
+    seqTimeStd = None
+    skeletonTimes = []
+    pthreadsTimes = []
+    nthreads = []
+    NUMRUNS=5
+    sum=0.
+    tempStds = []
+    for count, row in enumerate(reader, start=0):
+        if row[1]=="0":
+            tempStds.append(0)
+        else:
+            s = float(row[0])/seqTime
+            tempStds.append(s)
+        sum += float(row[0])
+        if count % NUMRUNS == 4:
+            avg = sum/NUMRUNS
+            tempStdsNdarray = np.array(tempStds, dtype='f')
+            tempStd = np.std(tempStdsNdarray)
+            if row[1]=="0":
+                seqTime = avg
+                seqTimeStd = tempStd
+                speedup = 1
+            elif row[1][0]=='p':
+                speedup = seqTime/avg
+                pthreadsTimes.append(speedup)
+                pthreadsTimesStds.append(tempStd)
+            else:
+                speedup = seqTime/avg
+                nthreads.append(row[1])
+                skeletonTimes.append(speedup)
+                skeletonTimesStds.append(tempStd)
+            sum=0
+            tempStds = []
+
+# plt.figure()
+plt.errorbar(nthreads, skeletonTimes, skeletonTimesStds, marker='^', label="skeleton")
+plt.errorbar(nthreads, pthreadsTimes, pthreadsTimesStds, marker='^', label="pthreads")
+plt.xlabel("nthreads")
+plt.ylabel("time")
+plt.legend()
+# plt.show()
+plt.savefig(sys.argv[2])

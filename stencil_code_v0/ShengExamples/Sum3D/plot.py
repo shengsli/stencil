@@ -1,73 +1,69 @@
 import sys
 import csv
 import numpy as np
-import numpy.ma as ma
 import matplotlib.pyplot as plt
 
-list = sys.argv
-if len(list) != 3:
-    sys.exit("usage: python3 %s <filename.csv> <filename.pdf>" % sys.argv[0]);
+# input argument
+arg_num = sys.argv
+if len(arg_num) != 2:
+    sys.exit("usage: python3 %s <filename.csv>" % sys.argv[0]);
 filename = sys.argv[1]
-# print("read file %s" % filename)
 
-skeletonTimesStds = []
-pthreadsTimesStds = []
+# read csv
+data = np.loadtxt(filename, delimiter=',', skiprows=1, dtype='float', usecols=(0,2,3))
+str_data = np.loadtxt(filename, delimiter=',', skiprows=1, dtype='str', usecols=(1))
 
-with open(filename) as csvfile:
-    reader = csv.reader(csvfile, delimiter=',', skipinitialspace=True)
-    fstrow = next(reader)
-    # print("x-axis is %s" % fstrow[1]) # expect nthreads
-    # print("y-axis is %s" % fstrow[0]) # expect time
+# prepare data
+RUNTIMES=5
+reshaped_data = data.reshape(-1,RUNTIMES,data.shape[1])
+reshaped_str_data = str_data.reshape(-1,RUNTIMES)
 
-    seqTime = None
-    seqTimeStd = None
-    skeletonTimes = []
-    pthreadsTimes = []
-    nthreads = []
-    NUMRUNS=5
-    sum=0.
-    tempStds = []
-    for count, row in enumerate(reader, start=0):
-        tempStds.append(row[0])
-        sum += float(row[0])
-        if count % NUMRUNS == 4:
-            avg = sum/NUMRUNS
-            tempStdsNdarray = np.array(tempStds, dtype='f')
-            tempStd = np.std(tempStdsNdarray)
-            if row[1]=="0":
-                seqTime = avg
-                seqTimeStd = tempStd
-            elif row[1][0]=='p':
-                pthreadsTimes.append(avg)
-                pthreadsTimesStds.append(tempStd)
-            else:
-                nthreads.append(row[1])
-                skeletonTimes.append(avg)
-                skeletonTimesStds.append(tempStd)
-            sum=0
-            tempStds = []
+# data for time plot
+ind = reshaped_str_data[:,0]
+ind[0] = "seq"
+times = reshaped_data[:,:,0]
+time_avgs = np.average(times,axis=1)
+time_stds = np.std(times,axis=1)
 
-# print(*skeletonTimes)
-# print(*nthreads)
-# print(*pthreadsTimes)
+row_num = times.shape[0]
+seq_time = times[0]
+seq_avg = time_avgs[0]
+seq_std = time_stds[0]
+pthreads_times = times[1:row_num//2+1]
+skeleton_times = times[row_num//2+1:]
+pthreads_time_avgs = time_avgs[1:row_num//2+1]
+skeleton_time_avgs = time_avgs[row_num//2+1:]
+pthreads_time_stds = time_stds[1:row_num//2+1]
+skeleton_time_stds = time_stds[row_num//2+1:]
+seq_ind = ind[0]
+threads_ind = ind[row_num//2+1:]
 
-# skeletonTimesArr = np.array(skeletonTimes)
-# pthreadsTimesArr = np.array(pthreadsTimes)
-# skeletonTimesStdsArr = np.array(skeletonTimesStds)
-# pthreadsTimesStdsArr = np.array(pthreadsTimesStds)
-# mask1 = ma.where(skeletonTimesArr>=pthreadsTimesArr)
-# mask2 = ma.where(skeletonTimesArr<pthreadsTimesArr)
+# data for speedup plot
+speedups = seq_time/times
+speedup_avgs = np.average(speedups,axis=1)
+speedup_stds = np.std(speedups,axis=1)
+pthreads_speedups = speedups[1:row_num//2+1]
+skeleton_speedup = speedups[row_num//2+1:]
+pthreads_speedup_avgs = speedup_avgs[1:row_num//2+1]
+skeleton_speedup_avgs = speedup_avgs[row_num//2+1:]
+pthreads_speedup_stds = speedup_stds[1:row_num//2+1]
+skeleton_speedup_stds = speedup_stds[row_num//2+1:]
 
-ind = range(len(nthreads))
-# plt.figure()
-# plt.plot(['seq'], seqTime, label="sequential")
-# plt.plot(nthreads, skeletonTimes, label="skeleton")
-# plt.plot(nthreads, pthreadsTimes, label="pthread")
-# plt.errorbar(['seq'], seqTime, [seqTimeStd], marker='^')
-plt.errorbar(['seq']+nthreads, [seqTime]+skeletonTimes, [seqTimeStd]+skeletonTimesStds, marker='^', label="skeleton")
-plt.errorbar(['seq']+nthreads, [seqTime]+pthreadsTimes, [seqTimeStd]+pthreadsTimesStds, marker='^', label="pthread")
+strs = sys.argv[1].split('.')
+time_plot_name = strs[0]+"_time.pdf"
+speedup_plot_name = strs[0]+"_speedup.pdf"
+
+plt.errorbar(threads_ind, skeleton_time_avgs, skeleton_time_stds, marker='^', label="skeleton")
+plt.errorbar(threads_ind, pthreads_time_avgs, pthreads_time_stds, marker='^', label="pthreads")
 plt.xlabel("nthreads")
 plt.ylabel("time")
 plt.legend()
-# plt.show()
-plt.savefig(sys.argv[2])
+plt.savefig(time_plot_name)
+plt.close()
+
+plt.errorbar(threads_ind, skeleton_speedup_avgs, skeleton_speedup_stds, marker='^', label="skeleton")
+plt.errorbar(threads_ind, pthreads_speedup_avgs, pthreads_speedup_stds, marker='^', label="pthreads")
+plt.xlabel("nthreads")
+plt.ylabel("speedup")
+plt.legend()
+plt.savefig(speedup_plot_name)
