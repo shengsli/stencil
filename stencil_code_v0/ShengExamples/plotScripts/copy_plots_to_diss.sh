@@ -1,3 +1,4 @@
+#!/bin/sh
 cd ~/stencil/stencil_code_v0/ShengExamples/Sum1D
 cp sum1DresultDICE*.pdf ~/diss-stencil/chapter4/v0/dice/
 cp sum1DresultJames*.pdf ~/diss-stencil/chapter4/v0/james/
