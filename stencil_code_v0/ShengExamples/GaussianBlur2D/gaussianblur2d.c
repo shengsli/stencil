@@ -38,7 +38,8 @@ double second()
 double conv(double *lhs, double *rhs, int size)
 {
 	double sum=0.;
-	for (int i=0; i<size; ++i) {
+	int i;
+	for (i=0; i<size; ++i) {
 		sum += lhs[i]*rhs[i];
 	}
 	return sum;
