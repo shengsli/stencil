@@ -21,15 +21,15 @@ reshaped_str_data = str_data.reshape(-1,RUNTIMES)
 # data for time plot
 problem_size = int(data[0,2])
 ind = reshaped_str_data[:,0]
-ind[0] = "seq"
+ind[0] = 1
 times = reshaped_data[:,:,0]
 time_avgs = np.average(times,axis=1)
 time_stds = np.std(times,axis=1)
 
 row_num = times.shape[0]
 seq_time = times[0]
-seq_avg = time_avgs[0]
-seq_std = time_stds[0]
+seq_time_avg = time_avgs[0]
+seq_time_std = time_stds[0]
 pthreads_times = times[1:row_num//2+1]
 skeleton_times = times[row_num//2+1:]
 pthreads_time_avgs = time_avgs[1:row_num//2+1]
@@ -40,7 +40,7 @@ seq_ind = ind[0]
 threads_ind = ind[row_num//2+1:]
 
 # data for speedup plot
-speedups = seq_time/times
+speedups = seq_time_avg/times
 speedup_avgs = np.average(speedups,axis=1)
 speedup_stds = np.std(speedups,axis=1)
 pthreads_speedups = speedups[1:row_num//2+1]
@@ -86,8 +86,9 @@ idx = strs[0].find('D')
 example_name = strs[0][0].upper() + strs[0][1:idx+1]
 
 # plot time
-plt.errorbar(threads_ind, skeleton_time_avgs, skeleton_time_stds, marker='^', label="skeleton")
-plt.errorbar(threads_ind, pthreads_time_avgs, pthreads_time_stds, marker='^', label="pthreads")
+plt.errorbar([0], seq_time_avg, seq_time_std, marker='.', label="sequential")
+plt.errorbar(threads_ind, skeleton_time_avgs, skeleton_time_stds, marker='.', label="skeleton")
+plt.errorbar(threads_ind, pthreads_time_avgs, pthreads_time_stds, marker='.', label="pthreads")
 plt.xlabel("#threads")
 plt.ylabel("AVG execution time (second)")
 plt.legend()
@@ -96,8 +97,8 @@ plt.savefig(time_plot_name)
 plt.close()
 
 # plot speedup
-plt.errorbar(threads_ind, skeleton_speedup_avgs, skeleton_speedup_stds, marker='^', label="skeleton")
-plt.errorbar(threads_ind, pthreads_speedup_avgs, pthreads_speedup_stds, marker='^', label="pthreads")
+plt.errorbar(threads_ind, skeleton_speedup_avgs, skeleton_speedup_stds, marker='.', label="skeleton")
+plt.errorbar(threads_ind, pthreads_speedup_avgs, pthreads_speedup_stds, marker='.', label="pthreads")
 plt.xlabel("#threads")
 plt.ylabel(r"AVG speedup = $T_{s} / T_{p}$")
 plt.legend()
@@ -106,8 +107,8 @@ plt.savefig(speedup_plot_name)
 plt.close()
 
 # plot efficiency
-plt.errorbar(threads_ind, skeleton_efficiency_avgs, skeleton_efficiency_stds, marker='^', label="skeleton")
-plt.errorbar(threads_ind, pthreads_efficiency_avgs, pthreads_efficiency_stds, marker='^', label="pthreads")
+plt.errorbar(threads_ind, skeleton_efficiency_avgs, skeleton_efficiency_stds, marker='.', label="skeleton")
+plt.errorbar(threads_ind, pthreads_efficiency_avgs, pthreads_efficiency_stds, marker='.', label="pthreads")
 plt.xlabel("#threads")
 plt.ylabel("AVG efficiency (%) = speedup / #threads")
 plt.title("{0}: efficiency, problem size = {1:,}".format(example_name, problem_size))
@@ -116,8 +117,8 @@ plt.savefig(efficiency_plot_name)
 plt.close()
 
 # plot cost 
-plt.errorbar(threads_ind, skeleton_cost_avgs, skeleton_cost_stds, marker='^', label="skeleton")
-plt.errorbar(threads_ind, pthreads_cost_avgs, pthreads_cost_stds, marker='^', label="pthreads")
+plt.errorbar(threads_ind, skeleton_cost_avgs, skeleton_cost_stds, marker='.', label="skeleton")
+plt.errorbar(threads_ind, pthreads_cost_avgs, pthreads_cost_stds, marker='.', label="pthreads")
 plt.xlabel("#threads")
 plt.ylabel(r"AVG cost (seconds) = execution time $\times$ #threads")
 plt.title("{0}: cost, problem size = {1:,}".format(example_name, problem_size))
