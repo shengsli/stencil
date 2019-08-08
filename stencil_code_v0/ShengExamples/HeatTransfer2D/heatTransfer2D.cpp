@@ -30,7 +30,7 @@ double stencilkernel (double neighbourhood[], int radius)
 	return average(neighbourhood);
 }
 
-void parallelMedian(std::vector<double> &output, std::vector<double> &input)
+void parallelHeatTransfer(std::vector<double> &output, std::vector<double> &input)
 {
     double tstart, tstop;
     tstart = second();
@@ -49,6 +49,6 @@ int main(int argc, char** argv)
     for(size_t i = 0; i < NROWS*NCOLS; ++i) {
 	    parInput[i] = 0.;
 	}
-	parallelMedian(parOutput, parInput);
+	parallelHeatTransfer(parOutput, parInput);
 	return 0;
 }
