@@ -1,9 +1,0 @@
-#!/bin/sh
-./plotScriptDICE_problemsize1.sh 
-./plotScriptDICE_problemsize2.sh 
-./plotScriptDICE_problemsize3.sh 
-./plotScriptDICE_problemsize4.sh 
-./plotScriptJames_problemsize1.sh
-./plotScriptJames_problemsize2.sh
-./plotScriptJames_problemsize3.sh
-./plotScriptJames_problemsize4.sh
