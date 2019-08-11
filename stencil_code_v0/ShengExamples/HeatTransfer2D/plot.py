@@ -86,19 +86,11 @@ idx = strs[0].find('D')
 example_name = strs[0][0].upper() + strs[0][1:idx+1]
 
 # plot time
-fig, ax1 = plt.subplots()
-ax2 = ax1.twinx()
-# bar
-temp_ind = np.arange(threads_ind.shape[0])
-ax1.bar(temp_ind+0.15, skeleton_speedup_avgs, yerr=skeleton_speedup_stds, width=0.3, color='r', label="skeleton")
-ax1.bar(temp_ind-0.15, pthreads_speedup_avgs, yerr=pthreads_speedup_stds, width=0.3, color='g', label="pthreads")
-ax1.set_ylabel(r"AVG speedup = $T_{s} / T_{p}$")
-# error bar
-ax2.errorbar([0],         seq_time_avg,       seq_time_std,       marker='^', label="sequential")
-ax2.errorbar(threads_ind, skeleton_time_avgs, skeleton_time_stds, marker='^', color='r', label="skeleton")
-ax2.errorbar(threads_ind, pthreads_time_avgs, pthreads_time_stds, marker='^', color='g', label="pthreads")
-ax2.set_xlabel("#threads")
-ax2.set_ylabel("AVG execution time (second)")
+plt.errorbar([0], seq_time_avg, seq_time_std, marker='^', label="sequential")
+plt.errorbar(threads_ind, skeleton_time_avgs, skeleton_time_stds, marker='^', label="skeleton")
+plt.errorbar(threads_ind, pthreads_time_avgs, pthreads_time_stds, marker='^', label="pthreads")
+plt.xlabel("#threads")
+plt.ylabel("AVG execution time (second)")
 plt.legend()
 plt.title("{0}: AVG execution time - #threads, #items = {1:,}".format(example_name, problem_size))
 plt.savefig(time_plot_name)
