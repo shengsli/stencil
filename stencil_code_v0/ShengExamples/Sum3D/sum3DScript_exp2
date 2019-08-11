@@ -42,8 +42,8 @@ do
 	do
 	  ./sum3D >> $resultfile
 	done
-	cur_nxs=$((cur_nxs*2))
-    cur_nys=$((cur_nys*2))
-	cur_nzs=$((cur_nzs*2))
+	cur_nxs=$((cur_nxs+10))
+    cur_nys=$((cur_nys+10))
+	cur_nzs=$((cur_nzs+10))
   done
 done
