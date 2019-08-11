@@ -33,7 +33,7 @@ for idx in range(THREAD_LINE_NUM):
     plt.errorbar(problem_sizes[idx*PROBLEMSIZE_NUM:(idx+1)*PROBLEMSIZE_NUM], 
                  time_avgs[idx*PROBLEMSIZE_NUM:(idx+1)*PROBLEMSIZE_NUM],
                  time_stds[idx*PROBLEMSIZE_NUM:(idx+1)*PROBLEMSIZE_NUM],
-                 marker='.', label="#threads={0}".format(threads_num[idx*PROBLEMSIZE_NUM]))
+                 marker='^', label="#threads={0}".format(threads_num[idx*PROBLEMSIZE_NUM]))
 
 # plt.axis()
 plt.xlabel("#items")
