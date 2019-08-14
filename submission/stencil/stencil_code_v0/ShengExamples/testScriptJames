@@ -1,0 +1,38 @@
+cd ~/stencil/stencil_code_v0/ShengExamples/Sum1D
+./sum1DJamesScript 64 100 5 sum1DresultJames.csv 3 100000 0 20
+Rscript Rtest.R sum1DresultJames.csv sum1DresultJames.pdf
+echo "Sum1D test done"
+
+cd ~/stencil/stencil_code_v0/ShengExamples/Sum2D
+./sum2DJamesScript 64 100 5 sum2DresultJames.csv 3 100 100 0 20
+Rscript Rtest.R sum2DresultJames.csv sum2DresultJames.pdf
+echo "Sum2D test done"
+
+cd ~/stencil/stencil_code_v0/ShengExamples/Sum3D
+./sum3DJamesScript 64 100 5 sum3DresultJames.csv 1 10 15 20 0 5
+Rscript Rtest.R sum3DresultJames.csv sum3DresultJames.pdf
+echo "Sum3D test done"
+
+cd ~/stencil/stencil_code_v0/ShengExamples/Median1D
+./median1DJamesScript 64 100 5 median1DresultJames.csv 3 100000 0 20
+Rscript Rtest.R median1DresultJames.csv median1DresultJames.pdf
+echo "Median1D test done"
+
+cd ~/stencil/stencil_code_v0/ShengExamples/Median2D
+./median2DJamesScript 64 100 5 median2DresultJames.csv 3 100 100 0 20
+Rscript Rtest.R median2DresultJames.csv median2DresultJames.pdf
+echo "Median2D test done"
+
+cd ~/stencil/stencil_code_v0/ShengExamples/Median3D
+./median3DJamesScript 64 100 5 median3DresultJames.csv 1 10 15 20 0 5
+Rscript Rtest.R median3DresultJames.csv median3DresultJames.pdf
+echo "Median3D test done"
+
+cd ~/stencil/stencil_code_v0/ShengExamples/GaussianBlur2D
+./gaussianBlur2DJamesScript 64 100 5 gaussianBlur2DresultJames.csv 2 100 100 0 20
+Rscript Rtest.R gaussianBlur2DresultJames.csv gaussianBlur2DresultJames.pdf
+
+cd ~/stencil/stencil_code_v0/ShengExamples/HeatTransfer2D
+./heatTransfer2DJamesScript 64 100 5 heatTransfer2DresultJames.csv 1 100 100 0 20
+Rscript Rtest.R heatTransfer2DresultJames.csv heatTransfer2DresultJames.pdf
+echo "HeatTransfer3D test done"

@@ -1,0 +1,43 @@
+# Tests the gaussianBlur2D stencil app
+
+# Test workload on multiple threads problem sizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./gaussianBlur2DScript_exp2 threads ndatablocks runs resultfile radius nrows ncols padding niters
+# e.g.	 ./gaussianBlur2DScript_exp2 4 100 5 gaussianBlur2DresultDICE_exp2.csv 3 100 100 0 20
+#
+# threads:    max threadcount
+# ndatablocks number of sub-blocks (for stealing) created from the initial
+#             work partition allocated to a thread
+# runs:       number of repeat runs
+# resultfile: results are sent here
+# radius:	  filter size is 2*radius+1
+# nrows:      number of rows in whole input
+# ncols:      number of columns in whole input
+# padding: 	  padding option can be 0,1,2
+# niters:	  nuber of iterations
+
+threads=$1
+ndatablocks=$2
+runs=$3
+resultfile=$4
+radius=$5
+nrows=$6
+ncols=$7
+padding=$8
+niters=$9
+
+echo "time, nthreads, ndatablocks, radius, nrows, ncols, padding, niters" > $resultfile
+
+for threadcount in $(seq 1 $threads); do
+  cur_nrows=$nrows
+  cur_ncols=$ncols
+  for count in $(seq 1 5); do
+    g++ gaussianBlur2D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNROWS=$cur_nrows -DNCOLS=$cur_ncols -DPADDING=$padding -DNITERS=$niters -o gaussianBlur2D
+    for run in $(seq 1 $runs); do
+      ./gaussianBlur2D >> $resultfile
+    done
+	cur_nrows=$((cur_nrows+100))
+    cur_ncols=$((cur_ncols+100))
+  done
+done

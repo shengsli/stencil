@@ -1,0 +1,51 @@
+# Tests the median3D stencil app
+
+# Test workload on multiple threads problem sizes and repeats
+# repeat runs are generated from within the executable
+#
+# USAGE: ./median3DJamesScript_exp2 threads ndatablocks runs resultfile radius nrows nxs nys nzs padding niters
+# e.g.	 ./median3DJamesScript_exp2 64 100 5 median3DresultJames_exp2.csv 1 10 10 10 0 1
+#
+# threads:    max threadcount
+# ndatablocks number of sub-blocks (for stealing) created from the initial
+#             work partition allocated to a thread
+# runs:       number of repeat runs
+# resultfile: results are sent here
+# radius:	  filter size is 2*radius+1
+# nxs
+# nys
+# nzs
+# padding: 	  padding option can be 0,1,2
+# niters:	  nuber of iterations
+
+threads=$1
+ndatablocks=$2
+runs=$3
+resultfile=$4
+radius=$5
+nxs=$6
+nys=$7
+nzs=$8
+padding=$9
+niters=$10
+
+echo "time, nthreads, ndatablocks, nxs, nyz, nzs, padding, niters" > $resultfile
+
+threadcount=1
+while [ $threadcount -le $threads ]
+do
+  cur_nxs=$nxs
+  cur_nys=$nys
+  cur_nzs=$nzs
+  for count in $(seq 1 5); do
+	g++ median3D.cpp -std=c++11 -O2 -lpthread -DNTHREADS=$threadcount -DNDATABLOCKS=$ndatablocks -DRADIUS=$radius -DNXS=$cur_nxs -DNYS=$cur_nys -DNZS=$cur_nzs -DPADDING=$padding -DNITERS=$niters -o median3D
+	for run in $(seq 1 $runs)
+	do
+	  ./median3D >> $resultfile
+	done
+	cur_nxs=$((cur_nxs+10))
+    cur_nys=$((cur_nys+10))
+	cur_nzs=$((cur_nzs+10))
+  done
+  threadcount=$((2*threadcount))
+done
